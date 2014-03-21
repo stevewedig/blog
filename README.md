@@ -1,4 +1,4 @@
-Java Foundation
+Foundation Libraries for Java 7+
 =============
 
 
@@ -11,18 +11,22 @@ This project extends Google Guava's core libraries for Java 7+. (what is guava.)
 **Foundation's Features Explained via Blog Posts:**
 * [Immutable Value Objects in Java & Python](http://stevewedig.com)
 * router
+* Not explained in blog posts: collect, etc, ...
 
 **Foundation's Design Goals:**
-* ...
-* Low tech/ gwt etc
+* **Quality**: Consistent with the conventions, standards, & practices outlined in [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/#how)
+* **Generic**: ... useful in many contexts and application, only depend on Guava
+* **Low Tech**: ... annotation, code gen, easy to read (rather than fancy/complex impl)
+* **Compatabile with Google Web Toolkit (GWT)**: ... only use subset of guava supported by gwt
+* **Extend Guava**: Build on Guava's libraries & practices. When possible, try to design interfaces to feel consistent with Guava.
 
 **Project Information:**
 * **GitHub Repo**: https://github.com/stevewedig/foundation
-* **Java conventions, standards, & practices**: [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/#how)
 * **License**: This project is in the public domain via [Unlicense](http://unlicense.org).
 
-**Other Relevant Blog Posts**
+**Other Related Blog Posts:**
 * [Dev Machine Setup: Java, Maven, Git](http://stevewedig.com)
+* [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/)
 * [A Software Developer's Reading List](http://stevewedig.com/2014/02/03/software-developers-reading-list/)
 
 ## Get Code, Create Javadocs, Run Tests
