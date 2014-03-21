@@ -83,9 +83,9 @@ The [Maven Central artifact page](http://search.maven.org/#artifactdetails%7Ccom
 
 Alternatively you can just copy the library files into your own codebase. The code depends on [Google Guava](https://code.google.com/p/guava-libraries/).
 
-### Adding to your GWT module file (if using GWT)
+### Inheriting Foundation in your GWT module file (if you're using GWT)
 
-In addition to providing the dependency code, add this line to your .gwt.xml file:
+In addition to getting the code via Maven or other mechanism, add this line to your .gwt.xml file:
 
     <inherits name="com.stevewedig.foundation.Foundation" />
 
