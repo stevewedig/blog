@@ -24,8 +24,8 @@
 
 	<!-- more artifact info required for Maven Central -->
 	<!-- https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide -->
-	<name>Value Objects</name>
-	<description>Helpers for implementing immutable value objects in Java</description>
+	<name>Foundation</name>
+	<description>Extending Google Guava's Core Libraries for Java 1.7+</description>
 	<url>https://github.com/stevewedig/foundation</url>
 	<licenses>
 		<license>

@@ -1,11 +1,11 @@
-Immutable Value Objects in Java
+Extending Google Guava's Core Libraries for Java 1.7+
 =============
 
 (This is a work in progress: the blog post isn't published yet and the artifact isn't in the Maven central yet.)
 
-GitHub has a rendered version of this readme: https://github.com/stevewedig/value-objects-in-java/blob/master/README.md
+GitHub has a rendered version of this readme: https://github.com/stevewedig/foundation-in-java/blob/master/README.md
 
-* This project's GitHub repo: https://github.com/stevewedig/value-objects-in-java
+* This project's GitHub repo: https://github.com/stevewedig/foundation-in-java
 * Blog post explaining this project: [Immutable Value Objects in Java & Python](http://stevewedig.com)
 * This project's conventions, standards, & practices: [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/#how)
 * How to setup your environment to use this project: [Dev Machine Setup: Java, Maven, Git](http://stevewedig.com)
@@ -16,7 +16,7 @@ GitHub has a rendered version of this readme: https://github.com/stevewedig/valu
 Use [Git](http://en.wikipedia.org/wiki/Git_(software)) to get the project code:
 
     cd <PROJECT_ROOT_PARENT>
-    git clone https://github.com/stevewedig/value-objects-in-java.git
+    git clone https://github.com/stevewedig/foundation-in-java.git
 
 Use [Maven](http://en.wikipedia.org/wiki/Apache_Maven) to generate the site, including the [Javadocs](http://en.wikipedia.org/wiki/Javadoc):
 
@@ -50,14 +50,14 @@ The easiest way to use this library is add it your dependency list in your Maven
     <dependencies>
         <dependency>
             <groupId>com.stevewedig</groupId>
-            <artifactId>value-objects</artifactId>
+            <artifactId>foundation</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>
 
 ### Other Build Tool Dependency Snippets
 
-The [Maven Central artifact page](http://search.maven.org/#artifactdetails%7Ccom.stevewedig%7Cvalue-objects%7C1.0.0%7Cjar) has snippets for other tools like Buildr, Ivy, and SBT.
+The [Maven Central artifact page](http://search.maven.org/#artifactdetails%7Ccom.stevewedig%7Cfoundation%7C1.0.0%7Cjar) has snippets for other tools like Buildr, Ivy, and SBT.
 
 
 ### Copying Library Files
