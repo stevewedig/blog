@@ -1,22 +1,36 @@
-Extending Google Guava's Core Libraries for Java 1.7+
+Java Foundation
 =============
+
 
 (This is a work in progress: the blog post isn't published yet and the artifact isn't in the Maven central yet.)
 
-GitHub has a rendered version of this readme: https://github.com/stevewedig/foundation-in-java/blob/master/README.md
+GitHub has a rendered version of this readme: https://github.com/stevewedig/foundation/blob/master/README.md
 
-* This project's GitHub repo: https://github.com/stevewedig/foundation-in-java
-* Blog post explaining this project: [Immutable Value Objects in Java & Python](http://stevewedig.com)
-* This project's conventions, standards, & practices: [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/#how)
-* How to setup your environment to use this project: [Dev Machine Setup: Java, Maven, Git](http://stevewedig.com)
-* This project is in the public domain via [Unlicense](http://unlicense.org).
+This project extends Google Guava's core libraries for Java 7+. (what is guava.) (along those lines, what does foundation add?)
+
+**Foundation's Features Explained via Blog Posts:**
+* [Immutable Value Objects in Java & Python](http://stevewedig.com)
+* router
+
+**Foundation's Design Goals:**
+* ...
+* Low tech/ gwt etc
+
+**Project Information:**
+* **GitHub Repo**: https://github.com/stevewedig/foundation
+* **Java conventions, standards, & practices**: [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/#how)
+* **License**: This project is in the public domain via [Unlicense](http://unlicense.org).
+
+**Other Relevant Blog Posts**
+* [Dev Machine Setup: Java, Maven, Git](http://stevewedig.com)
+* [A Software Developer's Reading List](http://stevewedig.com/2014/02/03/software-developers-reading-list/)
 
 ## Get Code, Create Javadocs, Run Tests
 
 Use [Git](http://en.wikipedia.org/wiki/Git_(software)) to get the project code:
 
     cd <PROJECT_ROOT_PARENT>
-    git clone https://github.com/stevewedig/foundation-in-java.git
+    git clone https://github.com/stevewedig/foundation.git
 
 Use [Maven](http://en.wikipedia.org/wiki/Apache_Maven) to generate the site, including the [Javadocs](http://en.wikipedia.org/wiki/Javadoc):
 
@@ -68,12 +82,6 @@ Alternatively you can just copy the library files into your own codebase. The co
 
 In addition to providing the dependency code, add this line to your .gwt.xml file:
 
-    <inherits name="com.stevewedig.pure.util.value_objects.ValueObjects" />
+    <inherits name="com.stevewedig.foundation.Foundation" />
 
-## Other Blog Posts
-
-In addition to this project's blog post ([Immutable Value Objects in Java & Python](http://stevewedig.com)), here are others that may interest you:
-
-* [A Software Developer's Reading List](http://stevewedig.com/2014/02/03/software-developers-reading-list/)
-* [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/)
 
