@@ -1,0 +1,14 @@
+# Java classes
+*.class
+
+# Java packages
+*.jar
+*.war
+*.ear
+
+# Maven build directory
+target/
+
+# OSX
+.DS_Store
+/bin
