@@ -11,7 +11,8 @@ This project extends Google Guava's core libraries for Java 7+. (what is guava.)
 **Foundation's Features Explained via Blog Posts:**
 * [Immutable Value Objects in Java & Python](http://stevewedig.com)
 * router
-* Not explained in blog posts: collect, etc, ...
+* The libraries in [foundation.collect](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/collect) and [foundation.etc](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/etc) are not explained by blog posts, but they are pretty self explanatory.
+* I will be writing more blog posts as I copy more code into Foundation.
 
 **Foundation's Design Goals:**
 * **Quality**: Consistent with the conventions, standards, & practices outlined in [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/#how)
