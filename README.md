@@ -19,7 +19,7 @@ This project extends Google Guava's core libraries for Java 7+. (what is guava.)
 * **Generic**: ... useful in many contexts and application, only depend on Guava
 * **Low Tech**: ... annotation, code gen, easy to read (rather than fancy/complex impl)
 * **Compatabile with Google Web Toolkit (GWT)**: ... only use subset of guava supported by gwt
-* **Extend Guava**: Build on Guava's libraries & practices. When possible, try to design interfaces to feel consistent with Guava.
+* **Extend Guava**: Use Guava's libraries & practices, particularly immutable collections and Optional. When possible try to make components feel consistent with Guava. (For example, providing mutable builders for creating immutable objects.)
 
 **Project Information:**
 * **GitHub Repo**: https://github.com/stevewedig/foundation
