@@ -10,12 +10,12 @@ This project extends Google Guava's core libraries for Java 7+. (what is guava.)
 
 **Foundation's Features Explained via Blog Posts:**
 * [Immutable Value Objects in Java & Python](http://stevewedig.com)
-* Pending: Yet Another URL Router
-* Pending: Global EventBus vs. Local Event Handlers
+* Pending: Framework independent URL router for Java
 * Pending: Directed-Acyclic Graphs (DAGs) in Java
 * Pending: Dependency Injection in Java Using a Small DAG Library
+* Pending: Global EventBus vs. Local Event Handlers
 * Pending: UI Architecture Pattern: View Flows
-* [foundation.collect](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/collect) and [foundation.etc](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/etc) are not explained by blog posts, but they are pretty self explanatory.
+* [foundation.collect](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/collect) and [foundation.etc](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/etc) are self explanatory, so they won't require blog posts
 
 **Foundation's Design Goals:**
 * **Quality**: Consistent with the conventions, standards, & practices outlined in [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/#how)
