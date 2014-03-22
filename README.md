@@ -1,10 +1,7 @@
 Foundation Libraries for Java 7+
 =============
 
-
-(This is a work in progress: the blog post isn't published yet and the artifact isn't in the Maven central yet.)
-
-GitHub has a rendered version of this readme: https://github.com/stevewedig/foundation/blob/master/README.md
+(GitHub has a rendered version of this readme: https://github.com/stevewedig/foundation/blob/master/README.md)
 
 Foundation extends [Google Guava's](https://code.google.com/p/guava-libraries/) core libraries for Java. Google Guava adds to Java numerous fundamental tools for building applications including [Optional](https://code.google.com/p/guava-libraries/wiki/UsingAndAvoidingNullExplained), [immutable collections](https://code.google.com/p/guava-libraries/wiki/ImmutableCollectionsExplained), [important new collections (Multiset/Bag, Multimap, Bimap)](https://code.google.com/p/guava-libraries/wiki/NewCollectionTypesExplained), [collection manipulation utilities](https://code.google.com/p/guava-libraries/wiki/CollectionUtilitiesExplained), [functional idioms](https://code.google.com/p/guava-libraries/wiki/FunctionalExplained), and [much more](https://code.google.com/p/guava-libraries/wiki/GuavaExplained). Foundation adds a few more application structuring tools to this list. 
 
@@ -19,7 +16,7 @@ Foundation is compatable with Java 7+, and all code can be compiled to JavaScrip
 * Pending: UI Architecture Pattern: View Flows
 * [foundation.util](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util) contains self explanatory utility libraries that won't require blog posts
 
-**Foundation's Design Goals:**
+**Design Goals for Foundation:**
 * **Quality**: Consistent with the conventions, standards, & practices outlined in [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/#how)
 * **Generic**: ... useful in many contexts and application, only depend on Guava
 * **Low Tech**: ... annotation, code gen, easy to read (rather than fancy/complex impl)
@@ -65,7 +62,7 @@ The root directory is also a project for the [Eclipse IDE](http://en.wikipedia.o
 
 More about the [standard layout of Maven projects](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html).
 
-## Using the Library
+## Using Foundation
 
 ### Maven Dependency Snippet
 
@@ -82,11 +79,6 @@ The easiest way to use this library is add it your dependency list in your Maven
 ### Other Build Tool Dependency Snippets
 
 The [Maven Central artifact page](http://search.maven.org/#artifactdetails%7Ccom.stevewedig%7Cfoundation%7C1.0.0%7Cjar) has snippets for other tools like Buildr, Ivy, and SBT.
-
-
-### Copying Library Files
-
-Alternatively you can just copy the library files into your own codebase. The code depends on [Google Guava](https://code.google.com/p/guava-libraries/).
 
 ### Inheriting Foundation in your GWT module file (if you're using GWT)
 
