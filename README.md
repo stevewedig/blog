@@ -20,8 +20,8 @@ Foundation is compatable with Java 7+ and all code can be compiled to JavaScript
 * **Quality**: Consistent with the conventions, standards, & practices outlined in [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/#how)
 * **Generic**: ... useful in many contexts and application, only depend on Guava
 * **Low Tech**: ... annotation, code gen, easy to read (rather than fancy/complex impl)
-* **Compatabile with GWT (Google Web Toolkit)**: ... only use subset of guava supported by gwt
 * **Extend Guava**: Build on Guava's libraries and generally try to make components feel consistent with Guava. Most objects defined in Foundation are immutable and use Guava's immutable collections and Optional. When necessary, Guava style builders are provided for initializing immutable objects in type safe ways.
+* **Compatabile with GWT (Google Web Toolkit)**: Last but not least, ... only use subset of guava supported by gwt
 
 **Project Information:**
 * **GitHub Repo**: https://github.com/stevewedig/foundation
