@@ -5,7 +5,7 @@ Foundation Libraries for Java 7+
 
 Foundation extends [Google Guava's](https://code.google.com/p/guava-libraries/) core libraries for Java. Google Guava adds to Java numerous fundamental tools for building applications including [Optional](https://code.google.com/p/guava-libraries/wiki/UsingAndAvoidingNullExplained), [immutable collections](https://code.google.com/p/guava-libraries/wiki/ImmutableCollectionsExplained), [important new collections (Multiset/Bag, Multimap, Bimap)](https://code.google.com/p/guava-libraries/wiki/NewCollectionTypesExplained), [collection manipulation utilities](https://code.google.com/p/guava-libraries/wiki/CollectionUtilitiesExplained), [functional idioms](https://code.google.com/p/guava-libraries/wiki/FunctionalExplained), and [much more](https://code.google.com/p/guava-libraries/wiki/GuavaExplained). Foundation adds a few more application structuring tools to this list. 
 
-Foundation is compatable with Java 7+, and all code can be compiled to JavaScript by [Google Web Toolkit (GWT)](https://code.google.com/p/guava-libraries/wiki/GuavaExplained) 2.6+. Foundation's only runtime dependency is Guava.
+Foundation is compatable with Java 7+ and all code can be compiled to JavaScript by GWT 2.6+ ([Google Web Toolkit](https://code.google.com/p/guava-libraries/wiki/GuavaExplained)). Foundation's only runtime dependency is Guava.
 
 **Foundation's Features Explained via Blog Posts:**
 * [Immutable Value Objects in Java & Python](http://stevewedig.com)
@@ -20,8 +20,8 @@ Foundation is compatable with Java 7+, and all code can be compiled to JavaScrip
 * **Quality**: Consistent with the conventions, standards, & practices outlined in [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/#how)
 * **Generic**: ... useful in many contexts and application, only depend on Guava
 * **Low Tech**: ... annotation, code gen, easy to read (rather than fancy/complex impl)
-* **Compatabile with Google Web Toolkit (GWT)**: ... only use subset of guava supported by gwt
-* **Extend Guava**: Use Guava's libraries & practices, and when possible try to make components feel consistent with Guava. Most object defined in Foundation are immutable and primarily work with immutable collections and Optional. Guava style builders are provided for initializing immutable objects in type safe ways.
+* **Compatabile with GWT (Google Web Toolkit)**: ... only use subset of guava supported by gwt
+* **Extend Guava**: Build on Guava's libraries and when possible try to make components feel consistent with Guava. Most objects defined in Foundation are immutable and use Guava's immutable collections and Optional. Guava style builders are provided for initializing immutable objects in type safe ways.
 
 **Project Information:**
 * **GitHub Repo**: https://github.com/stevewedig/foundation
