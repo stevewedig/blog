@@ -80,9 +80,9 @@ The easiest way to use this library is add it your dependency list in your Maven
 
 The [Maven Central artifact page](http://search.maven.org/#artifactdetails%7Ccom.stevewedig%7Cfoundation%7C1.0.0%7Cjar) has snippets for other tools like Buildr, Ivy, and SBT.
 
-### Inheriting Foundation in your GWT module file (if you're using GWT)
+### Inheriting Foundation in your GWT module file
 
-In addition to getting the code via Maven or other mechanism, add this line to your .gwt.xml file:
+If you're using GWT, in addition to getting the code via Maven or other mechanism, add this line to your .gwt.xml file:
 
     <inherits name="com.stevewedig.foundation.Foundation" />
 
