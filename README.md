@@ -43,6 +43,7 @@ Use [Maven](http://en.wikipedia.org/wiki/Apache_Maven) to generate the site, inc
 
     cd <PROJECT_ROOT>
     mvn site
+    # open target/site/index.html
 
 Use Maven to run the tests:
     
