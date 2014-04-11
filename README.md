@@ -9,10 +9,11 @@ Foundation is compatable with Java 7+ and all code can be compiled to JavaScript
 
 **Foundation's Features Explained via Blog Posts:**
 * [Immutable Value Objects in Java & Python](http://stevewedig.com)
+* Pending: Typesafe Heterogenous Structs in Java
+* Pending: Directed-Acyclic Graphs (DAGs) in Java
+* Pending: Simple Dependency Injection in Java Using DAGs
 * Pending: Global EventBus vs. Local Event Handlers
 * Pending: Framework independent URL routing for Java
-* Pending: Directed-Acyclic Graphs (DAGs) in Java
-* Pending: Dependency Injection in Java Using a Small DAG Library
 * Pending: UI Architecture Pattern: View Flows
 * [foundation.util.libs](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/libs) contains an assortment of self explanatory utility functions. These functions are organized into [StrLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/StrLib.java), [LambdaLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/LambdaLib.java), [CollectLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/CollectLib.java), [MapLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/MapLib.java), [SetLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/SetLib.java), etc.
 
