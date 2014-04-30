@@ -17,6 +17,7 @@ Foundation is compatable with Java 7+ and all code can be compiled to JavaScript
 * Pending: Framework Independent URL Routing for Java
 * Pending: Global Event Bus vs. Local Event Handlers
 * Pending: Asynchronous Cached Downloads in Java
+* Pending: Asynchronous Tasks with Dependencies in Java
 * Pending: UI Architecture Pattern: View Flow
 * [foundation.util.libs](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/libs) contains an assortment of self explanatory utility functions. These functions are organized into [StrLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/StrLib.java), [LambdaLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/LambdaLib.java), [CollectLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/CollectLib.java), [MapLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/MapLib.java), [SetLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/SetLib.java), etc.
 
