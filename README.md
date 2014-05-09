@@ -3,6 +3,8 @@ Foundation Libraries for Java 7+
 
 (GitHub has a rendered version of this readme: https://github.com/stevewedig/foundation/blob/master/README.md)
 
+Everyone has a pile of util code. I'm pulling out the most useful into foundation and sharing them via blog post. In that sense, you can think of it as an extension to Guava...
+
 Foundation extends [Google Guava's](https://code.google.com/p/guava-libraries/) core libraries for Java. Google Guava adds to Java numerous fundamental tools including [Optional](https://code.google.com/p/guava-libraries/wiki/UsingAndAvoidingNullExplained), [immutable collections](https://code.google.com/p/guava-libraries/wiki/ImmutableCollectionsExplained), [important new collections (Multiset/Bag, Multimap, Bimap)](https://code.google.com/p/guava-libraries/wiki/NewCollectionTypesExplained), [collection manipulation utilities](https://code.google.com/p/guava-libraries/wiki/CollectionUtilitiesExplained), [functional idioms](https://code.google.com/p/guava-libraries/wiki/FunctionalExplained), and [much more](https://code.google.com/p/guava-libraries/wiki/GuavaExplained). Foundation adds a few more application structuring tools to this list. 
 
 (somewhere need to mention this is just one person's util libs, so may or may not overlap with your stuff. Tried ot only include things that are reusable.)
