@@ -11,6 +11,7 @@ Foundation is compatable with Java 7+ and all code can be compiled to JavaScript
 
 **Foundation's Features Explained via Blog Posts:**
 * [Immutable Value Objects in Java & Python](http://stevewedig.com)
+* Pending: Fallible
 * Pending: Typesafe Heterogenous Structs in Java
 * Pending: Directed-Acyclic Graphs (DAGs) in Java
 * Pending: Simple Dependency Injection in Java Using DAGs
