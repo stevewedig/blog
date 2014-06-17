@@ -3,11 +3,9 @@ Foundation Libraries for Java 7+
 
 (GitHub has a rendered version of this readme: https://github.com/stevewedig/foundation/blob/master/README.md)
 
-Everyone has a pile of util code. I'm pulling out the most useful into foundation and sharing them via blog post. In that sense, you can think of it as an extension to Guava...
+We all build up a pile of util code over time. Foundation is my effort to pull out the most useful and generally applicable pieces of my util codebase, sharing them via GitHub & Maven, and explaining them on my [blog](http://stevewedig.com). I build on the core libraries of [Google Guava](https://code.google.com/p/guava-libraries/), so you can think of Foundation as an extension of Guava, which is an extension of Java's standard library.
 
-Foundation extends [Google Guava's](https://code.google.com/p/guava-libraries/) core libraries for Java. Google Guava adds to Java numerous fundamental tools including [Optional](https://code.google.com/p/guava-libraries/wiki/UsingAndAvoidingNullExplained), [immutable collections](https://code.google.com/p/guava-libraries/wiki/ImmutableCollectionsExplained), [important new collections (Multiset/Bag, Multimap, Bimap)](https://code.google.com/p/guava-libraries/wiki/NewCollectionTypesExplained), [collection manipulation utilities](https://code.google.com/p/guava-libraries/wiki/CollectionUtilitiesExplained), [functional idioms](https://code.google.com/p/guava-libraries/wiki/FunctionalExplained), and [much more](https://code.google.com/p/guava-libraries/wiki/GuavaExplained). Foundation adds a few more application structuring tools to this list. 
-
-(somewhere need to mention this is just one person's util libs, so may or may not overlap with your stuff. Tried ot only include things that are reusable.)
+(In my opinion everyone should use Guava because it to Java numerous fundamental tools including [Optional](https://code.google.com/p/guava-libraries/wiki/UsingAndAvoidingNullExplained), [immutable collections](https://code.google.com/p/guava-libraries/wiki/ImmutableCollectionsExplained), [important new collections (Multiset/Bag, Multimap, Bimap)](https://code.google.com/p/guava-libraries/wiki/NewCollectionTypesExplained), [collection manipulation utilities](https://code.google.com/p/guava-libraries/wiki/CollectionUtilitiesExplained), [functional idioms](https://code.google.com/p/guava-libraries/wiki/FunctionalExplained), and [much more](https://code.google.com/p/guava-libraries/wiki/GuavaExplained).
 
 Foundation is compatable with Java 7+ and all code can be compiled to JavaScript by GWT 2.6+ ([Google Web Toolkit](https://code.google.com/p/guava-libraries/wiki/GuavaExplained)). Foundation's only runtime dependency is Guava.
 
