@@ -11,7 +11,7 @@ Foundation extends [Google Guava's](https://code.google.com/p/guava-libraries/) 
 
 Foundation is compatable with Java 7+ and all code can be compiled to JavaScript by GWT 2.6+ ([Google Web Toolkit](https://code.google.com/p/guava-libraries/wiki/GuavaExplained)). Foundation's only runtime dependency is Guava.
 
-**Foundation's Features Explained via Blog Posts:**
+**Foundation's features explained via blog posts:**
 * [Value Objects in Java & Python](http://stevewedig.com)
 * Pending: Typesafe Heterogenous Structs in Java
 * Pending: Directed-Acyclic Graphs (DAGs) in Java
@@ -24,7 +24,7 @@ Foundation is compatable with Java 7+ and all code can be compiled to JavaScript
 * Pending: UI Architecture Pattern: View Flow
 * [foundation.util.libs](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/libs) contains an assortment of self explanatory utility functions. These functions are organized into [StrLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/StrLib.java), [LambdaLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/LambdaLib.java), [CollectLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/CollectLib.java), [MapLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/MapLib.java), [SetLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/SetLib.java), etc.
 
-**Design Goals for Foundation:**
+**Design goals for foundation:**
 * **Quality**: Consistent with the conventions, standards, & practices outlined in [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/#how)
 * **Generic**: ... useful in many contexts and application, only depend on Guava
 * **Low Tech**: ... annotation, code gen, easy to read (rather than fancy/complex impl)
