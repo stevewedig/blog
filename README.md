@@ -35,15 +35,6 @@ Pending posts have code written that is in use. However cleaning code and writin
 * [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/)
 * [A Software Developer's Reading List](http://stevewedig.com/2014/02/03/software-developers-reading-list/)
 
-## Foundation's design goals
-
-* **Quality**: Consistent with the conventions, standards, & practices outlined in [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/#how)
-* **Generic**: ... useful in many contexts and application, only depend on Guava
-* **Low Tech**: ... annotation, code gen, easy to read (rather than fancy/complex impl)
-* **Extend Guava**: Build on Guava's libraries and generally try to make components feel consistent with Guava. Most objects defined in Foundation are immutable and use Guava's immutable collections and Optional. When necessary, Guava style fluent builders are provided for initializing immutable objects in type safe ways. Examples include the Guava-fied ToplogicalSort.java and builders for Dag, Params, Router, etc.
-* **Compatabile with GWT (Google Web Toolkit)**: Last but not least, ... only use subset of guava supported by gwt
-* are some components not infinitely generic like the http cache? covers a starting point. fork code if need more control or something else? talk about DRY being good but not perfect when client needs are divergent, and not best during the discovery/experimentation phase, where you want to efficiently learn use cases, rather than dragged down by backwards compatability during experimentation (this is forking with the intent to rejoin). 
-
 ## Get Code, Create Javadocs, Run Tests
 
 Use [Git](http://en.wikipedia.org/wiki/Git_(software)) to get the project code:
