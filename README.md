@@ -16,7 +16,7 @@ Foundation is compatable with Java 7+ and all code can be compiled to JavaScript
 
 ## Foundation's features
 
-#### Features explain via blob posts
+#### Features explain via blog posts
 
 Pending posts have code written that is in use. However cleaning code and writing posts is a slow process, so this will take a while...
 
