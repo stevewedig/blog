@@ -18,7 +18,7 @@ Foundation is compatable with Java 7+ and all code can be compiled to JavaScript
 * Pending: Simple Dependency Injection Using DAGs in Java
 * Pending: Fallible: An Alternative to Throwing Exceptions in Java
 * Pending: Framework Independent URL Routing in Java
-* Pending: Global Event Bus vs. Local Event Handlers
+* Pending: Heterogenous Event Bus in Java
 * Pending: Asynchronous Cached Downloads in Java
 * Pending: Asynchronous Tasks with Dependencies in Java
 * Pending: UI Architecture Pattern: View Flow
