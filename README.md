@@ -13,7 +13,7 @@ Foundation is compatable with Java 7+ and all code can be compiled to JavaScript
 
 **Foundation's features explained via blog posts:**
 
-Pending posts have code written that is in use. However its time consuming to clean code and write posts, so this will take a while...
+Pending posts have code written that is in use. However cleaning code and writing posts is a slow process, so this will take a while...
 
 * [Value Objects in Java & Python](http://stevewedig.com)
 * Pending: Typesafe Heterogenous Structs in Java
