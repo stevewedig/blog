@@ -15,9 +15,9 @@ Foundation is compatable with Java 7+ and all code can be compiled to JavaScript
 * [Value Objects in Java & Python](http://stevewedig.com)
 * Pending: Typesafe Heterogenous Structs in Java
 * Pending: Directed-Acyclic Graphs (DAGs) in Java
-* Pending: Simple Java Dependency Injection Using DAGs
-* Pending: Fallible: An Alternative to Throwing Exceptions
-* Pending: Framework Independent URL Routing for Java
+* Pending: Simple Dependency Injection Using DAGs in Java
+* Pending: Fallible: An Alternative to Throwing Exceptions in Java
+* Pending: Framework Independent URL Routing in Java
 * Pending: Global Event Bus vs. Local Event Handlers
 * Pending: Asynchronous Cached Downloads in Java
 * Pending: Asynchronous Tasks with Dependencies in Java
