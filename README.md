@@ -11,7 +11,12 @@ Foundation extends [Google Guava's](https://code.google.com/p/guava-libraries/) 
 
 Foundation is compatable with Java 7+ and all code can be compiled to JavaScript by GWT 2.6+ ([Google Web Toolkit](https://code.google.com/p/guava-libraries/wiki/GuavaExplained)). Foundation's only runtime dependency is Guava.
 
+* **GitHub Repo**: https://github.com/stevewedig/foundation
+* **License**: This project is in the public domain via [Unlicense](http://unlicense.org).
+
 ### Foundation's features explained via blog posts
+
+##### Posts about Foundation's features
 
 Pending posts have code written that is in use. However cleaning code and writing posts is a slow process, so this will take a while...
 
@@ -25,7 +30,14 @@ Pending posts have code written that is in use. However cleaning code and writin
 * Pending: Asynchronous Cached Downloads in Java
 * Pending: Asynchronous Tasks with Dependency DAGs in Java
 * Pending: View Flow: A UI Architecture Pattern
-* [foundation.util.libs](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/libs) contains an assortment of self explanatory utility functions. These functions are organized into [StrLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/StrLib.java), [LambdaLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/LambdaLib.java), [CollectLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/CollectLib.java), [MapLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/MapLib.java), [SetLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/SetLib.java), etc.
+
+[foundation.util.libs](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/libs) contains an assortment of self explanatory utility functions. These functions are organized into [StrLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/StrLib.java), [LambdaLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/LambdaLib.java), [CollectLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/CollectLib.java), [MapLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/MapLib.java), [SetLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/SetLib.java), etc.
+
+##### Other related posts
+
+* [Dev Machine Setup: Java, Maven, Git](http://stevewedig.com)
+* [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/)
+* [A Software Developer's Reading List](http://stevewedig.com/2014/02/03/software-developers-reading-list/)
 
 ### Foundation's design goals
 
@@ -35,15 +47,6 @@ Pending posts have code written that is in use. However cleaning code and writin
 * **Extend Guava**: Build on Guava's libraries and generally try to make components feel consistent with Guava. Most objects defined in Foundation are immutable and use Guava's immutable collections and Optional. When necessary, Guava style fluent builders are provided for initializing immutable objects in type safe ways. Examples include the Guava-fied ToplogicalSort.java and builders for Dag, Params, Router, etc.
 * **Compatabile with GWT (Google Web Toolkit)**: Last but not least, ... only use subset of guava supported by gwt
 * are some components not infinitely generic like the http cache? covers a starting point. fork code if need more control or something else? talk about DRY being good but not perfect when client needs are divergent, and not best during the discovery/experimentation phase, where you want to efficiently learn use cases, rather than dragged down by backwards compatability during experimentation (this is forking with the intent to rejoin). 
-
-**Project Information:**
-* **GitHub Repo**: https://github.com/stevewedig/foundation
-* **License**: This project is in the public domain via [Unlicense](http://unlicense.org).
-
-**Other Related Blog Posts:**
-* [Dev Machine Setup: Java, Maven, Git](http://stevewedig.com)
-* [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/)
-* [A Software Developer's Reading List](http://stevewedig.com/2014/02/03/software-developers-reading-list/)
 
 ### Get Code, Create Javadocs, Run Tests
 
