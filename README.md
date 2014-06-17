@@ -11,7 +11,7 @@ Foundation extends [Google Guava's](https://code.google.com/p/guava-libraries/) 
 
 Foundation is compatable with Java 7+ and all code can be compiled to JavaScript by GWT 2.6+ ([Google Web Toolkit](https://code.google.com/p/guava-libraries/wiki/GuavaExplained)). Foundation's only runtime dependency is Guava.
 
-**Foundation's features explained via blog posts:**
+### Foundation's features explained via blog posts
 
 Pending posts have code written that is in use. However cleaning code and writing posts is a slow process, so this will take a while...
 
@@ -27,7 +27,8 @@ Pending posts have code written that is in use. However cleaning code and writin
 * Pending: View Flow: A UI Architecture Pattern
 * [foundation.util.libs](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/libs) contains an assortment of self explanatory utility functions. These functions are organized into [StrLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/StrLib.java), [LambdaLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/LambdaLib.java), [CollectLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/CollectLib.java), [MapLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/MapLib.java), [SetLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/SetLib.java), etc.
 
-**Design goals for foundation:**
+### Foundation's design goals
+
 * **Quality**: Consistent with the conventions, standards, & practices outlined in [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/#how)
 * **Generic**: ... useful in many contexts and application, only depend on Guava
 * **Low Tech**: ... annotation, code gen, easy to read (rather than fancy/complex impl)
@@ -44,7 +45,7 @@ Pending posts have code written that is in use. However cleaning code and writin
 * [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/)
 * [A Software Developer's Reading List](http://stevewedig.com/2014/02/03/software-developers-reading-list/)
 
-## Get Code, Create Javadocs, Run Tests
+### Get Code, Create Javadocs, Run Tests
 
 Use [Git](http://en.wikipedia.org/wiki/Git_(software)) to get the project code:
 
@@ -62,7 +63,7 @@ Use Maven to run the tests:
     cd <PROJECT_ROOT>
     mvn test
 
-## Project Organization
+### Project Organization
 
 The root directory is also a project for the [Eclipse IDE](http://en.wikipedia.org/wiki/Eclipse_(software)). If you are using Eclipse, you can import the project under "Import > General > Existing Projects into Workspace". If you are not using Eclipse, you can disregard or delete the Eclipse project metadata files: .classpath, .project, .settings.
 
@@ -75,9 +76,9 @@ The root directory is also a project for the [Eclipse IDE](http://en.wikipedia.o
 
 More about the [standard layout of Maven projects](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html).
 
-## Using Foundation
+### Using Foundation
 
-### Maven Dependency Snippet
+##### Maven Dependency Snippet
 
 The easiest way to use this library is add it your dependency list in your Maven [pom.xml](https://maven.apache.org/guides/introduction/introduction-to-the-pom.html) file:
 
@@ -89,11 +90,11 @@ The easiest way to use this library is add it your dependency list in your Maven
         </dependency>
     </dependencies>
 
-### Other Build Tool Dependency Snippets
+##### Other Build Tool Dependency Snippets
 
 The [Maven Central artifact page](http://search.maven.org/#artifactdetails%7Ccom.stevewedig%7Cfoundation%7C1.0.0%7Cjar) has snippets for other tools like Buildr, Ivy, and SBT.
 
-### Inheriting Foundation in your GWT module file
+##### Inheriting Foundation in your GWT module file
 
 If you're using GWT, in addition to getting the code via Maven or other mechanism, add this line to your .gwt.xml file:
 
