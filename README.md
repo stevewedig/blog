@@ -12,13 +12,16 @@ Foundation extends [Google Guava's](https://code.google.com/p/guava-libraries/) 
 Foundation is compatable with Java 7+ and all code can be compiled to JavaScript by GWT 2.6+ ([Google Web Toolkit](https://code.google.com/p/guava-libraries/wiki/GuavaExplained)). Foundation's only runtime dependency is Guava.
 
 **Foundation's features explained via blog posts:**
+
+Pending posts have code written that is in use. However its time consuming to clean code and write posts, so this will take a while...
+
 * [Value Objects in Java & Python](http://stevewedig.com)
 * Pending: Typesafe Heterogenous Structs in Java
 * Pending: Directed-Acyclic Graphs (DAGs) in Java
 * Pending: Simple Dependency Injection Using DAGs in Java
 * Pending: Fallible: An Alternative to Throwing Exceptions in Java
 * Pending: Framework Independent URL Routing in Java
-* Pending: Heterogenous Event Bus in Java
+* Pending: Typesafe Heterogenous Event Bus in Java
 * Pending: Asynchronous Cached Downloads in Java
 * Pending: Asynchronous Tasks with Dependency DAGs in Java
 * Pending: UI Architecture Pattern: View Flow
