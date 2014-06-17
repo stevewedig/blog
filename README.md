@@ -24,7 +24,7 @@ Pending posts have code written that is in use. However cleaning code and writin
 * Pending: Typesafe Heterogenous Event Bus in Java
 * Pending: Asynchronous Cached Downloads in Java
 * Pending: Asynchronous Tasks with Dependency DAGs in Java
-* Pending: UI Architecture Pattern: View Flow
+* Pending: View Flow: A UI Architecture Pattern
 * [foundation.util.libs](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/libs) contains an assortment of self explanatory utility functions. These functions are organized into [StrLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/StrLib.java), [LambdaLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/LambdaLib.java), [CollectLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/CollectLib.java), [MapLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/MapLib.java), [SetLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/SetLib.java), etc.
 
 **Design goals for foundation:**
