@@ -16,10 +16,10 @@ Foundation is compatable with Java 7+ and all code can be compiled to JavaScript
 Pending posts have code written that is in use. However cleaning code and writing posts is a slow process, so this will take a while...
 
 * [Value Objects in Java & Python](http://stevewedig.com)
+* Pending: Fallible: An Alternative to Throwing Exceptions in Java
 * Pending: Typesafe Heterogenous Structs in Java
 * Pending: Directed-Acyclic Graphs (DAGs) in Java
 * Pending: Simple Dependency Injection Using DAGs in Java
-* Pending: Fallible: An Alternative to Throwing Exceptions in Java
 * Pending: Framework Independent URL Routing in Java
 * Pending: Typesafe Heterogenous Event Bus in Java
 * Pending: Asynchronous Cached Downloads in Java
