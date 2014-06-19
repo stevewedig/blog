@@ -16,7 +16,7 @@ Foundation is compatable with Java 7+ and all code can be compiled to JavaScript
 
 #### Features explained via blog posts
 
-Each of the pending posts has code written that is in use, however cleaning code and writing posts is a slow process, so this will take a while to get all of this published...
+Each of the pending posts has code written that is in use, however cleaning code and writing posts is a slow process, so it will take a while to get all of this published...
 
 * [Value Objects in Java & Python](http://stevewedig.com)
 * Pending: Fallible: An Alternative to Throwing Exceptions in Java
