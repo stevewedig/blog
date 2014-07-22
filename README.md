@@ -21,12 +21,11 @@ Each of the pending posts has code written that is in use, however cleaning code
 * [Value Objects in Java & Python](http://stevewedig.com)
 * Pending: Typesafe Heterogenous Containers in Java
 * Pending: Directed-Acyclic Graphs (DAGs) in Java
-* Pending: Simple Dependency Injection Using DAGs in Java
+* Pending: Framework Free Dependency Injection in Java
 * Pending: Fallible: An Alternative to Throwing Exceptions in Java
-* Pending: Framework Independent URL Routing in Java
-* Pending: Typesafe Heterogenous Event Bus in Java
+* Pending: Framework Free URL Routing in Java
 * Pending: Asynchronous Cached Downloads in Java
-* Pending: Asynchronous Tasks with Dependency DAGs in Java
+* Pending: Asynchronous Task Workflows in Java
 * Pending: View Flow: A UI Architecture Pattern
 
 #### Utilities not explained via blog posts
