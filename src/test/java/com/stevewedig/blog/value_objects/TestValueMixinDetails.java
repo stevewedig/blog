@@ -67,7 +67,7 @@ public class TestValueMixinDetails {
     A a = new A("val");
     B b = new B("val");
 
-    CompareLib.assertDifferentValueAndDifferentString(a, b);
+    CompareLib.assertUnequalObjectsAndStrings(a, b);
   }
 
   private static class A extends ValueMixin {

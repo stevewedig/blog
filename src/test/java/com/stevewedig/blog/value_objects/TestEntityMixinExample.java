@@ -53,13 +53,13 @@ public class TestEntityMixinExample {
     Person bob2 = new Person("bob", 40);
 
     // double check that we have different values but they print the same
-    CompareLib.assertDifferentValueAndSameString(bob1, bob2);
+    CompareLib.assertUnequalObjectsButEqualStrings(bob1, bob2);
 
     // mutate
     bob2.setAge(41);
 
     // now they should't print the same
-    CompareLib.assertDifferentValueAndDifferentString(bob1, bob2);
+    CompareLib.assertUnequalObjectsAndStrings(bob1, bob2);
 
     // nail down the printing behavior
     // (if the Person class wasn't nested, the printed name wouldn't have the

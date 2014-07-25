@@ -8,7 +8,7 @@ import static org.junit.Assert.assertThat;
 
 abstract class CompareLib {
 
-  public static void assertSameValueAndSameString(Object a, Object b) {
+  public static void assertEqualObjectsAndStrings(Object a, Object b) {
     assertThat(a, not(sameInstance(b)));
 
     assertEquals(a, b);
@@ -17,7 +17,7 @@ abstract class CompareLib {
     assertEquals(a.toString(), b.toString());
   }
 
-  public static void assertDifferentValueAndDifferentString(Object a, Object b) {
+  public static void assertUnequalObjectsAndStrings(Object a, Object b) {
     assertThat(a, not(sameInstance(b)));
 
     assertNotEquals(a, b);
@@ -26,7 +26,7 @@ abstract class CompareLib {
     assertNotEquals(a.toString(), b.toString());
   }
 
-  public static void assertDifferentValueAndSameString(Object a, Object b) {
+  public static void assertUnequalObjectsButEqualStrings(Object a, Object b) {
     assertThat(a, not(sameInstance(b)));
 
     assertNotEquals(a, b);
