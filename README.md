@@ -42,7 +42,7 @@ These utilities should be fairly self explanatory...
 * [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/)
 * [A Software Developer's Reading List](http://stevewedig.com/2014/02/03/software-developers-reading-list/)
 
-## Get Code, Create Javadocs, Run Tests
+## Get Code, Run Tests, Create Javadocs
 
 Use [Git](http://en.wikipedia.org/wiki/Git_(software)) to get the project code:
 
