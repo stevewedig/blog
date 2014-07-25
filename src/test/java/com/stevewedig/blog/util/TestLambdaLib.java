@@ -51,10 +51,10 @@ public class TestLambdaLib {
   @Test
   public void testFn1IsGuavaFunction() {
 
-    Fn1<Integer, String> fn = null;
+    Fn1<Integer, String> fn1 = null;
 
     @SuppressWarnings("unused")
-    Function<Integer, String> function = fn;
+    Function<Integer, String> function = fn1;
 
   }
 }

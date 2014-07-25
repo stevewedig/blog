@@ -5,7 +5,9 @@ import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 
-
+/**
+ * String manipulation utilities.
+ */
 public abstract class StrLib {
 
   // ===========================================================================

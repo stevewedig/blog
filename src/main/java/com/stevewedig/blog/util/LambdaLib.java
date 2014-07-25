@@ -2,7 +2,9 @@ package com.stevewedig.blog.util;
 
 import com.google.common.base.Function;
 
-
+/**
+ * Interfaces for creating lambdas (callbacks).
+ */
 public abstract class LambdaLib {
 
   // ===========================================================================

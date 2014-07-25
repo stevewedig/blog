@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<!-- ======================================================================= -->
 	<!-- project -->
@@ -24,8 +25,8 @@
 
 	<!-- more artifact info required for Maven Central -->
 	<!-- https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide -->
-	<name>Steve Wedig's Libraries</name>
-	<description>Steve Wedig's Libraries for Java 1.7+</description>
+	<name>Steve Wedig's Libraries for Java 7+</name>
+	<description>Steve Wedig's Libraries for Java 7+</description>
 	<url>https://github.com/stevewedig/blog</url>
 	<licenses>
 		<license>
@@ -220,7 +221,6 @@
 	<!-- dependencies -->
 	<!-- ======================================================================= -->
 
-	<!-- http://stevewedig.com/2014/02/17/why-and-how-i-write-java/#how -->
 	<dependencies>
 
 		<!-- Guava extends the standard library -->
