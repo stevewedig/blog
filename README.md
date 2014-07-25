@@ -35,7 +35,7 @@ Pending posts have code that is in use, but it will take a while to get all this
 
 These utilities should be fairly self explanatory...
 
-* [StrLib](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/util/StrLib.java): Utility functions for manipulating strings.
+* [StrLib](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/util/StrLib.java): String manipulation utilities.
 * [LambdaLib](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/util/LambdaLib.java): Interfaces for creating anonymous lambdas (callbacks). Presumably I can get rid of this horrible syntax when I switch to Java 8.
 
 #### Other related blog posts
