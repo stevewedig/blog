@@ -19,7 +19,7 @@
 	<!-- core artifact info -->
 	<groupId>com.stevewedig</groupId>
 	<artifactId>blog</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<!-- more artifact info required for Maven Central -->
