@@ -1,14 +1,14 @@
 package com.stevewedig.blog.value_objects;
 
 /**
- * An object that helps implement toString, equals, and hashCode.
+ * An object that helps implement toString(), equals(), and hashCode().
  */
 public interface ObjectHelper {
 
   /**
    * Implements toString for both entity and value objects
    */
-  String objectString();
+  String classAndStateString();
 
   /**
    * Implements equals for value objects

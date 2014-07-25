@@ -1,6 +1,5 @@
 package com.stevewedig.blog.value_objects;
 
-
 /**
  * Base class of ValueMixin and EntityMixin.
  */
@@ -10,20 +9,30 @@ public abstract class ObjectMixin implements HasObjectHelper {
   // abstract hooks
   // ===========================================================================
 
-  // objects are either entities or values
+  // Objects are either entities or values.
+  //
+  // Having this as a flag at this level enables us to setup implementation inheritance hierarchies
+  // that looks like:
+  // ContainerMixin < ObjectMixin
+  // ImmutableContainer < ContainerMixin (set isEntity to false)
+  // MutableContainer < ContainerMixin (set isEntity to true)
   protected abstract boolean isEntity();
 
+  /**
+   * @return An array of alternating field names and field values.
+   */
   protected abstract Object[] fields();
 
+  // ===========================================================================
+  // utility
+  // ===========================================================================
+
   /**
-   * Convenient helper for subclasses to implement fields() by returning array("field1", field1,
+   * Convenience method so subclasses can implement fields() by returning array("field1", field1,
    * "field2", field2, ...). The longer alternative is to return new Object[]{"field1", field1,
    * "field2", field2, ...}.
    * 
    * http://rethinktheworld.blogspot.com/2010/06/literal-arrays-and-lists-in-java.html
-   * 
-   * @param items
-   * @return
    */
   protected Object[] array(Object... items) {
     return items;
@@ -52,13 +61,14 @@ public abstract class ObjectMixin implements HasObjectHelper {
   private ObjectHelper cachedHelper;
 
   // ===========================================================================
-  // delegate to objectHelper
-  // (ValueMixin also delegates equals and hashCode)
+  // delegating to objectHelper
   // ===========================================================================
 
   @Override
   public String toString() {
-    return objectHelper().objectString();
+    return objectHelper().classAndStateString();
   }
+
+  // ValueMixin also delegates equals() and hashCode()
 
 }
