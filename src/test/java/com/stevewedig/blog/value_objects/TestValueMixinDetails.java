@@ -6,9 +6,6 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import com.stevewedig.blog.value_objects.HasObjectHelper;
-import com.stevewedig.blog.value_objects.ValueMixin;
-
 public class TestValueMixinDetails {
 
   // ===========================================================================
@@ -63,7 +60,7 @@ public class TestValueMixinDetails {
   @Test
   public void testBehaviorChecking() {
 
-    // same state (fields), potentiallyy different behavior (classes)
+    // same state (fields) but different behavior (classes)
     A a = new A("val");
     B b = new B("val");
 

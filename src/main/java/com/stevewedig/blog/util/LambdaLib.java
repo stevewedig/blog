@@ -3,7 +3,7 @@ package com.stevewedig.blog.util;
 import com.google.common.base.Function;
 
 /**
- * Interfaces for creating lambdas (callbacks).
+ * Interfaces for creating anonymous lambdas (callbacks).
  */
 public abstract class LambdaLib {
 
@@ -15,7 +15,7 @@ public abstract class LambdaLib {
     Out apply();
   }
 
-  // can use Fn1 wherever Guava expects Function
+  // extends Function, so you can use Fn1 wherever Guava Function
   public static interface Fn1<A, Out> extends Function<A, Out> {
     @Override
     Out apply(A a);

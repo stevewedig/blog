@@ -1,13 +1,9 @@
 package com.stevewedig.blog.value_objects;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
 
 
 public class TestEntityMixinExample {
-
-  static boolean LOOK_AT_PRINTING = false;
 
   // ===========================================================================
   // Person
@@ -60,11 +56,6 @@ public class TestEntityMixinExample {
 
     // now they should't print the same
     CompareLib.assertUnequalObjectsAndStrings(bob1, bob2);
-
-    // nail down the printing behavior
-    // (if the Person class wasn't nested, the printed name wouldn't have the
-    // "TestEntityMixinExample$" prefix)
-    assertEquals("TestEntityMixinExample$Person{name=bob, age=40}", bob1.toString());
 
   }
 
