@@ -94,6 +94,6 @@ The [Maven Central artifact page](http://search.maven.org/#artifactdetails%7Ccom
 
 If you're using GWT, in addition to getting the code via Maven or other mechanism, add this line to your .gwt.xml file:
 
-    <inherits name="com.stevewedig.blog.blog" />
+    <inherits name="com.stevewedig.blog.Blog" />
 
 
