@@ -50,6 +50,11 @@ Use [Git](http://en.wikipedia.org/wiki/Git_(software)) to get the project code:
     cd <PROJECT_ROOT_PARENT>
     git clone https://github.com/stevewedig/blog.git
 
+Use [Maven](http://en.wikipedia.org/wiki/Apache_Maven) to run the tests:
+    
+    cd <PROJECT_ROOT>
+    mvn test
+
 Use [Maven](http://en.wikipedia.org/wiki/Apache_Maven) to generate the site, including the [Javadocs](http://en.wikipedia.org/wiki/Javadoc):
 
     cd <PROJECT_ROOT>
@@ -57,11 +62,6 @@ Use [Maven](http://en.wikipedia.org/wiki/Apache_Maven) to generate the site, inc
     # open site root: target/site/index.html
     # or
     # open javadoc: target/site/project-reports.html
-
-Use Maven to run the tests:
-    
-    cd <PROJECT_ROOT>
-    mvn test
 
 ## Project Organization
 
