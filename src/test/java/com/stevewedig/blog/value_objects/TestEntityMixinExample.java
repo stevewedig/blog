@@ -12,7 +12,7 @@ public class TestEntityMixinExample {
   // ===========================================================================
   // Person
   // ===========================================================================
-  
+
   static class Person extends EntityMixin {
     private final String name;
     private int age;
@@ -41,41 +41,31 @@ public class TestEntityMixinExample {
     }
 
   }
-  
+
   // ===========================================================================
   // test
   // ===========================================================================
-  
+
   @Test
   public void testEntityMixinExample() {
 
     Person bob1 = new Person("bob", 40);
     Person bob2 = new Person("bob", 40);
-    
-    // double check that we have different values but they print the smae
-    CompareLib.assertDifferentValueAndSameString(bob1, bob2);
 
-    assertEquals(bob1.toString(), bob2.toString());
+    // double check that we have different values but they print the same
+    CompareLib.assertDifferentValueAndSameString(bob1, bob2);
 
     // mutate
     bob2.setAge(41);
 
-    // now these bobs should't print the same
+    // now they should't print the same
     CompareLib.assertDifferentValueAndDifferentString(bob1, bob2);
 
-    // look at printing
-    if (LOOK_AT_PRINTING) {
+    // nail down the printing behavior
+    // (if the Person class wasn't nested, the printed name wouldn't have the
+    // "TestEntityMixinExample$" prefix)
+    assertEquals("TestEntityMixinExample$Person{name=bob, age=40}", bob1.toString());
 
-      System.out.println("printing print objects...");
-      System.out.println(bob1);
-      System.out.println(bob2);
-
-      System.out.println("\nprinting object state...");
-      System.out.println(((EntityMixin) bob1).fields());
-      System.out.println(((EntityMixin) bob2).fields());
-
-      throw new RuntimeException("check console to see what print object's toString() looks like");
-    }
   }
 
 }
