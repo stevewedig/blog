@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<!-- ======================================================================= -->
+	<!-- project -->
+	<!-- ======================================================================= -->
+
+	<!-- maven model version -->
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- parent POM provides inherited deploy/release configuration -->
+	<!-- https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide -->
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
+
+	<!-- core artifact info -->
+	<groupId>com.stevewedig</groupId>
+	<artifactId>blog</artifactId>
+	<version>1.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<!-- more artifact info required for Maven Central -->
+	<!-- https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide -->
+	<name>Steve Wedig's Libraries for Java 7+</name>
+	<description>Steve Wedig's Libraries for Java 7+</description>
+	<url>https://github.com/stevewedig/blog</url>
+	<licenses>
+		<license>
+			<name>Unlicense</name>
+			<url>http://unlicense.org</url>
+		</license>
+	</licenses>
+	<scm>
+		<connection>scm:git:git@github.com:stevewedig/blog.git</connection>
+		<developerConnection>scm:git:git@github.com:stevewedig/blog.git</developerConnection>
+		<url>git@github.com:stevewedig/blog.git</url>
+	</scm>
+	<developers>
+		<developer>
+			<name>Steve Wedig</name>
+			<url>http://stevewedig.com</url>
+		</developer>
+	</developers>
+
+	<properties>
+
+		<!-- Copied this from somewhere... -->
+		<!-- "Don't let your Mac use a crazy non-standard encoding" -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+
+	<!-- ======================================================================= -->
+	<!-- reporting / site -->
+	<!-- ======================================================================= -->
+
+	<!-- https://maven.apache.org/guides/mini/guide-site.html -->
+	<reporting>
+		<plugins>
+
+			<!-- http://stackoverflow.com/a/18734846 -->
+			<plugin>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.7</version>
+			</plugin>
+
+			<!-- generate javadoc -->
+			<!-- http://maven.apache.org/plugins/maven-javadoc-plugin/usage.html -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+			</plugin>
+		</plugins>
+	</reporting>
+
+	<!-- ======================================================================= -->
+	<!-- build -->
+	<!-- ======================================================================= -->
+
+	<build>
+		<plugins>
+			<!-- set Java version to 7 -->
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+
+			<!-- https://maven.apache.org/plugin-developers/cookbook/attach-source-javadoc-artifacts.html -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- https://maven.apache.org/plugin-developers/cookbook/attach-source-javadoc-artifacts.html -->
+			<!-- http://maven.apache.org/plugins/maven-javadoc-plugin/usage.html -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<!-- part of PGP signature -->
+				<!-- https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven -->
+				<!-- http://jira.codehaus.org/browse/MGPG-9 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.1</version>
+					<configuration>
+						<mavenExecutorId>forked-path</mavenExecutorId>
+						<useReleaseProfile>false</useReleaseProfile>
+						<arguments>${arguments} -Psonatype-oss-release</arguments>
+					</configuration>
+				</plugin>
+
+				<!-- http://stackoverflow.com/questions/13040788/how-to-elimate-the-maven-enforcer-plugin-goal-enforce-is-ignored-by-m2e-wa -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-enforcer-plugin</artifactId>
+										<versionRange>[1.0.0,)</versionRange>
+										<goals>
+											<goal>enforce</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+
+		<!-- include files required to be inheritable as a GWT module -->
+		<!-- http://mojo.codehaus.org/gwt-maven-plugin/user-guide/library.html -->
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.java</include>
+					<include>**/*.gwt.xml</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+
+	<profiles>
+		<!-- part of PGP signature -->
+		<!-- https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven -->
+		<profile>
+			<id>release-sign-artifacts</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.1</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<!-- ======================================================================= -->
+	<!-- dependencies -->
+	<!-- ======================================================================= -->
+
+	<dependencies>
+
+		<!-- Guava extends the standard library -->
+		<!-- https://code.google.com/p/guava-libraries/ -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>[10.0.1,)</version>
+		</dependency>
+
+		<!-- jUnit -->
+		<!-- http://junit.org/ -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>[4.0,)</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- hamcrest -->
+		<!-- https://code.google.com/p/hamcrest/ -->
+		<!-- used for jUnit assertThat() -->
+		<!-- https://code.google.com/p/hamcrest/wiki/HamcrestDistributables -->
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-integration</artifactId>
+			<version>[1.2,)</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+</project>

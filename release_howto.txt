@@ -18,8 +18,8 @@ https://oss.sonatype.org/content/repositories/snapshots/
 
 7. release to staging
 mvn release:clean
-mvn release:prepare -Darguments=-Dgpg.passphrase=PGP_PASSPHRASE
-mvn release:perform -Darguments=-Dgpg.passphrase=PGP_PASSPHRASE
+mvn release:prepare -Darguments=-Dgpg.passphrase=<PGP_PASSPHRASE>
+mvn release:perform -Darguments=-Dgpg.passphrase=<PGP_PASSPHRASE>
 
 8. login at https://oss.sonatype.org
 
