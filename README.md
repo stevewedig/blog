@@ -7,7 +7,7 @@ We all build up a pile of util code over time. This project is my effort to pull
 
 (FWIW, I think pretty much everyone should use Guava because it provides fundamental tools including [Optional](https://code.google.com/p/guava-libraries/wiki/UsingAndAvoidingNullExplained), [immutable collections](https://code.google.com/p/guava-libraries/wiki/ImmutableCollectionsExplained), [important new collections (Multiset/Bag, Multimap, Bimap)](https://code.google.com/p/guava-libraries/wiki/NewCollectionTypesExplained), [collection manipulation utilities](https://code.google.com/p/guava-libraries/wiki/CollectionUtilitiesExplained), [functional idioms](https://code.google.com/p/guava-libraries/wiki/FunctionalExplained), and [a bunch more](https://code.google.com/p/guava-libraries/wiki/GuavaExplained). That being said it doesn't cover everything, so you still have to reach into the [Apache Commons](http://commons.apache.org/) from time to time.)
 
-blog is compatable with Java 7+ and all code can be compiled to JavaScript by GWT 2.6+ ([Google Web Toolkit](https://code.google.com/p/guava-libraries/wiki/GuavaExplained)). blog's only runtime dependency is Guava.
+This project is compatable with Java 7+ and all code can be compiled to JavaScript by GWT 2.6+ ([Google Web Toolkit](https://code.google.com/p/guava-libraries/wiki/GuavaExplained)). The only runtime dependency is Guava.
 
 * **GitHub Repo**: https://github.com/stevewedig/blog
 * **License**: This project is in the public domain via [Unlicense](http://unlicense.org).

@@ -2,8 +2,6 @@ package com.stevewedig.blog.value_objects;
 
 import com.stevewedig.blog.value_objects.ValueMixin;
 
-
-
 class PointClassWithValueMixin extends ValueMixin implements Point {
   private final int x;
   private final int y;
