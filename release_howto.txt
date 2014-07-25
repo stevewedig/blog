@@ -1,36 +1,35 @@
 
 1. read this:
-NEW
 http://central.sonatype.org/pages/ossrh-guide.html
-OLD
-https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
 
-2. fill in pom.xml and settings.xml
+2. fill in pom.xml
 
-3. setup pgp on your machine:
+3. fill in ~/.m2/settings.xml with your credentials
+
+4. setup pgp on your machine:
 https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
 
-4. deploy snapshot (optional but trying a dry run makes sense to me)
+5. deploy snapshot (optional but trying a dry run makes sense to me)
 mvn clean deploy
 
-5. verify that snapshot showed up here:
+6. verify that snapshot showed up here:
 https://oss.sonatype.org/content/repositories/snapshots/
 (at first mine wouldn't show up until I added -SNAPSHOT to my version in pom.xml)
 
-6. release to staging
+7. release to staging
 mvn release:clean
 mvn release:prepare -Darguments=-Dgpg.passphrase=PGP_PASSPHRASE
 mvn release:perform -Darguments=-Dgpg.passphrase=PGP_PASSPHRASE
 
-7. login at https://oss.sonatype.org
+8. login at https://oss.sonatype.org
 
-8. "close" the staging repository
+9. "close" the staging repository
 https://oss.sonatype.org/index.html#stagingRepositories
 
-9. check under "activity" to see whether the repository passed verification (click "refresh" until the process completes)
+10. check under "activity" to see whether the repository passed verification (click "refresh" until the process completes)
 
-10. if it closed successfully, "release" the repository
+11. if it closed successfully, "release" the repository
 
-11. wait 2 hours and it should show up in Maven Central
+12. wait 2 hours and it should show up in Maven Central
 http://search.maven.org/
 
