@@ -55,7 +55,7 @@ class ObjectHelperClass implements ObjectHelper {
 
   @Override
   public String objectString() {
-    return StrLib.objectString(objectClass, fieldNamesAndValues);
+    return StrLib.objectStr(objectClass, fieldNamesAndValues);
   }
 
   // ===========================================================================

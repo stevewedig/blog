@@ -1,6 +1,6 @@
 package com.stevewedig.blog.errors;
 
-import static com.stevewedig.blog.util.StrLib._format;
+import static com.stevewedig.blog.util.StrLib.formatVar;
 
 
 /**
@@ -19,7 +19,7 @@ public class Bug extends RuntimeException {
   }
 
   public Bug(String template, Object... parts) {
-    super(_format(template, parts));
+    super(formatVar(template, parts));
   }
 
 }
