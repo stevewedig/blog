@@ -54,7 +54,9 @@ Use [Maven](http://en.wikipedia.org/wiki/Apache_Maven) to generate the site, inc
 
     cd <PROJECT_ROOT>
     mvn site
-    # open target/site/index.html
+    # open site root: target/site/index.html
+    # or
+    # open javadoc: target/site/project-reports.html
 
 Use Maven to run the tests:
     
