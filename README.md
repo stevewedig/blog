@@ -66,9 +66,8 @@ Use [Maven](http://en.wikipedia.org/wiki/Apache_Maven) to generate the site, inc
 
 The root directory is also a project for the [Eclipse IDE](http://en.wikipedia.org/wiki/Eclipse_(software)). If you are using Eclipse, you can import the project under "Import > General > Existing Projects into Workspace". If you are not using Eclipse, you can disregard or delete the Eclipse project metadata files: .classpath, .project, .settings.
 
-* **Library code**: src/main/java/com/stevewedig/pure/util/value_objects
-* **Test code**: src/test/java/com/stevewedig/pure/util/value_objects
-* **Test file with an example**: src/test/java/com/stevewedig/pure/util/value_objects/TestValueObjectExample.java
+* **Library code**: [src/main/java/com/stevewedig/blog/](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/)
+* **Test code**: src/test/java/com/stevewedig/blog/
 * **Directory built by Maven**: target/
 * **Project's site root**: target/site/index.html (Javadocs are linked to under "Project Reports")
 * **Project's Javadoc root**: target/site/apidocs/index.html
