@@ -1,18 +1,18 @@
-Foundation Libraries for Java 7+
+Libraries for Java 7+
 =============
 
-(GitHub has a rendered version of this readme: https://github.com/stevewedig/foundation/blob/master/README.md)
+(GitHub has a rendered version of this readme: https://github.com/stevewedig/blog/blob/master/README.md)
 
-We all build up a pile of util code over time. This project is my effort to pull out the most useful and generic features of my util codebase. These features are shared via GitHub & Maven, and explained on my [blog](http://stevewedig.com). I build on the core libraries of [Google Guava](https://code.google.com/p/guava-libraries/), so you can think of Foundation as an extension of Guava, which itself is an extension of Java's standard library. 
+We all build up a pile of util code over time. This project is my effort to pull out the most useful and generic features of my util codebase. These features are shared via GitHub & Maven, and explained on my [blog](http://stevewedig.com). I build on the core libraries of [Google Guava](https://code.google.com/p/guava-libraries/), so you can think of blog as an extension of Guava, which itself is an extension of Java's standard library. 
 
 (FWIW, I think pretty much everyone should use Guava because it provides fundamental tools including [Optional](https://code.google.com/p/guava-libraries/wiki/UsingAndAvoidingNullExplained), [immutable collections](https://code.google.com/p/guava-libraries/wiki/ImmutableCollectionsExplained), [important new collections (Multiset/Bag, Multimap, Bimap)](https://code.google.com/p/guava-libraries/wiki/NewCollectionTypesExplained), [collection manipulation utilities](https://code.google.com/p/guava-libraries/wiki/CollectionUtilitiesExplained), [functional idioms](https://code.google.com/p/guava-libraries/wiki/FunctionalExplained), and [a bunch more](https://code.google.com/p/guava-libraries/wiki/GuavaExplained). That being said it doesn't cover everything, so you still have to reach into the [Apache Commons](http://commons.apache.org/) from time to time.)
 
-Foundation is compatable with Java 7+ and all code can be compiled to JavaScript by GWT 2.6+ ([Google Web Toolkit](https://code.google.com/p/guava-libraries/wiki/GuavaExplained)). Foundation's only runtime dependency is Guava.
+blog is compatable with Java 7+ and all code can be compiled to JavaScript by GWT 2.6+ ([Google Web Toolkit](https://code.google.com/p/guava-libraries/wiki/GuavaExplained)). blog's only runtime dependency is Guava.
 
-* **GitHub Repo**: https://github.com/stevewedig/foundation
+* **GitHub Repo**: https://github.com/stevewedig/blog
 * **License**: This project is in the public domain via [Unlicense](http://unlicense.org).
 
-## Foundation's features
+## Features
 
 #### Features explained via blog posts
 
@@ -30,11 +30,11 @@ Pending posts have code that is in use, but it will take a while to get all this
 
 #### Utilities not explained via blog posts
 
-* [StrLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/StrLib.java): ...
-* [LambdaLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/LambdaLib.java): ...
-* [CollectLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/CollectLib.java): ...
-*  [MapLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/MapLib.java): ...
-* [SetLib](https://github.com/stevewedig/foundation/tree/master/src/main/java/com/stevewedig/foundation/util/SetLib.java): ...
+* [StrLib](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/util/StrLib.java): ...
+* [LambdaLib](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/util/LambdaLib.java): ...
+* [CollectLib](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/util/CollectLib.java): ...
+*  [MapLib](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/util/MapLib.java): ...
+* [SetLib](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/util/SetLib.java): ...
 * etc.
 
 #### Other related blog posts
@@ -48,7 +48,7 @@ Pending posts have code that is in use, but it will take a while to get all this
 Use [Git](http://en.wikipedia.org/wiki/Git_(software)) to get the project code:
 
     cd <PROJECT_ROOT_PARENT>
-    git clone https://github.com/stevewedig/foundation.git
+    git clone https://github.com/stevewedig/blog.git
 
 Use [Maven](http://en.wikipedia.org/wiki/Apache_Maven) to generate the site, including the [Javadocs](http://en.wikipedia.org/wiki/Javadoc):
 
@@ -74,7 +74,7 @@ The root directory is also a project for the [Eclipse IDE](http://en.wikipedia.o
 
 More about the [standard layout of Maven projects](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html).
 
-## Using Foundation
+## Using blog
 
 #### Maven Dependency Snippet
 
@@ -83,19 +83,19 @@ The easiest way to use this library is add it your dependency list in your Maven
     <dependencies>
         <dependency>
             <groupId>com.stevewedig</groupId>
-            <artifactId>foundation</artifactId>
+            <artifactId>blog</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>
 
 #### Other Build Tool Dependency Snippets
 
-The [Maven Central artifact page](http://search.maven.org/#artifactdetails%7Ccom.stevewedig%7Cfoundation%7C1.0.0%7Cjar) has snippets for other tools like Buildr, Ivy, and SBT.
+The [Maven Central artifact page](http://search.maven.org/#artifactdetails%7Ccom.stevewedig%7Cblog%7C1.0.0%7Cjar) has snippets for other tools like Buildr, Ivy, and SBT.
 
-#### Inheriting Foundation in your GWT module file
+#### Inheriting blog in your GWT module file
 
 If you're using GWT, in addition to getting the code via Maven or other mechanism, add this line to your .gwt.xml file:
 
-    <inherits name="com.stevewedig.foundation.Foundation" />
+    <inherits name="com.stevewedig.blog.blog" />
 
 
