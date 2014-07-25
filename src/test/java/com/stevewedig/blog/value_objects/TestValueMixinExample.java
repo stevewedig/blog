@@ -112,9 +112,8 @@ public class TestValueMixinExample {
     public ImmutableList<Article> articles() {
       return articles;
     }
-    
-  }
 
+  }
 
   // ===========================================================================
   // test
@@ -123,8 +122,18 @@ public class TestValueMixinExample {
   @Test
   public void testValueMixinExample() {
 
-    
-    
+
+    // Point point1 = new PointClassWithValueMixin(2, 3);
+    // Point point2 = new PointClassWithValueMixin(2, 3);
+    // CompareLib.assertSameValueAndSameString(point1, point2);
+    //
+    // Point point3 = new PointClassWithoutValueMixin(2, 3);
+    // Point point4 = new PointClassWithoutValueMixin(2, 3);
+    // CompareLib.assertSameValueAndSameString(point3, point4);
+    //
+    // CompareLib.assertDifferentValueAndDifferentString(point1, point3);
+
+
   }
 
 }

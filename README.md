@@ -1,4 +1,4 @@
-Libraries for Java 7+
+Steve Wedig's Libraries for Java 7+
 =============
 
 (GitHub has a rendered version of this readme: https://github.com/stevewedig/blog/blob/master/README.md)

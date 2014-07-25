@@ -9,15 +9,12 @@ import org.junit.Test;
 import com.stevewedig.blog.value_objects.HasObjectHelper;
 import com.stevewedig.blog.value_objects.ValueMixin;
 
-/**
- * Verify that ValueObject helpers and hashes are cached
- */
-public class TestValueDetails {
+public class TestValueMixinDetails {
 
   // ===========================================================================
   // helpers should be cached on value objects
   // ===========================================================================
-  
+
   @Test
   public void testCaching() {
 
@@ -42,25 +39,25 @@ public class TestValueDetails {
   private static class HashCounterClass {
 
     public int hashCount = 0;
-    
+
     @Override
     public int hashCode() {
       hashCount++;
       return super.hashCode();
     }
   }
-  
+
   private static class HashCounterContainerClass extends ValueMixin {
     public HashCounterClass hashCounter = new HashCounterClass();
 
     @Override
     public Object[] fields() {
       return array("hashCounter", hashCounter);
-    } 
+    }
   }
 
   // ===========================================================================
-  // making sure behavior (classes) are checked as well as state (fields) 
+  // making sure behavior (classes) are checked as well as state (fields)
   // ===========================================================================
 
   @Test

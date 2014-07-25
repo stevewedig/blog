@@ -10,9 +10,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
-/**
- * Demonstrating that Guava's Optional and immutable collections are ValueObject   
- */
 public class TestGuavaValues {
 
   @Test
