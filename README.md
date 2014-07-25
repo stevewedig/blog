@@ -10,7 +10,7 @@ We all build up a pile of util code over time. This project is my effort to shar
 
 I build on [Google Guava](https://code.google.com/p/guava-libraries/), so you can think of these libraries as an extension of Guava, which itself is an extension of Java's standard library. (FWIW, I think most Java developers should use Guava because it provides great fundamental tools including [Optional](https://code.google.com/p/guava-libraries/wiki/UsingAndAvoidingNullExplained), [immutable collections](https://code.google.com/p/guava-libraries/wiki/ImmutableCollectionsExplained), [important new collections (Multiset/Bag, Multimap, Bimap)](https://code.google.com/p/guava-libraries/wiki/NewCollectionTypesExplained), [collection manipulation utilities](https://code.google.com/p/guava-libraries/wiki/CollectionUtilitiesExplained), [functional idioms](https://code.google.com/p/guava-libraries/wiki/FunctionalExplained), and [a bunch more](https://code.google.com/p/guava-libraries/wiki/GuavaExplained).)
 
-This project is compatable with Java 7+ and all code can be compiled to JavaScript by GWT 2.6+ ([Google Web Toolkit](http://en.wikipedia.org/wiki/Google_Web_Toolkit)). The only runtime dependency is Guava.
+This project is compatable with Java 7+ and all code can be compiled to JavaScript by [Google Web Toolkit](http://en.wikipedia.org/wiki/Google_Web_Toolkit) 2.6+. The only runtime dependency is Guava.
 
 * **GitHub Repo**: https://github.com/stevewedig/blog
 * **License**: This project is in the public domain via [Unlicense](http://unlicense.org).
