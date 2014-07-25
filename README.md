@@ -84,7 +84,7 @@ The easiest way to use this library is add it your dependency list in your Maven
         <dependency>
             <groupId>com.stevewedig</groupId>
             <artifactId>blog</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </dependency>
     </dependencies>
 
