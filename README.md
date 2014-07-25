@@ -29,7 +29,6 @@ Pending posts have code that is in use, but it will take a while to get all this
 * Pending: Framework Free URL Routing in Java
 * Pending: Asynchronous Cached Downloads in Java
 * Pending: Asynchronous Task Workflows in Java
-* Pending: View Flows: A Lightweight UI Architecture Pattern
 
 #### Utilities not explained via blog posts
 
