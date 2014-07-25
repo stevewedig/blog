@@ -1,3 +1,6 @@
+
+(This is a pending project. The code isn't in Maven yet, and the blog posts haven't started yet.)
+
 Steve Wedig's Libraries for Java 7+
 =============
 
@@ -5,7 +8,7 @@ Steve Wedig's Libraries for Java 7+
 
 We all build up a pile of util code over time. This project is my effort to share the most reusable parts of my codebase. I'll be describing the features on my [blog](http://stevewedig.com) and sharing the code via GitHub & Maven.
 
-I build on the core libraries of [Google Guava](https://code.google.com/p/guava-libraries/), so you can think of these libraries as an extension of Guava, which itself is an extension of Java's standard library.  (FWIF, I think pretty much every Java developers should use Guava because it provides fundamental tools including [Optional](https://code.google.com/p/guava-libraries/wiki/UsingAndAvoidingNullExplained), [immutable collections](https://code.google.com/p/guava-libraries/wiki/ImmutableCollectionsExplained), [important new collections (Multiset/Bag, Multimap, Bimap)](https://code.google.com/p/guava-libraries/wiki/NewCollectionTypesExplained), [collection manipulation utilities](https://code.google.com/p/guava-libraries/wiki/CollectionUtilitiesExplained), [functional idioms](https://code.google.com/p/guava-libraries/wiki/FunctionalExplained), and [a bunch more](https://code.google.com/p/guava-libraries/wiki/GuavaExplained).)
+I build on the core libraries of [Google Guava](https://code.google.com/p/guava-libraries/), so you can think of these libraries as an extension of Guava, which itself is an extension of Java's standard library. (FWIW, I think pretty much every Java developer should use Guava because it provides fundamental tools including [Optional](https://code.google.com/p/guava-libraries/wiki/UsingAndAvoidingNullExplained), [immutable collections](https://code.google.com/p/guava-libraries/wiki/ImmutableCollectionsExplained), [important new collections (Multiset/Bag, Multimap, Bimap)](https://code.google.com/p/guava-libraries/wiki/NewCollectionTypesExplained), [collection manipulation utilities](https://code.google.com/p/guava-libraries/wiki/CollectionUtilitiesExplained), [functional idioms](https://code.google.com/p/guava-libraries/wiki/FunctionalExplained), and [a bunch more](https://code.google.com/p/guava-libraries/wiki/GuavaExplained).)
 
 This project is compatable with Java 7+ and all code can be compiled to JavaScript by GWT 2.6+ ([Google Web Toolkit](http://en.wikipedia.org/wiki/Google_Web_Toolkit)). The only runtime dependency is Guava.
 

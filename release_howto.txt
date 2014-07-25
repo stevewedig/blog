@@ -1,5 +1,8 @@
 
 1. read this:
+NEW
+http://central.sonatype.org/pages/ossrh-guide.html
+OLD
 https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
 
 2. fill in pom.xml and settings.xml
