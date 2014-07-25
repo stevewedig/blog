@@ -6,22 +6,18 @@ import com.google.common.base.Function;
 public abstract class LambdaLib {
 
   // ===========================================================================
-  // Fn
+  // Fn (has output)
   // ===========================================================================
 
   public static interface Fn0<Out> {
     Out apply();
   }
 
+  // can use Fn1 wherever Guava expects Function
   public static interface Fn1<A, Out> extends Function<A, Out> {
     @Override
     Out apply(A a);
   }
-
-  // I don't know why this doesn't work
-  // - is it boolean vs Boolean return value?
-  // - does Predicate not extend Function?
-  // public static interface Pred<A>1<A,Boolean>, Predicate<A> {}
 
   public static interface Fn2<A, B, Out> {
     Out apply(A a, B b);
@@ -56,7 +52,7 @@ public abstract class LambdaLib {
   }
 
   // ===========================================================================
-  // Act
+  // Act (no output)
   // ===========================================================================
 
   public static interface Act0 {
@@ -97,6 +93,5 @@ public abstract class LambdaLib {
   public static interface Act9<A, B, C, D, E, F, G, H, I> {
     void apply(A a, B b, C c, D d, E e, F f, G g, H h, I i);
   }
-
 
 }
