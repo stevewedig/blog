@@ -84,7 +84,7 @@ The easiest way to use this library is add it your dependency list in your Maven
         <dependency>
             <groupId>com.stevewedig</groupId>
             <artifactId>blog</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </dependency>
     </dependencies>
 
@@ -92,7 +92,7 @@ The easiest way to use this library is add it your dependency list in your Maven
 
 The [Maven Central artifact page](http://search.maven.org/#artifactdetails%7Ccom.stevewedig%7Cblog%7C1.0.0%7Cjar) has snippets for other tools like Buildr, Ivy, and SBT.
 
-#### Inheriting blog in your GWT module file
+#### Inheriting the GWT module
 
 If you're using GWT, in addition to getting the code via Maven or other mechanism, add this line to your .gwt.xml file:
 
