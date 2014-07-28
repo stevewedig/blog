@@ -42,7 +42,7 @@ These utilities should be fairly self explanatory...
 * [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/)
 * [A Software Developer's Reading List](http://stevewedig.com/2014/02/03/software-developers-reading-list/)
 
-## Get Code, Run Tests, Create Javadocs
+## Get code, run tests, create Javadocs
 
 Use [Git](http://en.wikipedia.org/wiki/Git_(software)) to get the project code:
 
@@ -58,11 +58,11 @@ Use [Maven](http://en.wikipedia.org/wiki/Apache_Maven) to generate the site, inc
 
     cd <PROJECT_ROOT>
     mvn site
-    # open site root: target/site/index.html
+    # open site index: target/site/index.html
     # or
-    # open javadoc: target/site/project-reports.html
+    # open javadoc index: target/site/project-reports.html
 
-## Project Organization
+## Project organization
 
 The root directory is a Maven project with the [standard layout](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html). The root directory is also a project for the [Eclipse IDE](http://en.wikipedia.org/wiki/Eclipse_(software)). If you are using Eclipse, you can import the project under "Import > General > Existing Projects into Workspace". If you are not using Eclipse, you can disregard or delete the Eclipse project metadata files: .classpath, .project, .settings.
 
@@ -74,9 +74,9 @@ The root directory is a Maven project with the [standard layout](https://maven.a
 
 More about the [standard layout of Maven projects](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html).
 
-## Using blog
+## Using the libraries
 
-#### Maven Dependency Snippet
+#### Maven dependency snippet
 
 The easiest way to use this library is add it your dependency list in your Maven [pom.xml](https://maven.apache.org/guides/introduction/introduction-to-the-pom.html) file:
 
@@ -88,7 +88,7 @@ The easiest way to use this library is add it your dependency list in your Maven
         </dependency>
     </dependencies>
 
-#### Other Build Tool Dependency Snippets
+#### Other build tools
 
 The [Maven Central artifact page](http://search.maven.org/#artifactdetails%7Ccom.stevewedig%7Cblog%7C1.0.0%7Cjar) has snippets for other tools like Buildr, Ivy, and SBT.
 
