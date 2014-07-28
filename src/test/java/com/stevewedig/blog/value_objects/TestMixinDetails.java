@@ -1,39 +1,54 @@
 package com.stevewedig.blog.value_objects;
 
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.sameInstance;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-public class TestValueMixinDetails {
+public class TestMixinDetails {
 
   // ===========================================================================
-  // helpers should be cached on value objects
+  // helpers should be cached on values and not cached on entities
   // ===========================================================================
 
   @Test
-  public void testCaching() {
+  public void testHelperCachedOnValues() {
 
-    HashCounterContainerClass container = new HashCounterContainerClass();
+    ValueWithCounter value = new ValueWithCounter();
 
-    // make sure the valueHelper is cached
-    assertThat(((HasObjectHelper) container).objectHelper(),
-        sameInstance(((HasObjectHelper) container).objectHelper()));
+    // helper is cached
+    assertThat(value.objectHelper(), sameInstance(value.objectHelper()));
 
-    assertEquals(container.hashCounter.hashCount, 0);
+    assertEquals(value.hashCounter.hashCount, 0);
 
-    container.hashCode();
-    assertEquals(container.hashCounter.hashCount, 1);
+    value.hashCode();
+    assertEquals(value.hashCounter.hashCount, 1);
 
     // count stays at 1 forever
-    container.hashCode();
-    assertEquals(container.hashCounter.hashCount, 1);
-    container.hashCode();
-    assertEquals(container.hashCounter.hashCount, 1);
+    value.hashCode();
+    assertEquals(value.hashCounter.hashCount, 1);
+    value.hashCode();
+    assertEquals(value.hashCounter.hashCount, 1);
+  }
+  
+  @Test
+  public void testHelperNotCachedOnEntities() {
+    
+    EntityWithCounter entity = new EntityWithCounter();
+    
+    // helper not cached
+    assertThat(entity.objectHelper(), not(sameInstance(entity.objectHelper())));
+    
+    assertEquals(entity.hashCounter.hashCount, 0);
+    
+    // nested object shouldn't be hashed
+    entity.hashCode();
+    assertEquals(entity.hashCounter.hashCount, 0);
   }
 
-  private static class HashCounterClass {
+  private static class HashCounter {
 
     public int hashCount = 0;
 
@@ -44,9 +59,18 @@ public class TestValueMixinDetails {
     }
   }
 
-  private static class HashCounterContainerClass extends ValueMixin {
-    public HashCounterClass hashCounter = new HashCounterClass();
+  private static class ValueWithCounter extends ValueMixin {
+    public HashCounter hashCounter = new HashCounter();
 
+    @Override
+    public Object[] fields() {
+      return array("hashCounter", hashCounter);
+    }
+  }
+
+  private static class EntityWithCounter extends EntityMixin {
+    public HashCounter hashCounter = new HashCounter();
+    
     @Override
     public Object[] fields() {
       return array("hashCounter", hashCounter);
