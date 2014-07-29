@@ -1,9 +1,11 @@
 package com.stevewedig.blog.value_objects;
 
+import static com.stevewedig.blog.value_objects.CompareLib.assertEqualObjectsAndStrings;
+import static com.stevewedig.blog.value_objects.CompareLib.assertUnequalObjectsAndStrings;
+
 import org.junit.Test;
 
 import com.google.common.base.Optional;
-
 
 public class TestValueWithoutMixin {
 
@@ -89,13 +91,13 @@ public class TestValueWithoutMixin {
     // same images
     Image image1 = new Image("http://image.com", 20, 30);
     Image image2 = new Image("http://image.com", 20, 30);
-    CompareLib.assertEqualObjectsAndStrings(image1, image2);
+    assertEqualObjectsAndStrings(image1, image2);
 
     // image with different url
-    CompareLib.assertUnequalObjectsAndStrings(image1, new Image("http://xxx.com", 20, 30));
+    assertUnequalObjectsAndStrings(image1, new Image("http://xxx.com", 20, 30));
 
     // image without size
-    CompareLib.assertUnequalObjectsAndStrings(image1, new Image("http://image.com"));
+    assertUnequalObjectsAndStrings(image1, new Image("http://image.com"));
 
   }
 

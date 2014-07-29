@@ -21,9 +21,11 @@ abstract class CompareLib {
     assertThat(a, not(sameInstance(b)));
 
     assertNotEquals(a, b);
-    assertNotEquals(a.hashCode(), b.hashCode());
 
-    assertNotEquals(a.toString(), b.toString());
+    if (b != null) {
+      assertNotEquals(a.hashCode(), b.hashCode());
+      assertNotEquals(a.toString(), b.toString());
+    }
   }
 
   public static void assertUnequalObjectsButEqualStrings(Object a, Object b) {

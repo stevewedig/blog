@@ -1,5 +1,8 @@
 package com.stevewedig.blog.value_objects;
 
+import static com.stevewedig.blog.value_objects.CompareLib.assertEqualObjectsAndStrings;
+import static com.stevewedig.blog.value_objects.CompareLib.assertUnequalObjectsAndStrings;
+
 import static org.hamcrest.Matchers.sameInstance;
 import static org.junit.Assert.assertThat;
 
@@ -22,9 +25,9 @@ public class TestGuavaValues {
     Optional<String> absent1 = Optional.absent();
     Optional<String> absent2 = Optional.absent();
 
-    CompareLib.assertEqualObjectsAndStrings(bob1, bob2);
-    CompareLib.assertUnequalObjectsAndStrings(bob1, alice);
-    CompareLib.assertUnequalObjectsAndStrings(bob1, absent1);
+    assertEqualObjectsAndStrings(bob1, bob2);
+    assertUnequalObjectsAndStrings(bob1, alice);
+    assertUnequalObjectsAndStrings(bob1, absent1);
 
     // apparently Guava does flywheel for absent, so these are the same instance
     assertThat(absent1, sameInstance(absent2));
@@ -37,8 +40,8 @@ public class TestGuavaValues {
     ImmutableList<String> bob2 = ImmutableList.of("bob");
     ImmutableList<String> alice = ImmutableList.of("alice");
 
-    CompareLib.assertEqualObjectsAndStrings(bob1, bob2);
-    CompareLib.assertUnequalObjectsAndStrings(bob1, alice);
+    assertEqualObjectsAndStrings(bob1, bob2);
+    assertUnequalObjectsAndStrings(bob1, alice);
   }
 
   @Test
@@ -48,8 +51,8 @@ public class TestGuavaValues {
     ImmutableSet<String> bob2 = ImmutableSet.of("bob");
     ImmutableSet<String> alice = ImmutableSet.of("alice");
 
-    CompareLib.assertEqualObjectsAndStrings(bob1, bob2);
-    CompareLib.assertUnequalObjectsAndStrings(bob1, alice);
+    assertEqualObjectsAndStrings(bob1, bob2);
+    assertUnequalObjectsAndStrings(bob1, alice);
   }
 
   @Test
@@ -60,9 +63,9 @@ public class TestGuavaValues {
     ImmutableMap<String, Integer> differentKey = ImmutableMap.of("alice", 1);
     ImmutableMap<String, Integer> differentValue = ImmutableMap.of("bob", 2);
 
-    CompareLib.assertEqualObjectsAndStrings(bob1, bob2);
-    CompareLib.assertUnequalObjectsAndStrings(bob1, differentKey);
-    CompareLib.assertUnequalObjectsAndStrings(bob1, differentValue);
+    assertEqualObjectsAndStrings(bob1, bob2);
+    assertUnequalObjectsAndStrings(bob1, differentKey);
+    assertUnequalObjectsAndStrings(bob1, differentValue);
   }
 
   // presumably Guava's other immutable collections work the same (ImmutableMulitset,

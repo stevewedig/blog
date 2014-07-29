@@ -1,7 +1,9 @@
 package com.stevewedig.blog.value_objects;
 
-import org.junit.Test;
+import static com.stevewedig.blog.value_objects.CompareLib.assertUnequalObjectsAndStrings;
+import static com.stevewedig.blog.value_objects.CompareLib.assertUnequalObjectsButEqualStrings;
 
+import org.junit.Test;
 
 public class TestEntityMixinExample {
 
@@ -49,13 +51,13 @@ public class TestEntityMixinExample {
     Person bob2 = new Person("bob", 40);
 
     // double check that we have different values but they print the same
-    CompareLib.assertUnequalObjectsButEqualStrings(bob1, bob2);
+    assertUnequalObjectsButEqualStrings(bob1, bob2);
 
     // mutate
     bob2.setAge(41);
 
     // now they should't print the same
-    CompareLib.assertUnequalObjectsAndStrings(bob1, bob2);
+    assertUnequalObjectsAndStrings(bob1, bob2);
 
   }
 

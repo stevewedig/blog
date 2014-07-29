@@ -1,10 +1,12 @@
 package com.stevewedig.blog.value_objects;
 
+import static com.stevewedig.blog.value_objects.CompareLib.assertEqualObjectsAndStrings;
+import static com.stevewedig.blog.value_objects.CompareLib.assertUnequalObjectsAndStrings;
+
 import org.junit.Test;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
-
 
 public class TestValueMixinExample {
 
@@ -142,60 +144,69 @@ public class TestValueMixinExample {
     // same images
     Image image1 = new Image("http://image.com", 20, 30);
     Image image2 = new Image("http://image.com", 20, 30);
-    CompareLib.assertEqualObjectsAndStrings(image1, image2);
+    assertEqualObjectsAndStrings(image1, image2);
 
     // image with different url
-    CompareLib.assertUnequalObjectsAndStrings(image1, new Image("http://xxx.com", 20, 30));
+    assertUnequalObjectsAndStrings(image1, new Image("http://xxx.com", 20, 30));
 
     // image without size
-    CompareLib.assertUnequalObjectsAndStrings(image1, new Image("http://image.com"));
+    assertUnequalObjectsAndStrings(image1, new Image("http://image.com"));
 
     // same articles
     Article article1 = new Article("http://article.com", "My Article", image1);
     Article article2 = new Article("http://article.com", "My Article", image2);
-    CompareLib.assertEqualObjectsAndStrings(article1, article2);
+    assertEqualObjectsAndStrings(article1, article2);
 
     // article with different url
-    CompareLib.assertUnequalObjectsAndStrings(article1, new Article("http://xxx.com", "My Article",
+    assertUnequalObjectsAndStrings(article1, new Article("http://xxx.com", "My Article",
         image1));
 
     // article with different title
-    CompareLib.assertUnequalObjectsAndStrings(article1, new Article("http://article.com", "xxx",
+    assertUnequalObjectsAndStrings(article1, new Article("http://article.com", "xxx",
         image1));
 
     // article with different image
-    CompareLib.assertUnequalObjectsAndStrings(article1, new Article("http://article.com",
+    assertUnequalObjectsAndStrings(article1, new Article("http://article.com",
         "My Article", new Image("http://xxx.com")));
 
     // article without an image
-    CompareLib.assertUnequalObjectsAndStrings(article1, new Article("http://article.com",
+    assertUnequalObjectsAndStrings(article1, new Article("http://article.com",
         "My Article"));
 
     // same feeds
     Article article3 = new Article("http://article3.com", "My Article 3");
     Feed feed1 = new Feed("http://feed.com", "My Feed", article1, article3);
     Feed feed2 = new Feed("http://feed.com", "My Feed", article1, article3);
-    CompareLib.assertEqualObjectsAndStrings(feed1, feed2);
+    assertEqualObjectsAndStrings(feed1, feed2);
 
     // feed with different url
-    CompareLib.assertUnequalObjectsAndStrings(feed1, new Feed("http://xxx.com", "My Feed",
+    assertUnequalObjectsAndStrings(feed1, new Feed("http://xxx.com", "My Feed",
         article1, article3));
 
     // feed with different title
-    CompareLib.assertUnequalObjectsAndStrings(feed1, new Feed("http://feed.com", "xxx", article1,
+    assertUnequalObjectsAndStrings(feed1, new Feed("http://feed.com", "xxx", article1,
         article3));
 
     // feed with different articles
-    CompareLib.assertUnequalObjectsAndStrings(feed1, new Feed("http://feed.com", "My Feed",
+    assertUnequalObjectsAndStrings(feed1, new Feed("http://feed.com", "My Feed",
         article1));
 
     // feed with different article order
-    CompareLib.assertUnequalObjectsAndStrings(feed1, new Feed("http://feed.com", "My Feed",
+    assertUnequalObjectsAndStrings(feed1, new Feed("http://feed.com", "My Feed",
         article3, article1));
 
     // feed without articles
-    CompareLib.assertUnequalObjectsAndStrings(feed1, new Feed("http://feed.com", "My Feed"));
+    assertUnequalObjectsAndStrings(feed1, new Feed("http://feed.com", "My Feed"));
 
   }
 
+  @Test
+  public void testComparisonToNonValueObjects() {
+    
+    Image image = new Image("http://image.com");
+
+    assertUnequalObjectsAndStrings(image, 1);
+    
+    assertUnequalObjectsAndStrings(image, null);
+  }
 }
