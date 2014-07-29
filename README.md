@@ -90,7 +90,7 @@ The easiest way to use this library is add it your dependency list in your Maven
 
 #### Other build tools
 
-The [Maven Central artifact page](http://search.maven.org/#artifactdetails%7Ccom.stevewedig%7Cblog%7C1.0.0%7Cjar) has snippets for other tools like Buildr, Ivy, and SBT.
+The [Maven Central artifact page](http://search.maven.org/#artifactdetails%7Ccom.stevewedig%7Cblog%7C1.0.1%7Cjar) has snippets for other tools like Buildr, Ivy, and SBT.
 
 #### Inheriting the GWT module
 
