@@ -39,8 +39,8 @@ These utilities should be fairly self explanatory...
 
 #### Other related blog posts
 
-* [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/)
 * [A Software Developer's Reading List](http://stevewedig.com/2014/02/03/software-developers-reading-list/)
+* [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/)
 
 ## Get code, run tests, create Javadocs
 
