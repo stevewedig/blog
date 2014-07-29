@@ -4,7 +4,7 @@
 Steve Wedig's Libraries for Java 7+
 =============
 
-(GitHub has a rendered version of this readme: https://github.com/stevewedig/blog/blob/master/README.md)
+(GitHub has a rendered version of this readme: https://github.com/stevewedig/blog/)
 
 We all build up a pile of util code over time. This project is my effort to share the most reusable parts of my codebase. As I publish features I'll be describing them on my [blog](http://stevewedig.com) and sharing the code via GitHub & Maven.
 
