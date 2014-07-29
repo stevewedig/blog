@@ -4,7 +4,7 @@
 Steve Wedig's Libraries for Java 7+
 =============
 
-(GitHub has a rendered version of this readme: https://github.com/stevewedig/blog/blob/master/README.md)
+(GitHub has a rendered version of this readme: https://github.com/stevewedig/blog/)
 
 We all build up a pile of util code over time. This project is my effort to share the most reusable parts of my codebase. As I publish features I'll be describing them on my [blog](http://stevewedig.com) and sharing the code via GitHub & Maven.
 
@@ -39,8 +39,8 @@ These utilities should be fairly self explanatory...
 
 #### Other related blog posts
 
-* [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/)
 * [A Software Developer's Reading List](http://stevewedig.com/2014/02/03/software-developers-reading-list/)
+* [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/)
 
 ## Get code, run tests, create Javadocs
 
@@ -90,7 +90,7 @@ The easiest way to use this library is add it your dependency list in your Maven
 
 #### Other build tools
 
-The [Maven Central artifact page](http://search.maven.org/#artifactdetails%7Ccom.stevewedig%7Cblog%7C1.0.0%7Cjar) has snippets for other tools like Buildr, Ivy, and SBT.
+The [Maven Central artifact page](http://search.maven.org/#artifactdetails%7Ccom.stevewedig%7Cblog%7C1.0.1%7Cjar) has snippets for other tools like Buildr, Ivy, and SBT.
 
 #### Inheriting the GWT module
 
