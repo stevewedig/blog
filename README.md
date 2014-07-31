@@ -21,7 +21,7 @@ This project is compatable with Java 7+ and all code can be compiled to JavaScri
 
 Pending posts have code that is in use, but it will take a while to get all this published...
 
-* [Value Objects in Java & Python](http://stevewedig.com)
+* [Value Objects in Java & Python](http://stevewedig.com/2014/07/31/value-objects-in-java-and-python/)
 * Pending: Typesafe Heterogenous Containers in Java
 * Pending: Directed-Acyclic Graphs (DAGs) in Java
 * Pending: Framework Free Dependency Injection in Java
