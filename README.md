@@ -1,7 +1,7 @@
 
 (This is a pending project. The code isn't in Maven yet, and the blog posts haven't started yet.)
 
-Steve Wedig's Libraries for Java 7+
+Libraries for Java 7+
 =============
 
 (GitHub has a rendered version of this readme: https://github.com/stevewedig/blog/)
