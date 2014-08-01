@@ -25,10 +25,6 @@ Pending posts have code that is in use, but it will take a while to get all this
 * Pending: Typesafe Heterogenous Containers in Java
 * Pending: Directed-Acyclic Graphs (DAGs) in Java
 * Pending: Framework Free Dependency Injection in Java
-* Pending: Fallible: Avoiding Exceptions in Java
-* Pending: Framework Free URL Routing in Java
-* Pending: Asynchronous Cached Downloads in Java
-* Pending: Asynchronous Task Workflows in Java
 
 #### Utilities not explained via blog posts
 
