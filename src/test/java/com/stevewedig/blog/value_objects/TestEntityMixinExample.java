@@ -2,6 +2,8 @@ package com.stevewedig.blog.value_objects;
 
 import static com.stevewedig.blog.value_objects.CompareLib.assertUnequalObjectsAndStrings;
 import static com.stevewedig.blog.value_objects.CompareLib.assertUnequalObjectsButEqualStrings;
+import static com.stevewedig.blog.value_objects.ObjectHelperLib.assertStateEquals;
+import static com.stevewedig.blog.value_objects.ObjectHelperLib.assertStateNotEquals;
 
 import org.junit.Test;
 
@@ -52,12 +54,17 @@ public class TestEntityMixinExample {
     // double check that we have different values but they print the same
     assertUnequalObjectsButEqualStrings(bob1, bob2);
 
+    // state is the same
+    assertStateEquals(bob1, bob2);
+    
     // mutate
     bob2.setAge(41);
 
     // now they should't print the same
     assertUnequalObjectsAndStrings(bob1, bob2);
 
+    // state is now different
+    assertStateNotEquals(bob1, bob2);
   }
 
 }

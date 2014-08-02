@@ -1,10 +1,12 @@
 package com.stevewedig.blog.value_objects;
 
+import static com.stevewedig.blog.util.StrLib.format;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Arrays;
 import java.util.Objects;
 
+import com.google.common.collect.ImmutableMap;
 import com.stevewedig.blog.errors.Bug;
 import com.stevewedig.blog.util.StrLib;
 
@@ -48,6 +50,31 @@ class ObjectHelperClass implements ObjectHelper {
 
   // created lazily and cached
   private Object[] classAndFieldValues;
+
+  // ===========================================================================
+  // fieldMap
+  // ===========================================================================
+
+  @Override
+  public ImmutableMap<String, Object> fieldMap() {
+    if (fieldMap == null) {
+
+      ImmutableMap.Builder<String, Object> builder = ImmutableMap.builder();
+
+      for (int i = 0; i < fieldNamesAndValues.length; i += 2) {
+        String name = (String) fieldNamesAndValues[i];
+        Object value = fieldNamesAndValues[i + 1];
+        builder.put(name, value);
+      }
+
+      this.fieldMap = builder.build();
+    }
+
+    return fieldMap;
+  }
+
+  // created lazily and cached
+  private ImmutableMap<String, Object> fieldMap;
 
   // ===========================================================================
   // objectString
@@ -96,5 +123,37 @@ class ObjectHelperClass implements ObjectHelper {
 
   // created lazily and cached
   private Integer classAndStateHash;
+
+  // ===========================================================================
+  // state equals
+  // ===========================================================================
+
+  @Override
+  public void assertStateEquals(HasObjectHelper other) {
+    assertStateEquals(other.objectHelper());
+  }
+
+  private void assertStateEquals(ObjectHelper other) {
+    if (fieldMap().equals(other.fieldMap()))
+      return;
+
+    // should specify which fields are different
+    throw new AssertionError(format("Object states were not equal. Expecting: %s, but got %s",
+        fieldMap(), other.fieldMap()));
+  }
+
+  // ===================================
+
+  @Override
+  public void assertStateNotEquals(HasObjectHelper other) {
+    assertStateNotEquals(other.objectHelper());
+  }
+
+  private void assertStateNotEquals(ObjectHelper other) {
+    if (!fieldMap().equals(other.fieldMap()))
+      return;
+
+    throw new AssertionError(format("Object states were equal, both were: %s", fieldMap()));
+  }
 
 }

@@ -145,7 +145,7 @@ public class TestValueMixinExample {
     Image image1 = new Image("http://image.com", 20, 30);
     Image image2 = new Image("http://image.com", 20, 30);
     assertEqualObjectsAndStrings(image1, image2);
-
+    
     // image with different url
     assertUnequalObjectsAndStrings(image1, new Image("http://xxx.com", 20, 30));
 
