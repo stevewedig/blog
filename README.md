@@ -1,7 +1,7 @@
 
 (This is a pending project. The code isn't in Maven yet, and the blog posts haven't started yet.)
 
-Steve Wedig's Libraries for Java 7+
+Libraries for Java 7+
 =============
 
 (GitHub has a rendered version of this readme: https://github.com/stevewedig/blog/)
@@ -21,14 +21,10 @@ This project is compatable with Java 7+ and all code can be compiled to JavaScri
 
 Pending posts have code that is in use, but it will take a while to get all this published...
 
-* [Value Objects in Java & Python](http://stevewedig.com)
+* [Value Objects in Java & Python](http://stevewedig.com/2014/07/31/value-objects-in-java-and-python/)
 * Pending: Typesafe Heterogenous Containers in Java
 * Pending: Directed-Acyclic Graphs (DAGs) in Java
 * Pending: Framework Free Dependency Injection in Java
-* Pending: Fallible: Avoiding Exceptions in Java
-* Pending: Framework Free URL Routing in Java
-* Pending: Asynchronous Cached Downloads in Java
-* Pending: Asynchronous Task Workflows in Java
 
 #### Utilities not explained via blog posts
 
