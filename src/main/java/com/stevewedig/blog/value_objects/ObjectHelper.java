@@ -7,6 +7,10 @@ import com.google.common.collect.ImmutableMap;
  */
 public interface ObjectHelper {
 
+  // ===========================================================================
+  // helper methods
+  // ===========================================================================
+
   /**
    * Implements toString for both entity and value objects
    */
@@ -22,15 +26,28 @@ public interface ObjectHelper {
    */
   int classAndStateHash();
 
+  // ===========================================================================
+  // exposing state
+  // ===========================================================================
+
   /**
-   * Exposed so helpers can compare class and fields with each other.
+   * Exposed for class and state comparison.
    */
   Object[] classAndFieldValues();
 
   /**
-   * Exposed for conveninece and state comparison.
+   * Exposed for state comparison.
+   */
+  Object[] fieldValues();
+
+  /**
+   * Exposed for conveninece.
    */
   ImmutableMap<String, Object> fieldMap();
+
+  // ===========================================================================
+  // state comparison
+  // ===========================================================================
 
   /**
    * Used to compare the state of entity objects or value objects with different classes.

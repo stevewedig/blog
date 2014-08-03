@@ -1,13 +1,15 @@
 package com.stevewedig.blog.value_objects;
 
+import static com.stevewedig.blog.value_objects.CompareLib.assertEqualObjectsAndStrings;
+import static com.stevewedig.blog.value_objects.CompareLib.assertUnequalObjectsAndStrings;
+import static com.stevewedig.blog.value_objects.ObjectHelperLib.assertStateEquals;
+import static com.stevewedig.blog.value_objects.ObjectHelperLib.assertStateNotEquals;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.sameInstance;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
-import static com.stevewedig.blog.value_objects.CompareLib.assertEqualObjectsAndStrings;
-import static com.stevewedig.blog.value_objects.CompareLib.assertUnequalObjectsAndStrings;
 
 public class TestMixinDetails {
 
@@ -156,5 +158,43 @@ public class TestMixinDetails {
       return array("myFlag", myFlag, "myEntity", myEntity);
     }
   }
+
+  // ===========================================================================
+  // verify we can handle null fields
+  // (not that I suggest using null, instead I always use Optional)
+  // ===========================================================================
+
+  @Test
+  public void testNullField() {
+
+    D a1 = new D("a");
+    D a2 = new D("a");
+    assertEqualObjectsAndStrings(a1, a2);
+    assertStateEquals(a1, a2);
+
+    D null1 = new D(null);
+    D null2 = new D(null);
+    assertEqualObjectsAndStrings(null1, null2);
+    assertStateEquals(null1, null2);
+
+    assertUnequalObjectsAndStrings(a1, null1);
+    assertStateNotEquals(a1, null1);
+  }
+
+
+  private static class D extends ValueMixin {
+
+    private final Object field;
+
+    public D(Object field) {
+      this.field = field;
+    }
+
+    @Override
+    protected Object[] fields() {
+      return array("field", field);
+    }
+  }
+
 
 }

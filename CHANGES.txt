@@ -1,3 +1,4 @@
 
+v1.0.3, August 3nd 2014 -- Made assertStateEquals() work with null field values
 v1.0.2, August 2nd 2014 -- Added assertStateEquals()
 v1.0.1, July 25th 2014 -- Initial relase of blog.value_objects

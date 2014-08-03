@@ -52,6 +52,26 @@ class ObjectHelperClass implements ObjectHelper {
   private Object[] classAndFieldValues;
 
   // ===========================================================================
+  // fieldValues
+  // ===========================================================================
+
+  @Override
+  public Object[] fieldValues() {
+    if (fieldValues == null) {
+
+      fieldValues = new Object[fieldCount()];
+
+      for (int i = 0; i < fieldCount(); i++)
+        fieldValues[i] = fieldNamesAndValues[i * 2 + 1];
+    }
+
+    return fieldValues;
+  }
+
+  // created lazily and cached
+  private Object[] fieldValues;
+
+  // ===========================================================================
   // fieldMap
   // ===========================================================================
 
@@ -134,12 +154,13 @@ class ObjectHelperClass implements ObjectHelper {
   }
 
   private void assertStateEquals(ObjectHelper other) {
-    if (fieldMap().equals(other.fieldMap()))
+
+    if (Arrays.equals(fieldValues(), other.fieldValues()))
       return;
 
     // should specify which fields are different
     throw new AssertionError(format("Object states were not equal. Expecting: %s, but got %s",
-        fieldMap(), other.fieldMap()));
+        fieldValues(), other.fieldValues()));
   }
 
   // ===================================
@@ -150,10 +171,10 @@ class ObjectHelperClass implements ObjectHelper {
   }
 
   private void assertStateNotEquals(ObjectHelper other) {
-    if (!fieldMap().equals(other.fieldMap()))
+    if (!Arrays.equals(fieldValues(), other.fieldValues()))
       return;
 
-    throw new AssertionError(format("Object states were equal, both were: %s", fieldMap()));
+    throw new AssertionError(format("Object states were equal, both were: %s", fieldValues()));
   }
 
 }
