@@ -14,5 +14,9 @@ public abstract class ErrorMixin extends RuntimeException {
   public ErrorMixin(String template, Object... parts) {
     super(formatN(template, parts));
   }
+  
+  public ErrorMixin(Exception e) {
+    this("Caused by %s", e);
+  }
 
 }
