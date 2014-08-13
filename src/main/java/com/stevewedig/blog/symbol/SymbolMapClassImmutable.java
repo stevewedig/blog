@@ -44,6 +44,13 @@ class SymbolMapClassImmutable extends SymbolMapClassMixin implements HasObjectHe
   // ===========================================================================
 
   @Override
+  public SymbolMap immutable() {
+    return this;
+  }
+
+  // ===================================
+  
+  @Override
   public ImmutableSet<Symbol<?>> symbols() {
     if (symbols == null)
       symbols = ImmutableSet.copyOf(state().keySet());
@@ -62,5 +69,6 @@ class SymbolMapClassImmutable extends SymbolMapClassMixin implements HasObjectHe
   }
 
   private ImmutableMap<Symbol<?>, Object> immutableState;
+
 
 }

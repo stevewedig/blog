@@ -61,6 +61,11 @@ public interface SymbolMap extends Iterable<Entry<Symbol<?>, Object>> {
   SymbolMap.Mutable mutable();
 
   /**
+   * @return An immutable SymbolMap copy.
+   */
+  SymbolMap immutable();
+
+  /**
    * 
    * @return A Map copy.
    */
@@ -80,11 +85,6 @@ public interface SymbolMap extends Iterable<Entry<Symbol<?>, Object>> {
 
     // fluid interface allows us to build immutable maps via mutable ones
     <Value> SymbolMap.Mutable put(Symbol<Value> symbol, Value value);
-
-    /**
-     * @return An immutable SymbolMap copy.
-     */
-    SymbolMap immutable();
 
   }
 
