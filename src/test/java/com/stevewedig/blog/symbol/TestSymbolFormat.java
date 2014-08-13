@@ -19,10 +19,10 @@ import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.stevewedig.blog.symbol.format.ConfigFormat;
-import com.stevewedig.blog.symbol.format.SymbolFormat;
-import com.stevewedig.blog.symbol.format.SymbolFormatLib;
-import com.stevewedig.blog.symbol.format.SymbolTranslator;
+import com.stevewedig.blog.symbol.translate.ConfigFormat;
+import com.stevewedig.blog.symbol.translate.SymbolFormat;
+import com.stevewedig.blog.symbol.translate.SymbolFormatLib;
+import com.stevewedig.blog.symbol.translate.SymbolTranslator;
 import com.stevewedig.blog.translate.Format;
 import com.stevewedig.blog.translate.ParseError;
 import com.stevewedig.blog.util.PropLib;

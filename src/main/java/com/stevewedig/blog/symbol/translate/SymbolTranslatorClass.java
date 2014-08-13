@@ -1,4 +1,4 @@
-package com.stevewedig.blog.symbol.format;
+package com.stevewedig.blog.symbol.translate;
 
 import java.util.Map;
 import java.util.Map.Entry;

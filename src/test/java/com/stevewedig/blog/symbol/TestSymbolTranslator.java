@@ -8,10 +8,10 @@ import org.junit.Test;
 
 import com.google.common.collect.ImmutableMap;
 import com.stevewedig.blog.errors.NotContained;
-import com.stevewedig.blog.symbol.format.SymbolFormatLib;
-import com.stevewedig.blog.symbol.format.SymbolParser;
-import com.stevewedig.blog.symbol.format.SymbolTranslator;
-import com.stevewedig.blog.symbol.format.SymbolWriter;
+import com.stevewedig.blog.symbol.translate.SymbolFormatLib;
+import com.stevewedig.blog.symbol.translate.SymbolParser;
+import com.stevewedig.blog.symbol.translate.SymbolTranslator;
+import com.stevewedig.blog.symbol.translate.SymbolWriter;
 import com.stevewedig.blog.translate.FormatLib;
 import com.stevewedig.blog.translate.ParseError;
 

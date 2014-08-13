@@ -1,4 +1,4 @@
-package com.stevewedig.blog.symbol.format;
+package com.stevewedig.blog.symbol.translate;
 
 import com.stevewedig.blog.symbol.SymbolMap;
 import com.stevewedig.blog.translate.Format;

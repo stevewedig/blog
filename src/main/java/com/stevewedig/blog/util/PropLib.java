@@ -10,7 +10,7 @@ import java.util.Properties;
 
 import com.google.common.collect.ImmutableMap;
 import com.stevewedig.blog.errors.Bug;
-import com.stevewedig.blog.symbol.format.ConfigFormat;
+import com.stevewedig.blog.symbol.translate.ConfigFormat;
 import com.stevewedig.blog.translate.ParseError;
 
 /**
