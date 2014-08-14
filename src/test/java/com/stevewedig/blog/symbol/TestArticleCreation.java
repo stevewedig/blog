@@ -7,6 +7,10 @@ import static com.stevewedig.blog.symbol.ArticleWithSymbols.$title;
 import static com.stevewedig.blog.symbol.ArticleWithSymbols.$url;
 import static com.stevewedig.blog.symbol.SymbolLib.map;
 import static com.stevewedig.blog.value_objects.ObjectHelperLib.assertStateEquals;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.sameInstance;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
@@ -15,8 +19,12 @@ import com.google.common.collect.ImmutableSet;
 
 public class TestArticleCreation {
 
+  // ===========================================================================
+  // create without defaults
+  // ===========================================================================
+
   @Test
-  public void testArticleFull() {
+  public void testArticleWithoutDefaults() {
 
     // =================================
     // positional
@@ -58,9 +66,11 @@ public class TestArticleCreation {
   }
 
   // ===========================================================================
+  // create with defaults
+  // ===========================================================================
 
   @Test
-  public void testArticleSparse() {
+  public void testArticleWithDefaults() {
 
     // =================================
     // positional
@@ -95,15 +105,58 @@ public class TestArticleCreation {
     assertStateEquals(positional, symbolWithDefaults);
 
     // =================================
-    // symbols without defaults // TODO do we need this?
+    // symbols adapting nulls to defaults
     // =================================
 
+    // adapting null to defaults
     ArticleWithSymbols symbolWithoutDefaults =
         new ArticleWithSymbols(map().put($url, "http://url.com").put($title, "title")
             .put($published, null).put($author, null).put($tags, null));
 
     assertStateEquals(positional, symbolWithoutDefaults);
 
+
+  }
+
+  // ===========================================================================
+  // copy with mutations
+  // ===========================================================================
+
+  @Test
+  public void testCopyWithMutation() {
+
+    ArticleWithSymbols sparse =
+        new ArticleWithSymbols(map().put($url, "http://url.com").put($title, "title"));
+
+
+    ArticleWithSymbols full =
+        new ArticleWithSymbols(map().put($url, "http://url.com").put($title, "title")
+            .put($published, 123).put($author, "bob").put($tags, ImmutableSet.of("software")));
+
+    // =================================
+    // copy
+    // =================================
+
+    assertEquals(sparse, sparse.copy());
+    
+    assertThat(sparse, not(sameInstance(sparse.copy())));
+
+    assertEquals(full, full.copy());
+
+    assertThat(full, not(sameInstance(full.copy())));
+
+    // =================================
+    // copyWithMutations
+    // =================================
+
+    assertEquals(
+        full,
+        sparse.copyWithMutations(map().put($published, 123).put($author, "bob")
+            .put($tags, ImmutableSet.of("software"))));
+
+    // adapting null to defaults
+    assertEquals(sparse,
+        full.copyWithMutations(map().put($published, null).put($author, null).put($tags, null)));
 
   }
 
