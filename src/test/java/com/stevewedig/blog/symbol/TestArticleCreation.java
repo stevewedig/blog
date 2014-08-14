@@ -66,9 +66,7 @@ public class TestArticleCreation {
     // positional
     // =================================
 
-    ArticleWithPositional positional =
-        new ArticleWithPositional("http://url.com", "title", Optional.<Integer>absent(), null,
-            ImmutableSet.<String>of());
+    ArticleWithPositional positional = new ArticleWithPositional("http://url.com", "title");
 
     // =================================
     // fluent mutable
@@ -97,7 +95,7 @@ public class TestArticleCreation {
     assertStateEquals(positional, symbolWithDefaults);
 
     // =================================
-    // symbols without defaults
+    // symbols without defaults // TODO do we need this?
     // =================================
 
     ArticleWithSymbols symbolWithoutDefaults =

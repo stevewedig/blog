@@ -1,6 +1,7 @@
 package com.stevewedig.blog.symbol;
 
 import static com.stevewedig.blog.symbol.SymbolLib.symbol;
+import static com.stevewedig.blog.symbol.SymbolLib.map;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
@@ -70,6 +71,30 @@ class ArticleWithSymbols extends ValueMixin {
 
   public ImmutableSet<String> getTags() {
     return tags;
+  }
+
+  // ===========================================================================
+  // copy / clone
+  // ===========================================================================
+
+  private SymbolMap.Mutable params() {
+    // TODO really ugly that published is not Optional as a symbol
+    return map().put($url, url).put($title, title)
+        .put($published, published.isPresent() ? published.get() : null).put($author, author)
+        .put($tags, tags);
+  }
+
+  public ArticleWithSymbols copy(SymbolMap delta) {
+
+    SymbolMap.Mutable params = params();
+
+    params.putAll(delta);
+
+    return new ArticleWithSymbols(params);
+  }
+
+  public ArticleWithSymbols copy() {
+    return copy(map());
   }
 
 }

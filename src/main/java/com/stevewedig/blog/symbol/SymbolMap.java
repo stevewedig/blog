@@ -85,6 +85,8 @@ public interface SymbolMap extends Iterable<Entry<Symbol<?>, Object>> {
 
     // fluid interface allows us to build immutable maps via mutable ones
     <Value> SymbolMap.Mutable put(Symbol<Value> symbol, Value value);
+    
+    SymbolMap.Mutable putAll(SymbolMap delta);
 
   }
 

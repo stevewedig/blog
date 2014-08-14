@@ -1,6 +1,7 @@
 package com.stevewedig.blog.symbol;
 
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -41,7 +42,7 @@ class SymbolMapClassMutable extends SymbolMapClassMixin implements SymbolMap.Mut
   public ImmutableMap<Symbol<?>, Object> immutableStateCopy() {
     return ImmutableMap.copyOf(state());
   }
-  
+
   // ===========================================================================
   // implementing SymbolMap.Mutable
   // ===========================================================================
@@ -56,6 +57,20 @@ class SymbolMapClassMutable extends SymbolMapClassMixin implements SymbolMap.Mut
 
     state().put(symbol, value);
 
+    return this;
+  }
+
+  // TODO untested
+  @Override
+  public Mutable putAll(SymbolMap delta) {
+    
+    for (Entry<Symbol<?>, Object> entry : delta) {
+      Symbol<?> symbol = entry.getKey();
+      Object value = entry.getValue();
+
+      state().put(symbol, value);
+    }
+    
     return this;
   }
 
