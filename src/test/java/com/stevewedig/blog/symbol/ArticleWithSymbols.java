@@ -84,11 +84,11 @@ class ArticleWithSymbols extends ValueMixin {
         .put($tags, tags);
   }
 
-  public ArticleWithSymbols copyWithMutations(SymbolMap delta) {
+  public ArticleWithSymbols copyWithMutations(SymbolMap mutations) {
 
     SymbolMap.Mutable params = params();
 
-    params.putAll(delta);
+    params.putAll(mutations);
 
     return new ArticleWithSymbols(params);
   }
