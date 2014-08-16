@@ -21,10 +21,10 @@ class SymbolBusClass implements SymbolBus {
   private final Multimap<Symbol<?>, Act1<?>> symbol__callbacks = Multimaps
       .synchronizedSetMultimap(HashMultimap.<Symbol<?>, Act1<?>>create());
 
-  private final Set<Act2<Symbol<?>, Object>> catchAlls = Collections
+  private final Set<Act2<Symbol<?>, Object>> globalCallbacks = Collections
       .synchronizedSet(new HashSet<Act2<Symbol<?>, Object>>());
 
-  private final Set<Act2<Symbol<?>, Object>> catchMisses = Collections
+  private final Set<Act2<Symbol<?>, Object>> missCallbacks = Collections
       .synchronizedSet(new HashSet<Act2<Symbol<?>, Object>>());
 
   // ===========================================================================
@@ -38,7 +38,7 @@ class SymbolBusClass implements SymbolBus {
 
     // miss subscribers
     if (callbacks.isEmpty()) {
-      for (Act2<Symbol<?>, Object> callback : catchMisses)
+      for (Act2<Symbol<?>, Object> callback : missCallbacks)
         callback.apply(symbol, event);
 
       return;
@@ -54,7 +54,7 @@ class SymbolBusClass implements SymbolBus {
     }
 
     // all subscribers
-    for (Act2<Symbol<?>, Object> callback : catchAlls)
+    for (Act2<Symbol<?>, Object> callback : globalCallbacks)
       callback.apply(symbol, event);
   }
 
@@ -78,12 +78,12 @@ class SymbolBusClass implements SymbolBus {
 
   @Override
   public void subscribeAll(Act2<Symbol<?>, Object> callback) {
-    catchAlls.add(callback);
+    globalCallbacks.add(callback);
   }
 
   @Override
   public void unsubscribeAll(Act2<Symbol<?>, Object> callback) {
-    catchAlls.remove(callback);
+    globalCallbacks.remove(callback);
   }
 
   // ===========================================================================
@@ -92,12 +92,12 @@ class SymbolBusClass implements SymbolBus {
 
   @Override
   public void subscribeMisses(Act2<Symbol<?>, Object> callback) {
-    catchMisses.add(callback);
+    missCallbacks.add(callback);
   }
 
   @Override
   public void unsubscribeMisses(Act2<Symbol<?>, Object> callback) {
-    catchMisses.remove(callback);
+    missCallbacks.remove(callback);
   }
 
 }
