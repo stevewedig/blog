@@ -67,14 +67,14 @@ public abstract class SymbolLib {
   }
 
   /**
-   * Create an empty immutable SymbolMap (which is not very useful).
+   * Create an empty SymbolMap.Solid (which is not very useful).
    */
   public static SymbolMap.Solid solidMap() {
     return new SymbolMapSolidClass();
   }
 
   /**
-   * Create an immutable SymbolMap from its internal state, which is not statically checked.
+   * Create a SymbolMap.Solid from its internal state, which is not statically checked.
    */
   public static SymbolMap.Solid solidMap(Map<Symbol<?>, Object> state) {
     return new SymbolMapSolidClass(state);

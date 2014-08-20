@@ -38,11 +38,12 @@ public class TestGetAndCast {
     // =================================
 
     try {
+
       @SuppressWarnings("unused")
       Integer fail = CastLib.get(map, "name");
-      
+
       throw new NotThrown(ClassCastException.class);
-    
+
     } catch (ClassCastException e) {
     }
 

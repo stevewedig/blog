@@ -1,12 +1,10 @@
 package com.stevewedig.blog.symbol;
 
 import static com.stevewedig.blog.symbol.SymbolLib.symbol;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertNotEquals;
 
-import java.util.Set;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -15,67 +13,59 @@ public class TestSymbol {
   @Test
   public void testSymbol__name() {
 
-    // The type parameter is the whole point of symbols, so you would never use them like this.
+    // explicit name
+    Symbol<String> $a = symbol("a");
+    assertEquals("a", $a.name());
 
-    assertThat(symbol("a").name(), equalTo("a"));
+    // generating name from type object
+    Symbol<Integer> $int = symbol(Integer.class);
+    assertEquals("java.lang.Integer", $int.name());
 
-    assertThat(symbol(Integer.class).name(), equalTo("java.lang.Integer"));
+    // name() and getName() are synonyms
+    assertEquals($a.getName(), $a.name());
   }
 
   @Test
-  public void testSymbol__beanVsPropertySyntax() {
+  public void testSymbol__valueObject() {
 
-    Symbol<Integer> symbol = symbol("a");
+    // equal with same name
+    Symbol<String> $a1 = symbol("a");
+    Symbol<String> $a2 = symbol("a");
+    assertEquals($a1, $a2);
 
-    assertEquals(symbol.getName(), symbol.name());
+    // unequal with different name
+    Symbol<String> $b = symbol("b");
+    assertNotEquals($a1, $b);
   }
 
   @Test
-  public void testSymbol__value() {
+  public void testSymbol__differentNamesAndSameValueTypes() {
 
-    // The type parameter is the whole point of symbols, so you would never use them like this.
+    // different symbols with the same Value type
+    Symbol<Boolean> $a = symbol(Boolean.class);
+    Symbol<Boolean> $b = symbol("b");
 
-    assertThat(symbol(Integer.class), equalTo(symbol(Integer.class)));
-
-    assertThat(symbol("a"), equalTo(symbol("a")));
-
-    assertThat(symbol("a"), not(equalTo(symbol("b"))));
+    assertNotEquals($a, $b);
+    assertNotEquals($a.name(), $b.name());
   }
 
   @Test
-  public void testSymbol__sameTypesDifferentNames() {
+  public void testSymbol__sameNamesAndDifferentValueTYpes() {
 
-    // This allows you to have multiple symbols with the same type. This isn't possible if types are
-    // used directly.
-
-    Symbol<Boolean> a = symbol(Boolean.class);
-    Symbol<Boolean> b = symbol("b");
-
-    assertThat(a, not(equalTo(b)));
-    assertThat(a.name(), not(equalTo(b.name())));
-  }
-
-  @Test
-  public void testSymbol__differentTypesSameNames() {
-
-    // Java generics use erasure, so the type parameters are not available at runtime. This means
-    // using these symbols in the same context would be a bug that would ruin type safety.
-
-    Symbol<Boolean> s1 = symbol("s");
-    Symbol<Integer> s2 = symbol("s");
+    // don't do this
+    Symbol<Boolean> $a1 = symbol("a");
+    Symbol<Integer> $a2 = symbol("a");
 
     // this is unfortunate
-    assertEquals(s1, s2);
+    assertEquals($a1, $a2);
   }
 
 
   @Test
-  public void testSymbol__genericType() {
+  public void testSymbol__genericValueType() {
 
-    // This allows you to have symbols for generic types. This isn't possible if types are used
-    // directly, because you can't say Set<Boolean>.class
-
-    Symbol<Set<Boolean>> a = symbol("a");
+    @SuppressWarnings("unused")
+    Symbol<List<Integer>> a = symbol("a");
 
   }
 }

@@ -58,11 +58,11 @@ public class TestArticleCreation {
     // symbol
     // =================================
 
-    ArticleWithSymbols symbol =
+    ArticleWithSymbols param =
         new ArticleWithSymbols(map().put($url, "http://url.com").put($title, "title")
             .put($published, 123).put($author, "bob").put($tags, ImmutableSet.of("software")));
 
-    assertStateEquals(positional, symbol);
+    assertStateEquals(positional, param);
   }
 
   // ===========================================================================
@@ -99,21 +99,21 @@ public class TestArticleCreation {
     // symbols with defaults
     // =================================
 
-    ArticleWithSymbols symbolWithDefaults =
+    ArticleWithSymbols paramWithDefaults =
         new ArticleWithSymbols(map().put($url, "http://url.com").put($title, "title"));
 
-    assertStateEquals(positional, symbolWithDefaults);
+    assertStateEquals(positional, paramWithDefaults);
 
     // =================================
     // symbols adapting nulls to defaults
     // =================================
 
     // adapting null to defaults
-    ArticleWithSymbols symbolWithoutDefaults =
+    ArticleWithSymbols paramWithoutDefaults =
         new ArticleWithSymbols(map().put($url, "http://url.com").put($title, "title")
             .put($published, null).put($author, null).put($tags, null));
 
-    assertStateEquals(positional, symbolWithoutDefaults);
+    assertStateEquals(positional, paramWithoutDefaults);
 
 
   }
@@ -138,7 +138,7 @@ public class TestArticleCreation {
     // =================================
 
     assertEquals(sparse, sparse.copy());
-    
+
     assertThat(sparse, not(sameInstance(sparse.copy())));
 
     assertEquals(full, full.copy());
