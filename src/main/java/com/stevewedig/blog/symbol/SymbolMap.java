@@ -6,12 +6,13 @@ import java.util.Map.Entry;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.stevewedig.blog.value_objects.HasObjectHelper;
 
 // can't extend Map because get() is more restrictive, however you can access the stateCopy()
 /**
  * A type safe mapping from symbols to values of matching types.
  */
-public interface SymbolMap extends Iterable<Entry<Symbol<?>, Object>> {
+public interface SymbolMap extends Iterable<Entry<Symbol<?>, Object>>, HasObjectHelper {
 
   // ===========================================================================
   // SymbolMap
