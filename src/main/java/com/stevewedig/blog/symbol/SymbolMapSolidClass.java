@@ -2,7 +2,6 @@ package com.stevewedig.blog.symbol;
 
 import java.util.Map;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
 class SymbolMapSolidClass extends SymbolMapMixin implements SymbolMap.Solid {
@@ -57,17 +56,5 @@ class SymbolMapSolidClass extends SymbolMapMixin implements SymbolMap.Solid {
   }
 
   private ImmutableSet<Symbol<?>> symbols = null;
-
-  // ===================================
-
-  @Override
-  public ImmutableMap<Symbol<?>, Object> immutableStateCopy() {
-    if (immutableState == null)
-      immutableState = ImmutableMap.copyOf(state());
-    return immutableState;
-  }
-
-  private ImmutableMap<Symbol<?>, Object> immutableState;
-
 
 }

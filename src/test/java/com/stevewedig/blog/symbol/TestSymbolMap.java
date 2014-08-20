@@ -9,10 +9,12 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Test;
 
 import com.google.common.base.Optional;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.stevewedig.blog.errors.NotContained;
 import com.stevewedig.blog.errors.NotThrown;
@@ -41,6 +43,7 @@ public class TestSymbolMap {
     SymbolMap.Fluid fluid1 = map();
     fluid1.put($bool, boolValue);
     fluid1.put($int, intValue);
+    fluid1.put($null, null);
     verifyExampleMap(fluid1);
 
     // solid copy
@@ -48,14 +51,14 @@ public class TestSymbolMap {
     verifyExampleMap(solid1);
 
     // create using the fluent builder syntax
-    SymbolMap solid2 = map().put($bool, boolValue).put($int, intValue).solid();
+    SymbolMap solid2 = map().put($bool, boolValue).put($int, intValue).put($null, null).solid();
     verifyExampleMap(solid2);
 
     // verify solid are values
     assertEquals(solid1, solid2);
 
     // verify fluid are entities
-    SymbolMap.Fluid fluid2 = map().put($bool, boolValue).put($int, intValue);
+    SymbolMap.Fluid fluid2 = map().put($bool, boolValue).put($int, intValue).put($null, null);
     assertNotEquals(fluid1, fluid2);
 
   }
@@ -63,14 +66,16 @@ public class TestSymbolMap {
   private void verifyExampleMap(SymbolMap map) {
 
     // symbols
-    assertEquals(map.symbols(), ImmutableSet.<Symbol<?>>of($int, $bool));
+    assertEquals(map.symbols(), ImmutableSet.<Symbol<?>>of($int, $bool, $null));
     assertTrue(map.contains($bool));
     assertTrue(map.contains($int));
+    assertTrue(map.contains($null));
     assertFalse(map.contains($unused));
 
     // get hit
     assertEquals(boolValue, map.get($bool));
     assertEquals(intValue, map.get($int));
+    assertNull(map.get($null));
 
     // get miss
     try {
@@ -87,47 +92,25 @@ public class TestSymbolMap {
     assertEquals(Optional.of(intValue), map.getOptional($int));
     assertEquals(Optional.absent(), map.getOptional($unused));
 
+
     // getNullable
     assertEquals(intValue, map.getNullable($int));
     assertNull(map.getNullable($unused));
+
+    // getOptional with adaptNull = False
+
+    // getNullable without adaptNull = false
 
     // transitions
     assertEquals(map.fluid().solid(), map.fluid().solid());
     assertStateEquals(map, map.fluid());
 
     // stateCopy
-    assertEquals(map.immutableStateCopy(),
-        ImmutableMap.<Symbol<?>, Object>of($int, intValue, $bool, boolValue));
-  }
-
-  // ===========================================================================
-  // make sure we support null values
-  // ===========================================================================
-
-  @Test
-  public void testSymbolMapCanContainNull() {
-
-    SymbolMap.Fluid map = map().put($int, null);
-
-    verifyMapWithNull(map);
-
-    verifyMapWithNull(map.solid());
-
-  }
-
-  private void verifyMapWithNull(SymbolMap map) {
-
-    map.symbols();
-
-    map.stateCopy();
-
-    // transitions
-
-    map.fluid();
-
-    map.fluid().solid();
-
-    // TODO fill this out better
+    Map<Symbol<?>, Object> state = new HashMap<>();
+    state.put($bool, boolValue);
+    state.put($int, intValue);
+    state.put($null, null);
+    assertEquals(state, map.stateCopy());
   }
 
 }

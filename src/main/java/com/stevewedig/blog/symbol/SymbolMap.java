@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.base.Optional;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.stevewedig.blog.value_objects.HasObjectHelper;
 
@@ -71,12 +70,6 @@ public interface SymbolMap extends Iterable<Entry<Symbol<?>, Object>>, HasObject
    * @return A Map copy.
    */
   Map<Symbol<?>, Object> stateCopy();
-
-  /**
-   * 
-   * @return An ImmutableMap copy (which will fail if any values are null).
-   */
-  ImmutableMap<Symbol<?>, Object> immutableStateCopy();
 
   // ===========================================================================
   // SymbolMap.Solid

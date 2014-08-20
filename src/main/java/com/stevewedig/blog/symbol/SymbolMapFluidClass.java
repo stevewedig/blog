@@ -3,7 +3,6 @@ package com.stevewedig.blog.symbol;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
 class SymbolMapFluidClass extends SymbolMapMixin implements SymbolMap.Fluid {
@@ -36,11 +35,6 @@ class SymbolMapFluidClass extends SymbolMapMixin implements SymbolMap.Fluid {
   @Override
   public ImmutableSet<Symbol<?>> symbols() {
     return ImmutableSet.copyOf(state().keySet());
-  }
-
-  @Override
-  public ImmutableMap<Symbol<?>, Object> immutableStateCopy() {
-    return ImmutableMap.copyOf(state());
   }
 
   // ===========================================================================
