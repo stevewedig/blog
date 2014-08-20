@@ -77,7 +77,7 @@ class ArticleWithSymbols extends ValueMixin {
   // copy / clone
   // ===========================================================================
 
-  private SymbolMap.Mutable params() {
+  private SymbolMap.Fluid params() {
     // TODO really ugly that published is not Optional as a symbol
     return map().put($url, url).put($title, title)
         .put($published, published.isPresent() ? published.get() : null).put($author, author)
@@ -86,7 +86,7 @@ class ArticleWithSymbols extends ValueMixin {
 
   public ArticleWithSymbols copyWithMutations(SymbolMap mutations) {
 
-    SymbolMap.Mutable params = params();
+    SymbolMap.Fluid params = params();
 
     params.putAll(mutations);
 

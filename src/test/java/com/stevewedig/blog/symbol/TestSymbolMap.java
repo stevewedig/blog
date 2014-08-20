@@ -28,16 +28,16 @@ public class TestSymbolMap {
   @Test
   public void testSymbolMapExample() {
 
-    SymbolMap.Mutable mutable = map();
+    SymbolMap.Fluid mutable = map();
     mutable.put($a, a);
     mutable.put($b, b);
     verifyExampleMap(mutable);
 
-    SymbolMap immutable = mutable.immutable();
+    SymbolMap immutable = mutable.solid();
     verifyExampleMap(immutable);
 
     // fluent builder syntax
-    SymbolMap immutable2 = map().put($a, a).put($b, b).immutable();
+    SymbolMap immutable2 = map().put($a, a).put($b, b).solid();
     verifyExampleMap(immutable2);
 
     // immutable are values
@@ -71,7 +71,7 @@ public class TestSymbolMap {
     assertThat(map.symbols(), equalTo(ImmutableSet.<Symbol<?>>of($a, $b)));
 
     // transitions
-    assertThat(map.mutable().immutable(), equalTo(map.mutable().immutable()));
+    assertThat(map.fluid().solid(), equalTo(map.fluid().solid()));
 
     // innerMap
     assertThat(map.immutableStateCopy(), equalTo(ImmutableMap.<Symbol<?>, Object>of($a, a, $b, b)));
@@ -82,11 +82,11 @@ public class TestSymbolMap {
   @Test
   public void testSymbolMapCanContainNull() {
 
-    SymbolMap.Mutable map = map().put($a, null);
+    SymbolMap.Fluid map = map().put($a, null);
 
     verifyMapWithNull(map);
 
-    verifyMapWithNull(map.immutable());
+    verifyMapWithNull(map.solid());
 
   }
 
@@ -98,9 +98,9 @@ public class TestSymbolMap {
 
     // transitions
 
-    map.mutable();
+    map.fluid();
 
-    map.mutable().immutable();
+    map.fluid().solid();
 
     // TODO fill this out better
   }

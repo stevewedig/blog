@@ -56,14 +56,14 @@ public interface SymbolMap extends Iterable<Entry<Symbol<?>, Object>> {
   // ===================================
 
   /**
-   * @return A SymbolMap.Mutable copy.
+   * @return A SymbolMap.Fluid copy.
    */
-  SymbolMap.Mutable mutable();
+  SymbolMap.Fluid fluid();
 
   /**
-   * @return An immutable SymbolMap copy.
+   * @return A SymbolMap.Solid copy.
    */
-  SymbolMap immutable();
+  SymbolMap.Solid solid();
 
   /**
    * 
@@ -78,15 +78,24 @@ public interface SymbolMap extends Iterable<Entry<Symbol<?>, Object>> {
   ImmutableMap<Symbol<?>, Object> immutableStateCopy();
 
   // ===========================================================================
-  // SymbolMap.Mutable
+  // SymbolMap.Solid
   // ===========================================================================
 
-  interface Mutable extends SymbolMap {
+  interface Solid extends SymbolMap {
+
+    // this interface guarantees immutability
+  }
+
+  // ===========================================================================
+  // SymbolMap.Fluid
+  // ===========================================================================
+
+  interface Fluid extends SymbolMap {
 
     // fluid interface allows us to build immutable maps via mutable ones
-    <Value> SymbolMap.Mutable put(Symbol<Value> symbol, Value value);
-    
-    SymbolMap.Mutable putAll(SymbolMap delta);
+    <Value> SymbolMap.Fluid put(Symbol<Value> symbol, Value value);
+
+    SymbolMap.Fluid putAll(SymbolMap delta);
 
   }
 

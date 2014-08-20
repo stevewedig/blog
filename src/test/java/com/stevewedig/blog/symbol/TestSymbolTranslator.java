@@ -24,7 +24,7 @@ public class TestSymbolTranslator {
 
   private static ImmutableMap<String, String> strMap = ImmutableMap.of("name", "bob", "age", "9");
 
-  private static SymbolMap symbolMap = map().put($name, "bob").put($age, 9).immutable();
+  private static SymbolMap symbolMap = map().put($name, "bob").put($age, 9).solid();
 
   // TODO include enum, bool, float
   

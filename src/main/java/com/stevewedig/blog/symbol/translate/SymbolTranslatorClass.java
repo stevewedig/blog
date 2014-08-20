@@ -108,15 +108,15 @@ class SymbolTranslatorClass extends ValueMixin implements SymbolTranslator {
   @Override
   public SymbolMap parse(Map<String, String> strMap) {
 
-    SymbolMap.Mutable symbolMap = SymbolLib.map();
+    SymbolMap.Fluid symbolMap = SymbolLib.map();
 
     for (Entry<String, String> entry : strMap.entrySet())
       parseEntry(symbolMap, entry.getKey(), entry.getValue());
 
-    return symbolMap.immutable();
+    return symbolMap.solid();
   }
 
-  private void parseEntry(SymbolMap.Mutable symbolMap, String keyStr, String valueStr) {
+  private void parseEntry(SymbolMap.Fluid symbolMap, String keyStr, String valueStr) {
 
     /*
      * We upcast the symbol's Value param to Object, and we upcast the value to Object. This

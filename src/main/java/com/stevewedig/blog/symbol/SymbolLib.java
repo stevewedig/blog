@@ -52,32 +52,32 @@ public abstract class SymbolLib {
   // ===========================================================================
 
   /**
-   * Create an empty SymbolMap.Mutable, which can be used as a builder for an immutable map
-   * (map().put()...put().immutable()).
+   * Create an empty SymbolMap.Fluid, which can be used as a builder for an immutable map
+   * (map().put()...put().solid()).
    */
-  public static SymbolMap.Mutable map() {
-    return new SymbolMapClassMutable();
+  public static SymbolMap.Fluid map() {
+    return new SymbolMapFluidClass();
   }
 
   /**
-   * Create a SymbolMap.Mutable from its internal state, which is not statically checked.
+   * Create a SymbolMap.Fluid from its internal state, which is not statically checked.
    */
-  public static SymbolMap.Mutable map(Map<Symbol<?>, Object> state) {
-    return new SymbolMapClassMutable(state);
+  public static SymbolMap.Fluid map(Map<Symbol<?>, Object> state) {
+    return new SymbolMapFluidClass(state);
   }
 
   /**
    * Create an empty immutable SymbolMap (which is not very useful).
    */
-  public static SymbolMap immutableMap() {
-    return new SymbolMapClassImmutable();
+  public static SymbolMap.Solid solidMap() {
+    return new SymbolMapSolidClass();
   }
 
   /**
    * Create an immutable SymbolMap from its internal state, which is not statically checked.
    */
-  public static SymbolMap immutableMap(Map<Symbol<?>, Object> state) {
-    return new SymbolMapClassImmutable(state);
+  public static SymbolMap.Solid solidMap(Map<Symbol<?>, Object> state) {
+    return new SymbolMapSolidClass(state);
   }
 
   // ===========================================================================

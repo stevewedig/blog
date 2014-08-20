@@ -87,7 +87,7 @@ public class TestSymbolFormat {
         map().put($userName, "bob").put($threadCount, 4).put($version, 2.3f).put($precision, 0.01d)
             .put($createTables, true).put($launchNukes, false).put($logLevel, LogLevel.warning)
             .put($point, new Point(7, 8)).put($adminEmails, ImmutableSet.of("alice@example.com"))
-            .put($thresholds, ImmutableList.of(10, 20, 30)).immutable();
+            .put($thresholds, ImmutableList.of(10, 20, 30)).solid();
 
     String fileContent =
         "userName = bob\n" + "threadCount = 4\n" + "version = 2.3\n" + "precision = 0.01\n"

@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
-class SymbolMapClassMutable extends SymbolMapClassMixin implements SymbolMap.Mutable {
+class SymbolMapFluidClass extends SymbolMapMixin implements SymbolMap.Fluid {
 
   // ===========================================================================
   // copied from EntityMixin
@@ -21,11 +21,11 @@ class SymbolMapClassMutable extends SymbolMapClassMixin implements SymbolMap.Mut
   // constructor
   // ===========================================================================
 
-  public SymbolMapClassMutable() {
+  public SymbolMapFluidClass() {
     super();
   }
 
-  public SymbolMapClassMutable(Map<Symbol<?>, Object> state) {
+  public SymbolMapFluidClass(Map<Symbol<?>, Object> state) {
     super(state);
   }
 
@@ -44,16 +44,16 @@ class SymbolMapClassMutable extends SymbolMapClassMixin implements SymbolMap.Mut
   }
 
   // ===========================================================================
-  // implementing SymbolMap.Mutable
+  // implementing SymbolMap.Fluid
   // ===========================================================================
 
   @Override
-  public SymbolMap immutable() {
-    return SymbolLib.immutableMap(state());
+  public SymbolMap.Solid solid() {
+    return SymbolLib.solidMap(state());
   }
 
   @Override
-  public <Value> Mutable put(Symbol<Value> symbol, Value value) {
+  public <Value> Fluid put(Symbol<Value> symbol, Value value) {
 
     state().put(symbol, value);
 
@@ -62,7 +62,7 @@ class SymbolMapClassMutable extends SymbolMapClassMixin implements SymbolMap.Mut
 
   // TODO untested
   @Override
-  public Mutable putAll(SymbolMap delta) {
+  public Fluid putAll(SymbolMap delta) {
     
     for (Entry<Symbol<?>, Object> entry : delta) {
       Symbol<?> symbol = entry.getKey();

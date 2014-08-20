@@ -13,7 +13,7 @@ import com.stevewedig.blog.errors.NotContained;
 import com.stevewedig.blog.util.CastLib;
 import com.stevewedig.blog.value_objects.ObjectMixin;
 
-public abstract class SymbolMapClassMixin extends ObjectMixin implements SymbolMap {
+public abstract class SymbolMapMixin extends ObjectMixin implements SymbolMap {
 
   // ===========================================================================
   // state
@@ -43,11 +43,11 @@ public abstract class SymbolMapClassMixin extends ObjectMixin implements SymbolM
   // constructor
   // ===========================================================================
 
-  public SymbolMapClassMixin() {
+  public SymbolMapMixin() {
     this.state = new HashMap<>();
   }
 
-  public SymbolMapClassMixin(Map<Symbol<?>, Object> state) {
+  public SymbolMapMixin(Map<Symbol<?>, Object> state) {
     this.state = Maps.newHashMap(state); // defensive copy
   }
 
@@ -142,7 +142,7 @@ public abstract class SymbolMapClassMixin extends ObjectMixin implements SymbolM
   }
 
   @Override
-  public Mutable mutable() {
+  public Fluid fluid() {
     return SymbolLib.map(state());
   }
 

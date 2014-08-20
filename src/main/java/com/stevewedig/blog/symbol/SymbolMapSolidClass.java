@@ -4,9 +4,8 @@ import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import com.stevewedig.blog.value_objects.HasObjectHelper;
 
-class SymbolMapClassImmutable extends SymbolMapClassMixin implements HasObjectHelper {
+class SymbolMapSolidClass extends SymbolMapMixin implements SymbolMap.Solid {
 
   // ===========================================================================
   // copied from ValueMixin
@@ -31,11 +30,11 @@ class SymbolMapClassImmutable extends SymbolMapClassMixin implements HasObjectHe
   // constructor
   // ===========================================================================
 
-  public SymbolMapClassImmutable() {
+  public SymbolMapSolidClass() {
     super();
   }
 
-  public SymbolMapClassImmutable(Map<Symbol<?>, Object> state) {
+  public SymbolMapSolidClass(Map<Symbol<?>, Object> state) {
     super(state);
   }
 
@@ -44,7 +43,7 @@ class SymbolMapClassImmutable extends SymbolMapClassMixin implements HasObjectHe
   // ===========================================================================
 
   @Override
-  public SymbolMap immutable() {
+  public SymbolMap.Solid solid() {
     return this;
   }
 
