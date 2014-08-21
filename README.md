@@ -1,6 +1,3 @@
-
-(This is a pending project. The code isn't in Maven yet, and the blog posts haven't started yet.)
-
 Libraries for Java 7+
 =============
 
