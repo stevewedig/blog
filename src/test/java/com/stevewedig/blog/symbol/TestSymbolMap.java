@@ -145,6 +145,7 @@ public class TestSymbolMap {
     // =================================
 
     assertEquals(map.fluid().solid(), map.fluid().solid());
+    
     assertStateEquals(map, map.fluid());
 
     // =================================

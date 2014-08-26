@@ -7,7 +7,6 @@ import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
 import com.stevewedig.blog.value_objects.HasObjectHelper;
 
-// can't extend Map because get() is more restrictive, however you can access the stateCopy()
 /**
  * A type safe mapping from symbols to values of matching types.
  */
@@ -75,15 +74,19 @@ public interface SymbolMap extends Iterable<Entry<Symbol<?>, Object>>, HasObject
   // SymbolMap.Solid
   // ===========================================================================
 
+  /**
+   * This interface indicates immutability & value object behavior.
+   */
   interface Solid extends SymbolMap {
-
-    // this interface guarantees immutability
   }
 
   // ===========================================================================
   // SymbolMap.Fluid
   // ===========================================================================
 
+  /**
+   * This interface indicates mutability & entity object behavior.
+   */
   interface Fluid extends SymbolMap {
 
     // fluid interface allows us to build immutable maps via mutable ones
