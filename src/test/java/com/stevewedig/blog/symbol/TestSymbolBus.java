@@ -1,11 +1,7 @@
 package com.stevewedig.blog.symbol;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
-import java.util.HashMap;
-import java.util.Map;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
@@ -13,58 +9,84 @@ import com.stevewedig.blog.util.LambdaLib.Act1;
 
 public class TestSymbolBus {
 
+  private Symbol<String> $signup = SymbolLib.symbol("signup");
+  private Symbol<String> $login = SymbolLib.symbol("login");
+
+  // ===========================================================================
+
+//  @Before
+//  protected void setUp() {
+//
+//  }
+
+  // ===================================
+
+  private Act1<String> signupCallback = new Act1<String>() {
+    @Override
+    public void apply(String accountId) {
+      signupId = accountId;
+      signupCount++;
+    }
+  };
+
+  private String signupId = null;
+  private int signupCount = 0;
+
+  // ===========================================================================
+  
+  SymbolBus bus = SymbolLib.bus();
+
+  // ===========================================================================
+  // subscribe symbol
+  // ===========================================================================
 
   @Test
-  public void testSymbolBus() {
+  public void testSymbolBus__subscribeSymbol() {
 
-    SymbolBus bus = SymbolLib.bus();
-
-    // note that we can use multiple symbols with the same type parameter
-    final Symbol<Integer> $accountCreated = SymbolLib.symbol("accountCreated");
-    final Symbol<Integer> $accountDeleted = SymbolLib.symbol("accountDeleted");
-
-    final Map<Symbol<?>, Integer> symbol__lastAccountId = new HashMap<>();
-
-    Act1<Integer> accountCreatedListener = new Act1<Integer>() {
-      @Override
-      public void apply(Integer accountId) {
-        symbol__lastAccountId.put($accountCreated, accountId);
-      }
-    };
-
-    Act1<Integer> accountDeletedListener = new Act1<Integer>() {
-      @Override
-      public void apply(Integer accountId) {
-        symbol__lastAccountId.put($accountDeleted, accountId);
-      }
-    };
-
-    // start with no listeners, so events have no effect
-    bus.publish($accountCreated, 1);
-    bus.publish($accountDeleted, 2);
-    assertTrue(symbol__lastAccountId.isEmpty());
-
-    // listen then unlisten, so still no effect
-    bus.subscribe($accountCreated, accountCreatedListener);
-    bus.subscribe($accountDeleted, accountDeletedListener);
-    bus.unsubscribe($accountCreated, accountCreatedListener);
-    bus.unsubscribe($accountDeleted, accountDeletedListener);
-    bus.publish($accountCreated, 1);
-    bus.publish($accountDeleted, 2);
-    assertTrue(symbol__lastAccountId.isEmpty());
-
-    // add listeners, so now has effect
-    bus.subscribe($accountCreated, accountCreatedListener);
-    bus.subscribe($accountDeleted, accountDeletedListener);
-    bus.publish($accountCreated, 3);
-    bus.publish($accountDeleted, 4);
-    assertThat(symbol__lastAccountId.get($accountCreated), equalTo(3));
-    assertThat(symbol__lastAccountId.get($accountDeleted), equalTo(4));
+    // initial state
+    assertNull(signupId);
+    assertEquals(0, signupCount);
     
+    // before subscribing, so callback is not called
+    bus.publish($signup, "a");
+    assertNull(signupId);
+    assertEquals(0, signupCount);
+    
+    // subscribe, so callback is called
+    bus.subscribe($signup, signupCallback);
+    bus.publish($signup, "b");
+    assertEquals("b", signupId);
+    assertEquals(1, signupCount);
+    
+    // unsubscribe, so callback is not called 
+    bus.unsubscribe($signup, signupCallback);
+    bus.publish($signup, "c");
+    assertEquals("b", signupId);
+    assertEquals(1, signupCount);
+    
+    // resubscribe, so callback is called
+    bus.subscribe($signup, signupCallback);
+    bus.publish($signup, "d");
+    assertEquals("d", signupId);
+    assertEquals(2, signupCount);
+    
+    // subscribe again, make sure callback is only called once though
+    bus.subscribe($signup, signupCallback);
+    bus.publish($signup, "e");
+    assertEquals("e", signupId);
+    assertEquals(3, signupCount);
   }
-  
-  // TODO test the multiple listeners for one event case
 
-  // TODO prevent duplicate firing if registered twice?
+  // ===========================================================================
+  // subscribe all
+  // ===========================================================================
+  
+  // ===========================================================================
+  // subscribe misses
+  // ===========================================================================
+
+  // ===========================================================================
+  // integration
+  // ===========================================================================
 
 }
