@@ -117,7 +117,12 @@ public abstract class FormatLib {
   public static Format<Boolean> boolJsonFormat = new Format<Boolean>() {
     @Override
     public Boolean parse(String syntax) {
-      return Boolean.parseBoolean(syntax);
+      if(syntax.equals("true"))
+        return true;
+      else if(syntax.equals("false"))
+        return false;
+      else
+        throw new ParseError("invalid json boolean: %s", syntax);
     }
 
     @Override
