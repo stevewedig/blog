@@ -154,7 +154,7 @@ public class TestSymbolBus {
       public void apply(Symbol<?> symbol, Object event) {}
     });
 
-    // publish to symbol with subscriber
+    // publish to symbol with subscriber ($signup)
     bus.publish($signup, "id1");
     assertEquals("id1", signupId);
     assertEquals(1, signupCount);
@@ -165,7 +165,7 @@ public class TestSymbolBus {
     assertNull(missId); // no change
     assertEquals(0, missCount); // no change
 
-    // publish to symbol without subscriber
+    // publish to symbol without subscriber ($login)
     bus.publish($login, "id2");
     assertEquals("id1", signupId); // no change
     assertEquals(1, signupCount); // no change

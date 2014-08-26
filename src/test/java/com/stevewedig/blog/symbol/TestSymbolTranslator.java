@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.google.common.collect.ImmutableMap;
 import com.stevewedig.blog.errors.NotContained;
+import com.stevewedig.blog.errors.NotThrown;
 import com.stevewedig.blog.symbol.translate.SymbolFormatLib;
 import com.stevewedig.blog.symbol.translate.SymbolParser;
 import com.stevewedig.blog.symbol.translate.SymbolTranslator;
@@ -17,17 +18,23 @@ import com.stevewedig.blog.translate.ParseError;
 
 public class TestSymbolTranslator {
 
+  // ===========================================================================
+  // symbols
+  // ===========================================================================
+
   private static Symbol<Object> $missing = symbol("missing");
 
   private static Symbol<Integer> $age = symbol("age");
   private static Symbol<String> $name = symbol("name");
 
+  // ===========================================================================
+  // values to convert between
+  // ===========================================================================
+
   private static ImmutableMap<String, String> strMap = ImmutableMap.of("name", "bob", "age", "9");
 
   private static SymbolMap symbolMap = map().put($name, "bob").put($age, 9).solid();
 
-  // TODO include enum, bool, float
-  
   // ===========================================================================
   // tests
   // ===========================================================================
@@ -35,7 +42,8 @@ public class TestSymbolTranslator {
   @Test
   public void testSymbolParser() {
 
-    SymbolParser parser = SymbolFormatLib.parser().add($age, FormatLib.intFormat).add($name).build();
+    SymbolParser parser =
+        SymbolFormatLib.parser().add($age, FormatLib.intFormat).add($name).build();
 
     verifyParser(parser);
   }
@@ -43,7 +51,8 @@ public class TestSymbolTranslator {
   @Test
   public void testSymbolWriter() {
 
-    SymbolWriter writer = SymbolFormatLib.writer().add($age, FormatLib.intFormat).add($name).build();
+    SymbolWriter writer =
+        SymbolFormatLib.writer().add($age, FormatLib.intFormat).add($name).build();
 
     verifyWriter(writer);
   }
@@ -79,7 +88,7 @@ public class TestSymbolTranslator {
 
     try {
       parser.parse($age, "x");
-      throw new AssertionError("expecting ParseError");
+      throw new NotThrown(ParseError.class);
     } catch (ParseError e) {
     }
 
@@ -89,7 +98,7 @@ public class TestSymbolTranslator {
 
     try {
       parser.parse($missing, "...");
-      throw new AssertionError("expecting NotContained");
+      throw new NotThrown(NotContained.class);
     } catch (NotContained e) {
     }
 
@@ -103,35 +112,35 @@ public class TestSymbolTranslator {
   // ===========================================================================
   // verify writer
   // ===========================================================================
-  
+
   private void verifyWriter(SymbolWriter writer) {
-    
+
     // =================================
     // write str (passthru)
     // =================================
-    
+
     assertEquals("bob", writer.write($name, "bob"));
-    
+
     // =================================
     // write int
     // =================================
-    
+
     assertEquals("9", writer.write($age, 9));
-        
+
     // =================================
     // missing symbol
     // =================================
-    
+
     try {
       writer.write($missing, "...");
-      throw new AssertionError("expecting NotContained");
+      throw new NotThrown(NotContained.class);
     } catch (NotContained e) {
     }
-    
+
     // =================================
     // write n
     // =================================
-    
+
     assertEquals(strMap, writer.write(symbolMap));
   }
 
