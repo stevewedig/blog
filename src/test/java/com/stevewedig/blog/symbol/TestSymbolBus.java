@@ -6,22 +6,22 @@ import static org.junit.Assert.assertNull;
 import org.junit.Test;
 
 import com.stevewedig.blog.util.LambdaLib.Act1;
+import com.stevewedig.blog.util.LambdaLib.Act2;
 
 public class TestSymbolBus {
 
-  private Symbol<String> $signup = SymbolLib.symbol("signup");
-  private Symbol<String> $login = SymbolLib.symbol("login");
-
+  // ===========================================================================
+  // create symbols
   // ===========================================================================
 
-//  @Before
-//  protected void setUp() {
-//
-//  }
+  protected Symbol<String> $signup = SymbolLib.symbol("signup");
+  protected Symbol<String> $login = SymbolLib.symbol("login");
 
-  // ===================================
+  // ===========================================================================
+  // create signup callback
+  // ===========================================================================
 
-  private Act1<String> signupCallback = new Act1<String>() {
+  protected Act1<String> signupCallback = new Act1<String>() {
     @Override
     public void apply(String accountId) {
       signupId = accountId;
@@ -29,64 +29,152 @@ public class TestSymbolBus {
     }
   };
 
-  private String signupId = null;
-  private int signupCount = 0;
+  protected String signupId = null;
+  protected int signupCount = 0;
 
   // ===========================================================================
-  
-  SymbolBus bus = SymbolLib.bus();
+  // create all callback
+  // ===========================================================================
+
+  protected Act2<Symbol<?>, Object> allCallback = new Act2<Symbol<?>, Object>() {
+    @Override
+    public void apply(Symbol<?> symbol, Object event) {
+      allSymbol = symbol;
+      allId = (String) event;
+      allCount++;
+    }
+  };
+
+  protected Symbol<?> allSymbol = null;
+  protected String allId = null;
+  protected int allCount = 0;
 
   // ===========================================================================
-  // subscribe symbol
+  // create miss callback
+  // ===========================================================================
+
+  protected Act2<Symbol<?>, Object> missCallback = new Act2<Symbol<?>, Object>() {
+    @Override
+    public void apply(Symbol<?> symbol, Object event) {
+      missSymbol = symbol;
+      missId = (String) event;
+      missCount++;
+    }
+  };
+
+  protected Symbol<?> missSymbol = null;
+  protected String missId = null;
+  protected int missCount = 0;
+
+  // ===========================================================================
+  // create bus
+  // ===========================================================================
+
+  protected SymbolBus bus = SymbolLib.bus();
+
+  // ===========================================================================
+  // tests
   // ===========================================================================
 
   @Test
-  public void testSymbolBus__subscribeSymbol() {
+  public void testSymbolBus__noSubscribers() {
 
     // initial state
     assertNull(signupId);
     assertEquals(0, signupCount);
-    
-    // before subscribing, so callback is not called
-    bus.publish($signup, "a");
-    assertNull(signupId);
+    assertNull(allSymbol);
+    assertNull(allId);
+    assertEquals(0, allCount);
+    assertNull(missSymbol);
+    assertNull(missId);
+    assertEquals(0, missCount);
+
+    // no subscribers
+    bus.publish($signup, "id1");
     assertEquals(0, signupCount);
-    
-    // subscribe, so callback is called
+    assertNull(allSymbol);
+    assertNull(allId);
+    assertEquals(0, allCount);
+    assertNull(missSymbol);
+    assertNull(missId);
+    assertEquals(0, missCount);
+
+    // subscribe then unsubscribe
     bus.subscribe($signup, signupCallback);
-    bus.publish($signup, "b");
-    assertEquals("b", signupId);
-    assertEquals(1, signupCount);
-    
-    // unsubscribe, so callback is not called 
     bus.unsubscribe($signup, signupCallback);
-    bus.publish($signup, "c");
-    assertEquals("b", signupId);
-    assertEquals(1, signupCount);
-    
-    // resubscribe, so callback is called
-    bus.subscribe($signup, signupCallback);
-    bus.publish($signup, "d");
-    assertEquals("d", signupId);
-    assertEquals(2, signupCount);
-    
-    // subscribe again, make sure callback is only called once though
-    bus.subscribe($signup, signupCallback);
-    bus.publish($signup, "e");
-    assertEquals("e", signupId);
-    assertEquals(3, signupCount);
+    bus.subscribeAll(allCallback);
+    bus.unsubscribeAll(allCallback);
+    bus.subscribeMisses(missCallback);
+    bus.unsubscribeMisses(missCallback);
+
+    // still no subscribers
+    bus.publish($signup, "id2");
+    assertEquals(0, signupCount);
+    assertNull(allSymbol);
+    assertNull(allId);
+    assertEquals(0, allCount);
+    assertNull(missSymbol);
+    assertNull(missId);
+    assertEquals(0, missCount);
   }
 
-  // ===========================================================================
-  // subscribe all
-  // ===========================================================================
-  
-  // ===========================================================================
-  // subscribe misses
-  // ===========================================================================
+  @Test
+  public void testSymbolBus__withSubscribers() {
 
-  // ===========================================================================
-  // integration
-  // ===========================================================================
+    // initial state
+    assertEquals(0, signupCount);
+    assertNull(allSymbol);
+    assertNull(allId);
+    assertEquals(0, allCount);
+    assertNull(missSymbol);
+    assertNull(missId);
+    assertEquals(0, missCount);
+
+    // subscribe
+    bus.subscribe($signup, signupCallback);
+    bus.subscribeAll(allCallback);
+    bus.subscribeMisses(missCallback);
+
+    // subscribe again to ensure that each is only called once
+    bus.subscribe($signup, signupCallback);
+    bus.subscribeAll(allCallback);
+    bus.subscribeMisses(missCallback);
+
+    // add other subscribers, to verify that we support multiple
+    bus.subscribe($signup, new Act1<String>() {
+      @Override
+      public void apply(String accountId) {}
+    });
+    bus.subscribeAll(new Act2<Symbol<?>, Object>() {
+      @Override
+      public void apply(Symbol<?> symbol, Object event) {}
+    });
+    bus.subscribeMisses(new Act2<Symbol<?>, Object>() {
+      @Override
+      public void apply(Symbol<?> symbol, Object event) {}
+    });
+
+    // publish to symbol with subscriber
+    bus.publish($signup, "id1");
+    assertEquals("id1", signupId);
+    assertEquals(1, signupCount);
+    assertEquals($signup, allSymbol);
+    assertEquals("id1", allId);
+    assertEquals(1, allCount);
+    assertNull(missSymbol); // no change
+    assertNull(missId); // no change
+    assertEquals(0, missCount); // no change
+
+    // publish to symbol without subscriber
+    bus.publish($login, "id2");
+    assertEquals("id1", signupId); // no change
+    assertEquals(1, signupCount); // no change
+    assertEquals($login, allSymbol);
+    assertEquals("id2", allId);
+    assertEquals(2, allCount);
+    assertEquals($login, missSymbol);
+    assertEquals("id2", missId);
+    assertEquals(1, missCount);
+  }
 
 }
