@@ -9,7 +9,7 @@ import java.util.Map;
 public interface TypeMap {
 
   // ===========================================================================
-  // copy
+  // state
   // ===========================================================================
 
   Map<Class<?>, Object> stateCopy();
@@ -35,6 +35,5 @@ public interface TypeMap {
   void clear();
 
   int size();
-
 
 }

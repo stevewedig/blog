@@ -1,12 +1,14 @@
 package com.stevewedig.blog.symbol;
 
 import java.util.Map;
+
 import java.util.Map.Entry;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
 import com.stevewedig.blog.value_objects.HasObjectHelper;
 
+// can't extend Map because SymbolMap.get() is more restrictive
 /**
  * A type safe mapping from symbols to values of matching types.
  */

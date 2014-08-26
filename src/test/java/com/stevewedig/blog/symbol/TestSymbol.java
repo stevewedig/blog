@@ -52,7 +52,7 @@ public class TestSymbol {
   @Test
   public void testSymbol__sameNamesAndDifferentValueTYpes() {
 
-    // don't do this
+    // don't do this (have symbols with the same name and different value type)
     Symbol<Boolean> $a1 = symbol("a");
     Symbol<Integer> $a2 = symbol("a");
 

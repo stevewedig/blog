@@ -1,6 +1,5 @@
 package com.stevewedig.blog.symbol;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,6 +26,12 @@ class SymbolBusClass implements SymbolBus {
   private final Set<Act2<Symbol<?>, Object>> missCallbacks = Collections
       .synchronizedSet(new HashSet<Act2<Symbol<?>, Object>>());
 
+  // ===================================
+  
+  private <Event> boolean symbolHasSubscriber(Symbol<Event> symbol) {
+    return symbol__callbacks.containsKey(symbol);
+  }
+
   // ===========================================================================
   // publish
   // ===========================================================================
@@ -34,28 +39,38 @@ class SymbolBusClass implements SymbolBus {
   @Override
   public <Event> void publish(Symbol<Event> symbol, Event event) {
 
-    Collection<Act1<?>> callbacks = symbol__callbacks.get(symbol);
+    publishAll(symbol, event);
 
-    // miss subscribers
-    if (callbacks.isEmpty()) {
-      for (Act2<Symbol<?>, Object> callback : missCallbacks)
-        callback.apply(symbol, event);
+    if (symbolHasSubscriber(symbol))
+      publishHit(symbol, event);
+    else
+      publishMiss(symbol, event);
 
-      return;
-    }
+  }
 
-    // symbol subscribers
-    for (Act1<?> _callback : callbacks) {
+  // ===================================
+  
+  private <Event> void publishAll(Symbol<Event> symbol, Event event) {
 
-      // safe because of subscribe's signature
+    for (Act2<Symbol<?>, Object> callback : globalCallbacks)
+      callback.apply(symbol, event);
+  }
+
+  private <Event> void publishMiss(Symbol<Event> symbol, Event event) {
+
+    for (Act2<Symbol<?>, Object> callback : missCallbacks)
+      callback.apply(symbol, event);
+  }
+
+  private <Event> void publishHit(Symbol<Event> symbol, Event event) {
+
+    for (Act1<?> _callback : symbol__callbacks.get(symbol)) {
+
+      // type safe because of subscribe's signature
       Act1<Event> callback = CastLib.cast(_callback);
 
       callback.apply(event);
     }
-
-    // all subscribers
-    for (Act2<Symbol<?>, Object> callback : globalCallbacks)
-      callback.apply(symbol, event);
   }
 
   // ===========================================================================
