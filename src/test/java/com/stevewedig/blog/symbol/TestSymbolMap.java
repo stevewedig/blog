@@ -38,8 +38,7 @@ public class TestSymbolMap {
   @Test
   public void testSymbolMapExample() {
 
-    // create using one put per line
-    // (not using fluent builder syntax)
+    // create using one put() per line
     SymbolMap.Fluid fluid1 = map();
     fluid1.put($bool, boolValue);
     fluid1.put($int, intValue);
@@ -54,10 +53,10 @@ public class TestSymbolMap {
     SymbolMap solid2 = map().put($bool, boolValue).put($int, intValue).put($null, null).solid();
     verifyExampleMap(solid2);
 
-    // verify solid are values
+    // verify solids behave as values
     assertEquals(solid1, solid2);
 
-    // verify fluid are entities
+    // verify fluids behave as entities
     SymbolMap.Fluid fluid2 = map().put($bool, boolValue).put($int, intValue).put($null, null);
     assertNotEquals(fluid1, fluid2);
 
