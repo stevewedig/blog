@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import com.google.common.collect.*;
 
-public class TestFormats {
+public class TestFormatLib {
 
   @Test
   public void testStrFormat() {
@@ -72,6 +72,31 @@ public class TestFormats {
     ImmutableList<Integer> model = ImmutableList.of(1, 2);
     String syntax = "1, 2";
     FormatVerifyLib.verify(intCommaListFormat, model, syntax, "a, b");
+  }
+  // ===========================================================================
+
+  @Test
+  public void testChain() {
+
+    Translator<Float, Integer> rounder = new Translator<Float, Integer>() {
+      @Override
+      public Integer parse(Float syntax) throws ParseError {
+
+        if (Math.ceil(syntax) != Math.floor(syntax))
+          throw new ParseError();
+
+        return Math.round(syntax);
+      }
+
+      @Override
+      public Float write(Integer model) {
+        return (float) model;
+      }
+    };
+    
+    Format<Integer> chained = FormatLib.chain(FormatLib.floatFormat, rounder);
+
+    FormatVerifyLib.verify(chained, 1, "1.0", "1.1");
   }
 
 }

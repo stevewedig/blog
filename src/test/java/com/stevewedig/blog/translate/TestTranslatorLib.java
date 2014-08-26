@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import com.stevewedig.blog.util.LambdaLib.Fn1;
 
-public class TestTranslatorToFn {
+public class TestTranslatorLib {
 
   @Test
   public void testParserToFn() {
