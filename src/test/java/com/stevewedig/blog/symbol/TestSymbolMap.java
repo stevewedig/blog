@@ -45,7 +45,7 @@ public class TestSymbolMap {
     fluid1.put($null, null); // decided to support this use case, unlike ImmutableMap
     verifyExampleMap(fluid1);
 
-    // create fluid2 using putAll
+    // create fluid2 using putAll()
     SymbolMap.Fluid fluid2 = map();
     fluid2.putAll(fluid1);
     verifyExampleMap(fluid2);

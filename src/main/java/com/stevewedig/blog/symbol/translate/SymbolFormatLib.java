@@ -5,7 +5,9 @@ import com.stevewedig.blog.translate.Format;
 import com.stevewedig.blog.translate.FormatLib;
 import com.stevewedig.blog.translate.ParseError;
 
-
+/**
+ * A library for creating SymbolTranslators and SymbolFormats.
+ */
 public abstract class SymbolFormatLib {
 
   // ===========================================================================

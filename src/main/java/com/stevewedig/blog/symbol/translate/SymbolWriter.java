@@ -7,6 +7,10 @@ import com.stevewedig.blog.symbol.SymbolMap;
 import com.stevewedig.blog.translate.FormatWriter;
 import com.stevewedig.blog.translate.Writer;
 
+
+/**
+ * A Writer that converts from SymbolMap to Map&lt;String, String&gt;.
+ */
 public interface SymbolWriter extends Writer<Map<String, String>, SymbolMap> {
 
   <Value> String write(Symbol<Value> symbol, Value value);

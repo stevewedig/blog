@@ -7,6 +7,9 @@ import com.stevewedig.blog.symbol.SymbolMap;
 import com.stevewedig.blog.translate.FormatParser;
 import com.stevewedig.blog.translate.Parser;
 
+/**
+ * A Parser that converts from Map&lt;String, String&gt; to SymbolMap.
+ */
 public interface SymbolParser extends Parser<Map<String, String>, SymbolMap> {
 
   <Value> Value parse(Symbol<Value> symbol, String valueStr);

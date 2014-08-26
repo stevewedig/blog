@@ -7,6 +7,10 @@ import com.stevewedig.blog.symbol.SymbolMap;
 import com.stevewedig.blog.translate.Format;
 import com.stevewedig.blog.translate.Translator;
 
+
+/**
+ * A Translator that converts between Map&lt;String, String&gt; and SymbolMap.
+ */
 public interface SymbolTranslator extends Translator<Map<String, String>, SymbolMap>, SymbolParser,
     SymbolWriter {
 
