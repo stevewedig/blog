@@ -13,7 +13,7 @@ import com.stevewedig.blog.errors.NotContained;
 import com.stevewedig.blog.util.CastLib;
 import com.stevewedig.blog.value_objects.ObjectMixin;
 
-public abstract class SymbolMapMixin extends ObjectMixin implements SymbolMap {
+abstract class SymbolMapMixin extends ObjectMixin implements SymbolMap {
 
   // ===========================================================================
   // state

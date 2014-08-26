@@ -2,6 +2,9 @@ package com.stevewedig.blog.translate;
 
 import com.stevewedig.blog.util.LambdaLib.Fn1;
 
+/**
+ * Translator related utilities.
+ */
 public abstract class TranslatorLib {
 
   public static <Syntax, Model> Fn1<Syntax, Model> parserFn(final Parser<Syntax, Model> parser) {

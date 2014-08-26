@@ -38,18 +38,23 @@ public class TestSymbolMap {
   @Test
   public void testSymbolMapExample() {
 
-    // create using one put() per line
+    // create fluid1 using one put() per line
     SymbolMap.Fluid fluid1 = map();
     fluid1.put($bool, boolValue);
     fluid1.put($int, intValue);
     fluid1.put($null, null); // decided to support this use case, unlike ImmutableMap
     verifyExampleMap(fluid1);
 
-    // solid copy
+    // create fluid2 using putAll
+    SymbolMap.Fluid fluid2 = map();
+    fluid2.putAll(fluid1);
+    verifyExampleMap(fluid2);
+
+    // create solid1 by copying an existing fluid
     SymbolMap solid1 = fluid1.solid();
     verifyExampleMap(solid1);
 
-    // create using the fluent builder syntax
+    // create solid2 using a fluid as a fluent builder
     SymbolMap solid2 = map().put($bool, boolValue).put($int, intValue).put($null, null).solid();
     verifyExampleMap(solid2);
 
@@ -57,7 +62,6 @@ public class TestSymbolMap {
     assertEquals(solid1, solid2);
 
     // verify fluids behave as entities
-    SymbolMap.Fluid fluid2 = map().put($bool, boolValue).put($int, intValue).put($null, null);
     assertNotEquals(fluid1, fluid2);
 
   }
@@ -145,7 +149,7 @@ public class TestSymbolMap {
     // =================================
 
     assertEquals(map.fluid().solid(), map.fluid().solid());
-    
+
     assertStateEquals(map, map.fluid());
 
     // =================================

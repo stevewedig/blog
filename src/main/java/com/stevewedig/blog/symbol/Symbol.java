@@ -5,7 +5,7 @@ import java.io.Serializable;
 import com.stevewedig.blog.value_objects.ValueMixin;
 
 /**
- * A name combined with a Value parameters, for use in type safe heterogeneous containers.
+ * A name combined with a Value parameter, for use in type safe heterogeneous containers.
  */
 public class Symbol<Value> extends ValueMixin implements Serializable {
   

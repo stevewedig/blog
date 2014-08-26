@@ -14,7 +14,7 @@ import com.stevewedig.blog.symbol.translate.ConfigFormat;
 import com.stevewedig.blog.translate.ParseError;
 
 /**
- * Not compatible with GWT
+ * Properties manipulation utilities, not compatible with GWT.
  */
 public abstract class PropLib {
 

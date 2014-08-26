@@ -77,7 +77,7 @@ public interface SymbolMap extends Iterable<Entry<Symbol<?>, Object>>, HasObject
   // ===========================================================================
 
   /**
-   * This interface indicates immutability & value object behavior.
+   * A SymbolMap that is immutable and a value object.
    */
   interface Solid extends SymbolMap {
   }
@@ -87,14 +87,14 @@ public interface SymbolMap extends Iterable<Entry<Symbol<?>, Object>>, HasObject
   // ===========================================================================
 
   /**
-   * This interface indicates mutability & entity object behavior.
+   * A SymbolMap that is mutable and an entity object.
    */
   interface Fluid extends SymbolMap {
 
     // fluid interface allows us to build immutable maps via mutable ones
     <Value> SymbolMap.Fluid put(Symbol<Value> symbol, Value value);
 
-    SymbolMap.Fluid putAll(SymbolMap delta);
+    SymbolMap.Fluid putAll(SymbolMap updates);
 
   }
 

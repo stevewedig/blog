@@ -2,6 +2,9 @@ package com.stevewedig.blog.util;
 
 import java.util.Map;
 
+/**
+ * Casting related utilities.
+ */
 public abstract class CastLib {
 
   public static <Value> Value cast(Object value) {

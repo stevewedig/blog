@@ -1,7 +1,7 @@
 package com.stevewedig.blog.errors;
 
 /**
- * Thrown when a method is not implemented yet.
+ * Thrown when a method is not implemented.
  */
 public class NotImplemented extends ErrorMixin {
   private static final long serialVersionUID = 1L;

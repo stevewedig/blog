@@ -9,6 +9,9 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
 
+/**
+ * Format related utilities and common formats such as str, int, bool, etc.
+ */
 public abstract class FormatLib {
 
   // ===========================================================================

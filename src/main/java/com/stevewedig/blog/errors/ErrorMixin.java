@@ -2,7 +2,9 @@ package com.stevewedig.blog.errors;
 
 import static com.stevewedig.blog.util.StrLib.formatN;
 
-
+/**
+ * Extends RuntimeException with convenient constructors.
+ */
 public abstract class ErrorMixin extends RuntimeException {
 
   private static final long serialVersionUID = 1L;

@@ -54,11 +54,10 @@ class SymbolMapFluidClass extends SymbolMapMixin implements SymbolMap.Fluid {
     return this;
   }
 
-  // TODO untested
   @Override
-  public Fluid putAll(SymbolMap delta) {
+  public Fluid putAll(SymbolMap updates) {
     
-    for (Entry<Symbol<?>, Object> entry : delta) {
+    for (Entry<Symbol<?>, Object> entry : updates) {
       Symbol<?> symbol = entry.getKey();
       Object value = entry.getValue();
 
