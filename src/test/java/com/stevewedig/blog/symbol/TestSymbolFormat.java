@@ -100,11 +100,12 @@ public class TestSymbolFormat {
     // writing is non-deterministic, so easiest to test it by parsing it back out
     assertEquals(symbolMap, format.parse(format.write(symbolMap)));
 
-    // System.out.println(format.write(symbolMap));
+    // uncomment this to see the generated file
+//    System.out.println(format.write(symbolMap));
   }
 
   // ===========================================================================
-  // LogLevel enum with toString/valueOf format
+  // LogLevel enum with format using toString/valueOf
   // ===========================================================================
 
   static enum LogLevel {
@@ -124,10 +125,11 @@ public class TestSymbolFormat {
   };
 
   // ===========================================================================
-  // Point class with JSON format
+  // Point class with format using JSON
   // ===========================================================================
 
-  // http://stevewedig.com/2014/07/31/value-objects-in-java-and-python/
+  // ValueMixin is described here:
+  // http://stevewedig.com/2014/07/31/value-objects-in-java-and-python/#java
   static class Point extends ValueMixin {
 
     // =================================
