@@ -5,8 +5,8 @@ import java.util.Map.Entry;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
-import com.stevewedig.blog.errors.Bug;
 import com.stevewedig.blog.errors.NotContained;
+import com.stevewedig.blog.errors.NotImplemented;
 import com.stevewedig.blog.symbol.Symbol;
 import com.stevewedig.blog.symbol.SymbolLib;
 import com.stevewedig.blog.symbol.SymbolMap;
@@ -48,7 +48,7 @@ class SymbolTranslatorClass extends ValueMixin implements SymbolTranslator {
   private ImmutableMap<Symbol<?>, FormatParser<?>> symbol__parser() {
 
     if (!symbol__parser.isPresent())
-      throw new Bug("Cannot do parsing on a SymbolWriter");
+      throw new NotImplemented("Cannot do parsing on a SymbolWriter");
 
     return symbol__parser.get();
   }
@@ -56,7 +56,7 @@ class SymbolTranslatorClass extends ValueMixin implements SymbolTranslator {
   private ImmutableMap<Symbol<?>, FormatWriter<?>> symbol__writer() {
 
     if (!symbol__writer.isPresent())
-      throw new Bug("Cannot do parsing on a SymbolParser");
+      throw new NotImplemented("Cannot do parsing on a SymbolParser");
 
     return symbol__writer.get();
   }

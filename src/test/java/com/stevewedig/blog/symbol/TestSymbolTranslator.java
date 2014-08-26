@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.google.common.collect.ImmutableMap;
 import com.stevewedig.blog.errors.NotContained;
+import com.stevewedig.blog.errors.NotImplemented;
 import com.stevewedig.blog.errors.NotThrown;
 import com.stevewedig.blog.symbol.translate.SymbolFormatLib;
 import com.stevewedig.blog.symbol.translate.SymbolParser;
@@ -40,12 +41,29 @@ public class TestSymbolTranslator {
   // ===========================================================================
 
   @Test
+  public void testSymbolTranslator() {
+
+    SymbolTranslator translator =
+        SymbolFormatLib.translator().add($age, FormatLib.intFormat).add($name).build();
+
+    verifyParser(translator);
+
+    verifyWriter(translator);
+  }
+  
+  @Test
   public void testSymbolParser() {
 
     SymbolParser parser =
         SymbolFormatLib.parser().add($age, FormatLib.intFormat).add($name).build();
 
     verifyParser(parser);
+
+    try {
+      verifyWriter((SymbolTranslator) parser);
+      throw new NotThrown(NotImplemented.class);
+    } catch (NotImplemented e) {
+    }
   }
 
   @Test
@@ -55,17 +73,12 @@ public class TestSymbolTranslator {
         SymbolFormatLib.writer().add($age, FormatLib.intFormat).add($name).build();
 
     verifyWriter(writer);
-  }
 
-  @Test
-  public void testSymbolTranslator() {
-
-    SymbolTranslator translator =
-        SymbolFormatLib.translator().add($age, FormatLib.intFormat).add($name).build();
-
-    verifyParser(translator);
-
-    verifyWriter(translator);
+    try {
+      verifyParser((SymbolTranslator) writer);
+      throw new NotThrown(NotImplemented.class);
+    } catch (NotImplemented e) {
+    }
   }
 
   // ===========================================================================

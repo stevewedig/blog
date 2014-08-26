@@ -9,8 +9,12 @@ import com.stevewedig.blog.translate.ParseError;
 public abstract class SymbolFormatLib {
 
   // ===========================================================================
-  // translator
+  // translator (and parser/writer)
   // ===========================================================================
+
+  public static SymbolTranslator.Builder translator() {
+    return new SymbolTranslatorClass.TranslatorBuilder();
+  }
 
   public static SymbolParser.Builder parser() {
     return new SymbolTranslatorClass.ParserBuilder();
@@ -18,10 +22,6 @@ public abstract class SymbolFormatLib {
 
   public static SymbolWriter.Builder writer() {
     return new SymbolTranslatorClass.WriterBuilder();
-  }
-
-  public static SymbolTranslator.Builder translator() {
-    return new SymbolTranslatorClass.TranslatorBuilder();
   }
 
   // ===========================================================================
