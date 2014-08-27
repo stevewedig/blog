@@ -28,6 +28,8 @@ class ArticleWithSymbols extends ValueMixin {
   private final String author; // nullable
   private final ImmutableSet<String> tags; // default
 
+  private static ImmutableSet<String> defaultTags = ImmutableSet.of();
+
   @Override
   protected Object[] fields() {
     return array("url", url, "title", title, "published", published, "author", author, "tags", tags);
@@ -45,8 +47,6 @@ class ArticleWithSymbols extends ValueMixin {
     author = params.getNullable($author);
     tags = params.getDefault($tags, defaultTags);
   }
-
-  private static ImmutableSet<String> defaultTags = ImmutableSet.of();
 
   // ===========================================================================
   // getters
