@@ -26,15 +26,15 @@ public class TestGetAndCast {
     // basic usage
     // =================================
 
-    // with type inference (of the generic method's parameter)
+    // with type inference for CastLib.get()'s generic parameter
     String name = CastLib.get(map, "name");
     assertEquals("Bob", name);
 
-    // without type interference (manually providing the generic method's parameter)
+    // without type interference, manually providing the CastLib.get()'s parameter
     assertEquals((Integer) 20, CastLib.<Integer>get(map, "age"));
 
     // =================================
-    // invalid cast demonstrating that getAndCast is not type safe
+    // invalid cast demonstrating that CastLib.get() is not type safe
     // =================================
 
     try {
