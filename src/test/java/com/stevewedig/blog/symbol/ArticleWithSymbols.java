@@ -1,5 +1,6 @@
 package com.stevewedig.blog.symbol;
 
+import static com.stevewedig.blog.symbol.SymbolLib.map;
 import static com.stevewedig.blog.symbol.SymbolLib.symbol;
 
 import com.google.common.base.Optional;
@@ -46,9 +47,6 @@ class ArticleWithSymbols extends ValueMixin {
     published = params.getOptional($published);
     author = params.getNullable($author);
     tags = params.getDefault($tags, defaultTags);
-
-    // used for copy() and copyWithMutations()
-    this.params = params.solid();
   }
 
   // ===========================================================================
@@ -79,16 +77,23 @@ class ArticleWithSymbols extends ValueMixin {
   // copy (clone)
   // ===========================================================================
 
-  private final SymbolMap.Solid params;
-
-  public ArticleWithSymbols copy() {
-    
-    return new ArticleWithSymbols(params);
+  // params could be cached because ArticleWithSymbols is immutable
+  // (we could actually just save the params in the constructor)
+  public SymbolMap.Solid params() {
+    return map().put($url, url).put($title, title).put($published, published.orNull())
+        .put($author, author).put($tags, tags).solid();
   }
 
+  // shallow copy
+  public ArticleWithSymbols copy() {
+
+    return new ArticleWithSymbols(params());
+  }
+
+  // shallow copy
   public ArticleWithSymbols copyWithMutations(SymbolMap mutations) {
 
-    return new ArticleWithSymbols(params.fluid().putAll(mutations));
+    return new ArticleWithSymbols(params().fluid().putAll(mutations));
   }
 
 }
