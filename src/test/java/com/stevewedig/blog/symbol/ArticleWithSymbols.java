@@ -1,7 +1,6 @@
 package com.stevewedig.blog.symbol;
 
-import static com.stevewedig.blog.symbol.SymbolLib.symbol;
-import static com.stevewedig.blog.symbol.SymbolLib.map;
+import static com.stevewedig.blog.symbol.SymbolLib.*;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
@@ -44,7 +43,7 @@ class ArticleWithSymbols extends ValueMixin {
     title = map.get($title);
     published = map.getOptional($published);
     author = map.getNullable($author);
-    tags = map.getDefault($tags, defaultTags); // TODO
+    tags = map.getDefault($tags, defaultTags);
   }
 
   private static ImmutableSet<String> defaultTags = ImmutableSet.of();
@@ -78,10 +77,8 @@ class ArticleWithSymbols extends ValueMixin {
   // ===========================================================================
 
   private SymbolMap.Fluid params() {
-    // TODO really ugly that published is not Optional as a symbol
-    return map().put($url, url).put($title, title)
-        .put($published, published.isPresent() ? published.get() : null).put($author, author)
-        .put($tags, tags);
+    return map().put($url, url).put($title, title).put($published, published.orNull())
+        .put($author, author).put($tags, tags);
   }
 
   public ArticleWithSymbols copyWithMutations(SymbolMap mutations) {

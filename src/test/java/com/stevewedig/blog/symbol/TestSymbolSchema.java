@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableSet;
-import com.stevewedig.blog.errors.NotThrown;
+import com.stevewedig.blog.errors.*;
 
 public class TestSymbolSchema {
 
@@ -63,6 +63,16 @@ public class TestSymbolSchema {
     schema.validate(SymbolLib.map().put($a, 1).put($b, true));
 
   }
+  
+  @Test
+  public void testInvalidSymbolSchema() {
 
+    try {
+      SymbolLib.schema($a).withOptional($a);
+      throw new NotThrown(Bug.class);
+    }
+    catch(Bug e) {
+    }
+  }
 
 }

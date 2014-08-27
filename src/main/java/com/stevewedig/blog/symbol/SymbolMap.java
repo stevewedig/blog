@@ -28,14 +28,24 @@ public interface SymbolMap extends Iterable<Entry<Symbol<?>, Object>>, HasObject
   // convenience getters
   // ===================================
 
-  <Value> Value getDefault(Symbol<Value> symbol, Value defaultValue, boolean adaptNull);
 
+  /**
+   * @return The value, or the defaultValue if it is missing or null.
+   */
   <Value> Value getDefault(Symbol<Value> symbol, Value defaultValue);
 
-  <Value> Optional<Value> getOptional(Symbol<Value> symbol, boolean adaptNull);
+  <Value> Value getDefault(Symbol<Value> symbol, Value defaultValue, boolean adaptNull);
 
+  /**
+   * @return The value, or Optional.absent if it is missing or null.
+   */
   <Value> Optional<Value> getOptional(Symbol<Value> symbol);
 
+  <Value> Optional<Value> getOptional(Symbol<Value> symbol, boolean adaptNull);
+  
+  /**
+   * @return The value, or null if it is missing.
+   */
   <Value> Value getNullable(Symbol<Value> symbol);
 
   // ===================================

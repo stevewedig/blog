@@ -1,12 +1,9 @@
 package com.stevewedig.blog.symbol;
 
-import static com.stevewedig.blog.util.StrLib.format;
-
-import java.util.HashSet;
 import java.util.Set;
 
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
+import com.google.common.collect.*;
+import com.stevewedig.blog.errors.Bug;
 import com.stevewedig.blog.value_objects.ValueMixin;
 
 class SymbolSchemaClass extends ValueMixin implements SymbolSchema {
@@ -40,18 +37,11 @@ class SymbolSchemaClass extends ValueMixin implements SymbolSchema {
   }
 
   private void validate() {
-
-    // TODO prevent dups in required and opt
-
-    // TODO untested
-    Set<String> keys = new HashSet<>();
-    for (Symbol<?> symbol : symbols()) {
-      String key = symbol.name();
-      if (keys.contains(key))
-        throw new RuntimeException(format("Schema found a symbol key conflict: %s", key));
-      else
-        keys.add(key);
-    }
+    
+    Set<Symbol<?>> overlap = Sets.intersection(requiredSymbols, optionalSymbols);
+    
+    if(! overlap.isEmpty())
+      throw new Bug("the symbols (%s) were passed in as both required and optional", overlap);
   }
 
   // ===========================================================================
