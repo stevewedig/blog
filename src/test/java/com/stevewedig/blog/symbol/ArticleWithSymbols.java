@@ -47,6 +47,9 @@ class ArticleWithSymbols extends ValueMixin {
     published = params.getOptional($published);
     author = params.getNullable($author);
     tags = params.getDefault($tags, defaultTags);
+
+    // used for copyWithMutations()
+    this.params = params.solid();
   }
 
   // ===========================================================================
@@ -77,14 +80,11 @@ class ArticleWithSymbols extends ValueMixin {
   // copy / clone
   // ===========================================================================
 
-  private SymbolMap.Fluid params() {
-    return map().put($url, url).put($title, title).put($published, published.orNull())
-        .put($author, author).put($tags, tags);
-  }
+  private final SymbolMap.Solid params;
 
   public ArticleWithSymbols copyWithMutations(SymbolMap mutations) {
 
-    SymbolMap.Fluid params = params();
+    SymbolMap.Fluid params = this.params.fluid();
 
     params.putAll(mutations);
 

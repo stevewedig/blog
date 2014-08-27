@@ -57,7 +57,7 @@ public class TestSymbolFormat {
     // Step 2: Create translator, associating symbols with formats
     // =================================
 
-    // $userName has default format, which is strFormat
+    // $userName has default format, which is strFormat, which is a no-op
     // $createTables and $logLevels are both Boolean, but use different formats
     SymbolTranslator translator =
         SymbolFormatLib.translator().add($notUsed, strFormat).add($userName)
@@ -83,7 +83,7 @@ public class TestSymbolFormat {
     // Step 5: Use SymbolFormat to convert between fileContent and symbolMap
     // =================================
 
-    SymbolMap symbolMap =
+    SymbolMap.Solid symbolMap =
         map().put($userName, "bob").put($threadCount, 4).put($version, 2.3f).put($precision, 0.01d)
             .put($createTables, true).put($launchNukes, false).put($logLevel, LogLevel.warning)
             .put($point, new Point(7, 8)).put($adminEmails, ImmutableSet.of("alice@example.com"))
