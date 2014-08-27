@@ -101,7 +101,7 @@ public class TestSymbolFormat {
     assertEquals(symbolMap, format.parse(format.write(symbolMap)));
 
     // uncomment this to see the generated file
-//    System.out.println(format.write(symbolMap));
+    // System.out.println(format.write(symbolMap));
   }
 
   // ===========================================================================
@@ -128,7 +128,7 @@ public class TestSymbolFormat {
   // Point class with format using JSON
   // ===========================================================================
 
-  // ValueMixin is described here:
+  // ValueMixin makes this behave as a value object:
   // http://stevewedig.com/2014/07/31/value-objects-in-java-and-python/#java
   static class Point extends ValueMixin {
 
@@ -170,7 +170,8 @@ public class TestSymbolFormat {
     // format
     // =================================
 
-    // obviously you would want to use a real JSON library
+    // Obviously in practice you would want to use a real JSON library, but I don't want to
+    // introduce a dependency on one here.
     public static Format<Point> format = new Format<Point>() {
 
       @Override
