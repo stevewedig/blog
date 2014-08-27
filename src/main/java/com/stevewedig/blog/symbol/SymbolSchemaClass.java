@@ -2,7 +2,8 @@ package com.stevewedig.blog.symbol;
 
 import java.util.Set;
 
-import com.google.common.collect.*;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
 import com.stevewedig.blog.errors.Bug;
 import com.stevewedig.blog.value_objects.ValueMixin;
 

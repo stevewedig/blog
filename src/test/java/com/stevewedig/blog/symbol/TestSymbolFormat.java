@@ -1,16 +1,30 @@
 package com.stevewedig.blog.symbol;
 
-import static com.stevewedig.blog.symbol.SymbolLib.*;
-import static com.stevewedig.blog.translate.FormatLib.*;
+import static com.stevewedig.blog.symbol.SymbolLib.map;
+import static com.stevewedig.blog.symbol.SymbolLib.symbol;
+import static com.stevewedig.blog.translate.FormatLib.boolFlagFormat;
+import static com.stevewedig.blog.translate.FormatLib.boolJsonFormat;
+import static com.stevewedig.blog.translate.FormatLib.doubleFormat;
+import static com.stevewedig.blog.translate.FormatLib.floatFormat;
+import static com.stevewedig.blog.translate.FormatLib.intCommaListFormat;
+import static com.stevewedig.blog.translate.FormatLib.intFormat;
+import static com.stevewedig.blog.translate.FormatLib.strCommaSetFormat;
+import static com.stevewedig.blog.translate.FormatLib.strFormat;
 import static org.junit.Assert.assertEquals;
 
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.junit.Test;
 
-import com.google.common.collect.*;
-import com.stevewedig.blog.symbol.translate.*;
-import com.stevewedig.blog.translate.*;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+import com.stevewedig.blog.symbol.translate.ConfigFormat;
+import com.stevewedig.blog.symbol.translate.SymbolFormat;
+import com.stevewedig.blog.symbol.translate.SymbolFormatLib;
+import com.stevewedig.blog.symbol.translate.SymbolTranslator;
+import com.stevewedig.blog.translate.Format;
+import com.stevewedig.blog.translate.ParseError;
 import com.stevewedig.blog.util.PropLib;
 import com.stevewedig.blog.value_objects.ValueMixin;
 

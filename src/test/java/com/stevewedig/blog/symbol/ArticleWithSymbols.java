@@ -1,6 +1,7 @@
 package com.stevewedig.blog.symbol;
 
-import static com.stevewedig.blog.symbol.SymbolLib.*;
+import static com.stevewedig.blog.symbol.SymbolLib.map;
+import static com.stevewedig.blog.symbol.SymbolLib.symbol;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
