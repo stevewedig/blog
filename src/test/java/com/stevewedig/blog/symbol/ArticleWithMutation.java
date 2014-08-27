@@ -30,6 +30,7 @@ class ArticleWithMutation extends ValueMixin {
   // constructor
   // ===========================================================================
 
+  // empty constructor, the fields are set after object creation
   public ArticleWithMutation() {}
 
   // ===========================================================================

@@ -19,6 +19,8 @@ class ArticleWithPositional extends ValueMixin {
   private final String author; // nullable
   private final ImmutableSet<String> tags;
 
+  private static ImmutableSet<String> defaultTags = ImmutableSet.of();
+
   // http://stevewedig.com/2014/07/31/value-objects-in-java-and-python/#java
   @Override
   protected Object[] fields() {
@@ -29,6 +31,7 @@ class ArticleWithPositional extends ValueMixin {
   // constructor
   // ===========================================================================
 
+  // constructor with positional parameters
   public ArticleWithPositional(String url, String title, Optional<Integer> published,
       String author, ImmutableSet<String> tags) {
     this.url = url;
@@ -38,8 +41,9 @@ class ArticleWithPositional extends ValueMixin {
     this.tags = tags;
   }
 
+  // constructor with fewer parameters, providing default values for the rest
   public ArticleWithPositional(String url, String title) {
-    this(url, title, Optional.<Integer>absent(), null, ImmutableSet.<String>of());
+    this(url, title, Optional.<Integer>absent(), null, defaultTags);
   }
 
   // ===========================================================================
