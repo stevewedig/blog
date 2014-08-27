@@ -76,12 +76,13 @@ class ArticleWithSymbols extends ValueMixin {
   }
 
   // ===========================================================================
-  // copy / clone
+  // copy (clone)
   // ===========================================================================
 
   private final SymbolMap.Solid params;
 
   public ArticleWithSymbols copy() {
+    
     return new ArticleWithSymbols(params);
   }
 
