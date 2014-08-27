@@ -38,12 +38,12 @@ class ArticleWithSymbols extends ValueMixin {
   // ===========================================================================
 
   // constructor accepting symbol params
-  public ArticleWithSymbols(SymbolMap map) {
-    url = map.get($url);
-    title = map.get($title);
-    published = map.getOptional($published);
-    author = map.getNullable($author);
-    tags = map.getDefault($tags, defaultTags);
+  public ArticleWithSymbols(SymbolMap params) {
+    url = params.get($url);
+    title = params.get($title);
+    published = params.getOptional($published);
+    author = params.getNullable($author);
+    tags = params.getDefault($tags, defaultTags);
   }
 
   private static ImmutableSet<String> defaultTags = ImmutableSet.of();
