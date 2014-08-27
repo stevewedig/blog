@@ -4,6 +4,8 @@ import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
 import com.stevewedig.blog.value_objects.ValueMixin;
 
+// ValueMixin makes this behave as a value object:
+// http://stevewedig.com/2014/07/31/value-objects-in-java-and-python/#java
 class ArticleWithBuilder extends ValueMixin {
 
   // ===========================================================================
@@ -16,6 +18,7 @@ class ArticleWithBuilder extends ValueMixin {
   private final String author; // nullable
   private final ImmutableSet<String> tags; // default
 
+  // http://stevewedig.com/2014/07/31/value-objects-in-java-and-python/#java
   @Override
   protected Object[] fields() {
     return array("url", url, "title", title, "published", published, "author", author, "tags", tags);

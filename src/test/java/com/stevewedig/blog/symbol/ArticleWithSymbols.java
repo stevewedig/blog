@@ -7,6 +7,8 @@ import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
 import com.stevewedig.blog.value_objects.ValueMixin;
 
+// ValueMixin makes this behave as a value object:
+// http://stevewedig.com/2014/07/31/value-objects-in-java-and-python/#java
 class ArticleWithSymbols extends ValueMixin {
 
   // ===========================================================================
@@ -31,6 +33,7 @@ class ArticleWithSymbols extends ValueMixin {
 
   private static ImmutableSet<String> defaultTags = ImmutableSet.of();
 
+  // http://stevewedig.com/2014/07/31/value-objects-in-java-and-python/#java
   @Override
   protected Object[] fields() {
     return array("url", url, "title", title, "published", published, "author", author, "tags", tags);
@@ -78,19 +81,19 @@ class ArticleWithSymbols extends ValueMixin {
   // ===========================================================================
 
   // params could be cached because ArticleWithSymbols is immutable
-  // (we could actually just save the params in the constructor)
-  public SymbolMap.Solid params() {
+  // (we could actually just save the params.solid() in the constructor)
+  private SymbolMap.Solid params() {
     return map().put($url, url).put($title, title).put($published, published.orNull())
         .put($author, author).put($tags, tags).solid();
   }
 
-  // shallow copy
+  // shallow
   public ArticleWithSymbols copy() {
 
     return new ArticleWithSymbols(params());
   }
 
-  // shallow copy
+  // shallow
   public ArticleWithSymbols copyWithMutations(SymbolMap mutations) {
 
     return new ArticleWithSymbols(params().fluid().putAll(mutations));
