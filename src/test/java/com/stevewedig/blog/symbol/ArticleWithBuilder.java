@@ -75,6 +75,11 @@ class ArticleWithBuilder extends ValueMixin {
     private ImmutableSet<String> tags = ImmutableSet.of(); // default
 
     public ArticleWithBuilder build() {
+
+      // prevent invalid objects
+      if (url == null || title == null)
+        throw new NullPointerException();
+
       return new ArticleWithBuilder(url, title, published, author, tags);
     }
 
