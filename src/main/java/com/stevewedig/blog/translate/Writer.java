@@ -1,7 +1,7 @@
 package com.stevewedig.blog.translate;
 
 /**
- * Converts from Model to Syntax, so a Writer writes.
+ * A Writer writes, so it converts from Model to Syntax.
  */
 public interface Writer<Syntax, Model> {
 

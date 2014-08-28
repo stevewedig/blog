@@ -1,7 +1,7 @@
 package com.stevewedig.blog.translate;
 
 /**
- * Converts from Syntax to Model, so a Parser parses.
+ * A Parser parses, so it converts from Syntax to Model.
  */
 public interface Parser<Syntax, Model> {
 
