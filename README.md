@@ -27,7 +27,7 @@ These utilities should be fairly self explanatory...
 
 * [StrLib](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/util/StrLib.java): String manipulation utilities.
 * [LambdaLib](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/util/LambdaLib.java): Interfaces for creating anonymous lambdas (callbacks). Presumably I can get rid of this horrible syntax when I switch to Java 8.
-* [blog.errors](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/errors): A collection of useful errors, and an [ErrorMixin](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/errors/ErrorMixin.java) which adds convenient constructors to RuntimeException.
+* [blog.errors](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/errors): A collection of common errors, and an [ErrorMixin](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/errors/ErrorMixin.java) which adds string formatting constructors to RuntimeException.
 
 #### Other related blog posts
 
