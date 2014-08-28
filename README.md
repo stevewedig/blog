@@ -16,8 +16,6 @@ This project is compatable with Java 7+ and all code can be compiled to JavaScri
 
 #### Features explained via blog posts
 
-Pending posts have code that is in use, but it will take a while to get all this published...
-
 * [Value Objects in Java & Python](http://stevewedig.com/2014/07/31/value-objects-in-java-and-python/)
 * Pending: Typesafe Heterogenous Containers in Java
 * Pending: Directed-Acyclic Graphs (DAGs) in Java
@@ -77,13 +75,13 @@ The easiest way to use this library is add it your dependency list in your Maven
         <dependency>
             <groupId>com.stevewedig</groupId>
             <artifactId>blog</artifactId>
-            <version>1.1.1</version>
+            <version>1.1.2</version>
         </dependency>
     </dependencies>
 
 #### Other build tools
 
-The [Maven Central artifact page](http://search.maven.org/#artifactdetails%7Ccom.stevewedig%7Cblog%7C1.1.1%7Cjar) has snippets for other tools like Buildr, Ivy, and SBT.
+The [Maven Central artifact page](http://search.maven.org/#artifactdetails%7Ccom.stevewedig%7Cblog%7C1.1.2%7Cjar) has snippets for other tools like Buildr, Ivy, and SBT.
 
 #### Inheriting the GWT module
 
