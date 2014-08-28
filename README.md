@@ -77,13 +77,13 @@ The easiest way to use this library is add it your dependency list in your Maven
         <dependency>
             <groupId>com.stevewedig</groupId>
             <artifactId>blog</artifactId>
-            <version>1.0.3</version>
+            <version>1.1.1</version>
         </dependency>
     </dependencies>
 
 #### Other build tools
 
-The [Maven Central artifact page](http://search.maven.org/#artifactdetails%7Ccom.stevewedig%7Cblog%7C1.0.3%7Cjar) has snippets for other tools like Buildr, Ivy, and SBT.
+The [Maven Central artifact page](http://search.maven.org/#artifactdetails%7Ccom.stevewedig%7Cblog%7C1.1.1%7Cjar) has snippets for other tools like Buildr, Ivy, and SBT.
 
 #### Inheriting the GWT module
 

@@ -70,8 +70,10 @@ public abstract class SymbolLib {
    * Create an empty SymbolMap.Solid (which is not very useful).
    */
   public static SymbolMap.Solid solidMap() {
-    return new SymbolMapSolidClass();
+    return emptySolidMap;
   }
+
+  private static SymbolMap.Solid emptySolidMap = new SymbolMapSolidClass();
 
   /**
    * Create a SymbolMap.Solid from its internal state, which is not statically checked.

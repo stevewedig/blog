@@ -1,11 +1,14 @@
 package com.stevewedig.blog.symbol;
 
-import static com.stevewedig.blog.symbol.SymbolLib.*;
+import static com.stevewedig.blog.symbol.SymbolLib.map;
+import static com.stevewedig.blog.symbol.SymbolLib.symbol;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
 import com.stevewedig.blog.value_objects.ValueMixin;
 
+// ValueMixin makes this behave as a value object:
+// http://stevewedig.com/2014/07/31/value-objects-in-java-and-python/#java
 class ArticleWithSymbols extends ValueMixin {
 
   // ===========================================================================
@@ -28,6 +31,9 @@ class ArticleWithSymbols extends ValueMixin {
   private final String author; // nullable
   private final ImmutableSet<String> tags; // default
 
+  private static ImmutableSet<String> defaultTags = ImmutableSet.of();
+
+  // http://stevewedig.com/2014/07/31/value-objects-in-java-and-python/#java
   @Override
   protected Object[] fields() {
     return array("url", url, "title", title, "published", published, "author", author, "tags", tags);
@@ -38,15 +44,13 @@ class ArticleWithSymbols extends ValueMixin {
   // ===========================================================================
 
   // constructor accepting symbol params
-  public ArticleWithSymbols(SymbolMap map) {
-    url = map.get($url);
-    title = map.get($title);
-    published = map.getOptional($published);
-    author = map.getNullable($author);
-    tags = map.getDefault($tags, defaultTags);
+  public ArticleWithSymbols(SymbolMap params) {
+    url = params.get($url);
+    title = params.get($title);
+    published = params.getOptional($published);
+    author = params.getNullable($author);
+    tags = params.getDefault($tags, defaultTags);
   }
-
-  private static ImmutableSet<String> defaultTags = ImmutableSet.of();
 
   // ===========================================================================
   // getters
@@ -73,25 +77,26 @@ class ArticleWithSymbols extends ValueMixin {
   }
 
   // ===========================================================================
-  // copy / clone
+  // copy (clone)
   // ===========================================================================
 
-  private SymbolMap.Fluid params() {
+  // params could be cached because ArticleWithSymbols is immutable
+  // (we could actually just save the params.solid() in the constructor)
+  private SymbolMap.Solid params() {
     return map().put($url, url).put($title, title).put($published, published.orNull())
-        .put($author, author).put($tags, tags);
+        .put($author, author).put($tags, tags).solid();
   }
 
+  // shallow
+  public ArticleWithSymbols copy() {
+
+    return new ArticleWithSymbols(params());
+  }
+
+  // shallow
   public ArticleWithSymbols copyWithMutations(SymbolMap mutations) {
 
-    SymbolMap.Fluid params = params();
-
-    params.putAll(mutations);
-
-    return new ArticleWithSymbols(params);
-  }
-
-  public ArticleWithSymbols copy() {
-    return copyWithMutations(map());
+    return new ArticleWithSymbols(params().fluid().putAll(mutations));
   }
 
 }

@@ -1,10 +1,20 @@
 package com.stevewedig.blog.translate;
 
-import static com.stevewedig.blog.translate.FormatLib.*;
+import static com.stevewedig.blog.translate.FormatLib.boolFlagFormat;
+import static com.stevewedig.blog.translate.FormatLib.boolJsonFormat;
+import static com.stevewedig.blog.translate.FormatLib.doubleFormat;
+import static com.stevewedig.blog.translate.FormatLib.floatFormat;
+import static com.stevewedig.blog.translate.FormatLib.intCommaListFormat;
+import static com.stevewedig.blog.translate.FormatLib.intCommaSetFormat;
+import static com.stevewedig.blog.translate.FormatLib.intFormat;
+import static com.stevewedig.blog.translate.FormatLib.strCommaListFormat;
+import static com.stevewedig.blog.translate.FormatLib.strCommaSetFormat;
+import static com.stevewedig.blog.translate.FormatLib.strFormat;
 
 import org.junit.Test;
 
-import com.google.common.collect.*;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 
 public class TestFormatLib {
 

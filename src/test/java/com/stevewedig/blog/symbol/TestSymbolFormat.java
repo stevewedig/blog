@@ -1,16 +1,30 @@
 package com.stevewedig.blog.symbol;
 
-import static com.stevewedig.blog.symbol.SymbolLib.*;
-import static com.stevewedig.blog.translate.FormatLib.*;
+import static com.stevewedig.blog.symbol.SymbolLib.map;
+import static com.stevewedig.blog.symbol.SymbolLib.symbol;
+import static com.stevewedig.blog.translate.FormatLib.boolFlagFormat;
+import static com.stevewedig.blog.translate.FormatLib.boolJsonFormat;
+import static com.stevewedig.blog.translate.FormatLib.doubleFormat;
+import static com.stevewedig.blog.translate.FormatLib.floatFormat;
+import static com.stevewedig.blog.translate.FormatLib.intCommaListFormat;
+import static com.stevewedig.blog.translate.FormatLib.intFormat;
+import static com.stevewedig.blog.translate.FormatLib.strCommaSetFormat;
+import static com.stevewedig.blog.translate.FormatLib.strFormat;
 import static org.junit.Assert.assertEquals;
 
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.junit.Test;
 
-import com.google.common.collect.*;
-import com.stevewedig.blog.symbol.translate.*;
-import com.stevewedig.blog.translate.*;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+import com.stevewedig.blog.symbol.translate.ConfigFormat;
+import com.stevewedig.blog.symbol.translate.SymbolFormat;
+import com.stevewedig.blog.symbol.translate.SymbolFormatLib;
+import com.stevewedig.blog.symbol.translate.SymbolTranslator;
+import com.stevewedig.blog.translate.Format;
+import com.stevewedig.blog.translate.ParseError;
 import com.stevewedig.blog.util.PropLib;
 import com.stevewedig.blog.value_objects.ValueMixin;
 
@@ -43,7 +57,7 @@ public class TestSymbolFormat {
     // Step 2: Create translator, associating symbols with formats
     // =================================
 
-    // $userName has default format, which is strFormat
+    // $userName has default format, which is strFormat, which is a no-op
     // $createTables and $logLevels are both Boolean, but use different formats
     SymbolTranslator translator =
         SymbolFormatLib.translator().add($notUsed, strFormat).add($userName)
@@ -69,7 +83,7 @@ public class TestSymbolFormat {
     // Step 5: Use SymbolFormat to convert between fileContent and symbolMap
     // =================================
 
-    SymbolMap symbolMap =
+    SymbolMap.Solid symbolMap =
         map().put($userName, "bob").put($threadCount, 4).put($version, 2.3f).put($precision, 0.01d)
             .put($createTables, true).put($launchNukes, false).put($logLevel, LogLevel.warning)
             .put($point, new Point(7, 8)).put($adminEmails, ImmutableSet.of("alice@example.com"))
@@ -87,7 +101,7 @@ public class TestSymbolFormat {
     assertEquals(symbolMap, format.parse(format.write(symbolMap)));
 
     // uncomment this to see the generated file
-//    System.out.println(format.write(symbolMap));
+    // System.out.println(format.write(symbolMap));
   }
 
   // ===========================================================================
@@ -114,7 +128,7 @@ public class TestSymbolFormat {
   // Point class with format using JSON
   // ===========================================================================
 
-  // ValueMixin is described here:
+  // ValueMixin makes this behave as a value object:
   // http://stevewedig.com/2014/07/31/value-objects-in-java-and-python/#java
   static class Point extends ValueMixin {
 
@@ -156,7 +170,8 @@ public class TestSymbolFormat {
     // format
     // =================================
 
-    // obviously you would want to use a real JSON library
+    // Obviously in practice you would want to use a real JSON library, but I don't want to
+    // introduce a dependency on one here.
     public static Format<Point> format = new Format<Point>() {
 
       @Override
