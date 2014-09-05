@@ -2,13 +2,13 @@ package com.stevewedig.blog.translate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSetMultimap;
-import com.stevewedig.blog.errors.NotImplemented;
 
 
 /**
@@ -273,11 +273,12 @@ public abstract class FormatLib {
 
           ImmutableSetMultimap.Builder<String, String> map = ImmutableSetMultimap.builder();
 
-          for (String part : Splitter.on(", ").split(syntax)) {
+          for (String entryStr : commaSplitter.trimResults().split(syntax)) {
 
-            int i = part.indexOf(" = ");
-            String key = part.substring(0, i);
-            String value = part.substring(i + 3);
+            List<String> entryParts = equalsSplitter.trimResults().splitToList(entryStr);
+
+            String key = entryParts.get(0);
+            String value = entryParts.get(1);
 
             map.put(key, value);
           }
@@ -288,12 +289,28 @@ public abstract class FormatLib {
 
         @Override
         public String write(ImmutableSetMultimap<String, String> model) {
-          throw new NotImplemented();
+
+          List<String> entryStrs = new ArrayList<>();
+
+          for (Entry<String, String> entry : model.entries()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            String entryStr = equalsJoiner.join(key, value);
+            entryStrs.add(entryStr);
+          }
+
+          return commaJoiner.join(entryStrs);
         }
       };
 
   public static ImmutableSetMultimap<String, String> parseMultimap(String string) {
     return FormatLib.strMultimapFormat.parse(string);
   }
+
+  private static final Splitter commaSplitter = Splitter.on(",");
+  private static final Joiner commaJoiner = Joiner.on(", ");
+
+  private static final Splitter equalsSplitter = Splitter.on("=");
+  private static final Joiner equalsJoiner = Joiner.on(" = ");
 
 }
