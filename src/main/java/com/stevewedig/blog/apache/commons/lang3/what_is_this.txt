@@ -1,6 +1,0 @@
-
-I don't want to introduce a dependency on Apache Commons, however Guava don't provide a supserset of the functionality, so I've copied a few of the files over.
-
-Here is the origin:
-http://commons.apache.org/proper/commons-lang/
-
