@@ -1,25 +1,14 @@
 package com.stevewedig.blog.util;
 
-import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 
 /**
- * String manipulation utilities.
+ * String utilities not available in Guava's Strings or Apache commons StringUtils.
  */
 public abstract class StrLib {
-
-  // ===========================================================================
-  // blank
-  // ===========================================================================
-
-  /**
-   * Is the string empty or all whitespace?
-   */
-  public static boolean isBlank(String str) {
-    return str.isEmpty() || str.matches("^\\s*$");
-  }
 
   // ===========================================================================
   // classAndStateString
@@ -38,7 +27,7 @@ public abstract class StrLib {
    */
   public static String classAndStateString(String typeName, Object... fieldNamesAndValues) {
 
-    ToStringHelper builder = Objects.toStringHelper(typeName);
+    ToStringHelper builder = MoreObjects.toStringHelper(typeName);
 
     int fieldCount = fieldNamesAndValues.length / 2;
 

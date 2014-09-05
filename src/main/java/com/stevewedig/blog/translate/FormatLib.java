@@ -7,6 +7,8 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableSetMultimap;
+import com.stevewedig.blog.errors.NotImplemented;
 
 
 /**
@@ -120,9 +122,9 @@ public abstract class FormatLib {
   public static Format<Boolean> boolJsonFormat = new Format<Boolean>() {
     @Override
     public Boolean parse(String syntax) {
-      if(syntax.equals("true"))
+      if (syntax.equals("true"))
         return true;
-      else if(syntax.equals("false"))
+      else if (syntax.equals("false"))
         return false;
       else
         throw new ParseError("invalid json boolean: %s", syntax);
@@ -170,6 +172,9 @@ public abstract class FormatLib {
       @Override
       public ImmutableSet<Item> parse(String collectionStr) throws ParseError {
 
+        if (collectionStr.length() == 0)
+          return ImmutableSet.of();
+
         ImmutableSet.Builder<Item> items = ImmutableSet.builder();
 
         for (String itemStr : splitter.split(collectionStr)) {
@@ -198,6 +203,11 @@ public abstract class FormatLib {
 
   public static Format<ImmutableSet<Integer>> intCommaSetFormat = genSetFormat(intFormat, ", ");
 
+  // more convenient that ImmutableSet.of("a", "b", ...)
+  public static ImmutableSet<String> parseSet(String string) {
+    return strCommaSetFormat.parse(string);
+  }
+
   // ===========================================================================
   // list
   // ===========================================================================
@@ -212,6 +222,9 @@ public abstract class FormatLib {
 
       @Override
       public ImmutableList<Item> parse(String collectionStr) throws ParseError {
+
+        if (collectionStr.length() == 0)
+          return ImmutableList.of();
 
         ImmutableList.Builder<Item> items = ImmutableList.builder();
 
@@ -237,10 +250,50 @@ public abstract class FormatLib {
     };
   }
 
-  public static Format<ImmutableList<String>> strCommaListFormat =
-      genListFormat(strFormat, ", ");
+  public static Format<ImmutableList<String>> strCommaListFormat = genListFormat(strFormat, ", ");
 
-  public static Format<ImmutableList<Integer>> intCommaListFormat = genListFormat(intFormat,
-      ", ");
+  public static Format<ImmutableList<Integer>> intCommaListFormat = genListFormat(intFormat, ", ");
+
+  // more convenient that ImmutableList.of("a", "b", ...)
+  public static ImmutableList<String> parseList(String string) {
+    return strCommaListFormat.parse(string);
+  }
+
+  // ===========================================================================
+  // multimap
+  // ===========================================================================
+
+  public static Format<ImmutableSetMultimap<String, String>> strMultimapFormat =
+      new Format<ImmutableSetMultimap<String, String>>() {
+        @Override
+        public ImmutableSetMultimap<String, String> parse(String syntax) throws ParseError {
+
+          if (syntax.length() == 0)
+            return ImmutableSetMultimap.of();
+
+          ImmutableSetMultimap.Builder<String, String> map = ImmutableSetMultimap.builder();
+
+          for (String part : Splitter.on(", ").split(syntax)) {
+
+            int i = part.indexOf(" = ");
+            String key = part.substring(0, i);
+            String value = part.substring(i + 3);
+
+            map.put(key, value);
+          }
+
+          return map.build();
+
+        }
+
+        @Override
+        public String write(ImmutableSetMultimap<String, String> model) {
+          throw new NotImplemented();
+        }
+      };
+
+  public static ImmutableSetMultimap<String, String> parseMultimap(String string) {
+    return FormatLib.strMultimapFormat.parse(string);
+  }
 
 }
