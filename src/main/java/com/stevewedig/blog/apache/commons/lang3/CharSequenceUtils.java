@@ -24,7 +24,7 @@ package com.stevewedig.blog.apache.commons.lang3;
  * @since 3.0
  * @version $Id$
  */
-public class CharSequenceUtils {
+public abstract class CharSequenceUtils {
 
     private static final int NOT_FOUND = -1;
 

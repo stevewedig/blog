@@ -11,7 +11,7 @@ import com.stevewedig.blog.digraph.node.UpNode;
 import com.stevewedig.blog.digraph.node.UpNodeLib;
 import com.stevewedig.blog.util.SetLib;
 
-public class TreeLib {
+public abstract class TreeLib {
 
   // ===========================================================================
   // tree from state

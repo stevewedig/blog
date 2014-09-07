@@ -11,7 +11,7 @@ import com.stevewedig.blog.digraph.node.UpNode;
 import com.stevewedig.blog.digraph.node.UpNodeLib;
 import com.stevewedig.blog.util.SetLib;
 
-public class GraphLib {
+public abstract class GraphLib {
 
   // ===========================================================================
   // graph from state

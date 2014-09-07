@@ -39,7 +39,7 @@ import java.util.Map;
  * @since 2.0
  * @version $Id$
  */
-public class ArrayUtils {
+public abstract class ArrayUtils {
 
   /**
    * An empty immutable {@code Object} array.

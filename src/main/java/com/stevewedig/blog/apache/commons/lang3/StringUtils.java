@@ -113,7 +113,7 @@ import java.util.regex.Pattern;
  * @version $Id$
  */
 //@Immutable
-public class StringUtils {
+public abstract class StringUtils {
     // Performance testing notes (JDK 1.4, Jul03, scolebourne)
     // Whitespace:
     // Character.isWhitespace() is faster than WHITESPACE.indexOf()

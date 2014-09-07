@@ -11,7 +11,7 @@ import com.stevewedig.blog.digraph.node.UpNode;
 import com.stevewedig.blog.digraph.node.UpNodeLib;
 import com.stevewedig.blog.util.SetLib;
 
-public class DagLib {
+public abstract class DagLib {
 
   // ===========================================================================
   // dag from state

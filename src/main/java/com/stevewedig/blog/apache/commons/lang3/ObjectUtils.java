@@ -31,7 +31,7 @@ import java.io.Serializable;
  * @version $Id$
  */
 //@Immutable
-public class ObjectUtils {
+public abstract class ObjectUtils {
 
     /**
      * <p>Singleton used as a {@code null} placeholder where

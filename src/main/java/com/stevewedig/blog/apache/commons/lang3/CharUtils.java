@@ -27,7 +27,7 @@ package com.stevewedig.blog.apache.commons.lang3;
  * @since 2.1
  * @version $Id$
  */
-public class CharUtils {
+public abstract class CharUtils {
     
     private static final String[] CHAR_STRING_ARRAY = new String[128];
     
