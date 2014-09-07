@@ -263,14 +263,14 @@ public class TestExampleFileTree {
 
       ImmutableList<String> startIds = ImmutableList.of(rootId());
 
-      return nodeIterable(depthFirst, includeStarts, startIds, path__childList);
+      return nodeIterable(depthFirst, includeStarts, startIds, node__childList);
     }
 
-    private Fn1<String, List<String>> path__childList = new Fn1<String, List<String>>() {
+    private Fn1<FileNode, List<String>> node__childList = new Fn1<FileNode, List<String>>() {
       @Override
-      public List<String> apply(String path) {
+      public List<String> apply(FileNode node) {
 
-        List<String> childIdList = Lists.newArrayList(childIdSet(path));
+        List<String> childIdList = Lists.newArrayList(childIdSet(node.path()));
 
         // order child nodes alphabetically
         Collections.sort(childIdList);

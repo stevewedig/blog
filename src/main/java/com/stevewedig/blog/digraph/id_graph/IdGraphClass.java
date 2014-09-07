@@ -256,7 +256,7 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
 
     // Notice that we just delegate to a static method. This is only exposed as a method on IdGraph
     // for convenient access.
-    return TraverseLib.iterable(depthFirst, includeStarts, startIds, expand);
+    return TraverseLib.idIterable(depthFirst, includeStarts, startIds, expand);
   }
 
 }

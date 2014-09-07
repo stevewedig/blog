@@ -12,6 +12,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSetMultimap;
 import com.google.common.collect.Sets;
+import com.stevewedig.blog.digraph.alg.TraverseLib;
 import com.stevewedig.blog.digraph.id_graph.GraphValidationErrors.GraphContainedUnexpectedIds;
 import com.stevewedig.blog.digraph.id_graph.IdGraph;
 import com.stevewedig.blog.errors.NotContained;
@@ -20,7 +21,6 @@ import com.stevewedig.blog.errors.NotMutable;
 import com.stevewedig.blog.util.LambdaLib.Fn1;
 import com.stevewedig.blog.value_objects.ValueMixin;
 
-// TODO improve the toString, also on IdGraph
 public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> {
 
   // ===========================================================================
@@ -100,31 +100,6 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   }
 
   // ===========================================================================
-  // unboundIds (ids without nodes)
-  // ===========================================================================
-
-  @Override
-  public ImmutableSet<Id> unboundIdSet() {
-    if (unboundIds == null)
-      unboundIds = ImmutableSet.copyOf(Sets.difference(idSet(), id__node.keySet()));
-    return unboundIds;
-  }
-
-  private ImmutableSet<Id> unboundIds;
-
-  // ===================================
-
-  @Override
-  public boolean isComplete() {
-    return unboundIdSet().isEmpty();
-  }
-
-  @Override
-  public boolean isPartial() {
-    return !isComplete();
-  }
-
-  // ===========================================================================
   // mapping id -> node
   // ===========================================================================
 
@@ -149,6 +124,47 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
       throw new NotContained("id = %s", id);
 
     return id__node.get(id);
+  }
+
+  // ===================================
+
+  @Override
+  public Fn1<Id, Node> nodeLambda() {
+    if (nodeLambda == null)
+      nodeLambda = new Fn1<Id, Node>() {
+        @Override
+        public Node apply(Id id) {
+          return node(id);
+        }
+      };
+    return nodeLambda;
+  }
+
+  private Fn1<Id, Node> nodeLambda;
+
+  // ===========================================================================
+  // unboundIds (ids without nodes)
+  // ===========================================================================
+
+  @Override
+  public ImmutableSet<Id> unboundIdSet() {
+    if (unboundIds == null)
+      unboundIds = ImmutableSet.copyOf(Sets.difference(idSet(), id__node.keySet()));
+    return unboundIds;
+  }
+
+  private ImmutableSet<Id> unboundIds;
+
+  // ===================================
+
+  @Override
+  public boolean isComplete() {
+    return unboundIdSet().isEmpty();
+  }
+
+  @Override
+  public boolean isPartial() {
+    return !isComplete();
   }
 
   // ===========================================================================
@@ -332,9 +348,9 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
 
   @Override
   public Iterable<Node> nodeIterable(boolean depthFirst, boolean includeStarts,
-      ImmutableList<Id> startIds, Fn1<Id, List<Id>> expand) {
+      ImmutableList<Id> startIds, Fn1<Node, List<Id>> expand) {
 
-    return nodeWrapIterable(idIterable(depthFirst, includeStarts, startIds, expand));
+    return TraverseLib.nodeIterable(depthFirst, includeStarts, startIds, expand, nodeLambda());
   }
 
   // ===========================================================================
@@ -523,6 +539,5 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   public void clear() {
     throw new NotMutable();
   }
-
 
 }

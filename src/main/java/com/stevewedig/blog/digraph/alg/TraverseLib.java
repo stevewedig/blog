@@ -18,35 +18,50 @@ public abstract class TraverseLib {
   // iterable
   // ===========================================================================
 
-  public static <Id> Iterable<Id> iterable(final boolean depthFirst, final boolean includeStarts,
+  public static <Id> Iterable<Id> idIterable(final boolean depthFirst, final boolean includeStarts,
       final ImmutableList<Id> startIds, final Fn1<Id, List<Id>> expand) {
 
-    return new IterableClass<>(depthFirst, includeStarts, expand, startIds);
+    Fn1<Id, Id> lookup = new Fn1<Id, Id>() {
+      @Override
+      public Id apply(Id id) {
+        return id;
+      }
+    };
+
+    return new IterableClass<Id, Id>(depthFirst, includeStarts, startIds, expand, lookup);
+  }
+
+  public static <Id, Node> Iterable<Node> nodeIterable(boolean depthFirst, boolean includeStarts,
+      ImmutableList<Id> startIds, Fn1<Node, List<Id>> expand, Fn1<Id, Node> lookup) {
+
+    return new IterableClass<Id, Node>(depthFirst, includeStarts, startIds, expand, lookup);
   }
 
   // ===========================================================================
   // IterableClass
   // ===========================================================================
 
-  private static class IterableClass<Id> implements Iterable<Id> {
+  private static class IterableClass<Id, Node> implements Iterable<Node> {
 
     private final boolean depthFirst;
     private final boolean includeStarts;
-    private final Fn1<Id, List<Id>> expand;
     private final ImmutableList<Id> startIds;
+    private final Fn1<Node, List<Id>> expand;
+    private final Fn1<Id, Node> lookup;
 
-    public IterableClass(boolean depthFirst, boolean includeStarts, Fn1<Id, List<Id>> expand,
-        ImmutableList<Id> startIds) {
+    public IterableClass(boolean depthFirst, boolean includeStarts, ImmutableList<Id> startIds,
+        Fn1<Node, List<Id>> expand, Fn1<Id, Node> lookup) {
 
       this.depthFirst = depthFirst;
       this.includeStarts = includeStarts;
-      this.expand = expand;
       this.startIds = startIds;
+      this.expand = expand;
+      this.lookup = lookup;
     }
 
     @Override
-    public Iterator<Id> iterator() {
-      return TraverseLib.iterator(depthFirst, includeStarts, startIds, expand);
+    public Iterator<Node> iterator() {
+      return TraverseLib.nodeIterator(depthFirst, includeStarts, startIds, expand, lookup);
     }
 
   }
@@ -55,17 +70,30 @@ public abstract class TraverseLib {
   // iterator
   // ===========================================================================
 
-  public static <Id> Iterator<Id> iterator(boolean depthFirst, boolean includeStarts,
+  public static <Id> Iterator<Id> idIterator(boolean depthFirst, boolean includeStarts,
       ImmutableList<Id> startIds, Fn1<Id, List<Id>> expand) {
 
-    return new IteratorClass<Id>(depthFirst, includeStarts, startIds, expand);
+    Fn1<Id, Id> lookup = new Fn1<Id, Id>() {
+      @Override
+      public Id apply(Id id) {
+        return id;
+      }
+    };
+
+    return new IteratorClass<Id, Id>(depthFirst, includeStarts, startIds, expand, lookup);
+  }
+
+  public static <Id, Node> Iterator<Node> nodeIterator(boolean depthFirst, boolean includeStarts,
+      ImmutableList<Id> startIds, Fn1<Node, List<Id>> expand, Fn1<Id, Node> lookup) {
+
+    return new IteratorClass<Id, Node>(depthFirst, includeStarts, startIds, expand, lookup);
   }
 
   // ===========================================================================
   // IteratorClass
   // ===========================================================================
 
-  private static class IteratorClass<Id> implements Iterator<Id> {
+  private static class IteratorClass<Id, Node> implements Iterator<Node> {
 
     // =================================
     // inputs
@@ -73,7 +101,8 @@ public abstract class TraverseLib {
 
     private final boolean depthFirst;
     private final boolean includeStarts;
-    private final Fn1<Id, List<Id>> expand;
+    private final Fn1<Node, List<Id>> expand;
+    private final Fn1<Id, Node> lookup;
     private final ImmutableSet<Id> starts;
 
     // =================================
@@ -94,11 +123,12 @@ public abstract class TraverseLib {
     // =================================
 
     public IteratorClass(boolean depthFirst, boolean includeStarts, ImmutableList<Id> startIds,
-        Fn1<Id, List<Id>> expand) {
+        Fn1<Node, List<Id>> expand, Fn1<Id, Node> lookup) {
 
       this.depthFirst = depthFirst;
       this.includeStarts = includeStarts;
       this.expand = expand;
+      this.lookup = lookup;
 
       starts = ImmutableSet.copyOf(startIds);
 
@@ -122,7 +152,7 @@ public abstract class TraverseLib {
     // =================================
 
     @Override
-    public Id next() {
+    public Node next() {
 
       findNext();
 
@@ -130,10 +160,10 @@ public abstract class TraverseLib {
         throw new NoSuchElementException();
 
       Id id = nextId;
-
       nextId = null;
 
-      return id;
+      Node node = lookup.apply(id);
+      return node;
     }
 
     // =================================
@@ -168,7 +198,9 @@ public abstract class TraverseLib {
     // expand
     // =================================
 
-    private void expand(Id node) {
+    private void expand(Id id) {
+
+      Node node = lookup.apply(id);
 
       List<Id> expanded = expand.apply(node);
 

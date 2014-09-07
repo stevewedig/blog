@@ -48,6 +48,8 @@ public interface Graph<Id, Node> extends IdGraph<Id>, Set<Node> {
    */
   Node node(Id id) throws NotContained;
 
+  Fn1<Id, Node> nodeLambda();
+
   // ===========================================================================
   // unboundIds (ids without nodes)
   // ===========================================================================
@@ -130,8 +132,17 @@ public interface Graph<Id, Node> extends IdGraph<Id>, Set<Node> {
   // generic traversal
   // ===========================================================================
 
-  Iterable<Node> nodeIterable(boolean depthFirst, boolean includeStarts, ImmutableList<Id> startIds,
-      Fn1<Id, List<Id>> expand);
+  /**
+   * Generic node traversal.
+   * 
+   * @param depthFirst Whether to traverse depth first or breadth first.
+   * @param includeStarts Whether to include the start nodes in the traversal.
+   * @param startIds The initial id set.
+   * @param expand A function mapping a node to the next ids.
+   * @return A node iterable corresponding to the traversal.
+   */
+  Iterable<Node> nodeIterable(boolean depthFirst, boolean includeStarts,
+      ImmutableList<Id> startIds, Fn1<Node, List<Id>> expand);
 
   // ===========================================================================
   // converting id collections to node collections
