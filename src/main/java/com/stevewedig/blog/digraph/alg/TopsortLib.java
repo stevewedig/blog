@@ -37,7 +37,7 @@ public abstract class TopsortLib {
    * 
    * @param idSet The node ids in your DAG.
    * @param id__parents The dependency structure of your DAG.
-   * @return Topologically sorted list of node ids with sources/roots at the start.
+   * @return An optional topological sort of ids, with roots (sources) at the start.
    */
   public static <Id> Optional<ImmutableList<Id>> sort(ImmutableSet<Id> idSet,
       ImmutableSetMultimap<Id, Id> id__parents) {
@@ -45,7 +45,7 @@ public abstract class TopsortLib {
     // need to traverse in this direction as well
     ImmutableMultimap<Id, Id> id__children = id__parents.inverse();
 
-    // topologically sorted id list
+    // building a topologically sorted id list
     ImmutableList.Builder<Id> sorted = ImmutableList.builder();
 
     // ids are closed when the are added to sorted
@@ -61,12 +61,12 @@ public abstract class TopsortLib {
       int parentCount = id__parents.get(id).size();
       id__parentCount.put(id, parentCount);
 
-      // the roots/sources form the initial open set
+      // the graph's roots (sources) form the initial open set
       if (parentCount == 0)
         open.push(id);
     }
 
-    // loop: close an id and see if that opens any of its children
+    // loop: close an open id and see if that opens any of its children
     while (!open.isEmpty()) {
 
       Id id = open.pop();
