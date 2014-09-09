@@ -96,7 +96,7 @@ public interface IdGraph<Id> {
   // ===========================================================================
 
   /**
-   * Generic id traversal.
+   * Generic id traversal as an iterable.
    * 
    * @param depthFirst Whether to traverse depth first or breadth first.
    * @param includeStarts Whether to include the start ids in the traversal.
@@ -105,6 +105,18 @@ public interface IdGraph<Id> {
    * @return An id iterable corresponding to the traversal.
    */
   Iterable<Id> idIterable(boolean depthFirst, boolean includeStarts, ImmutableList<Id> startIds,
+      Fn1<Id, List<Id>> expand);
+
+  /**
+   * Generic id traversal copied into a list.
+   * 
+   * @param depthFirst Whether to traverse depth first or breadth first.
+   * @param includeStarts Whether to include the start ids in the traversal.
+   * @param startIds The initial id set.
+   * @param expand A function mapping an id to the next ids.
+   * @return An id list corresponding to the traversal.
+   */
+  ImmutableList<Id> idList(boolean depthFirst, boolean includeStarts, ImmutableList<Id> startIds,
       Fn1<Id, List<Id>> expand);
 
 }

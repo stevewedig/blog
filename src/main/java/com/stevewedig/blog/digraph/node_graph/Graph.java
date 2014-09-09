@@ -133,7 +133,7 @@ public interface Graph<Id, Node> extends IdGraph<Id>, Set<Node> {
   // ===========================================================================
 
   /**
-   * Generic node traversal.
+   * Generic node traversal as an iterable.
    * 
    * @param depthFirst Whether to traverse depth first or breadth first.
    * @param includeStarts Whether to include the start nodes in the traversal.
@@ -142,6 +142,18 @@ public interface Graph<Id, Node> extends IdGraph<Id>, Set<Node> {
    * @return A node iterable corresponding to the traversal.
    */
   Iterable<Node> nodeIterable(boolean depthFirst, boolean includeStarts,
+      ImmutableList<Id> startIds, Fn1<Node, List<Id>> expand);
+
+  /**
+   * Generic node traversal copied into a list.
+   * 
+   * @param depthFirst Whether to traverse depth first or breadth first.
+   * @param includeStarts Whether to include the start nodes in the traversal.
+   * @param startIds The initial id set.
+   * @param expand A function mapping a node to the next ids.
+   * @return A node list corresponding to the traversal.
+   */
+  ImmutableList<Node> nodeList(boolean depthFirst, boolean includeStarts,
       ImmutableList<Id> startIds, Fn1<Node, List<Id>> expand);
 
   // ===========================================================================

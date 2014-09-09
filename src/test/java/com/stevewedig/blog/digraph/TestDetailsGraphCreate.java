@@ -1,41 +1,24 @@
 package com.stevewedig.blog.digraph;
 
-import static com.stevewedig.blog.digraph.node.UpNodeLib.upNode;
 import static com.stevewedig.blog.digraph.node.DownNodeLib.downNode;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static com.stevewedig.blog.digraph.node.UpNodeLib.upNode;
+import static org.junit.Assert.*;
 
-import java.util.Set;
+import java.util.*;
 
 import org.junit.Test;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.ImmutableBiMap;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ImmutableSetMultimap;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
+import com.google.common.collect.*;
 import com.stevewedig.blog.digraph.id_graph.GraphValidationErrors.DagCannotHaveCycle;
 import com.stevewedig.blog.digraph.id_graph.GraphValidationErrors.GraphContainedUnexpectedIds;
 import com.stevewedig.blog.digraph.id_graph.GraphValidationErrors.TreeCannotBeEmpty;
 import com.stevewedig.blog.digraph.id_graph.GraphValidationErrors.TreeCannotHaveMultipleRoots;
 import com.stevewedig.blog.digraph.id_graph.GraphValidationErrors.TreeNodesCannotHaveMultipleParents;
-import com.stevewedig.blog.digraph.id_graph.IdDag;
-import com.stevewedig.blog.digraph.id_graph.IdDagLib;
-import com.stevewedig.blog.digraph.id_graph.IdGraph;
-import com.stevewedig.blog.digraph.id_graph.IdGraphLib;
-import com.stevewedig.blog.digraph.id_graph.IdTree;
-import com.stevewedig.blog.digraph.id_graph.IdTreeLib;
-import com.stevewedig.blog.digraph.node.UpNode;
-import com.stevewedig.blog.digraph.node_graph.Dag;
-import com.stevewedig.blog.digraph.node_graph.DagLib;
-import com.stevewedig.blog.digraph.node_graph.Graph;
-import com.stevewedig.blog.digraph.node_graph.GraphLib;
-import com.stevewedig.blog.digraph.node_graph.Tree;
-import com.stevewedig.blog.digraph.node_graph.TreeLib;
+import com.stevewedig.blog.digraph.id_graph.*;
+import com.stevewedig.blog.digraph.node.*;
+import com.stevewedig.blog.digraph.node_graph.*;
 import com.stevewedig.blog.errors.NotThrown;
+import com.stevewedig.blog.util.LambdaLib.Fn1;
 
 public class TestDetailsGraphCreate {
 
@@ -410,21 +393,36 @@ public class TestDetailsGraphCreate {
   @Test
   public void testCornerCase__partial() {
 
-    Graph<String, UpNode<String>> graph = GraphLib.up(upNode("b", "missing"));
+    UpNode<String> b = UpNodeLib.upNode("b", "missing");
+
+    Graph<String, UpNode<String>> graph = GraphLib.up(b);
     assertEquals(ImmutableSet.of("missing"), graph.unboundIdSet());
     assertTrue(graph.isPartial());
     assertFalse(graph.isComplete());
 
-    Dag<String, UpNode<String>> dag = DagLib.up(upNode("b", "missing"));
+    Dag<String, UpNode<String>> dag = DagLib.up(b);
     assertEquals(ImmutableSet.of("missing"), dag.unboundIdSet());
     assertTrue(dag.isPartial());
     assertFalse(dag.isComplete());
 
-    Tree<String, UpNode<String>> tree = TreeLib.up(upNode("b", "missing"));
+    Tree<String, UpNode<String>> tree = TreeLib.up(b);
     assertEquals(ImmutableSet.of("missing"), tree.unboundIdSet());
     assertTrue(tree.isPartial());
     assertFalse(tree.isComplete());
 
-  }
+    // =================================
+    // make sure generic node traversal works even though we don't have all the nodes
+    // =================================
 
+    Fn1<UpNode<String>, List<String>> expand = new Fn1<UpNode<String>, List<String>>() {
+      @Override
+      public List<String> apply(UpNode<String> node) {
+        return ImmutableList.copyOf(node.parentIds());
+      }
+    };
+
+    assertEquals(ImmutableList.of(b), graph.nodeList(true, true, ImmutableList.of("b"), expand));
+    assertEquals(ImmutableList.of(b), dag.nodeList(true, true, ImmutableList.of("b"), expand));
+    assertEquals(ImmutableList.of(b), tree.nodeList(true, true, ImmutableList.of("b"), expand));
+  }
 }

@@ -259,4 +259,11 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
     return TraverseLib.idIterable(depthFirst, includeStarts, startIds, expand);
   }
 
+  @Override
+  public ImmutableList<Id> idList(boolean depthFirst, boolean includeStarts,
+      ImmutableList<Id> startIds, Fn1<Id, List<Id>> expand) {
+
+    return ImmutableList.copyOf(idIterable(depthFirst, includeStarts, startIds, expand));
+  }
+
 }

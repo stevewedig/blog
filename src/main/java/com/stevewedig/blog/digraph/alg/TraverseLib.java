@@ -1,15 +1,9 @@
 package com.stevewedig.blog.digraph.alg;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Set;
+import java.util.*;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.stevewedig.blog.errors.NotImplemented;
+import com.google.common.collect.*;
+import com.stevewedig.blog.errors.*;
 import com.stevewedig.blog.util.LambdaLib.Fn1;
 
 public abstract class TraverseLib {
@@ -116,7 +110,8 @@ public abstract class TraverseLib {
     // for deduplication
     private final Set<Id> closed = new HashSet<>();
 
-    private Id nextId = null;
+    // lookahead for hasNext()
+    private Node nextNode = null;
 
     // =================================
     // constructor
@@ -144,7 +139,7 @@ public abstract class TraverseLib {
 
       findNext();
 
-      return nextId != null;
+      return nextNode != null;
     }
 
     // =================================
@@ -154,15 +149,13 @@ public abstract class TraverseLib {
     @Override
     public Node next() {
 
-      findNext();
-
-      if (nextId == null)
+      if (!hasNext())
         throw new NoSuchElementException();
 
-      Id id = nextId;
-      nextId = null;
+      Node node = nextNode;
 
-      Node node = lookup.apply(id);
+      nextNode = null;
+
       return node;
     }
 
@@ -172,35 +165,33 @@ public abstract class TraverseLib {
 
     private void findNext() {
 
-      while (nextId == null && !open.isEmpty()) {
+      while (nextNode == null && !open.isEmpty()) {
 
         Id id = open.removeFirst();
 
-        expand(id);
+        Node node;
+        try {
+          node = lookup.apply(id);
+
+        } catch (NotContained e) {
+          // this happens when a node graph is partial
+          continue;
+        }
+
+        expand(node);
 
         if (!includeStarts && starts.contains(id))
           continue;
 
-        nextId = id;
+        nextNode = node;
       }
-    }
-
-    // =================================
-    // remove
-    // =================================
-
-    @Override
-    public void remove() {
-      throw new NotImplemented();
     }
 
     // =================================
     // expand
     // =================================
 
-    private void expand(Id id) {
-
-      Node node = lookup.apply(id);
+    private void expand(Node node) {
 
       List<Id> expanded = expand.apply(node);
 
@@ -237,6 +228,15 @@ public abstract class TraverseLib {
         open.addFirst(id);
       else
         open.addLast(id);
+    }
+
+    // =================================
+    // remove
+    // =================================
+
+    @Override
+    public void remove() {
+      throw new NotImplemented();
     }
 
   }

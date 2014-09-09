@@ -343,7 +343,15 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   @Override
   public Iterable<Id> idIterable(boolean depthFirst, boolean includeStarts,
       ImmutableList<Id> startIds, Fn1<Id, List<Id>> expand) {
+
     return idGraph.idIterable(depthFirst, includeStarts, startIds, expand);
+  }
+
+  @Override
+  public ImmutableList<Id> idList(boolean depthFirst, boolean includeStarts,
+      ImmutableList<Id> startIds, Fn1<Id, List<Id>> expand) {
+
+    return idGraph.idList(depthFirst, includeStarts, startIds, expand);
   }
 
   @Override
@@ -351,6 +359,13 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
       ImmutableList<Id> startIds, Fn1<Node, List<Id>> expand) {
 
     return TraverseLib.nodeIterable(depthFirst, includeStarts, startIds, expand, nodeLambda());
+  }
+
+  @Override
+  public ImmutableList<Node> nodeList(boolean depthFirst, boolean includeStarts,
+      ImmutableList<Id> startIds, Fn1<Node, List<Id>> expand) {
+
+    return ImmutableList.copyOf(nodeIterable(depthFirst, includeStarts, startIds, expand));
   }
 
   // ===========================================================================
@@ -539,5 +554,4 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   public void clear() {
     throw new NotMutable();
   }
-
 }
