@@ -2,6 +2,9 @@ package com.stevewedig.blog.digraph.id_graph;
 
 import com.stevewedig.blog.errors.ErrorMixin;
 
+/**
+ * A collection of digraph creation errors.
+ */
 public abstract class GraphValidationErrors {
 
   public static class GraphContainedUnexpectedIds extends ErrorMixin {

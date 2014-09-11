@@ -8,6 +8,9 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSetMultimap;
 import com.stevewedig.blog.util.LambdaLib.Fn1;
 
+/**
+ * A digraph containing ids.
+ */
 public interface IdGraph<Id> {
 
   // ===========================================================================

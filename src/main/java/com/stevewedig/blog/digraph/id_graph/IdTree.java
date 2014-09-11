@@ -3,6 +3,9 @@ package com.stevewedig.blog.digraph.id_graph;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 
+/**
+ * A tree containing ids.
+ */
 public interface IdTree<Id> extends IdDag<Id> {
 
   // ===========================================================================

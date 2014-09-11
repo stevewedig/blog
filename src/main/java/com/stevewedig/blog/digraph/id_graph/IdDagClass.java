@@ -5,6 +5,9 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSetMultimap;
 import com.stevewedig.blog.digraph.id_graph.GraphValidationErrors.DagCannotHaveCycle;
 
+/**
+ * An implementation of IdDag.
+ */
 public class IdDagClass<Id> extends IdGraphClass<Id> implements IdDag<Id> {
 
   // ===========================================================================

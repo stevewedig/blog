@@ -12,6 +12,9 @@ import com.stevewedig.blog.digraph.id_graph.IdGraphLib;
 import com.stevewedig.blog.digraph.id_graph.IdTree;
 import com.stevewedig.blog.digraph.id_graph.IdTreeLib;
 
+/**
+ * A library with tools for manipulating UpNodes.
+ */
 public abstract class UpNodeLib {
 
   // ===========================================================================

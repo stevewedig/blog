@@ -2,6 +2,9 @@ package com.stevewedig.blog.digraph.id_graph;
 
 import com.google.common.collect.ImmutableList;
 
+/**
+ * A dag containing ids.
+ */
 public interface IdDag<Id> extends IdGraph<Id> {
   
   // ===========================================================================

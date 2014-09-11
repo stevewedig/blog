@@ -13,6 +13,9 @@ import com.stevewedig.blog.digraph.id_graph.IdGraph;
 import com.stevewedig.blog.errors.NotContained;
 import com.stevewedig.blog.util.LambdaLib.Fn1;
 
+/**
+ * A digraph containing nodes.
+ */
 public interface Graph<Id, Node> extends IdGraph<Id>, Set<Node> {
 
   // ===========================================================================

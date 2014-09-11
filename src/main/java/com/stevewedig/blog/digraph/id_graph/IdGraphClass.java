@@ -15,6 +15,9 @@ import com.stevewedig.blog.util.LambdaLib.Fn1;
 import com.stevewedig.blog.util.MultimapLib;
 import com.stevewedig.blog.value_objects.ValueMixin;
 
+/**
+ * An implementation of IdGraph.
+ */
 public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
 
   // ===========================================================================

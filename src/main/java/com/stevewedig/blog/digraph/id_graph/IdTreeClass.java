@@ -12,6 +12,9 @@ import com.stevewedig.blog.digraph.id_graph.GraphValidationErrors.TreeCannotBeEm
 import com.stevewedig.blog.digraph.id_graph.GraphValidationErrors.TreeCannotHaveMultipleRoots;
 import com.stevewedig.blog.digraph.id_graph.GraphValidationErrors.TreeNodesCannotHaveMultipleParents;
 
+/**
+ * An implementation of IdTree.
+ */
 public class IdTreeClass<Id> extends IdDagClass<Id> implements IdTree<Id> {
 
   // ===========================================================================

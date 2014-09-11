@@ -11,6 +11,9 @@ import com.stevewedig.blog.digraph.node.UpNode;
 import com.stevewedig.blog.digraph.node.UpNodeLib;
 import com.stevewedig.blog.util.SetLib;
 
+/**
+ * A library for creating Graphs.
+ */
 public abstract class GraphLib {
 
   // ===========================================================================

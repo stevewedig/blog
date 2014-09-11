@@ -4,6 +4,9 @@ import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.stevewedig.blog.digraph.id_graph.IdTree;
 
+/**
+ * A tree containing nodes.
+ */
 public interface Tree<Id, Node> extends Dag<Id, Node>, IdTree<Id> {
 
   // ===========================================================================
@@ -12,11 +15,11 @@ public interface Tree<Id, Node> extends Dag<Id, Node>, IdTree<Id> {
 
   @Override
   IdTree<Id> idGraph();
-  
+
   // ===========================================================================
   // root
   // ===========================================================================
-  
+
   Node rootNode();
 
   // ===========================================================================

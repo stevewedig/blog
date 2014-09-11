@@ -6,6 +6,9 @@ import com.google.common.collect.*;
 import com.stevewedig.blog.errors.*;
 import com.stevewedig.blog.util.LambdaLib.Fn1;
 
+/**
+ * Generic digraph traversal.
+ */
 public abstract class TraverseLib {
 
   // ===========================================================================

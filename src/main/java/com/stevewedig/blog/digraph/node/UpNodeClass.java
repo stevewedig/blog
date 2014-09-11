@@ -3,6 +3,9 @@ package com.stevewedig.blog.digraph.node;
 import com.google.common.collect.ImmutableSet;
 import com.stevewedig.blog.value_objects.ValueMixin;
 
+/**
+ * An implementation of UpNode.
+ */
 public class UpNodeClass<Id> extends ValueMixin implements UpNode<Id> {
 
   // ===========================================================================

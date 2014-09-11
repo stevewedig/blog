@@ -6,6 +6,9 @@ import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableList;
 import com.stevewedig.blog.digraph.id_graph.IdDag;
 
+/**
+ * An implementation of Dag.
+ */
 public class DagClass<Id, Node> extends GraphClass<Id, Node> implements Dag<Id, Node> {
 
   // ===========================================================================

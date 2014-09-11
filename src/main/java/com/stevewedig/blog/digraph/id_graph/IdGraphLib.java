@@ -7,6 +7,9 @@ import com.google.common.collect.ImmutableSetMultimap;
 import com.google.common.collect.Multimap;
 import com.stevewedig.blog.util.MultimapLib;
 
+/**
+ * A library for creating IdGraphs.
+ */
 public abstract class IdGraphLib {
 
   // ===========================================================================

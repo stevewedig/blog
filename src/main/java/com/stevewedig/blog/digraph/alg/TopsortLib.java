@@ -13,6 +13,9 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSetMultimap;
 import com.stevewedig.blog.util.MultimapLib;
 
+/**
+ * Generic topological sort.
+ */
 public abstract class TopsortLib {
 
   // http://en.wikipedia.org/wiki/Topological_sorting

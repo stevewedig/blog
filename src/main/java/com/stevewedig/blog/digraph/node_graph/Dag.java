@@ -3,6 +3,9 @@ package com.stevewedig.blog.digraph.node_graph;
 import com.google.common.collect.ImmutableList;
 import com.stevewedig.blog.digraph.id_graph.IdDag;
 
+/**
+ * A dag containing nodes.
+ */
 public interface Dag<Id, Node> extends Graph<Id, Node>, IdDag<Id> {
 
   // ===========================================================================

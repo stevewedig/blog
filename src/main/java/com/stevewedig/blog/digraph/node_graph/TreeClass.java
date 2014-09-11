@@ -5,6 +5,9 @@ import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableList;
 import com.stevewedig.blog.digraph.id_graph.IdTree;
 
+/**
+ * An implementation of Tree.
+ */
 public class TreeClass<Id, Node> extends DagClass<Id, Node> implements Tree<Id, Node> {
 
   // ===========================================================================

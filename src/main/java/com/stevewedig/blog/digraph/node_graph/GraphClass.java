@@ -21,6 +21,9 @@ import com.stevewedig.blog.errors.NotMutable;
 import com.stevewedig.blog.util.LambdaLib.Fn1;
 import com.stevewedig.blog.value_objects.ValueMixin;
 
+/**
+ * An implementation of Graph.
+ */
 public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> {
 
   // ===========================================================================

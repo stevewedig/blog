@@ -5,6 +5,9 @@ import java.util.Set;
 
 import com.google.common.collect.Sets;
 
+/**
+ * Set related utilities.
+ */
 public abstract class SetLib {
 
   @SafeVarargs
