@@ -18,14 +18,4 @@ public abstract class SetLib {
     return items;
   }
 
-  public static <Item> Set<Item> union(Iterable<Set<Item>> sets) {
-    
-    Set<Item> items = new HashSet<>();
-    
-    for (Set<Item> set : sets)
-      items = Sets.union(items, set);
-    
-    return items;
-  }
-
 }
