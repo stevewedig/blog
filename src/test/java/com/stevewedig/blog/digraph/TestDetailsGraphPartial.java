@@ -71,7 +71,13 @@ public class TestDetailsGraphPartial {
     assertEquals(parseSet(""), tree.parentIdSet("a"));
     assertEquals(parseSet("a"), tree.parentIdSet("b"));
 
-    // TODO
+    assertEquals(ImmutableSet.of(), tree.parentNodeSet("a"));
+    
+    try {
+      tree.parentNodeSet("b");
+      throw new NotThrown(NotContained.class);
+    } catch (NotContained e) {
+    }
 
     // =================================
     // children

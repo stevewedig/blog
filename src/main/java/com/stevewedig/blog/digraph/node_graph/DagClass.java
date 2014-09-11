@@ -67,7 +67,7 @@ public class DagClass<Id, Node> extends GraphClass<Id, Node> implements Dag<Id, 
 
   @Override
   public Iterable<Node> depthNodeIterable() {
-    return nodeWrapIterable(idDag.depthIdIterable());
+    return nodeWrapIterable(idDag.depthIdIterable(), true);
   }
 
   // ===================================
@@ -75,7 +75,7 @@ public class DagClass<Id, Node> extends GraphClass<Id, Node> implements Dag<Id, 
   @Override
   public ImmutableList<Node> depthNodeList() {
     if (depthNodeList == null)
-      depthNodeList = nodeWrapList(depthIdList());
+      depthNodeList = nodeWrapList(depthIdList(), true);
     return depthNodeList;
   }
 
@@ -99,7 +99,7 @@ public class DagClass<Id, Node> extends GraphClass<Id, Node> implements Dag<Id, 
 
   @Override
   public Iterable<Node> breadthNodeIterable() {
-    return nodeWrapIterable(idDag.breadthIdIterable());
+    return nodeWrapIterable(idDag.breadthIdIterable(), true);
   }
 
   // ===================================
@@ -107,7 +107,7 @@ public class DagClass<Id, Node> extends GraphClass<Id, Node> implements Dag<Id, 
   @Override
   public ImmutableList<Node> breadthNodeList() {
     if (breadthNodeList == null)
-      breadthNodeList = nodeWrapList(breadthIdList());
+      breadthNodeList = nodeWrapList(breadthIdList(), true);
     return breadthNodeList;
   }
 

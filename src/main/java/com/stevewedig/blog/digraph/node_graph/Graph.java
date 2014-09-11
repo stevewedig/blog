@@ -192,27 +192,22 @@ public interface Graph<Id, Node> extends IdGraph<Id>, Set<Node> {
   /**
    * Converting ids to a node set.
    */
-  ImmutableSet<Node> nodeWrapSet(Iterable<Id> ids);
+  ImmutableSet<Node> nodeWrapSet(Iterable<Id> ids, boolean skipMissingNodes);
 
   /**
    * Converting ids to a node list.
    */
-  ImmutableList<Node> nodeWrapList(Iterable<Id> ids);
-
-  /**
-   * Converting an optional id to an optional node.
-   */
-  Optional<Node> nodeWrapOptional(Optional<Id> optionalId);
+  ImmutableList<Node> nodeWrapList(Iterable<Id> ids, boolean skipMissingNodes);
 
   /**
    * Converting an id iterable to a node iterable.
    */
-  Iterable<Node> nodeWrapIterable(Iterable<Id> idIterable);
+  Iterable<Node> nodeWrapIterable(Iterable<Id> idIterable, boolean skipMissingNodes);
 
   /**
    * Converting an id iterator to a node iterator.
    */
-  Iterator<Node> nodeWrapIterator(Iterator<Id> idIterator);
+  Iterator<Node> nodeWrapIterator(Iterator<Id> idIterator, boolean skipMissingNodes);
 
   // ===========================================================================
   // deprecating Set's mutation methods (Graphs are immutable)
