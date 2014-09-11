@@ -17,7 +17,7 @@ import com.stevewedig.blog.util.LambdaLib.Fn1;
 public class TestDetailsGraphPartial {
 
   @Test
-  public void testCornerCase__partial() {
+  public void testPartialGraph() {
 
     UpNode<String> b = UpNodeLib.upNode("b", "a");
 
@@ -87,7 +87,7 @@ public class TestDetailsGraphPartial {
     assertEquals(parseSet("b"), tree.childIdSet("a"));
     assertEquals(parseSet(""), tree.childIdSet("b"));
 
-    // not currently verifying that skipMissingNode = false
+    // doesn't verify that skipMissingNode = false
     assertEquals(ImmutableSet.of(b), tree.childNodeSet("a"));
     assertEquals(ImmutableSet.of(), tree.childNodeSet("b"));
 
@@ -113,8 +113,8 @@ public class TestDetailsGraphPartial {
 
     assertEquals(parseSet("b"), tree.descendantIdSet("a"));
     assertEquals(parseSet(""), tree.descendantIdSet("b"));
-
-    // not currently verifying that skipMissingNode = false
+    
+    // doesn't verify that skipMissingNode = false
     assertEquals(ImmutableSet.of(b), tree.descendantNodeSet("a"));
     assertEquals(ImmutableSet.of(), tree.descendantNodeSet("b"));
 
@@ -137,7 +137,7 @@ public class TestDetailsGraphPartial {
 
     assertEquals(parseSet("b"), tree.leafIdSet());
 
-    // not currently verifying that skipMissingNode = false
+    // doesn't verify that skipMissingNode = false
     assertEquals(ImmutableSet.of(b), tree.leafNodeSet());
 
     // =================================
@@ -264,4 +264,40 @@ public class TestDetailsGraphPartial {
     assertEquals(1, tree.maxDepth());
 
   }
+
+
+  @Test
+  public void testPartialGraph2() {
+
+    DownNode<String> a = DownNodeLib.downNode("a", "b");
+
+    Dag<String, DownNode<String>> dag = TreeLib.down(a);
+
+    // =================================
+    // test cases not verified aboved
+    // =================================
+
+    // skipMissingNode = false
+    try {
+      dag.leafNodeSet();
+      throw new NotThrown(NotContained.class);
+    } catch (NotContained e) {
+    }
+    
+    // skipMissingNode = false
+    try {
+      dag.childNodeSet("a");
+      throw new NotThrown(NotContained.class);
+    } catch (NotContained e) {
+    }
+    
+    // skipMissingNode = false
+    try {
+      dag.descendantNodeSet("a");
+      throw new NotThrown(NotContained.class);
+    } catch (NotContained e) {
+    }
+    
+  }
+  
 }
