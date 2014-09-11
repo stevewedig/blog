@@ -1,10 +1,8 @@
 package com.stevewedig.blog.symbol;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Ordering;
+import com.google.common.collect.*;
 
 /**
  * The library for working with TypeMap, Symbol, SymbolMap, SymbolSchema, and SymbolBus.
@@ -37,14 +35,7 @@ public abstract class SymbolLib {
    * Create a symbol from a name and a Value parameter.
    */
   public static <Value> Symbol<Value> symbol(String name) {
-    return new Symbol<Value>(name);
-  }
-
-  /**
-   * Create a symbol from a type object.
-   */
-  public static <Value> Symbol<Value> symbol(Class<Value> type) {
-    return symbol(type.getName());
+    return new SymbolClass<Value>(name);
   }
 
   // ===========================================================================

@@ -22,10 +22,10 @@ import com.stevewedig.blog.errors.NotThrown;
 public class TestSymbolMap {
 
   // symbols
-  static Symbol<Boolean> $bool = symbol(Boolean.class);
-  static Symbol<Integer> $int = symbol(Integer.class);
+  static Symbol<Boolean> $bool = symbol("bool");
+  static Symbol<Integer> $int = symbol("int");
   static Symbol<Integer> $unused = symbol("unused");
-  static Symbol<String> $null = symbol(String.class);
+  static Symbol<String> $null = symbol("null");
 
   // values
   static Boolean boolValue = true;

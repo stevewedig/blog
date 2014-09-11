@@ -13,53 +13,31 @@ public class TestSymbol {
   @Test
   public void testSymbol__name() {
 
-    // explicit name
     Symbol<String> $a = symbol("a");
     assertEquals("a", $a.name());
-
-    // generating name from type object
-    Symbol<Integer> $int = symbol(Integer.class);
-    assertEquals("java.lang.Integer", $int.name());
-
-    // name() and getName() are synonyms
-    assertEquals($a.getName(), $a.name());
   }
 
   @Test
-  public void testSymbol__valueObject() {
+  public void testSymbol__entityObject() {
 
-    // equal with same name
+    // same name, but not equal
     Symbol<String> $a1 = symbol("a");
     Symbol<String> $a2 = symbol("a");
-    assertEquals($a1, $a2);
 
-    // unequal with different name
-    Symbol<String> $b = symbol("b");
-    assertNotEquals($a1, $b);
+    assertNotEquals($a1, $a2);
+
   }
 
   @Test
   public void testSymbol__differentNamesAndSameValueTypes() {
 
     // different symbols with the same Value type
-    Symbol<Boolean> $a = symbol(Boolean.class);
+    Symbol<Boolean> $a = symbol("a");
     Symbol<Boolean> $b = symbol("b");
 
     assertNotEquals($a, $b);
     assertNotEquals($a.name(), $b.name());
   }
-
-  @Test
-  public void testSymbol__sameNamesAndDifferentValueTYpes() {
-
-    // don't do this (have symbols with the same name and different value type)
-    Symbol<Boolean> $a1 = symbol("a");
-    Symbol<Integer> $a2 = symbol("a");
-
-    // this is unfortunate
-    assertEquals($a1, $a2);
-  }
-
 
   @Test
   public void testSymbol__genericValueType() {

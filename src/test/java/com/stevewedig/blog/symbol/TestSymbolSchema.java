@@ -10,10 +10,10 @@ import com.stevewedig.blog.errors.NotThrown;
 
 public class TestSymbolSchema {
 
-  static Symbol<Integer> $a = SymbolLib.symbol(Integer.class);
-  static Symbol<Boolean> $b = SymbolLib.symbol("mybool");
-  static Symbol<Boolean> $c = SymbolLib.symbol(Boolean.class);
-  static Symbol<Float> d = SymbolLib.symbol(Float.class);
+  static Symbol<Integer> $a = SymbolLib.symbol("a");
+  static Symbol<Boolean> $b = SymbolLib.symbol("b");
+  static Symbol<Boolean> $c = SymbolLib.symbol("c");
+  static Symbol<Float> d = SymbolLib.symbol("d");
 
   @Test
   public void testSymbolSchema() {

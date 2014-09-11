@@ -1,13 +1,9 @@
 package com.stevewedig.blog.symbol;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
-import com.stevewedig.blog.util.CastLib;
+import com.google.common.collect.*;
+import com.stevewedig.blog.util.*;
 import com.stevewedig.blog.util.LambdaLib.Act1;
 import com.stevewedig.blog.util.LambdaLib.Act2;
 
@@ -17,17 +13,16 @@ class SymbolBusClass implements SymbolBus {
   // threadsafe state
   // ===========================================================================
 
-  private final Multimap<Symbol<?>, Act1<?>> symbol__callbacks = Multimaps
-      .synchronizedSetMultimap(HashMultimap.<Symbol<?>, Act1<?>>create());
+  private final Multimap<Symbol<?>, Act1<?>> symbol__callbacks = HashMultimap
+      .<Symbol<?>, Act1<?>>create();
 
-  private final Set<Act2<Symbol<?>, Object>> globalCallbacks = Collections
-      .synchronizedSet(new HashSet<Act2<Symbol<?>, Object>>());
+  private final Set<Act2<Symbol<?>, Object>> globalCallbacks =
+      new HashSet<Act2<Symbol<?>, Object>>();
 
-  private final Set<Act2<Symbol<?>, Object>> missCallbacks = Collections
-      .synchronizedSet(new HashSet<Act2<Symbol<?>, Object>>());
+  private final Set<Act2<Symbol<?>, Object>> missCallbacks = new HashSet<Act2<Symbol<?>, Object>>();
 
   // ===================================
-  
+
   private <Event> boolean symbolHasSubscriber(Symbol<Event> symbol) {
     return symbol__callbacks.containsKey(symbol);
   }
@@ -49,7 +44,7 @@ class SymbolBusClass implements SymbolBus {
   }
 
   // ===================================
-  
+
   private <Event> void publishAll(Symbol<Event> symbol, Event event) {
 
     for (Act2<Symbol<?>, Object> callback : globalCallbacks)

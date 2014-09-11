@@ -1,19 +1,13 @@
 package com.stevewedig.blog.symbol.translate;
 
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
-import com.stevewedig.blog.errors.NotContained;
-import com.stevewedig.blog.errors.NotImplemented;
-import com.stevewedig.blog.symbol.Symbol;
-import com.stevewedig.blog.symbol.SymbolLib;
-import com.stevewedig.blog.symbol.SymbolMap;
-import com.stevewedig.blog.translate.Format;
-import com.stevewedig.blog.translate.FormatLib;
-import com.stevewedig.blog.translate.FormatParser;
-import com.stevewedig.blog.translate.FormatWriter;
+import com.stevewedig.blog.errors.*;
+import com.stevewedig.blog.symbol.*;
+import com.stevewedig.blog.translate.*;
 import com.stevewedig.blog.value_objects.ValueMixin;
 
 class SymbolTranslatorClass extends ValueMixin implements SymbolTranslator {
@@ -39,7 +33,29 @@ class SymbolTranslatorClass extends ValueMixin implements SymbolTranslator {
 
     this.symbol__parser = Optional.fromNullable(symbol__parser);
     this.symbol__writer = Optional.fromNullable(symbol__writer);
+
+    initNameMap();
   }
+
+  private void initNameMap() {
+
+    ImmutableMap.Builder<String, Symbol<?>> name__symbol = ImmutableMap.builder();
+
+    if (symbol__parser.isPresent())
+      for (Symbol<?> symbol : symbol__parser.get().keySet())
+        name__symbol.put(symbol.name(), symbol);
+
+    else if (symbol__writer.isPresent())
+      for (Symbol<?> symbol : symbol__writer.get().keySet())
+        name__symbol.put(symbol.name(), symbol);
+
+    else
+      throw new Bug("translator needs writers or parsers");
+
+    this.name__symbol = name__symbol.build();
+  }
+
+  private ImmutableMap<String, Symbol<?>> name__symbol;
 
   // ===========================================================================
   // checking whether we can parse/write
@@ -70,7 +86,8 @@ class SymbolTranslatorClass extends ValueMixin implements SymbolTranslator {
   public <Value> Value parse(Symbol<Value> symbol, String valueStr) {
 
     if (!symbol__parser().containsKey(symbol))
-      throw new NotContained("unexpected symbol key: \"%s\", possible keys: %s", symbol.name(), symbol__parser().keySet());
+      throw new NotContained("unexpected symbol key: \"%s\", possible keys: %s", symbol.name(),
+          symbol__parser().keySet());
 
     // the type safety of this is enforced by the builders
     @SuppressWarnings("unchecked")
@@ -127,7 +144,12 @@ class SymbolTranslatorClass extends ValueMixin implements SymbolTranslator {
 
     // symbols are value objects so we can conveniently create a new one here
     // http://stevewedig.com/2014/07/31/value-objects-in-java-and-python/
-    Symbol<Object> symbol = SymbolLib.symbol(keyStr);
+
+    if (!name__symbol.containsKey(keyStr))
+      throw new NotContained("Symbol with name: %s", keyStr);
+
+    @SuppressWarnings("unchecked")
+    Symbol<Object> symbol = (Symbol<Object>) name__symbol.get(keyStr);
 
     Object value = parse(symbol, valueStr);
 
