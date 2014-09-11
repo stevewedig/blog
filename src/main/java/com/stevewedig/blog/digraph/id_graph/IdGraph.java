@@ -18,42 +18,64 @@ public interface IdGraph<Id> {
   // ===========================================================================
 
   /**
-   * @return The set of ids (larger than nodeSet when the graph as unboundIds).
+   * The set of ids.
    */
   ImmutableSet<Id> idSet();
 
+  /**
+   * The number of ids.
+   */
   int idSize();
 
   // ===========================================================================
   // parents
   // ===========================================================================
 
+  /**
+   * The mapping from id to parent ids.
+   */
   ImmutableSetMultimap<Id, Id> id__parentIds();
 
+  /**
+   * Getting an id's parent ids.
+   */
   ImmutableSet<Id> parentIdSet(Id id);
 
+  /**
+   * Lambda that gets an id's parent ids.
+   */
   Fn1<Id, List<Id>> parentIdListLambda();
 
   // ===========================================================================
   // children
   // ===========================================================================
 
+  /**
+   * The mapping from id to child ids.
+   */
   ImmutableSetMultimap<Id, Id> id__childIds();
 
+  /**
+   * Getting an id's child ids.
+   */
   ImmutableSet<Id> childIdSet(Id id);
 
+  /**
+   * Lambda that gets an id's child ids.
+   */
   Fn1<Id, List<Id>> childIdListLambda();
 
   // ===========================================================================
   // ancestors
   // ===========================================================================
 
+  /**
+   * Getting an id's ancestor id iterable (its parents, it's parents' parents, and so on).
+   */
   Iterable<Id> ancestorIdIterable(Id id);
 
   /**
-   * 
-   * @param id
-   * @return ancestorIds, not inclusive, no duplicates
+   * Getting an id's ancestor id set (its parents, it's parents' parents, and so on).
    */
   ImmutableSet<Id> ancestorIdSet(Id id);
 
@@ -61,12 +83,13 @@ public interface IdGraph<Id> {
   // descendants
   // ===========================================================================
 
+  /**
+   * Getting an id's descendant id iterable (its children, it's childrens' children, and so on).
+   */
   Iterable<Id> descendantIdIterable(Id id);
 
   /**
-   * 
-   * @param id
-   * @return descendantIds, not inclusive
+   * Getting an id's descendant id set (its children, it's childrens' children, and so on).
    */
   ImmutableSet<Id> descendantIdSet(Id id);
 
@@ -74,23 +97,31 @@ public interface IdGraph<Id> {
   // roots (sources)
   // ===========================================================================
 
+  /**
+   * The digraph's root (source) ids, so the ids without parents.
+   */
   ImmutableSet<Id> rootIdSet();
 
   // ===========================================================================
   // leaves (sinks)
   // ===========================================================================
 
+  /**
+   * The digraph's leaf (sink) ids, so the ids without children.
+   */
   ImmutableSet<Id> leafIdSet();
 
   // ===========================================================================
   // topological sort
   // ===========================================================================
 
+  /**
+   * Whether the digraph contains a cycle.
+   */
   boolean containsCycle();
 
   /**
-   * @return Topologically sorted list of ids, which will be Optional.absent() when the graph
-   *         contains a cycle.
+   * A topologically sorted list of ids, with roots (sources) first (will be absent if the digraph is cyclic).
    */
   Optional<ImmutableList<Id>> optionalTopsortIdList();
 

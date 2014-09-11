@@ -22,6 +22,9 @@ public interface Graph<Id, Node> extends IdGraph<Id>, Set<Node> {
   // exposing inner idGraph
   // ===========================================================================
 
+  /**
+   * The internal id graph.
+   */
   IdGraph<Id> idGraph();
 
   // ===========================================================================
@@ -29,10 +32,13 @@ public interface Graph<Id, Node> extends IdGraph<Id>, Set<Node> {
   // ===========================================================================
 
   /**
-   * @return ImmutableSet of nodes, although Graph implements Set&lt;Node&gt;.
+   * An ImmutableSet of nodes (note that Graph also implements Set&lt;Node&gt;).
    */
   ImmutableSet<Node> nodeSet();
 
+  /**
+   * The size of the node set, will be small than idSize() in partial graphs.
+   */
   int nodeSize();
 
   // ===========================================================================
@@ -40,17 +46,23 @@ public interface Graph<Id, Node> extends IdGraph<Id>, Set<Node> {
   // ===========================================================================
 
   /**
-   * @return The mapping between id and node.
+   * The mapping between id and node.
    */
   ImmutableBiMap<Id, Node> id__node();
 
+  /**
+   * Whether a node is associated with this id.
+   */
   boolean containsNodeForId(Id id);
 
   /**
-   * @return The node associated with the id (will not return null).
+   * Getting the node associated with an id.
    */
   Node node(Id id) throws NotContained;
 
+  /**
+   * A lambda that get's the node associated with an id.
+   */
   Fn1<Id, Node> nodeLambda();
 
   // ===========================================================================
@@ -58,17 +70,17 @@ public interface Graph<Id, Node> extends IdGraph<Id>, Set<Node> {
   // ===========================================================================
 
   /**
-   * @return The ids which are referenced but don't have associated nodes in the graph.
+   * The ids in the idGraph which don't have associated nodes in id__node.
    */
   ImmutableSet<Id> unboundIdSet();
 
   /**
-   * @return True if there are no unbound ids.
+   * True if there are no unbound ids.
    */
   boolean isComplete();
 
   /**
-   * @return True if there are unbound ids.
+   * True if there are unbound ids.
    */
   boolean isPartial();
 
@@ -76,24 +88,31 @@ public interface Graph<Id, Node> extends IdGraph<Id>, Set<Node> {
   // parents
   // ===========================================================================
 
+  /**
+   * Getting an id's parent node set.
+   */
   ImmutableSet<Node> parentNodeSet(Id id);
 
   // ===========================================================================
   // children
   // ===========================================================================
 
+  /**
+   * Getting an id's child node set.
+   */
   ImmutableSet<Node> childNodeSet(Id id);
 
   // ===========================================================================
   // ancestors
   // ===========================================================================
 
+  /**
+   * Getting an id's ancestor node iterable (its parents, it's parents' parents, and so on).
+   */
   Iterable<Node> ancestorNodeIterable(Id id);
 
   /**
-   * 
-   * @param id
-   * @return ancestorNodes, not inclusive
+   * Getting an id's ancestor node set (its parents, it's parents' parents, and so on).
    */
   ImmutableSet<Node> ancestorNodeSet(Id id);
 
@@ -101,12 +120,13 @@ public interface Graph<Id, Node> extends IdGraph<Id>, Set<Node> {
   // descendants
   // ===========================================================================
 
+  /**
+   * Getting an id's descendant node iterable (its children, it's childrens' children, and so on).
+   */
   Iterable<Node> descendantNodeIterable(Id id);
 
   /**
-   * 
-   * @param id
-   * @return descendantNodes, not inclusive
+   * Getting an id's descendant node set (its children, it's childrens' children, and so on).
    */
   ImmutableSet<Node> descendantNodeSet(Id id);
 
@@ -114,12 +134,18 @@ public interface Graph<Id, Node> extends IdGraph<Id>, Set<Node> {
   // roots (sources)
   // ===========================================================================
 
+  /**
+   * The digraph's root (source) nodes, so the nodes without parents.
+   */
   ImmutableSet<Node> rootNodeSet();
 
   // ===========================================================================
   // leaves (sinks)
   // ===========================================================================
 
+  /**
+   * The digraph's leaf (sink) nodes, so the nodes without children.
+   */
   ImmutableSet<Node> leafNodeSet();
 
   // ===========================================================================
@@ -127,7 +153,7 @@ public interface Graph<Id, Node> extends IdGraph<Id>, Set<Node> {
   // ===========================================================================
 
   /**
-   * @return Topologically sorted list of nodes, will be absent if graph contains a cycle.
+   * A topologically sorted list of nodes, with roots (sources) first (will be absent if the digraph is cyclic).
    */
   Optional<ImmutableList<Node>> optionalTopsortNodeList();
 
@@ -164,47 +190,75 @@ public interface Graph<Id, Node> extends IdGraph<Id>, Set<Node> {
   // ===========================================================================
 
   /**
-   * @return Node set corresponding to the id set.
+   * Converting ids to a node set.
    */
   ImmutableSet<Node> nodeWrapSet(Iterable<Id> ids);
 
   /**
-   * @return Node list corresponding to the id set.
+   * Converting ids to a node list.
    */
   ImmutableList<Node> nodeWrapList(Iterable<Id> ids);
 
+  /**
+   * Converting an optional id to an optional node.
+   */
   Optional<Node> nodeWrapOptional(Optional<Id> optionalId);
 
+  /**
+   * Converting an id iterable to a node iterable.
+   */
   Iterable<Node> nodeWrapIterable(Iterable<Id> idIterable);
 
+  /**
+   * Converting an id iterator to a node iterator.
+   */
   Iterator<Node> nodeWrapIterator(Iterator<Id> idIterator);
 
   // ===========================================================================
   // deprecating Set's mutation methods (Graphs are immutable)
   // ===========================================================================
 
+  /**
+   * Not implemented because graphs are immutable.
+   */
   @Deprecated
   @Override
   boolean add(Node e);
-
+  
+  /**
+   * Not implemented because graphs are immutable.
+   */
   @Deprecated
   @Override
   boolean remove(Object o);
-
+  
+  /**
+   * Not implemented because graphs are immutable.
+   */
   @Deprecated
   @Override
   boolean addAll(Collection<? extends Node> c);
 
+  /**
+   * Not implemented because graphs are immutable.
+   */
   @Deprecated
   @Override
   boolean retainAll(Collection<?> c);
-
+  
+  /**
+   * Not implemented because graphs are immutable.
+   */
   @Deprecated
   @Override
   boolean removeAll(Collection<?> c);
-
+  
+  /**
+   * Not implemented because graphs are immutable.
+   */
   @Deprecated
   @Override
   void clear();
 
 }
+

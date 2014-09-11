@@ -12,7 +12,7 @@ public interface IdDag<Id> extends IdGraph<Id> {
   // ===========================================================================
 
   /**
-   * @return Topologically sorted list of ids.
+   * A topologically sorted list of ids, with roots (sources) first.
    */
   ImmutableList<Id> topsortIdList();
   
@@ -20,16 +20,28 @@ public interface IdDag<Id> extends IdGraph<Id> {
   // depth first
   // ===========================================================================
 
+  /**
+   * A depth first id iterable.
+   */
   Iterable<Id> depthIdIterable();
   
+  /**
+   * A depth first id list.
+   */
   ImmutableList<Id> depthIdList();
 
   // ===========================================================================
   // breadth first
   // ===========================================================================
 
+  /**
+   * A breadth first id iterable.
+   */
   Iterable<Id> breadthIdIterable();
 
+  /**
+   * A breadth first id list.
+   */
   ImmutableList<Id> breadthIdList();
 
 }

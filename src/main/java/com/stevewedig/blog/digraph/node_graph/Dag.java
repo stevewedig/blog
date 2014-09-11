@@ -12,6 +12,9 @@ public interface Dag<Id, Node> extends Graph<Id, Node>, IdDag<Id> {
   // exposing inner idDag
   // ===========================================================================
 
+  /**
+   * The internal id dag.
+   */
   @Override
   IdDag<Id> idGraph();
 
@@ -20,7 +23,7 @@ public interface Dag<Id, Node> extends Graph<Id, Node>, IdDag<Id> {
   // ===========================================================================
 
   /**
-   * @return Topologically sorted list of nodes.
+   * A topologically sorted list of nodes, with roots (sources) first.
    */
   ImmutableList<Node> topsortNodeList();
 
@@ -28,16 +31,28 @@ public interface Dag<Id, Node> extends Graph<Id, Node>, IdDag<Id> {
   // depth first
   // ===========================================================================
 
+  /**
+   * A depth first node iterable.
+   */
   Iterable<Node> depthNodeIterable();
 
+  /**
+   * A depth first node list.
+   */
   ImmutableList<Node> depthNodeList();
 
   // ===========================================================================
   // breadth first
   // ===========================================================================
 
+  /**
+   * A breadth first node iterable.
+   */
   Iterable<Node> breadthNodeIterable();
 
+  /**
+   * A breadth first node list.
+   */
   ImmutableList<Node> breadthNodeList();
 
 }

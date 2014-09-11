@@ -13,6 +13,9 @@ public interface Tree<Id, Node> extends Dag<Id, Node>, IdTree<Id> {
   // exposing inner idTree
   // ===========================================================================
 
+  /**
+   * The internal id tree.
+   */
   @Override
   IdTree<Id> idGraph();
 
@@ -20,18 +23,27 @@ public interface Tree<Id, Node> extends Dag<Id, Node>, IdTree<Id> {
   // root
   // ===========================================================================
 
+  /**
+   * The tree's root node.
+   */
   Node rootNode();
 
   // ===========================================================================
   // parent
   // ===========================================================================
 
+  /**
+   * Getting an id's parent node, will be absent if the id is the root.
+   */
   Optional<Node> parentNode(Id id);
 
   // ===========================================================================
   // ancestors
   // ===========================================================================
-
+  
+  /**
+   * Getting an id's ancestor node list, with the root node first and the id's parent node last.
+   */
   ImmutableList<Node> ancestorNodeList(Id id);
 
 }
