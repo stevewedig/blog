@@ -32,7 +32,7 @@ public class TestDetailsGraphPartial {
     // =================================
 
     assertEquals(parseSet("a"), tree.unboundIdSet());
-    
+
     assertTrue(tree.isPartial());
     assertFalse(tree.isComplete());
 
@@ -72,7 +72,8 @@ public class TestDetailsGraphPartial {
     assertEquals(parseSet("a"), tree.parentIdSet("b"));
 
     assertEquals(ImmutableSet.of(), tree.parentNodeSet("a"));
-    
+
+    // skipMissingNode = false
     try {
       tree.parentNodeSet("b");
       throw new NotThrown(NotContained.class);
@@ -86,7 +87,9 @@ public class TestDetailsGraphPartial {
     assertEquals(parseSet("b"), tree.childIdSet("a"));
     assertEquals(parseSet(""), tree.childIdSet("b"));
 
-    // TODO
+    // not currently verifying that skipMissingNode = false
+    assertEquals(ImmutableSet.of(b), tree.childNodeSet("a"));
+    assertEquals(ImmutableSet.of(), tree.childNodeSet("b"));
 
     // =================================
     // ancestors
@@ -95,7 +98,14 @@ public class TestDetailsGraphPartial {
     assertEquals(parseSet(""), tree.ancestorIdSet("a"));
     assertEquals(parseSet("a"), tree.ancestorIdSet("b"));
 
-    // TODO
+    assertEquals(ImmutableSet.of(), tree.ancestorIdSet("a"));
+
+    // skipMissingNode = false
+    try {
+      tree.ancestorNodeSet("b");
+      throw new NotThrown(NotContained.class);
+    } catch (NotContained e) {
+    }
 
     // =================================
     // descendants
@@ -104,7 +114,9 @@ public class TestDetailsGraphPartial {
     assertEquals(parseSet("b"), tree.descendantIdSet("a"));
     assertEquals(parseSet(""), tree.descendantIdSet("b"));
 
-    // TODO
+    // not currently verifying that skipMissingNode = false
+    assertEquals(ImmutableSet.of(b), tree.descendantNodeSet("a"));
+    assertEquals(ImmutableSet.of(), tree.descendantNodeSet("b"));
 
     // =================================
     // roots
@@ -112,7 +124,12 @@ public class TestDetailsGraphPartial {
 
     assertEquals(parseSet("a"), tree.rootIdSet());
 
-    // TODO
+    // skipMissingNode = false
+    try {
+      tree.rootNodeSet();
+      throw new NotThrown(NotContained.class);
+    } catch (NotContained e) {
+    }
 
     // =================================
     // leaves
@@ -120,7 +137,8 @@ public class TestDetailsGraphPartial {
 
     assertEquals(parseSet("b"), tree.leafIdSet());
 
-    // TODO
+    // not currently verifying that skipMissingNode = false
+    assertEquals(ImmutableSet.of(b), tree.leafNodeSet());
 
     // =================================
     // optional topsort
@@ -128,7 +146,8 @@ public class TestDetailsGraphPartial {
 
     assertEquals(parseList("a, b"), tree.optionalTopsortIdList().get());
 
-    // TODO
+    // skipMissingNode = true
+    assertEquals(ImmutableList.of(b), tree.optionalTopsortNodeList().get());
 
     // =================================
     // id traversal
@@ -142,7 +161,6 @@ public class TestDetailsGraphPartial {
     };
 
     assertEquals(parseList("b, a"), tree.idList(true, true, ImmutableList.of("b"), expandId));
-
 
     // =================================
     // node traversal (even though we don't have all the nodes
@@ -167,7 +185,8 @@ public class TestDetailsGraphPartial {
 
     assertEquals(parseList("a, b"), tree.topsortIdList());
 
-    // TODO
+    // skipMissingNode = true
+    assertEquals(ImmutableList.of(b), tree.topsortNodeList());
 
     // =================================
     // depth first
@@ -175,7 +194,8 @@ public class TestDetailsGraphPartial {
 
     assertEquals(parseList("a, b"), tree.depthIdList());
 
-    // TODO
+    // skipMissingNode = true
+    assertEquals(ImmutableList.of(b), tree.depthNodeList());
 
     // =================================
     // breadth first
@@ -183,7 +203,8 @@ public class TestDetailsGraphPartial {
 
     assertEquals(parseList("a, b"), tree.breadthIdList());
 
-    // TODO
+    // skipMissingNode = true
+    assertEquals(ImmutableList.of(b), tree.breadthNodeList());
 
     // =========================================================================
     // tree attributes
@@ -226,11 +247,12 @@ public class TestDetailsGraphPartial {
 
     assertEquals(parseList(""), tree.ancestorNodeList("a"));
 
-    // try {
-    // tree.ancestorNodeList("b");
-    // throw new NotThrown(NotContained.class);
-    // } catch (NotContained e) {
-    // }
+    // skipMissingNode = false
+    try {
+      tree.ancestorNodeList("b");
+      throw new NotThrown(NotContained.class);
+    } catch (NotContained e) {
+    }
 
     // =================================
     // depth
