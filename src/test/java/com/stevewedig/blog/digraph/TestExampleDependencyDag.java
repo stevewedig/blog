@@ -172,7 +172,7 @@ public class TestExampleDependencyDag {
 
       validateDependencies(dag);
 
-      return dag.topsortNodeList();
+      return dag.nodeWrapList(dag.topsortIdList(), true);
     }
 
     private void validateDependencies(Dag<String, Module> dag) {

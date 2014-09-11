@@ -1,9 +1,6 @@
 package com.stevewedig.blog.digraph.node_graph;
 
-import java.util.Iterator;
-
-import com.google.common.collect.ImmutableBiMap;
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.*;
 import com.stevewedig.blog.digraph.id_graph.IdDag;
 
 /**
@@ -67,7 +64,7 @@ public class DagClass<Id, Node> extends GraphClass<Id, Node> implements Dag<Id, 
 
   @Override
   public Iterable<Node> depthNodeIterable() {
-    return nodeWrapIterable(idDag.depthIdIterable(), true);
+    return nodeWrapIterable(idDag.depthIdIterable(), false);
   }
 
   // ===================================
@@ -75,7 +72,7 @@ public class DagClass<Id, Node> extends GraphClass<Id, Node> implements Dag<Id, 
   @Override
   public ImmutableList<Node> depthNodeList() {
     if (depthNodeList == null)
-      depthNodeList = nodeWrapList(depthIdList(), true);
+      depthNodeList = nodeWrapList(depthIdList(), false);
     return depthNodeList;
   }
 
@@ -99,7 +96,7 @@ public class DagClass<Id, Node> extends GraphClass<Id, Node> implements Dag<Id, 
 
   @Override
   public Iterable<Node> breadthNodeIterable() {
-    return nodeWrapIterable(idDag.breadthIdIterable(), true);
+    return nodeWrapIterable(idDag.breadthIdIterable(), false);
   }
 
   // ===================================
@@ -107,29 +104,10 @@ public class DagClass<Id, Node> extends GraphClass<Id, Node> implements Dag<Id, 
   @Override
   public ImmutableList<Node> breadthNodeList() {
     if (breadthNodeList == null)
-      breadthNodeList = nodeWrapList(breadthIdList(), true);
+      breadthNodeList = nodeWrapList(breadthIdList(), false);
     return breadthNodeList;
   }
 
   private ImmutableList<Node> breadthNodeList;
-
-  // ===========================================================================
-  // overriding some Set methods to use nodeList
-  // ===========================================================================
-
-  @Override
-  public Iterator<Node> iterator() {
-    return topsortNodeList().iterator();
-  }
-
-  @Override
-  public Object[] toArray() {
-    return topsortNodeList().toArray();
-  }
-
-  @Override
-  public <T> T[] toArray(T[] a) {
-    return topsortNodeList().toArray(a);
-  }
 
 }

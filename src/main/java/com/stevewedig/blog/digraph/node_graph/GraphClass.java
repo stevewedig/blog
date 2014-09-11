@@ -160,6 +160,13 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
     return !isComplete();
   }
 
+  // ===================================
+
+  protected void assertComplete() {
+    if (isPartial())
+      throw new NotAllowedForPartialGraphs("unbound ids = %s", unboundIdSet());
+  }
+
   // ===========================================================================
   // parents
   // ===========================================================================
@@ -317,9 +324,11 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   @Override
   public Optional<ImmutableList<Node>> optionalTopsortNodeList() {
 
+    assertComplete();
+
     if (optionalTopsortNodeList == null) {
       if (optionalTopsortIdList().isPresent())
-        optionalTopsortNodeList = Optional.of(nodeWrapList(optionalTopsortIdList().get(), true));
+        optionalTopsortNodeList = Optional.of(nodeWrapList(optionalTopsortIdList().get(), false));
       else
         optionalTopsortNodeList = Optional.absent();
     }
@@ -327,7 +336,6 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   }
 
   private Optional<ImmutableList<Node>> optionalTopsortNodeList;
-
 
   // ===========================================================================
   // generic traversal
@@ -351,6 +359,8 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   public Iterable<Node> nodeIterable(boolean depthFirst, boolean includeStarts,
       ImmutableList<Id> startIds, Fn1<Node, List<Id>> expand) {
 
+    assertComplete();
+
     return TraverseLib.nodeIterable(depthFirst, includeStarts, startIds, expand, nodeLambda());
   }
 
@@ -368,13 +378,16 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   @Override
   public ImmutableSet<Node> nodeWrapSet(Iterable<Id> ids, boolean skipMissingNodes) {
 
+    if (!skipMissingNodes)
+      assertComplete();
+
     ImmutableSet.Builder<Node> nodeSet = ImmutableSet.builder();
 
     for (Id id : ids)
-      if (containsNodeForId(id))
+      if (skipMissingNodes && !containsNodeForId(id))
+        continue;
+      else
         nodeSet.add(id__node.get(id));
-      else if (!skipMissingNodes)
-        throw new NotContained("node for id = %s", id);
 
     return nodeSet.build();
   }
@@ -384,15 +397,37 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   @Override
   public ImmutableList<Node> nodeWrapList(Iterable<Id> ids, boolean skipMissingNodes) {
 
+    if (!skipMissingNodes)
+      assertComplete();
+
     ImmutableList.Builder<Node> nodeList = ImmutableList.builder();
 
     for (Id id : ids)
-      if (containsNodeForId(id))
+      if (skipMissingNodes && !containsNodeForId(id))
+        continue;
+      else
         nodeList.add(id__node.get(id));
-      else if (!skipMissingNodes)
-        throw new NotContained("node for id = %s", id);
 
     return nodeList.build();
+  }
+
+  // ===================================
+
+  @Override
+  public Optional<Node> nodeWrapOptional(Optional<Id> optionalId, boolean skipMissingNode) {
+
+    if (!skipMissingNode)
+      assertComplete();
+
+    if (!optionalId.isPresent())
+      return Optional.absent();
+
+    Id id = optionalId.get();
+
+    if (skipMissingNode && !containsNodeForId(id))
+      return Optional.absent();
+
+    return Optional.of(node(id));
   }
 
   // ===================================
@@ -414,6 +449,9 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   @Override
   public Iterator<Node> nodeWrapIterator(final Iterator<Id> idIterator,
       final boolean skipMissingNodes) {
+
+    if (!skipMissingNodes)
+      assertComplete();
 
     return new Iterator<Node>() {
 
@@ -451,14 +489,12 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
 
         while (nextId == null && idIterator.hasNext()) {
 
-          nextId = idIterator.next();
+          Id id = idIterator.next();
 
-          if (containsNodeForId(nextId))
-            break;
-          else if (skipMissingNodes)
-            nextId = null;
-          else
-            throw new NotContained("node for id = %s", nextId);
+          if (skipMissingNodes && !containsNodeForId(id))
+            continue;
+
+          nextId = id;
         }
       }
 

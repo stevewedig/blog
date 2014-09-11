@@ -44,12 +44,7 @@ public class TreeClass<Id, Node> extends DagClass<Id, Node> implements Tree<Id, 
 
   @Override
   public Optional<Node> parentNode(Id id) {
-    if (id.equals(rootId()))
-      return Optional.absent();
-
-    Id parentId = parentId(id).get();
-    
-    return Optional.of(node(parentId));
+    return nodeWrapOptional(parentId(id), false);
   }
 
   // ===========================================================================
@@ -77,6 +72,8 @@ public class TreeClass<Id, Node> extends DagClass<Id, Node> implements Tree<Id, 
 
   @Override
   public Node rootNode() {
+    assertComplete();
+
     return node(rootId());
   }
 

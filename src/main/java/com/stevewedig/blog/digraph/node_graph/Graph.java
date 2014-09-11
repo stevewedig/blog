@@ -1,14 +1,9 @@
 package com.stevewedig.blog.digraph.node_graph;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import com.google.common.base.Optional;
-import com.google.common.collect.ImmutableBiMap;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.*;
 import com.stevewedig.blog.digraph.id_graph.IdGraph;
 import com.stevewedig.blog.errors.NotContained;
 import com.stevewedig.blog.util.LambdaLib.Fn1;
@@ -198,6 +193,11 @@ public interface Graph<Id, Node> extends IdGraph<Id>, Set<Node> {
    * Converting ids to a node list.
    */
   ImmutableList<Node> nodeWrapList(Iterable<Id> ids, boolean skipMissingNodes);
+
+  /**
+   * Converting optional id to an optional node.
+   */
+  Optional<Node> nodeWrapOptional(Optional<Id> id, boolean skipMissingNode);
 
   /**
    * Converting an id iterable to a node iterable.

@@ -281,11 +281,9 @@ public class TestSampleNodeTree {
     assertTrue(tree.containsAll(nodeSet));
     assertFalse(tree.containsAll(ImmutableSet.of(a, new Object())));
 
-    // these methods should delegate to nodeList()
-    assertEquals(tree.topsortNodeList(), ImmutableList.copyOf(tree.iterator()));
-    assertEquals(tree.topsortNodeList(), ImmutableList.copyOf(tree.toArray()));
-    assertEquals(tree.topsortNodeList(), ImmutableList.copyOf(tree));
-
+    assertEquals(tree.nodeSet(), ImmutableSet.copyOf(tree.iterator()));
+    assertEquals(tree.nodeSet(), ImmutableSet.copyOf(tree.toArray()));
+    assertEquals(tree.nodeSet(), ImmutableSet.copyOf(tree));
   }
 
 }

@@ -212,11 +212,9 @@ public class TestSampleNodeDag {
     assertTrue(dag.containsAll(nodeSet));
     assertFalse(dag.containsAll(ImmutableSet.of(a, new Object())));
 
-    // these methods should delegate to nodeList()
-    assertEquals(dag.topsortNodeList(), ImmutableList.copyOf(dag.iterator()));
-    assertEquals(dag.topsortNodeList(), ImmutableList.copyOf(dag.toArray()));
-    assertEquals(dag.topsortNodeList(), ImmutableList.copyOf(dag));
-
+    assertEquals(dag.nodeSet(), ImmutableSet.copyOf(dag.iterator()));
+    assertEquals(dag.nodeSet(), ImmutableSet.copyOf(dag.toArray()));
+    assertEquals(dag.nodeSet(), ImmutableSet.copyOf(dag));
   }
 
 }

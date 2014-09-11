@@ -71,13 +71,16 @@ public class TestDetailsGraphPartial {
     assertEquals(parseSet(""), tree.parentIdSet("a"));
     assertEquals(parseSet("a"), tree.parentIdSet("b"));
 
-    assertEquals(ImmutableSet.of(), tree.parentNodeSet("a"));
+    try {
+      tree.parentNodeSet("a");
+      throw new NotThrown(NotAllowedForPartialGraphs.class);
+    } catch (NotAllowedForPartialGraphs e) {
+    }
 
-    // skipMissingNode = false
     try {
       tree.parentNodeSet("b");
-      throw new NotThrown(NotContained.class);
-    } catch (NotContained e) {
+      throw new NotThrown(NotAllowedForPartialGraphs.class);
+    } catch (NotAllowedForPartialGraphs e) {
     }
 
     // =================================
@@ -87,9 +90,17 @@ public class TestDetailsGraphPartial {
     assertEquals(parseSet("b"), tree.childIdSet("a"));
     assertEquals(parseSet(""), tree.childIdSet("b"));
 
-    // doesn't verify that skipMissingNode = false
-    assertEquals(ImmutableSet.of(b), tree.childNodeSet("a"));
-    assertEquals(ImmutableSet.of(), tree.childNodeSet("b"));
+    try {
+      tree.childNodeSet("a");
+      throw new NotThrown(NotAllowedForPartialGraphs.class);
+    } catch (NotAllowedForPartialGraphs e) {
+    }
+
+    try {
+      tree.childNodeSet("b");
+      throw new NotThrown(NotAllowedForPartialGraphs.class);
+    } catch (NotAllowedForPartialGraphs e) {
+    }
 
     // =================================
     // ancestors
@@ -98,13 +109,16 @@ public class TestDetailsGraphPartial {
     assertEquals(parseSet(""), tree.ancestorIdSet("a"));
     assertEquals(parseSet("a"), tree.ancestorIdSet("b"));
 
-    assertEquals(ImmutableSet.of(), tree.ancestorIdSet("a"));
+    try {
+      tree.ancestorNodeSet("a");
+      throw new NotThrown(NotAllowedForPartialGraphs.class);
+    } catch (NotAllowedForPartialGraphs e) {
+    }
 
-    // skipMissingNode = false
     try {
       tree.ancestorNodeSet("b");
-      throw new NotThrown(NotContained.class);
-    } catch (NotContained e) {
+      throw new NotThrown(NotAllowedForPartialGraphs.class);
+    } catch (NotAllowedForPartialGraphs e) {
     }
 
     // =================================
@@ -113,10 +127,18 @@ public class TestDetailsGraphPartial {
 
     assertEquals(parseSet("b"), tree.descendantIdSet("a"));
     assertEquals(parseSet(""), tree.descendantIdSet("b"));
-    
-    // doesn't verify that skipMissingNode = false
-    assertEquals(ImmutableSet.of(b), tree.descendantNodeSet("a"));
-    assertEquals(ImmutableSet.of(), tree.descendantNodeSet("b"));
+
+    try {
+      tree.descendantNodeSet("a");
+      throw new NotThrown(NotAllowedForPartialGraphs.class);
+    } catch (NotAllowedForPartialGraphs e) {
+    }
+
+    try {
+      tree.descendantNodeSet("b");
+      throw new NotThrown(NotAllowedForPartialGraphs.class);
+    } catch (NotAllowedForPartialGraphs e) {
+    }
 
     // =================================
     // roots
@@ -124,11 +146,10 @@ public class TestDetailsGraphPartial {
 
     assertEquals(parseSet("a"), tree.rootIdSet());
 
-    // skipMissingNode = false
     try {
       tree.rootNodeSet();
-      throw new NotThrown(NotContained.class);
-    } catch (NotContained e) {
+      throw new NotThrown(NotAllowedForPartialGraphs.class);
+    } catch (NotAllowedForPartialGraphs e) {
     }
 
     // =================================
@@ -137,8 +158,11 @@ public class TestDetailsGraphPartial {
 
     assertEquals(parseSet("b"), tree.leafIdSet());
 
-    // doesn't verify that skipMissingNode = false
-    assertEquals(ImmutableSet.of(b), tree.leafNodeSet());
+    try {
+      tree.leafNodeSet();
+      throw new NotThrown(NotAllowedForPartialGraphs.class);
+    } catch (NotAllowedForPartialGraphs e) {
+    }
 
     // =================================
     // optional topsort
@@ -146,8 +170,11 @@ public class TestDetailsGraphPartial {
 
     assertEquals(parseList("a, b"), tree.optionalTopsortIdList().get());
 
-    // skipMissingNode = true
-    assertEquals(ImmutableList.of(b), tree.optionalTopsortNodeList().get());
+    try {
+      tree.optionalTopsortNodeList();
+      throw new NotThrown(NotAllowedForPartialGraphs.class);
+    } catch (NotAllowedForPartialGraphs e) {
+    }
 
     // =================================
     // id traversal
@@ -173,7 +200,11 @@ public class TestDetailsGraphPartial {
       }
     };
 
-    assertEquals(ImmutableList.of(b), tree.nodeList(true, true, ImmutableList.of("b"), expandNode));
+    try {
+      tree.nodeList(true, true, ImmutableList.of("b"), expandNode);
+      throw new NotThrown(NotAllowedForPartialGraphs.class);
+    } catch (NotAllowedForPartialGraphs e) {
+    }
 
     // =========================================================================
     // dag attributes
@@ -185,8 +216,11 @@ public class TestDetailsGraphPartial {
 
     assertEquals(parseList("a, b"), tree.topsortIdList());
 
-    // skipMissingNode = true
-    assertEquals(ImmutableList.of(b), tree.topsortNodeList());
+    try {
+      tree.topsortNodeList();
+      throw new NotThrown(NotAllowedForPartialGraphs.class);
+    } catch (NotAllowedForPartialGraphs e) {
+    }
 
     // =================================
     // depth first
@@ -194,8 +228,11 @@ public class TestDetailsGraphPartial {
 
     assertEquals(parseList("a, b"), tree.depthIdList());
 
-    // skipMissingNode = true
-    assertEquals(ImmutableList.of(b), tree.depthNodeList());
+    try {
+      tree.depthNodeList();
+      throw new NotThrown(NotAllowedForPartialGraphs.class);
+    } catch (NotAllowedForPartialGraphs e) {
+    }
 
     // =================================
     // breadth first
@@ -203,8 +240,11 @@ public class TestDetailsGraphPartial {
 
     assertEquals(parseList("a, b"), tree.breadthIdList());
 
-    // skipMissingNode = true
-    assertEquals(ImmutableList.of(b), tree.breadthNodeList());
+    try {
+      tree.breadthNodeList();
+      throw new NotThrown(NotAllowedForPartialGraphs.class);
+    } catch (NotAllowedForPartialGraphs e) {
+    }
 
     // =========================================================================
     // tree attributes
@@ -218,8 +258,8 @@ public class TestDetailsGraphPartial {
 
     try {
       tree.rootNode();
-      throw new NotThrown(NotContained.class);
-    } catch (NotContained e) {
+      throw new NotThrown(NotAllowedForPartialGraphs.class);
+    } catch (NotAllowedForPartialGraphs e) {
     }
 
     // =================================
@@ -227,15 +267,18 @@ public class TestDetailsGraphPartial {
     // =================================
 
     assertEquals(Optional.absent(), tree.parentId("a"));
-    assertEquals(Optional.absent(), tree.parentNode("a"));
     assertEquals(Optional.of("a"), tree.parentId("b"));
 
-    // this is optional for the root
-    // for child nodes, this should throw not contained
+    try {
+      tree.parentNode("a");
+      throw new NotThrown(NotAllowedForPartialGraphs.class);
+    } catch (NotAllowedForPartialGraphs e) {
+    }
+
     try {
       tree.parentNode("b");
-      throw new NotThrown(NotContained.class);
-    } catch (NotContained e) {
+      throw new NotThrown(NotAllowedForPartialGraphs.class);
+    } catch (NotAllowedForPartialGraphs e) {
     }
 
     // =================================
@@ -245,13 +288,16 @@ public class TestDetailsGraphPartial {
     assertEquals(parseList(""), tree.ancestorIdList("a"));
     assertEquals(parseList("a"), tree.ancestorIdList("b"));
 
-    assertEquals(parseList(""), tree.ancestorNodeList("a"));
-
-    // skipMissingNode = false
+    try {
+      tree.ancestorNodeList("a");
+      throw new NotThrown(NotAllowedForPartialGraphs.class);
+    } catch (NotAllowedForPartialGraphs e) {
+    }
+    
     try {
       tree.ancestorNodeList("b");
-      throw new NotThrown(NotContained.class);
-    } catch (NotContained e) {
+      throw new NotThrown(NotAllowedForPartialGraphs.class);
+    } catch (NotAllowedForPartialGraphs e) {
     }
 
     // =================================
@@ -265,39 +311,4 @@ public class TestDetailsGraphPartial {
 
   }
 
-
-  @Test
-  public void testPartialGraph2() {
-
-    DownNode<String> a = DownNodeLib.downNode("a", "b");
-
-    Dag<String, DownNode<String>> dag = TreeLib.down(a);
-
-    // =================================
-    // test cases not verified aboved
-    // =================================
-
-    // skipMissingNode = false
-    try {
-      dag.leafNodeSet();
-      throw new NotThrown(NotContained.class);
-    } catch (NotContained e) {
-    }
-    
-    // skipMissingNode = false
-    try {
-      dag.childNodeSet("a");
-      throw new NotThrown(NotContained.class);
-    } catch (NotContained e) {
-    }
-    
-    // skipMissingNode = false
-    try {
-      dag.descendantNodeSet("a");
-      throw new NotThrown(NotContained.class);
-    } catch (NotContained e) {
-    }
-    
-  }
-  
 }
