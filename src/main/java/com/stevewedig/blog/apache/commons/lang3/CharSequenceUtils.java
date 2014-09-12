@@ -94,15 +94,6 @@ public abstract class CharSequenceUtils {
      */
     static int indexOf(final CharSequence cs, final CharSequence searchChar, final int start) {
         return cs.toString().indexOf(searchChar.toString(), start);
-//        if (cs instanceof String && searchChar instanceof String) {
-//            // TODO: Do we assume searchChar is usually relatively small;
-//            //       If so then calling toString() on it is better than reverting to
-//            //       the green implementation in the else block
-//            return ((String) cs).indexOf((String) searchChar, start);
-//        } else {
-//            // TODO: Implement rather than convert to String
-//            return cs.toString().indexOf(searchChar.toString(), start);
-//        }
     }
 
     /**
@@ -143,15 +134,6 @@ public abstract class CharSequenceUtils {
      */
     static int lastIndexOf(final CharSequence cs, final CharSequence searchChar, final int start) {
         return cs.toString().lastIndexOf(searchChar.toString(), start);
-//        if (cs instanceof String && searchChar instanceof String) {
-//            // TODO: Do we assume searchChar is usually relatively small;
-//            //       If so then calling toString() on it is better than reverting to
-//            //       the green implementation in the else block
-//            return ((String) cs).lastIndexOf((String) searchChar, start);
-//        } else {
-//            // TODO: Implement rather than convert to String
-//            return cs.toString().lastIndexOf(searchChar.toString(), start);
-//        }
     }
 
     /**

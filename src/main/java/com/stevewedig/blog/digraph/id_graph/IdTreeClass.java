@@ -72,7 +72,6 @@ public class IdTreeClass<Id> extends IdDagClass<Id> implements IdTree<Id> {
   // ancestors
   // ===========================================================================
 
-  // TODO inefficient
   @Override
   public ImmutableList<Id> ancestorIdList(Id id) {
 

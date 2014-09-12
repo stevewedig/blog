@@ -33,7 +33,8 @@ public abstract class TopsortLib {
    * 
    * @param idSet The node ids in your DAG.
    * @param id__parents The dependency structure of your DAG.
-   * @return An optional topological sort of ids, with roots (sources) at the start.
+   * @return A topological sort of ids with roots (sources) at the start, will be absent if the
+   *         graph is cyclic.
    */
   public static <Id> Optional<ImmutableList<Id>> sort(ImmutableSet<Id> idSet,
       ImmutableSetMultimap<Id, Id> id__parents) {
@@ -91,7 +92,13 @@ public abstract class TopsortLib {
   }
 
   /**
-   * TODO fill this out
+   * Generic topological sort, starting the dependency structure between ids (this function assume
+   * the graph is connected, so all ids have an arc). If your DAG nodes don't have ids, you can just
+   * use the nodes themselves as ids.
+   * 
+   * @param id__parents The dependency structure of your DAG.
+   * @return A topological sort of ids with roots (sources) at the start, will be absent if the
+   *         graph is cyclic.
    */
   public static <Id> Optional<ImmutableList<Id>> sort(ImmutableSetMultimap<Id, Id> id__parents) {
 

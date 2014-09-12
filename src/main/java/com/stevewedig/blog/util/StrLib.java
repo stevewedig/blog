@@ -92,7 +92,7 @@ public abstract class StrLib {
   public static String formatN(String template, Object... items) {
     String str = template;
     for (Object item : items)
-      str = str.replaceFirst("%s", quoteReplacement(item.toString()));
+      str = str.replaceFirst("%s", quoteReplacement(item == null ? "null" : item.toString()));
     return str;
   }
 

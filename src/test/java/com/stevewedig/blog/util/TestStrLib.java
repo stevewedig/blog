@@ -27,7 +27,7 @@ public class TestStrLib {
   @Test
   public void testFormat() {
 
-    assertEquals("1 a 2 true 3", format("1 %s 2 %s 3", "a", true));
+    assertEquals("1 a 2 true 3 null", format("1 %s 2 %s 3 %s", "a", true, null));
 
   }
 }

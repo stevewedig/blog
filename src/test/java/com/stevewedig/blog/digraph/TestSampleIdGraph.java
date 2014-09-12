@@ -84,7 +84,6 @@ public class TestSampleIdGraph {
 
   @Test
   public void testIdGraphFromParentMap() {
-
     verifyIdGraph(idGraphFromParentMap());
   }
 
