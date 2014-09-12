@@ -1,4 +1,4 @@
-package com.stevewedig.blog.digraph.node;
+package com.stevewedig.blog.digraph.errors;
 
 import com.stevewedig.blog.errors.ErrorMixin;
 

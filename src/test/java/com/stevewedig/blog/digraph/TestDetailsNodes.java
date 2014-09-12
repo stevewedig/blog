@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableSet;
+import com.stevewedig.blog.digraph.errors.NodeIdConflict;
 import com.stevewedig.blog.digraph.node.*;
 import com.stevewedig.blog.errors.NotThrown;
 

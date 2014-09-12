@@ -1,6 +1,7 @@
 package com.stevewedig.blog.digraph.node;
 
 import com.google.common.collect.*;
+import com.stevewedig.blog.digraph.errors.NodeIdConflict;
 import com.stevewedig.blog.digraph.id_graph.*;
 
 /**
