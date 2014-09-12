@@ -3,6 +3,7 @@ package com.stevewedig.blog.digraph.node_graph;
 import java.util.Set;
 
 import com.google.common.collect.*;
+import com.stevewedig.blog.digraph.errors.GraphIsMissingNodes;
 import com.stevewedig.blog.digraph.id_graph.IdDag;
 import com.stevewedig.blog.digraph.node.*;
 import com.stevewedig.blog.util.SetLib;
@@ -19,7 +20,12 @@ public abstract class DagLib {
   public static <Id, Node> Dag<Id, Node> dag(IdDag<Id> idDag,
       ImmutableBiMap<Id, Node> id__node) {
     
-    return new DagClass<>(idDag, id__node);
+    Dag<Id, Node> dag = new DagClass<>(idDag, id__node);
+
+    if(! dag.unboundIdSet().isEmpty())
+      throw new GraphIsMissingNodes("unbound ids = %s", dag.unboundIdSet());
+    
+    return dag;
   }
 
   // ===========================================================================

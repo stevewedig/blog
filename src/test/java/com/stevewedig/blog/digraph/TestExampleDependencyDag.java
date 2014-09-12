@@ -9,7 +9,7 @@ import org.junit.Test;
 import com.google.common.collect.*;
 import com.stevewedig.blog.digraph.errors.DagCannotHaveCycle;
 import com.stevewedig.blog.digraph.node.UpNode;
-import com.stevewedig.blog.digraph.node_graph.*;
+import com.stevewedig.blog.digraph.node_graph_partial.*;
 import com.stevewedig.blog.errors.NotThrown;
 import com.stevewedig.blog.value_objects.ValueMixin;
 
@@ -164,14 +164,14 @@ public class TestExampleDependencyDag {
     public ImmutableList<Module> findBuildOrder(Module... modules) throws MissingDependency {
 
       // use DagLib.up.up() because Module < UpNode
-      Dag<String, Module> dag = DagLib.up(modules);
+      PartialDag<String, Module> dag = PartialDagLib.up(modules);
 
       validateDependencies(dag);
 
       return dag.nodeWrapList(dag.topsortIdList(), true);
     }
 
-    private void validateDependencies(Dag<String, Module> dag) {
+    private void validateDependencies(PartialDag<String, Module> dag) {
 
       ImmutableSet<String> dependencyPaths = dag.unboundIdSet();
 

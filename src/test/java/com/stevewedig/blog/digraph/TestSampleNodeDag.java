@@ -108,9 +108,6 @@ public class TestSampleNodeDag {
 
     assertEquals(ImmutableSet.of(), dag.unboundIdSet());
 
-    assertTrue(dag.isComplete());
-    assertFalse(dag.isPartial());
-
     // =================================
     // parents
     // =================================

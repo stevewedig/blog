@@ -69,16 +69,6 @@ public interface PartialGraph<Id, Node> extends IdGraph<Id>, Set<Node> {
    */
   ImmutableSet<Id> unboundIdSet();
 
-  /**
-   * True if there are no unbound ids.
-   */
-  boolean isComplete();
-
-  /**
-   * True if there are unbound ids.
-   */
-  boolean isPartial();
-
   // ===========================================================================
   // converting id collections to node collections
   // ===========================================================================

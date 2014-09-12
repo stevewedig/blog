@@ -1,7 +1,7 @@
 package com.stevewedig.blog.digraph;
 
 import static com.stevewedig.blog.translate.FormatLib.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
@@ -9,9 +9,8 @@ import org.junit.Test;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.*;
-import com.stevewedig.blog.digraph.errors.NotAllowedForPartialGraphs;
 import com.stevewedig.blog.digraph.node.*;
-import com.stevewedig.blog.digraph.node_graph.*;
+import com.stevewedig.blog.digraph.node_graph_partial.*;
 import com.stevewedig.blog.errors.*;
 import com.stevewedig.blog.util.LambdaLib.Fn1;
 
@@ -22,7 +21,7 @@ public class TestDetailsGraphPartial {
 
     UpNode<String> b = UpNodeLib.upNode("b", "a");
 
-    final Tree<String, UpNode<String>> tree = TreeLib.up(b);
+    final PartialTree<String, UpNode<String>> tree = PartialTreeLib.up(b);
 
     // =========================================================================
     // graph attributes
@@ -33,9 +32,6 @@ public class TestDetailsGraphPartial {
     // =================================
 
     assertEquals(parseSet("a"), tree.unboundIdSet());
-
-    assertTrue(tree.isPartial());
-    assertFalse(tree.isComplete());
 
     // =================================
     // ids
@@ -72,36 +68,12 @@ public class TestDetailsGraphPartial {
     assertEquals(parseSet(""), tree.parentIdSet("a"));
     assertEquals(parseSet("a"), tree.parentIdSet("b"));
 
-    try {
-      tree.parentNodeSet("a");
-      throw new NotThrown(NotAllowedForPartialGraphs.class);
-    } catch (NotAllowedForPartialGraphs e) {
-    }
-
-    try {
-      tree.parentNodeSet("b");
-      throw new NotThrown(NotAllowedForPartialGraphs.class);
-    } catch (NotAllowedForPartialGraphs e) {
-    }
-
     // =================================
     // children
     // =================================
 
     assertEquals(parseSet("b"), tree.childIdSet("a"));
     assertEquals(parseSet(""), tree.childIdSet("b"));
-
-    try {
-      tree.childNodeSet("a");
-      throw new NotThrown(NotAllowedForPartialGraphs.class);
-    } catch (NotAllowedForPartialGraphs e) {
-    }
-
-    try {
-      tree.childNodeSet("b");
-      throw new NotThrown(NotAllowedForPartialGraphs.class);
-    } catch (NotAllowedForPartialGraphs e) {
-    }
 
     // =================================
     // ancestors
@@ -110,18 +82,6 @@ public class TestDetailsGraphPartial {
     assertEquals(parseSet(""), tree.ancestorIdSet("a"));
     assertEquals(parseSet("a"), tree.ancestorIdSet("b"));
 
-    try {
-      tree.ancestorNodeSet("a");
-      throw new NotThrown(NotAllowedForPartialGraphs.class);
-    } catch (NotAllowedForPartialGraphs e) {
-    }
-
-    try {
-      tree.ancestorNodeSet("b");
-      throw new NotThrown(NotAllowedForPartialGraphs.class);
-    } catch (NotAllowedForPartialGraphs e) {
-    }
-
     // =================================
     // descendants
     // =================================
@@ -129,29 +89,11 @@ public class TestDetailsGraphPartial {
     assertEquals(parseSet("b"), tree.descendantIdSet("a"));
     assertEquals(parseSet(""), tree.descendantIdSet("b"));
 
-    try {
-      tree.descendantNodeSet("a");
-      throw new NotThrown(NotAllowedForPartialGraphs.class);
-    } catch (NotAllowedForPartialGraphs e) {
-    }
-
-    try {
-      tree.descendantNodeSet("b");
-      throw new NotThrown(NotAllowedForPartialGraphs.class);
-    } catch (NotAllowedForPartialGraphs e) {
-    }
-
     // =================================
     // roots
     // =================================
 
     assertEquals(parseSet("a"), tree.rootIdSet());
-
-    try {
-      tree.rootNodeSet();
-      throw new NotThrown(NotAllowedForPartialGraphs.class);
-    } catch (NotAllowedForPartialGraphs e) {
-    }
 
     // =================================
     // leaves
@@ -159,23 +101,11 @@ public class TestDetailsGraphPartial {
 
     assertEquals(parseSet("b"), tree.leafIdSet());
 
-    try {
-      tree.leafNodeSet();
-      throw new NotThrown(NotAllowedForPartialGraphs.class);
-    } catch (NotAllowedForPartialGraphs e) {
-    }
-
     // =================================
     // optional topsort
     // =================================
 
     assertEquals(parseList("a, b"), tree.optionalTopsortIdList().get());
-
-    try {
-      tree.optionalTopsortNodeList();
-      throw new NotThrown(NotAllowedForPartialGraphs.class);
-    } catch (NotAllowedForPartialGraphs e) {
-    }
 
     // =================================
     // id traversal
@@ -201,12 +131,6 @@ public class TestDetailsGraphPartial {
       }
     };
 
-    try {
-      tree.nodeList(true, true, ImmutableList.of("b"), expandNode);
-      throw new NotThrown(NotAllowedForPartialGraphs.class);
-    } catch (NotAllowedForPartialGraphs e) {
-    }
-
     // =========================================================================
     // dag attributes
     // =========================================================================
@@ -217,35 +141,17 @@ public class TestDetailsGraphPartial {
 
     assertEquals(parseList("a, b"), tree.topsortIdList());
 
-    try {
-      tree.topsortNodeList();
-      throw new NotThrown(NotAllowedForPartialGraphs.class);
-    } catch (NotAllowedForPartialGraphs e) {
-    }
-
     // =================================
     // depth first
     // =================================
 
     assertEquals(parseList("a, b"), tree.depthIdList());
 
-    try {
-      tree.depthNodeList();
-      throw new NotThrown(NotAllowedForPartialGraphs.class);
-    } catch (NotAllowedForPartialGraphs e) {
-    }
-
     // =================================
     // breadth first
     // =================================
 
     assertEquals(parseList("a, b"), tree.breadthIdList());
-
-    try {
-      tree.breadthNodeList();
-      throw new NotThrown(NotAllowedForPartialGraphs.class);
-    } catch (NotAllowedForPartialGraphs e) {
-    }
 
     // =========================================================================
     // tree attributes
@@ -257,12 +163,6 @@ public class TestDetailsGraphPartial {
 
     assertEquals("a", tree.rootId());
 
-    try {
-      tree.rootNode();
-      throw new NotThrown(NotAllowedForPartialGraphs.class);
-    } catch (NotAllowedForPartialGraphs e) {
-    }
-
     // =================================
     // parent
     // =================================
@@ -270,36 +170,12 @@ public class TestDetailsGraphPartial {
     assertEquals(Optional.absent(), tree.parentId("a"));
     assertEquals(Optional.of("a"), tree.parentId("b"));
 
-    try {
-      tree.parentNode("a");
-      throw new NotThrown(NotAllowedForPartialGraphs.class);
-    } catch (NotAllowedForPartialGraphs e) {
-    }
-
-    try {
-      tree.parentNode("b");
-      throw new NotThrown(NotAllowedForPartialGraphs.class);
-    } catch (NotAllowedForPartialGraphs e) {
-    }
-
     // =================================
     // ancestor list
     // =================================
 
     assertEquals(parseList(""), tree.ancestorIdList("a"));
     assertEquals(parseList("a"), tree.ancestorIdList("b"));
-
-    try {
-      tree.ancestorNodeList("a");
-      throw new NotThrown(NotAllowedForPartialGraphs.class);
-    } catch (NotAllowedForPartialGraphs e) {
-    }
-    
-    try {
-      tree.ancestorNodeList("b");
-      throw new NotThrown(NotAllowedForPartialGraphs.class);
-    } catch (NotAllowedForPartialGraphs e) {
-    }
 
     // =================================
     // depth

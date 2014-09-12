@@ -148,25 +148,6 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
 
   private ImmutableSet<Id> unboundIds;
 
-  // ===================================
-
-  @Override
-  public boolean isComplete() {
-    return unboundIdSet().isEmpty();
-  }
-
-  @Override
-  public boolean isPartial() {
-    return !isComplete();
-  }
-
-  // ===================================
-
-  protected void assertComplete() {
-    if (isPartial())
-      throw new NotAllowedForPartialGraphs("unbound ids = %s", unboundIdSet());
-  }
-
   // ===========================================================================
   // parents
   // ===========================================================================
@@ -324,8 +305,6 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   @Override
   public Optional<ImmutableList<Node>> optionalTopsortNodeList() {
 
-    assertComplete();
-
     if (optionalTopsortNodeList == null) {
       if (optionalTopsortIdList().isPresent())
         optionalTopsortNodeList = Optional.of(nodeWrapList(optionalTopsortIdList().get(), false));
@@ -358,9 +337,7 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   @Override
   public Iterable<Node> nodeIterable(boolean depthFirst, boolean includeStarts,
       ImmutableList<Id> startIds, Fn1<Node, List<Id>> expand) {
-
-    assertComplete();
-
+    
     return TraverseLib.nodeIterable(depthFirst, includeStarts, startIds, expand, nodeLambda());
   }
 
@@ -378,9 +355,6 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   @Override
   public ImmutableSet<Node> nodeWrapSet(Iterable<Id> ids, boolean skipMissingNodes) {
 
-    if (!skipMissingNodes)
-      assertComplete();
-
     ImmutableSet.Builder<Node> nodeSet = ImmutableSet.builder();
 
     for (Id id : ids)
@@ -397,9 +371,6 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   @Override
   public ImmutableList<Node> nodeWrapList(Iterable<Id> ids, boolean skipMissingNodes) {
 
-    if (!skipMissingNodes)
-      assertComplete();
-
     ImmutableList.Builder<Node> nodeList = ImmutableList.builder();
 
     for (Id id : ids)
@@ -415,9 +386,6 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
 
   @Override
   public Optional<Node> nodeWrapOptional(Optional<Id> optionalId, boolean skipMissingNode) {
-
-    if (!skipMissingNode)
-      assertComplete();
 
     if (!optionalId.isPresent())
       return Optional.absent();
@@ -449,9 +417,6 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   @Override
   public Iterator<Node> nodeWrapIterator(final Iterator<Id> idIterator,
       final boolean skipMissingNodes) {
-
-    if (!skipMissingNodes)
-      assertComplete();
 
     return new Iterator<Node>() {
 

@@ -121,9 +121,6 @@ public class TestSampleNodeGraph {
 
     assertEquals(ImmutableSet.of(), graph.unboundIdSet());
 
-    assertTrue(graph.isComplete());
-    assertFalse(graph.isPartial());
-
     // =================================
     // parents
     // =================================

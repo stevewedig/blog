@@ -12,6 +12,7 @@ import com.google.common.collect.*;
 import com.stevewedig.blog.digraph.errors.*;
 import com.stevewedig.blog.digraph.id_graph.*;
 import com.stevewedig.blog.digraph.node_graph.*;
+import com.stevewedig.blog.digraph.node_graph_partial.*;
 import com.stevewedig.blog.errors.NotThrown;
 
 public class TestDetailsGraphCreate {
@@ -87,7 +88,7 @@ public class TestDetailsGraphCreate {
 
     // union of graphs
     assertEquals(idGraph,
-        GraphLib.up(GraphLib.up(upNode("a"), upNode("b", "a")), GraphLib.up(upNode("c", "a")))
+        GraphLib.up(GraphLib.up(upNode("a"), upNode("b", "a")), PartialGraphLib.up(upNode("c", "a")))
             .idGraph());
 
     // =================================
@@ -117,7 +118,7 @@ public class TestDetailsGraphCreate {
     // union of graphs
     assertEquals(
         idGraph,
-        GraphLib.down(GraphLib.down(downNode("a", "b", "c"), downNode("b")),
+        GraphLib.down(PartialGraphLib.down(downNode("a", "b", "c"), downNode("b")),
             GraphLib.down(downNode("c"))).idGraph());
 
     // =================================
@@ -143,7 +144,7 @@ public class TestDetailsGraphCreate {
 
     // union of graphs
     assertEquals(idDag,
-        DagLib.up(DagLib.up(upNode("a"), upNode("b", "a")), DagLib.up(upNode("c", "a"))).idGraph());
+        DagLib.up(DagLib.up(upNode("a"), upNode("b", "a")), PartialDagLib.up(upNode("c", "a"))).idGraph());
 
     // =================================
     // node dag (down)
@@ -172,7 +173,7 @@ public class TestDetailsGraphCreate {
     // union of graphs
     assertEquals(idDag,
         DagLib
-            .down(DagLib.down(downNode("a", "b", "c"), downNode("b")), DagLib.down(downNode("c")))
+            .down(PartialDagLib.down(downNode("a", "b", "c"), downNode("b")), DagLib.down(downNode("c")))
             .idGraph());
 
     // =================================
@@ -198,7 +199,7 @@ public class TestDetailsGraphCreate {
 
     // union of graphs
     assertEquals(idTree,
-        TreeLib.up(TreeLib.up(upNode("a"), upNode("b", "a")), TreeLib.up(upNode("c", "a")))
+        TreeLib.up(TreeLib.up(upNode("a"), upNode("b", "a")), PartialTreeLib.up(upNode("c", "a")))
             .idGraph());
 
     // =================================
@@ -228,7 +229,7 @@ public class TestDetailsGraphCreate {
     // union of graphs
     assertEquals(
         idTree,
-        TreeLib.down(TreeLib.down(downNode("a", "b", "c"), downNode("b")),
+        TreeLib.down(PartialTreeLib.down(downNode("a", "b", "c"), downNode("b")),
             TreeLib.down(downNode("c"))).idGraph());
 
   }

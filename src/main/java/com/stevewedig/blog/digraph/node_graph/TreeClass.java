@@ -72,8 +72,6 @@ public class TreeClass<Id, Node> extends DagClass<Id, Node> implements Tree<Id, 
 
   @Override
   public Node rootNode() {
-    assertComplete();
-
     return node(rootId());
   }
 

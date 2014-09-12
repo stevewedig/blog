@@ -128,9 +128,6 @@ public class TestSampleNodeTree {
 
     assertEquals(ImmutableSet.of(), tree.unboundIdSet());
 
-    assertTrue(tree.isComplete());
-    assertFalse(tree.isPartial());
-
     // =================================
     // parents
     // =================================
