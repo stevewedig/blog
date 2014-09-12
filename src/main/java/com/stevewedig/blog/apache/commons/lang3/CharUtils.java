@@ -83,10 +83,10 @@ public abstract class CharUtils {
      * @param ch  the character to convert
      * @return a Character of the specified character
      */
-    @Deprecated
-    public static Character toCharacterObject(final char ch) {
-        return Character.valueOf(ch);
-    }
+//    @Deprecated
+//    public static Character toCharacterObject(final char ch) {
+//        return Character.valueOf(ch);
+//    }
     
     /**
      * <p>Converts the String to a Character using the first character, returning
