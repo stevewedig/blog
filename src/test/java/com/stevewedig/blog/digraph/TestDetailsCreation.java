@@ -2,20 +2,18 @@ package com.stevewedig.blog.digraph;
 
 import static com.stevewedig.blog.digraph.node.DownNodeLib.downNode;
 import static com.stevewedig.blog.digraph.node.UpNodeLib.upNode;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Set;
 
 import org.junit.Test;
 
 import com.google.common.collect.*;
-import com.stevewedig.blog.digraph.errors.*;
 import com.stevewedig.blog.digraph.id_graph.*;
 import com.stevewedig.blog.digraph.node_graph.*;
 import com.stevewedig.blog.digraph.node_graph_partial.*;
-import com.stevewedig.blog.errors.NotThrown;
 
-public class TestDetailsGraphCreate {
+public class TestDetailsCreation {
 
   // ===========================================================================
   // test various graph creation methods
@@ -87,9 +85,10 @@ public class TestDetailsGraphCreate {
             ImmutableSet.of(upNode("c", "a"))).idGraph());
 
     // union of graphs
-    assertEquals(idGraph,
-        GraphLib.up(GraphLib.up(upNode("a"), upNode("b", "a")), PartialGraphLib.up(upNode("c", "a")))
-            .idGraph());
+    assertEquals(
+        idGraph,
+        GraphLib.up(GraphLib.up(upNode("a"), upNode("b", "a")),
+            PartialGraphLib.up(upNode("c", "a"))).idGraph());
 
     // =================================
     // node graph (down)
@@ -144,7 +143,8 @@ public class TestDetailsGraphCreate {
 
     // union of graphs
     assertEquals(idDag,
-        DagLib.up(DagLib.up(upNode("a"), upNode("b", "a")), PartialDagLib.up(upNode("c", "a"))).idGraph());
+        DagLib.up(DagLib.up(upNode("a"), upNode("b", "a")), PartialDagLib.up(upNode("c", "a")))
+            .idGraph());
 
     // =================================
     // node dag (down)
@@ -171,10 +171,10 @@ public class TestDetailsGraphCreate {
             ImmutableSet.of(downNode("c"))).idGraph());
 
     // union of graphs
-    assertEquals(idDag,
-        DagLib
-            .down(PartialDagLib.down(downNode("a", "b", "c"), downNode("b")), DagLib.down(downNode("c")))
-            .idGraph());
+    assertEquals(
+        idDag,
+        DagLib.down(PartialDagLib.down(downNode("a", "b", "c"), downNode("b")),
+            DagLib.down(downNode("c"))).idGraph());
 
     // =================================
     // node tree (up)
@@ -231,157 +231,6 @@ public class TestDetailsGraphCreate {
         idTree,
         TreeLib.down(PartialTreeLib.down(downNode("a", "b", "c"), downNode("b")),
             TreeLib.down(downNode("c"))).idGraph());
-
-  }
-
-  // ===========================================================================
-  // test various validation errors
-  // ===========================================================================
-
-  @Test
-  public void testValidation__GraphContainedUnexpectedIds__unexpectedInArcMap() {
-
-    Set<String> ids = Sets.newHashSet("a");
-
-    Multimap<String, String> childId__parentId = ImmutableSetMultimap.of("a", "missing");
-
-    try {
-      IdGraphLib.fromParentMap(ids, childId__parentId);
-
-      throw new NotThrown(GraphContainedUnexpectedIds.class);
-    } catch (GraphContainedUnexpectedIds e) {
-    }
-  }
-
-
-  @Test
-  public void testValidation__GraphContainedUnexpectedIds__unexpectedInNodeMap() {
-
-    IdGraph<String> idGraph = IdGraphLib.fromParentMap(ImmutableSetMultimap.of("b", "a"));
-
-    ImmutableBiMap<String, Object> id__node =
-        ImmutableBiMap.of("a", new Object(), "b", new Object(), "missing", new Object());
-
-    try {
-      GraphLib.graph(idGraph, id__node);
-
-      throw new NotThrown(GraphContainedUnexpectedIds.class);
-    } catch (GraphContainedUnexpectedIds e) {
-    }
-  }
-
-  @Test
-  public void testValidation__DagCannotHaveCycle() {
-
-    try {
-      IdDagLib.fromParentMap(ImmutableSetMultimap.of("a", "a"));
-
-      throw new NotThrown(DagCannotHaveCycle.class);
-    } catch (DagCannotHaveCycle e) {
-    }
-  }
-
-
-  @Test
-  public void testValidation__TreeCannotHaveMultipleRoots() {
-
-    try {
-      IdTreeLib.fromParentMap(ImmutableSetMultimap.of("child1", "root1", "child2", "root2"));
-
-      throw new NotThrown(TreeCannotHaveMultipleRoots.class);
-    } catch (TreeCannotHaveMultipleRoots e) {
-    }
-  }
-
-
-  @Test
-  public void testValidation__TreeCannotBeEmpty() {
-
-    try {
-      IdTreeLib.fromParentMap(ImmutableSetMultimap.of());
-
-      throw new NotThrown(TreeCannotBeEmpty.class);
-    } catch (TreeCannotBeEmpty e) {
-    }
-  }
-
-
-  @Test
-  public void testValidation__TreeNodesCannotHaveMultipleParents() {
-
-    try {
-      IdTreeLib.fromChildMap(ImmutableSetMultimap.of("parent1", "child", "parent2", "child",
-          "root", "parent1", "root", "parent2"));
-
-      throw new NotThrown(TreeNodesCannotHaveMultipleParents.class);
-    } catch (TreeNodesCannotHaveMultipleParents e) {
-    }
-  }
-
-  // ===========================================================================
-  // test various corner cases
-  // http://en.wikipedia.org/wiki/Corner_case
-  // ===========================================================================
-
-  @Test
-  public void testCornerCase__zeroNodes() {
-
-    IdGraph<Object> graph = IdGraphLib.fromParentMap(ImmutableSetMultimap.of());
-    assertTrue(graph.idSet().isEmpty());
-    assertTrue(graph.id__parentIds().isEmpty());
-
-    IdDag<Object> dag = IdDagLib.fromParentMap(ImmutableSetMultimap.of());
-    assertTrue(dag.idSet().isEmpty());
-    assertTrue(dag.id__parentIds().isEmpty());
-
-  }
-
-  @Test
-  public void testCornerCase__oneNode() {
-
-    IdGraph<String> graph =
-        IdGraphLib.fromParentMap(ImmutableSet.of("a"), ImmutableSetMultimap.<String, String>of());
-    assertEquals(ImmutableSet.of("a"), graph.idSet());
-
-    IdDag<String> dag =
-        IdDagLib.fromParentMap(ImmutableSet.of("a"), ImmutableSetMultimap.<String, String>of());
-    assertEquals(ImmutableSet.of("a"), dag.idSet());
-
-    IdTree<String> tree =
-        IdTreeLib.fromParentMap(ImmutableSet.of("a"), ImmutableSetMultimap.<String, String>of());
-    assertEquals("a", tree.rootId());
-
-  }
-
-  @Test
-  public void testCornerCase__cyclic() {
-
-    IdGraph<String> one = IdGraphLib.fromParentMap(ImmutableSetMultimap.of("a", "a"));
-    assertTrue(one.containsCycle());
-    assertFalse(one.optionalTopsortIdList().isPresent());
-
-    IdGraph<String> two = IdGraphLib.fromParentMap(ImmutableSetMultimap.of("a", "b", "b", "a"));
-    assertTrue(two.containsCycle());
-    assertFalse(two.optionalTopsortIdList().isPresent());
-
-    IdGraph<String> three =
-        IdGraphLib.fromParentMap(ImmutableSetMultimap.of("a", "b", "b", "c", "c", "a"));
-    assertTrue(three.containsCycle());
-    assertFalse(three.optionalTopsortIdList().isPresent());
-
-  }
-
-  @Test
-  public void testCornerCase__detatched() {
-
-    IdGraph<String> graph = IdGraphLib.fromParentMap(ImmutableSetMultimap.of("b", "a", "c", "c"));
-    assertEquals(ImmutableSet.of("a", "b", "c"), graph.idSet());
-    assertEquals(ImmutableSet.of("a"), graph.rootIdSet());
-    assertTrue(graph.containsCycle());
-
-    IdDag<String> dag = IdDagLib.fromParentMap(ImmutableSetMultimap.of("b", "a", "d", "c"));
-    assertEquals(ImmutableSet.of("a", "b", "c", "d"), dag.idSet());
-    assertEquals(ImmutableSet.of("a", "c"), dag.rootIdSet());
 
   }
 

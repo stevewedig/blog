@@ -14,7 +14,7 @@ import com.stevewedig.blog.digraph.node_graph_partial.*;
 import com.stevewedig.blog.errors.*;
 import com.stevewedig.blog.util.LambdaLib.Fn1;
 
-public class TestDetailsGraphPartial {
+public class TestDetailsPartial {
 
   @Test
   public void testPartialGraph() {
