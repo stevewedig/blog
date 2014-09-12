@@ -4,6 +4,8 @@ import static com.stevewedig.blog.digraph.node.DownNodeLib.downNode;
 import static com.stevewedig.blog.digraph.node.UpNodeLib.upNode;
 import static org.junit.Assert.*;
 
+import java.util.*;
+
 import org.junit.Test;
 
 import com.google.common.base.Optional;
@@ -80,7 +82,7 @@ public class TestSampleNodeTree {
   // verify Tree
   // ===========================================================================
 
-  private <Node> void verifyNodeTree(Tree<String, Node> tree) {
+  private <Node extends BaseNode<String>> void verifyNodeTree(Tree<String, Node> tree) {
 
     // =================================
     // idTree
@@ -226,7 +228,6 @@ public class TestSampleNodeTree {
     assertEquals(ImmutableSet.of(), tree.descendantNodeSet("g"));
     assertEquals(ImmutableSet.of(), tree.descendantNodeSet("h"));
 
-
     // =================================
     // root (source)
     // =================================
@@ -243,22 +244,29 @@ public class TestSampleNodeTree {
     // topological sort
     // =================================
 
-    // TODO test
-    tree.topsortNodeList();
+    verifyTopsort(tree);
 
     // =================================
     // depth first
     // =================================
 
-    // TODO test
-    tree.depthNodeList();
+    @SuppressWarnings("unchecked")
+    ImmutableSet<ImmutableList<Node>> depthNodeLists =
+        ImmutableSet.of(ImmutableList.of(a, b, c, d, e, f, g, h),
+            ImmutableList.of(a, b, c, d, e, h, f, g), ImmutableList.of(a, b, e, c, d, f, g, h),
+            ImmutableList.of(a, b, e, c, d, h, f, g), ImmutableList.of(a, f, g, b, c, d, e, h),
+            ImmutableList.of(a, f, g, b, e, c, d, h), ImmutableList.of(a, f, g, h, b, c, d, e),
+            ImmutableList.of(a, f, g, h, b, e, c, e), ImmutableList.of(a, h, b, c, d, e, f, g),
+            ImmutableList.of(a, h, b, e, c, d, f, g), ImmutableList.of(a, h, f, a, b, c, d, e),
+            ImmutableList.of(a, h, f, a, b, e, c, d));
+
+    assertTrue(depthNodeLists.contains(tree.depthNodeList()));
 
     // =================================
     // breadth first
     // =================================
 
-    // TODO test
-    tree.breadthNodeList();
+    verifyBreadth(tree);
 
     // =================================
     // implementing set
@@ -278,4 +286,33 @@ public class TestSampleNodeTree {
     assertEquals(tree.nodeSet(), ImmutableSet.copyOf(tree));
   }
 
+  // ===========================================================================
+  // helpers
+  // ===========================================================================
+
+  private static <Id, Node extends BaseNode<Id>> void verifyTopsort(Tree<Id, Node> tree) {
+
+    Set<Id> found = new HashSet<>();
+
+    for (Node node : tree.topsortNodeList()) {
+
+      assertTrue(Sets.difference(tree.parentIdSet(node.id()), found).isEmpty());
+
+      found.add(node.id());
+    }
+  }
+
+  private static <Id, Node extends BaseNode<Id>> void verifyBreadth(Tree<Id, Node> tree) {
+
+    int currentDepth = 0;
+
+    for (Node node : tree.breadthNodeList()) {
+
+      int depth = tree.depth(node.id());
+
+      assertTrue(depth >= currentDepth);
+
+      currentDepth = depth;
+    }
+  }
 }
