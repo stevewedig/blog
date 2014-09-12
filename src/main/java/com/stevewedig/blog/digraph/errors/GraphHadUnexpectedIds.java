@@ -2,14 +2,14 @@ package com.stevewedig.blog.digraph.errors;
 
 import com.stevewedig.blog.errors.ErrorMixin;
 
-public class GraphContainedUnexpectedIds extends ErrorMixin {
+public class GraphHadUnexpectedIds extends ErrorMixin {
   private static final long serialVersionUID = 1L;
 
-  public GraphContainedUnexpectedIds() {
+  public GraphHadUnexpectedIds() {
     super();
   }
 
-  public GraphContainedUnexpectedIds(String template, Object... parts) {
+  public GraphHadUnexpectedIds(String template, Object... parts) {
     super(template, parts);
   };
 }

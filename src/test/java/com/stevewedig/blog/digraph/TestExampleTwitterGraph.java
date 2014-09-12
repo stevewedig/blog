@@ -12,9 +12,6 @@ import com.stevewedig.blog.digraph.id_graph.*;
 import com.stevewedig.blog.errors.*;
 import com.stevewedig.blog.value_objects.*;
 
-/**
- * A digraph application without node objects, so IdGraph is used.
- */
 public class TestExampleTwitterGraph {
 
   // ===========================================================================

@@ -29,7 +29,6 @@ public class TestDetailsNodes {
       throw new NotThrown(NodeIdConflict.class);
     } catch (NodeIdConflict e) {
     }
-
     
     try {
       DownNodeLib.nodes__nodeMap(ImmutableSet.of(DownNodeLib.downNode("a", "b"),
@@ -38,7 +37,6 @@ public class TestDetailsNodes {
       throw new NotThrown(NodeIdConflict.class);
     } catch (NodeIdConflict e) {
     }
-    
 
   }
 

@@ -39,12 +39,16 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
     validate(allowPartial);
   }
 
+  // ===================================
+  // validate
+  // ===================================
+
   private void validate(boolean allowPartial) {
 
     if (!allowPartial && ! unboundIdSet().isEmpty())
       throw new GraphIsMissingNodes("unbound ids = %s", unboundIdSet());
     
-    // =================================
+    // =============
     
     Set<Id> graphIds = idGraph.idSet();
 
@@ -53,7 +57,7 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
     Set<Id> unexpectedIds = Sets.difference(nodeMapIds, graphIds);
 
     if (!unexpectedIds.isEmpty())
-      throw new GraphContainedUnexpectedIds("unexpectedIds = %s, graphIds = %s, nodeMapIds = %s",
+      throw new GraphHadUnexpectedIds("unexpectedIds = %s, graphIds = %s, nodeMapIds = %s",
           unexpectedIds, graphIds, nodeMapIds);
   }
 
@@ -313,6 +317,7 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
       else
         optionalTopsortNodeList = Optional.absent();
     }
+    
     return optionalTopsortNodeList;
   }
 

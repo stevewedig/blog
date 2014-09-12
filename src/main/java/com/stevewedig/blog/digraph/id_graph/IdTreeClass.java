@@ -117,8 +117,8 @@ public class IdTreeClass<Id> extends IdDagClass<Id> implements IdTree<Id> {
         if (depth > maxDepth)
           maxDepth = depth;
       }
-
     }
+    
     return maxDepth;
   }
 

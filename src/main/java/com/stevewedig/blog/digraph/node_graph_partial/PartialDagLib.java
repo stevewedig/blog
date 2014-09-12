@@ -9,7 +9,7 @@ import com.stevewedig.blog.digraph.node_graph.DagClass;
 import com.stevewedig.blog.util.SetLib;
 
 /**
- * A library for creating Dags.
+ * A library for creating PartialDags.
  */
 public abstract class PartialDagLib {
 

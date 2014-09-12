@@ -3,7 +3,7 @@ package com.stevewedig.blog.digraph.node_graph_partial;
 import com.stevewedig.blog.digraph.id_graph.IdTree;
 
 /**
- * A tree containing nodes.
+ * A partial tree containing nodes.
  */
 public interface PartialTree<Id, Node> extends PartialDag<Id, Node>, IdTree<Id> {
 

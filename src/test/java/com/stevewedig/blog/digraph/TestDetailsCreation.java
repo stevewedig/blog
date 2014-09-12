@@ -15,8 +15,8 @@ import com.stevewedig.blog.digraph.node_graph_partial.*;
 
 public class TestDetailsCreation {
 
-  // this tests all the ways to create graphs, which unfortunately involves a combinatorial explose
-  // of:
+  // this tests all the ways to create graphs, which unfortunately
+  // involves a combinatorial explosion of:
   // A. graph vs. dag vs. tree
   // B. up node vs. down node
   // C. complete graph vs. partial graph

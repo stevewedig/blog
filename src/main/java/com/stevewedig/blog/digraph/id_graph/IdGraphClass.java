@@ -5,7 +5,7 @@ import java.util.*;
 import com.google.common.base.Optional;
 import com.google.common.collect.*;
 import com.stevewedig.blog.digraph.alg.*;
-import com.stevewedig.blog.digraph.errors.GraphContainedUnexpectedIds;
+import com.stevewedig.blog.digraph.errors.GraphHadUnexpectedIds;
 import com.stevewedig.blog.util.LambdaLib.Fn1;
 import com.stevewedig.blog.util.*;
 import com.stevewedig.blog.value_objects.ValueMixin;
@@ -40,15 +40,15 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
   // validate
   // ===========================================================================
 
-  private void validate() throws GraphContainedUnexpectedIds {
+  private void validate() throws GraphHadUnexpectedIds {
 
     ImmutableSet<Id> mapIds = MultimapLib.keysAndValues(id__parentIds());
 
     Set<Id> unexpectedIds = Sets.difference(mapIds, idSet());
 
     if (!unexpectedIds.isEmpty())
-      throw new GraphContainedUnexpectedIds("unexpectedIds = %s, mapIds = %s, idSet = %s",
-          unexpectedIds, mapIds, idSet());
+      throw new GraphHadUnexpectedIds("unexpectedIds = %s, mapIds = %s, idSet = %s", unexpectedIds,
+          mapIds, idSet());
   }
 
   // ===========================================================================
@@ -252,7 +252,7 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
   public Iterable<Id> idIterable(boolean depthFirst, boolean includeStarts,
       ImmutableList<Id> startIds, Fn1<Id, List<Id>> expand) {
 
-    // Notice that we just delegate to a static method. This is only exposed as a method on IdGraph
+    // Notice that completedly delegate to TraverseLib. This is only exposed as a method on IdGraph
     // for convenient access.
     return TraverseLib.idIterable(depthFirst, includeStarts, startIds, expand);
   }

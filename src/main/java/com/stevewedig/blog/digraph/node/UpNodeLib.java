@@ -23,7 +23,7 @@ public abstract class UpNodeLib {
   }
 
   // ===========================================================================
-  // nodeIter -> idSet
+  // nodes -> ids
   // ===========================================================================
 
   public static <Id, Node extends UpNode<Id>> ImmutableSet<Id> nodes__ids(Iterable<Node> nodes) {
@@ -39,7 +39,7 @@ public abstract class UpNodeLib {
   }
 
   // ===========================================================================
-  // nodeIter -> parentMap
+  // nodes -> parentMap
   // ===========================================================================
 
   public static <Id, Node extends UpNode<Id>> ImmutableSetMultimap<Id, Id> nodes__parentMap(
@@ -55,7 +55,7 @@ public abstract class UpNodeLib {
   }
 
   // ===========================================================================
-  // nodeSet -> nodeMap
+  // nodes -> nodeMap
   // ===========================================================================
 
   public static <Id, Node extends UpNode<Id>> ImmutableBiMap<Id, Node> nodes__nodeMap(
@@ -75,7 +75,7 @@ public abstract class UpNodeLib {
   }
 
   // ===========================================================================
-  // nodeSet -> idGraph, idDag, idTree
+  // nodes -> idGraph, idDag, idTree
   // ===========================================================================
 
   public static <Id, Node extends UpNode<Id>> IdGraph<Id> nodes__idGraph(Iterable<Node> nodes) {

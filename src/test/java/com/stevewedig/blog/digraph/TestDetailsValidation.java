@@ -23,8 +23,8 @@ public class TestDetailsValidation {
     try {
       IdGraphLib.fromParentMap(ids, childId__parentId);
 
-      throw new NotThrown(GraphContainedUnexpectedIds.class);
-    } catch (GraphContainedUnexpectedIds e) {
+      throw new NotThrown(GraphHadUnexpectedIds.class);
+    } catch (GraphHadUnexpectedIds e) {
     }
   }
 
@@ -40,8 +40,8 @@ public class TestDetailsValidation {
     try {
       GraphLib.graph(idGraph, id__node);
 
-      throw new NotThrown(GraphContainedUnexpectedIds.class);
-    } catch (GraphContainedUnexpectedIds e) {
+      throw new NotThrown(GraphHadUnexpectedIds.class);
+    } catch (GraphHadUnexpectedIds e) {
     }
   }
 

@@ -5653,7 +5653,7 @@ public abstract class StringUtils {
      * <p>Capitalizes a String changing the first letter to title case as
      * per {@link Character#toTitleCase(char)}. No other letters are changed.</p>
      *
-     * <p>For a word based algorithm, see {@link org.apache.commons.lang3.text.WordUtils#capitalize(String)}.
+     * <p>For a word based algorithm, see org.apache.commons.lang3.text.WordUtils#capitalize(String).
      * A {@code null} input String returns {@code null}.</p>
      *
      * <pre>
@@ -5665,7 +5665,6 @@ public abstract class StringUtils {
      *
      * @param str the String to capitalize, may be null
      * @return the capitalized String, {@code null} if null String input
-     * @see org.apache.commons.lang3.text.WordUtils#capitalize(String)
      * @see #uncapitalize(String)
      * @since 2.0
      */
@@ -5691,7 +5690,7 @@ public abstract class StringUtils {
      * <p>Uncapitalizes a String changing the first letter to title case as
      * per {@link Character#toLowerCase(char)}. No other letters are changed.</p>
      *
-     * <p>For a word based algorithm, see {@link org.apache.commons.lang3.text.WordUtils#uncapitalize(String)}.
+     * <p>For a word based algorithm, see org.apache.commons.lang3.text.WordUtils#uncapitalize(String).
      * A {@code null} input String returns {@code null}.</p>
      *
      * <pre>
@@ -5703,7 +5702,6 @@ public abstract class StringUtils {
      *
      * @param str the String to uncapitalize, may be null
      * @return the uncapitalized String, {@code null} if null String input
-     * @see org.apache.commons.lang3.text.WordUtils#uncapitalize(String)
      * @see #capitalize(String)
      * @since 2.0
      */
@@ -5735,7 +5733,7 @@ public abstract class StringUtils {
      *  <li>Lower case character converts to Upper case</li>
      * </ul>
      *
-     * <p>For a word based algorithm, see {@link org.apache.commons.lang3.text.WordUtils#swapCase(String)}.
+     * <p>For a word based algorithm, see org.apache.commons.lang3.text.WordUtils#swapCase(String).
      * A {@code null} input String returns {@code null}.</p>
      *
      * <pre>

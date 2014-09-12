@@ -9,7 +9,7 @@ import com.stevewedig.blog.errors.NotContained;
 import com.stevewedig.blog.util.LambdaLib.Fn1;
 
 /**
- * A digraph containing nodes.
+ * A partial digraph containing nodes.
  */
 public interface PartialGraph<Id, Node> extends IdGraph<Id>, Set<Node> {
 
@@ -99,7 +99,7 @@ public interface PartialGraph<Id, Node> extends IdGraph<Id>, Set<Node> {
   Iterator<Node> nodeWrapIterator(Iterator<Id> idIterator, boolean skipMissingNodes);
 
   // ===========================================================================
-  // deprecating Set's mutation methods (Graphs are immutable)
+  // deprecating Set's mutation methods (this library's graphs are immutable)
   // ===========================================================================
 
   /**

@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.*;
-import com.stevewedig.blog.digraph.errors.TestSampleIdTree;
 import com.stevewedig.blog.digraph.node.*;
 import com.stevewedig.blog.digraph.node_graph.*;
 

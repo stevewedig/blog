@@ -9,7 +9,7 @@ import com.stevewedig.blog.digraph.node_graph.GraphClass;
 import com.stevewedig.blog.util.SetLib;
 
 /**
- * A library for creating Graphs.
+ * A library for creating PartialGraphs.
  */
 public abstract class PartialGraphLib {
 

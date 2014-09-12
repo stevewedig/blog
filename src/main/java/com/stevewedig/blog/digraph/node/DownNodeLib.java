@@ -23,7 +23,7 @@ public abstract class DownNodeLib {
   }
 
   // ===========================================================================
-  // nodeIter -> idSet
+  // nodes -> ids
   // ===========================================================================
 
   public static <Id, Node extends DownNode<Id>> ImmutableSet<Id> node__ids(Iterable<Node> nodes) {
@@ -39,7 +39,7 @@ public abstract class DownNodeLib {
   }
 
   // ===========================================================================
-  // nodeIter -> parentMap
+  // nodes -> parentMap
   // ===========================================================================
 
   public static <Id, Node extends DownNode<Id>> ImmutableSetMultimap<Id, Id> nodes__parentMap(
@@ -59,7 +59,7 @@ public abstract class DownNodeLib {
   }
 
   // ===========================================================================
-  // nodeSet -> nodeMap
+  // nodes -> nodeMap
   // ===========================================================================
 
   public static <Id, Node extends DownNode<Id>> ImmutableBiMap<Id, Node> nodes__nodeMap(
@@ -79,7 +79,7 @@ public abstract class DownNodeLib {
   }
 
   // ===========================================================================
-  // nodeSet -> idGraph, idDag, idTree
+  // nodes -> idGraph, idDag, idTree
   // ===========================================================================
 
   public static <Id, Node extends DownNode<Id>> IdGraph<Id> nodes__idGraph(Iterable<Node> nodes) {
