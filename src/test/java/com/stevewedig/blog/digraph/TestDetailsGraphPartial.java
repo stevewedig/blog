@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.*;
+import com.stevewedig.blog.digraph.errors.NotAllowedForPartialGraphs;
 import com.stevewedig.blog.digraph.node.*;
 import com.stevewedig.blog.digraph.node_graph.*;
 import com.stevewedig.blog.errors.*;

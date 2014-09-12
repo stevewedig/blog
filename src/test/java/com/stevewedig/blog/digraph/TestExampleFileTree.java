@@ -1,31 +1,17 @@
 package com.stevewedig.blog.digraph;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.junit.Test;
 
-import com.google.common.base.Joiner;
-import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
-import com.google.common.base.Splitter;
-import com.google.common.collect.ImmutableBiMap;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
+import com.google.common.base.*;
+import com.google.common.collect.*;
 import com.stevewedig.blog.apache.commons.lang3.StringUtils;
 import com.stevewedig.blog.digraph.id_graph.IdTree;
-import com.stevewedig.blog.digraph.node.UpNode;
-import com.stevewedig.blog.digraph.node.UpNodeLib;
-import com.stevewedig.blog.digraph.node_graph.Tree;
-import com.stevewedig.blog.digraph.node_graph.TreeClass;
+import com.stevewedig.blog.digraph.node.*;
+import com.stevewedig.blog.digraph.node_graph.*;
 import com.stevewedig.blog.errors.Bug;
 import com.stevewedig.blog.util.LambdaLib.Fn1;
 import com.stevewedig.blog.value_objects.ValueMixin;

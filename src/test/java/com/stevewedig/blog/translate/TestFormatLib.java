@@ -1,23 +1,11 @@
 package com.stevewedig.blog.translate;
 
-import static com.stevewedig.blog.translate.FormatLib.boolFlagFormat;
-import static com.stevewedig.blog.translate.FormatLib.boolJsonFormat;
-import static com.stevewedig.blog.translate.FormatLib.doubleFormat;
-import static com.stevewedig.blog.translate.FormatLib.floatFormat;
-import static com.stevewedig.blog.translate.FormatLib.intCommaListFormat;
-import static com.stevewedig.blog.translate.FormatLib.intCommaSetFormat;
-import static com.stevewedig.blog.translate.FormatLib.intFormat;
-import static com.stevewedig.blog.translate.FormatLib.strCommaListFormat;
-import static com.stevewedig.blog.translate.FormatLib.strCommaSetFormat;
-import static com.stevewedig.blog.translate.FormatLib.strFormat;
-import static com.stevewedig.blog.translate.FormatLib.strMultimapFormat;
-import static org.junit.Assert.*;
+import static com.stevewedig.blog.translate.FormatLib.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ImmutableSetMultimap;
+import com.google.common.collect.*;
 
 public class TestFormatLib {
 

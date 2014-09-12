@@ -1,23 +1,15 @@
-package com.stevewedig.blog.digraph;
+package com.stevewedig.blog.digraph.errors;
 
 import static com.stevewedig.blog.translate.FormatLib.parseList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import org.junit.Test;
 
 import com.google.common.base.Optional;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
-import com.stevewedig.blog.digraph.id_graph.IdTree;
-import com.stevewedig.blog.digraph.id_graph.IdTreeLib;
+import com.google.common.collect.*;
+import com.stevewedig.blog.digraph.id_graph.*;
 
 // example dag with varying branch factors and path depths
 //

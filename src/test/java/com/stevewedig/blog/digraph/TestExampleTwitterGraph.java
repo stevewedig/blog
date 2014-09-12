@@ -2,21 +2,15 @@ package com.stevewedig.blog.digraph;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import org.junit.Test;
 
 import com.google.common.base.Optional;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.SetMultimap;
-import com.stevewedig.blog.digraph.id_graph.IdGraph;
-import com.stevewedig.blog.digraph.id_graph.IdGraphLib;
-import com.stevewedig.blog.errors.AlreadyContained;
-import com.stevewedig.blog.errors.NotContained;
-import com.stevewedig.blog.value_objects.EntityMixin;
-import com.stevewedig.blog.value_objects.ValueMixin;
+import com.google.common.collect.*;
+import com.stevewedig.blog.digraph.id_graph.*;
+import com.stevewedig.blog.errors.*;
+import com.stevewedig.blog.value_objects.*;
 
 /**
  * A digraph application without node objects, so IdGraph is used.

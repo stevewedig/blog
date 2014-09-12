@@ -5,8 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableSet;
-import com.stevewedig.blog.errors.Bug;
-import com.stevewedig.blog.errors.NotThrown;
+import com.stevewedig.blog.errors.*;
 
 public class TestSymbolSchema {
 

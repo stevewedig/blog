@@ -1,16 +1,7 @@
 package com.stevewedig.blog.digraph.node;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-import com.google.common.collect.ImmutableBiMap;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ImmutableSetMultimap;
-import com.stevewedig.blog.digraph.id_graph.IdDag;
-import com.stevewedig.blog.digraph.id_graph.IdDagLib;
-import com.stevewedig.blog.digraph.id_graph.IdGraph;
-import com.stevewedig.blog.digraph.id_graph.IdGraphLib;
-import com.stevewedig.blog.digraph.id_graph.IdTree;
-import com.stevewedig.blog.digraph.id_graph.IdTreeLib;
+import com.google.common.collect.*;
+import com.stevewedig.blog.digraph.id_graph.*;
 
 /**
  * A library with tools for manipulating DownNodes.

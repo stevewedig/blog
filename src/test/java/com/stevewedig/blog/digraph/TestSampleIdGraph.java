@@ -1,16 +1,11 @@
 package com.stevewedig.blog.digraph;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Multimap;
-import com.stevewedig.blog.digraph.id_graph.IdGraph;
-import com.stevewedig.blog.digraph.id_graph.IdGraphLib;
+import com.google.common.collect.*;
+import com.stevewedig.blog.digraph.id_graph.*;
 
 // example graph containing cycles (a->b->c->d->a, and a->e->a)
 //

@@ -1,7 +1,6 @@
 package com.stevewedig.blog.symbol;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import com.google.common.collect.Maps;
 import com.stevewedig.blog.errors.NotContained;

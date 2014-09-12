@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.google.common.collect.*;
+import com.google.common.collect.ImmutableSet;
 
 public class TestSetLib {
 

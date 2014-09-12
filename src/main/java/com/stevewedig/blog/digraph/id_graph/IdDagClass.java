@@ -1,9 +1,7 @@
 package com.stevewedig.blog.digraph.id_graph;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ImmutableSetMultimap;
-import com.stevewedig.blog.digraph.id_graph.GraphValidationErrors.DagCannotHaveCycle;
+import com.google.common.collect.*;
+import com.stevewedig.blog.digraph.errors.DagCannotHaveCycle;
 
 /**
  * An implementation of IdDag.

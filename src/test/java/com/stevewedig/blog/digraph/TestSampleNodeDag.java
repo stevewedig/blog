@@ -2,19 +2,13 @@ package com.stevewedig.blog.digraph;
 
 import static com.stevewedig.blog.digraph.node.DownNodeLib.downNode;
 import static com.stevewedig.blog.digraph.node.UpNodeLib.upNode;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.google.common.collect.ImmutableBiMap;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.stevewedig.blog.digraph.node.DownNode;
-import com.stevewedig.blog.digraph.node.UpNode;
-import com.stevewedig.blog.digraph.node_graph.Dag;
-import com.stevewedig.blog.digraph.node_graph.DagLib;
+import com.google.common.collect.*;
+import com.stevewedig.blog.digraph.node.*;
+import com.stevewedig.blog.digraph.node_graph.*;
 
 // example dag containing diamond (a, b, c, d)
 //

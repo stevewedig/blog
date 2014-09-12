@@ -1,16 +1,12 @@
 package com.stevewedig.blog.digraph;
 
-import static com.stevewedig.blog.translate.FormatLib.parseList;
-import static com.stevewedig.blog.translate.FormatLib.parseMultimap;
 import static com.stevewedig.blog.digraph.alg.TopsortLib.sort;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static com.stevewedig.blog.translate.FormatLib.*;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.*;
 
 public class TestDetailsTopsortLib {
 

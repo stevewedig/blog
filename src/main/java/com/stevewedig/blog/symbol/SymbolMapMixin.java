@@ -2,9 +2,7 @@ package com.stevewedig.blog.symbol;
 
 import static com.stevewedig.blog.util.StrLib.format;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 import com.google.common.base.Optional;

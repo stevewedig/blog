@@ -1,21 +1,14 @@
 package com.stevewedig.blog.symbol;
 
-import static com.stevewedig.blog.symbol.SymbolLib.map;
-import static com.stevewedig.blog.symbol.SymbolLib.symbol;
+import static com.stevewedig.blog.symbol.SymbolLib.*;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableMap;
-import com.stevewedig.blog.errors.NotContained;
-import com.stevewedig.blog.errors.NotImplemented;
-import com.stevewedig.blog.errors.NotThrown;
-import com.stevewedig.blog.symbol.translate.SymbolFormatLib;
-import com.stevewedig.blog.symbol.translate.SymbolParser;
-import com.stevewedig.blog.symbol.translate.SymbolTranslator;
-import com.stevewedig.blog.symbol.translate.SymbolWriter;
-import com.stevewedig.blog.translate.FormatLib;
-import com.stevewedig.blog.translate.ParseError;
+import com.stevewedig.blog.errors.*;
+import com.stevewedig.blog.symbol.translate.*;
+import com.stevewedig.blog.translate.*;
 
 public class TestSymbolTranslator {
 

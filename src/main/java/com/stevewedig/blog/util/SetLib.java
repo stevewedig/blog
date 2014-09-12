@@ -1,7 +1,6 @@
 package com.stevewedig.blog.util;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import com.google.common.collect.Sets;
 

@@ -1,12 +1,8 @@
 package com.stevewedig.blog.util;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 import com.google.common.collect.ImmutableMap;
 import com.stevewedig.blog.errors.Bug;

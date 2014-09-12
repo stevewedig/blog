@@ -16,8 +16,7 @@
  */
 package com.stevewedig.blog.apache.commons.lang3;
 
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
 
 /**
  * <p>Operations on {@code Object}.</p>

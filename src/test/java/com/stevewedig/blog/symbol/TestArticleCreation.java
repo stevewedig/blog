@@ -1,16 +1,10 @@
 package com.stevewedig.blog.symbol;
 
-import static com.stevewedig.blog.symbol.ArticleWithSymbols.$author;
-import static com.stevewedig.blog.symbol.ArticleWithSymbols.$published;
-import static com.stevewedig.blog.symbol.ArticleWithSymbols.$tags;
-import static com.stevewedig.blog.symbol.ArticleWithSymbols.$title;
-import static com.stevewedig.blog.symbol.ArticleWithSymbols.$url;
+import static com.stevewedig.blog.symbol.ArticleWithSymbols.*;
 import static com.stevewedig.blog.symbol.SymbolLib.map;
 import static com.stevewedig.blog.value_objects.ObjectHelperLib.assertStateEquals;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.sameInstance;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 

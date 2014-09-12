@@ -2,13 +2,9 @@ package com.stevewedig.blog.digraph.node_graph;
 
 import java.util.Set;
 
-import com.google.common.collect.ImmutableBiMap;
-import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.*;
 import com.stevewedig.blog.digraph.id_graph.IdGraph;
-import com.stevewedig.blog.digraph.node.DownNode;
-import com.stevewedig.blog.digraph.node.DownNodeLib;
-import com.stevewedig.blog.digraph.node.UpNode;
-import com.stevewedig.blog.digraph.node.UpNodeLib;
+import com.stevewedig.blog.digraph.node.*;
 import com.stevewedig.blog.util.SetLib;
 
 /**

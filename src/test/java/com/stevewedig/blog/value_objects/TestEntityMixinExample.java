@@ -1,9 +1,7 @@
 package com.stevewedig.blog.value_objects;
 
-import static com.stevewedig.blog.value_objects.CompareLib.assertUnequalObjectsAndStrings;
-import static com.stevewedig.blog.value_objects.CompareLib.assertUnequalObjectsButEqualStrings;
-import static com.stevewedig.blog.value_objects.ObjectHelperLib.assertStateEquals;
-import static com.stevewedig.blog.value_objects.ObjectHelperLib.assertStateNotEquals;
+import static com.stevewedig.blog.value_objects.CompareLib.*;
+import static com.stevewedig.blog.value_objects.ObjectHelperLib.*;
 
 import org.junit.Test;
 

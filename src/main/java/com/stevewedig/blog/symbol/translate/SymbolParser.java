@@ -2,10 +2,8 @@ package com.stevewedig.blog.symbol.translate;
 
 import java.util.Map;
 
-import com.stevewedig.blog.symbol.Symbol;
-import com.stevewedig.blog.symbol.SymbolMap;
-import com.stevewedig.blog.translate.FormatParser;
-import com.stevewedig.blog.translate.Parser;
+import com.stevewedig.blog.symbol.*;
+import com.stevewedig.blog.translate.*;
 
 /**
  * A Parser that converts from Map&lt;String, String&gt; to SymbolMap.

@@ -2,9 +2,7 @@ package com.stevewedig.blog.digraph.id_graph;
 
 import java.util.Set;
 
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ImmutableSetMultimap;
-import com.google.common.collect.Multimap;
+import com.google.common.collect.*;
 import com.stevewedig.blog.util.MultimapLib;
 
 /**

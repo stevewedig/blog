@@ -1,16 +1,13 @@
 package com.stevewedig.blog.value_objects;
 
-import static com.stevewedig.blog.value_objects.CompareLib.assertEqualObjectsAndStrings;
-import static com.stevewedig.blog.value_objects.CompareLib.assertUnequalObjectsAndStrings;
+import static com.stevewedig.blog.value_objects.CompareLib.*;
 import static org.hamcrest.Matchers.sameInstance;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
 import com.google.common.base.Optional;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.*;
 
 public class TestGuavaValues {
 

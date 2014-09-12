@@ -9,11 +9,7 @@ import java.util.Set;
 import org.junit.Test;
 
 import com.google.common.collect.*;
-import com.stevewedig.blog.digraph.id_graph.GraphValidationErrors.DagCannotHaveCycle;
-import com.stevewedig.blog.digraph.id_graph.GraphValidationErrors.GraphContainedUnexpectedIds;
-import com.stevewedig.blog.digraph.id_graph.GraphValidationErrors.TreeCannotBeEmpty;
-import com.stevewedig.blog.digraph.id_graph.GraphValidationErrors.TreeCannotHaveMultipleRoots;
-import com.stevewedig.blog.digraph.id_graph.GraphValidationErrors.TreeNodesCannotHaveMultipleParents;
+import com.stevewedig.blog.digraph.errors.*;
 import com.stevewedig.blog.digraph.id_graph.*;
 import com.stevewedig.blog.digraph.node_graph.*;
 import com.stevewedig.blog.errors.NotThrown;

@@ -1,6 +1,6 @@
 package com.stevewedig.blog.symbol;
 
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 import com.google.common.base.Optional;

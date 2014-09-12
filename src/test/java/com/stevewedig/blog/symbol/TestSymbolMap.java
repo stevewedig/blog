@@ -1,23 +1,16 @@
 package com.stevewedig.blog.symbol;
 
-import static com.stevewedig.blog.symbol.SymbolLib.map;
-import static com.stevewedig.blog.symbol.SymbolLib.symbol;
+import static com.stevewedig.blog.symbol.SymbolLib.*;
 import static com.stevewedig.blog.value_objects.ObjectHelperLib.assertStateEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import org.junit.Test;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
-import com.stevewedig.blog.errors.NotContained;
-import com.stevewedig.blog.errors.NotThrown;
+import com.stevewedig.blog.errors.*;
 
 public class TestSymbolMap {
 

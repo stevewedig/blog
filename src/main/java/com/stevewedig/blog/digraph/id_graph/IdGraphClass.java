@@ -1,18 +1,13 @@
 package com.stevewedig.blog.digraph.id_graph;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import com.google.common.base.Optional;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ImmutableSetMultimap;
-import com.google.common.collect.Sets;
-import com.stevewedig.blog.digraph.alg.TopsortLib;
-import com.stevewedig.blog.digraph.alg.TraverseLib;
-import com.stevewedig.blog.digraph.id_graph.GraphValidationErrors.GraphContainedUnexpectedIds;
+import com.google.common.collect.*;
+import com.stevewedig.blog.digraph.alg.*;
+import com.stevewedig.blog.digraph.errors.GraphContainedUnexpectedIds;
 import com.stevewedig.blog.util.LambdaLib.Fn1;
-import com.stevewedig.blog.util.MultimapLib;
+import com.stevewedig.blog.util.*;
 import com.stevewedig.blog.value_objects.ValueMixin;
 
 /**

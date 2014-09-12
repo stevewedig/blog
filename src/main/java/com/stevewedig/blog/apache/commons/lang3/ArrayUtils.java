@@ -15,10 +15,7 @@
 package com.stevewedig.blog.apache.commons.lang3;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.BitSet;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>

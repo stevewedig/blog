@@ -1,13 +1,9 @@
 package com.stevewedig.blog.value_objects;
 
-import static com.stevewedig.blog.value_objects.CompareLib.assertEqualObjectsAndStrings;
-import static com.stevewedig.blog.value_objects.CompareLib.assertUnequalObjectsAndStrings;
-import static com.stevewedig.blog.value_objects.ObjectHelperLib.assertStateEquals;
-import static com.stevewedig.blog.value_objects.ObjectHelperLib.assertStateNotEquals;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.sameInstance;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static com.stevewedig.blog.value_objects.CompareLib.*;
+import static com.stevewedig.blog.value_objects.ObjectHelperLib.*;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 

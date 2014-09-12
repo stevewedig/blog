@@ -3,9 +3,7 @@ package com.stevewedig.blog.digraph.id_graph;
 import java.util.List;
 
 import com.google.common.base.Optional;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ImmutableSetMultimap;
+import com.google.common.collect.*;
 import com.stevewedig.blog.util.LambdaLib.Fn1;
 
 /**

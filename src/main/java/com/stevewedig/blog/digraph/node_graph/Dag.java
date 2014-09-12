@@ -1,22 +1,12 @@
 package com.stevewedig.blog.digraph.node_graph;
 
 import com.google.common.collect.ImmutableList;
-import com.stevewedig.blog.digraph.id_graph.IdDag;
+import com.stevewedig.blog.digraph.node_graph_partial.PartialDag;
 
 /**
  * A dag containing nodes.
  */
-public interface Dag<Id, Node> extends Graph<Id, Node>, IdDag<Id> {
-
-  // ===========================================================================
-  // exposing inner idDag
-  // ===========================================================================
-
-  /**
-   * The internal id dag.
-   */
-  @Override
-  IdDag<Id> idGraph();
+public interface Dag<Id, Node> extends Graph<Id, Node>, PartialDag<Id, Node> {
 
   // ===========================================================================
   // topological sort

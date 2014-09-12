@@ -1,7 +1,6 @@
 package com.stevewedig.blog.util;
 
-import static com.stevewedig.blog.util.StrLib.classAndStateString;
-import static com.stevewedig.blog.util.StrLib.format;
+import static com.stevewedig.blog.util.StrLib.*;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
