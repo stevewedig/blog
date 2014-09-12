@@ -19,8 +19,8 @@ public class TreeClass<Id, Node> extends DagClass<Id, Node> implements Tree<Id, 
   // constructor
   // ===========================================================================
 
-  public TreeClass(IdTree<Id> idTree, ImmutableBiMap<Id, Node> id__node) {
-    super(idTree, id__node);
+  public TreeClass(IdTree<Id> idTree, ImmutableBiMap<Id, Node> id__node, boolean allowPartial) {
+    super(idTree, id__node, allowPartial);
     this.idTree = idTree;
   }
 

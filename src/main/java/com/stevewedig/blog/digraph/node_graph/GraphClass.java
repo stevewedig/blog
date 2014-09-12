@@ -32,15 +32,20 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   // constructor
   // ===========================================================================
 
-  public GraphClass(IdGraph<Id> idGraph, ImmutableBiMap<Id, Node> id__node) {
+  public GraphClass(IdGraph<Id> idGraph, ImmutableBiMap<Id, Node> id__node, boolean allowPartial) {
     this.idGraph = idGraph;
     this.id__node = id__node;
 
-    validate();
+    validate(allowPartial);
   }
 
-  private void validate() {
+  private void validate(boolean allowPartial) {
 
+    if (!allowPartial && ! unboundIdSet().isEmpty())
+      throw new GraphIsMissingNodes("unbound ids = %s", unboundIdSet());
+    
+    // =================================
+    
     Set<Id> graphIds = idGraph.idSet();
 
     Set<Id> nodeMapIds = id__node.keySet();
@@ -50,9 +55,6 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
     if (!unexpectedIds.isEmpty())
       throw new GraphContainedUnexpectedIds("unexpectedIds = %s, graphIds = %s, nodeMapIds = %s",
           unexpectedIds, graphIds, nodeMapIds);
-
-    // note that it is ok for the id graph to have more ids than the node map, because node graphs
-    // are allowed to be partial
   }
 
   // ===========================================================================
@@ -337,7 +339,7 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   @Override
   public Iterable<Node> nodeIterable(boolean depthFirst, boolean includeStarts,
       ImmutableList<Id> startIds, Fn1<Node, List<Id>> expand) {
-    
+
     return TraverseLib.nodeIterable(depthFirst, includeStarts, startIds, expand, nodeLambda());
   }
 

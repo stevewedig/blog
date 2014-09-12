@@ -18,8 +18,8 @@ public class DagClass<Id, Node> extends GraphClass<Id, Node> implements Dag<Id, 
   // constructor
   // ===========================================================================
 
-  public DagClass(IdDag<Id> idDag, ImmutableBiMap<Id, Node> id__node) {
-    super(idDag, id__node);
+  public DagClass(IdDag<Id> idDag, ImmutableBiMap<Id, Node> id__node, boolean allowPartial) {
+    super(idDag, id__node, allowPartial);
     this.idDag = idDag;
   }
 

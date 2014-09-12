@@ -20,7 +20,7 @@ public abstract class PartialDagLib {
   public static <Id, Node> PartialDag<Id, Node> dag(IdDag<Id> idDag,
       ImmutableBiMap<Id, Node> id__node) {
     
-    return new DagClass<>(idDag, id__node);
+    return new DagClass<>(idDag, id__node, true);
   }
 
   // ===========================================================================

@@ -200,7 +200,7 @@ public class TestExampleFileTree {
     // =================================
 
     private FileTreeClass(IdTree<String> idTree, ImmutableBiMap<String, FileNode> id__node) {
-      super(idTree, id__node);
+      super(idTree, id__node, false);
     }
 
     // =================================

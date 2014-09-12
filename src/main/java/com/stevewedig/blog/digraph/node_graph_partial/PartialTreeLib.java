@@ -19,8 +19,8 @@ public abstract class PartialTreeLib {
 
   public static <Id, Node> PartialTree<Id, Node> tree(IdTree<Id> idTree,
       ImmutableBiMap<Id, Node> id__node) {
-    
-    return new TreeClass<>(idTree, id__node);
+
+    return new TreeClass<>(idTree, id__node, true);
   }
 
   // ===========================================================================
@@ -28,11 +28,11 @@ public abstract class PartialTreeLib {
   // ===========================================================================
 
   public static <Id, Node extends UpNode<Id>> PartialTree<Id, Node> up(ImmutableSet<Node> nodeSet) {
-        
+
     IdTree<Id> idTree = UpNodeLib.nodes__idTree(nodeSet);
-    
+
     ImmutableBiMap<Id, Node> id__node = UpNodeLib.nodes__nodeMap(nodeSet);
-    
+
     return tree(idTree, id__node);
   }
 
@@ -54,12 +54,13 @@ public abstract class PartialTreeLib {
   // tree from down nodes
   // ===========================================================================
 
-  public static <Id, Node extends DownNode<Id>> PartialTree<Id, Node> down(ImmutableSet<Node> nodeSet) {
-        
+  public static <Id, Node extends DownNode<Id>> PartialTree<Id, Node> down(
+      ImmutableSet<Node> nodeSet) {
+
     IdTree<Id> idTree = DownNodeLib.nodes__idTree(nodeSet);
-    
+
     ImmutableBiMap<Id, Node> id__node = DownNodeLib.nodes__nodeMap(nodeSet);
-    
+
     return tree(idTree, id__node);
   }
 

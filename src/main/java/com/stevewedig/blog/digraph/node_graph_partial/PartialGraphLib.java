@@ -20,7 +20,7 @@ public abstract class PartialGraphLib {
   public static <Id, Node> PartialGraph<Id, Node> graph(IdGraph<Id> idGraph,
       ImmutableBiMap<Id, Node> id__node) {
 
-    return new GraphClass<>(idGraph, id__node);
+    return new GraphClass<>(idGraph, id__node, true);
   }
 
   // ===========================================================================

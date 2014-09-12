@@ -172,14 +172,7 @@ public abstract class TraverseLib {
 
         Id id = open.removeFirst();
 
-        Node node;
-        try {
-          node = lookup.apply(id);
-
-        } catch (NotContained e) {
-          // this happens when a node graph is partial
-          continue;
-        }
+        Node node = lookup.apply(id);
 
         expand(node);
 
