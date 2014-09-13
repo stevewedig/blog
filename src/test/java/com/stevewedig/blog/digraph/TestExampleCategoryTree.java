@@ -23,7 +23,7 @@ public class TestExampleCategoryTree {
   }
 
   // ===========================================================================
-  // tree
+  // id tree
   // ===========================================================================
 
   private static IdTree<Category> idTree = IdTreeLib.fromParentMap(Category.mammal,
@@ -35,19 +35,17 @@ public class TestExampleCategoryTree {
   }
 
   // ===========================================================================
+  // id tree methods
+  // ===========================================================================
 
   public static Category mostSpecific(Set<Category> categories) {
     return idTree.mostDeep(categories);
   }
 
-  // ===========================================================================
-
   // TODO inChildren
   public static boolean isSubcategory(Category child, Category parent) {
     return idTree.descendantOf(child, parent, true);
   }
-
-  // ===========================================================================
 
   // TODO fill in ancestors?
   public static Set<Category> expandParents(Set<Category> otherCategories) {
@@ -59,10 +57,26 @@ public class TestExampleCategoryTree {
   }
 
   // ===========================================================================
-  // test
+  // node class
   // ===========================================================================
 
-  // TODO show the idTree vs nodeTree approaches
+  // TODO
+  
+  // ===========================================================================
+  // node tree class
+  // ===========================================================================
+
+  // TODO
+
+  // ===========================================================================
+  // node tree
+  // ===========================================================================
+  
+  // TODO
+  
+  // ===========================================================================
+  // tests
+  // ===========================================================================
 
   @Test
   public void testSubcategory() {
