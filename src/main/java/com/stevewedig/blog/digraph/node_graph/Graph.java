@@ -39,10 +39,14 @@ public interface Graph<Id, Node> extends PartialGraph<Id, Node> {
    */
   Iterable<Node> ancestorNodeIterable(Id id, boolean inclusive);
 
+  Iterable<Node> ancestorNodeIterable(Set<Id> ids, boolean inclusive);
+
   /**
    * Getting an id's ancestor node set (its parents, it's parents' parents, and so on).
    */
   ImmutableSet<Node> ancestorNodeSet(Id id, boolean inclusive);
+
+  ImmutableSet<Node> ancestorNodeSet(Set<Id> ids, boolean inclusive);
 
   // ===========================================================================
   // descendants
@@ -53,10 +57,14 @@ public interface Graph<Id, Node> extends PartialGraph<Id, Node> {
    */
   Iterable<Node> descendantNodeIterable(Id id, boolean inclusive);
 
+  Iterable<Node> descendantNodeIterable(Set<Id> ids, boolean inclusive);
+
   /**
    * Getting an id's descendant node set (its children, it's childrens' children, and so on).
    */
   ImmutableSet<Node> descendantNodeSet(Id id, boolean inclusive);
+
+  ImmutableSet<Node> descendantNodeSet(Set<Id> ids, boolean inclusive);
 
   // ===========================================================================
   // roots (sources)

@@ -17,7 +17,7 @@ public class TestExampleCategoryTree {
 
   static enum Category {
 
-    animal, mammal, primate, reptile
+    animal, mammal, primate, reptile, lizard
   }
 
   // ===========================================================================
@@ -26,9 +26,10 @@ public class TestExampleCategoryTree {
 
   // parent map means mapping from child -> parent(s)
   static IdTree<Category> tree = IdTreeLib.fromParentMap(Category.mammal, Category.animal,
-      Category.primate, Category.mammal, Category.reptile, Category.animal);
+      Category.primate, Category.mammal, Category.reptile, Category.animal, Category.lizard,
+      Category.reptile);
 
-  // this will raise an error if we add a Category without adding it to the tree
+  // an AssertionError will be raised if we create a Category without adding it to the tree
   static {
     tree.assertIdsMatch(Category.values());
   }
@@ -46,13 +47,7 @@ public class TestExampleCategoryTree {
   }
 
   public static Set<Category> addSupercategories(Set<Category> categories) {
-
-    // return tree.ancestorIdSet(categories, true);
-    
-    // otherCategories = Sets.newHashSet(otherCategories);
-
-    // TODO not right but not bothering, need hierarchy and cateogry objects
-    return categories;
+    return tree.ancestorIdSet(categories, true);
   }
 
   // ===========================================================================
@@ -83,4 +78,20 @@ public class TestExampleCategoryTree {
     assertEquals(Category.primate, mostSpecific(ImmutableSet.of(Category.animal, Category.mammal,
         Category.primate, Category.reptile)));
   }
+
+  @Test
+  public void testAddSupercategories() {
+
+    assertEquals(ImmutableSet.of(Category.animal),
+        addSupercategories(ImmutableSet.of(Category.animal)));
+
+    assertEquals(ImmutableSet.of(Category.animal, Category.mammal, Category.primate),
+        addSupercategories(ImmutableSet.of(Category.primate)));
+
+    assertEquals(ImmutableSet.of(Category.animal, Category.mammal, Category.primate,
+        Category.reptile, Category.lizard), addSupercategories(ImmutableSet.of(Category.primate,
+        Category.lizard)));
+
+  }
+
 }

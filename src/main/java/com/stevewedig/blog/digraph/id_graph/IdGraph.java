@@ -76,10 +76,14 @@ public interface IdGraph<Id> {
    */
   Iterable<Id> ancestorIdIterable(Id id, boolean inclusive);
 
+  Iterable<Id> ancestorIdIterable(Set<Id> ids, boolean inclusive);
+
   /**
    * Getting an id's ancestor id set (its parents, it's parents' parents, and so on).
    */
   ImmutableSet<Id> ancestorIdSet(Id id, boolean inclusive);
+
+  ImmutableSet<Id> ancestorIdSet(Set<Id> ids, boolean inclusive);
 
   boolean ancestorOf(Id id, Id potentialDescendant, boolean inclusive);
 
@@ -92,10 +96,14 @@ public interface IdGraph<Id> {
    */
   Iterable<Id> descendantIdIterable(Id id, boolean inclusive);
 
+  Iterable<Id> descendantIdIterable(Set<Id> ids, boolean inclusive);
+
   /**
    * Getting an id's descendant id set (its children, it's childrens' children, and so on).
    */
   ImmutableSet<Id> descendantIdSet(Id id, boolean inclusive);
+
+  ImmutableSet<Id> descendantIdSet(Set<Id> ids, boolean inclusive);
 
   boolean descendantOf(Id id, Id potentialAncestor, boolean inclusive);
 

@@ -222,8 +222,18 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   }
 
   @Override
+  public Iterable<Id> ancestorIdIterable(Set<Id> ids, boolean inclusive) {
+    return idGraph.ancestorIdIterable(ids, inclusive);
+  }
+
+  @Override
   public ImmutableSet<Id> ancestorIdSet(Id id, boolean inclusive) {
     return idGraph.ancestorIdSet(id, inclusive);
+  }
+
+  @Override
+  public ImmutableSet<Id> ancestorIdSet(Set<Id> ids, boolean inclusive) {
+    return idGraph.ancestorIdSet(ids, inclusive);
   }
 
   @Override
@@ -231,14 +241,26 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
     return idGraph.ancestorOf(id, potentialDescendant, inclusive);
   }
 
+  // ===================================
+
   @Override
   public Iterable<Node> ancestorNodeIterable(Id id, boolean inclusive) {
     return nodeWrapIterable(ancestorIdIterable(id, inclusive), false);
   }
 
   @Override
+  public Iterable<Node> ancestorNodeIterable(Set<Id> ids, boolean inclusive) {
+    return nodeWrapIterable(ancestorIdIterable(ids, inclusive), false);
+  }
+
+  @Override
   public ImmutableSet<Node> ancestorNodeSet(Id id, boolean inclusive) {
     return nodeWrapSet(ancestorIdIterable(id, inclusive), false);
+  }
+
+  @Override
+  public ImmutableSet<Node> ancestorNodeSet(Set<Id> ids, boolean inclusive) {
+    return nodeWrapSet(ancestorIdIterable(ids, inclusive), false);
   }
 
   // ===========================================================================
@@ -256,9 +278,21 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   }
 
   @Override
+  public Iterable<Id> descendantIdIterable(Set<Id> ids, boolean inclusive) {
+    return idGraph.descendantIdIterable(ids, inclusive);
+  }
+
+  @Override
+  public ImmutableSet<Id> descendantIdSet(Set<Id> ids, boolean inclusive) {
+    return idGraph.descendantIdSet(ids, inclusive);
+  }
+
+  @Override
   public boolean descendantOf(Id id, Id potentialAncestor, boolean inclusive) {
     return idGraph.descendantOf(id, potentialAncestor, inclusive);
   }
+
+  // ===================================
 
   @Override
   public Iterable<Node> descendantNodeIterable(Id id, boolean inclusive) {
@@ -266,8 +300,18 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   }
 
   @Override
+  public Iterable<Node> descendantNodeIterable(Set<Id> ids, boolean inclusive) {
+    return nodeWrapIterable(descendantIdIterable(ids, inclusive), false);
+  }
+
+  @Override
   public ImmutableSet<Node> descendantNodeSet(Id id, boolean inclusive) {
     return nodeWrapSet(descendantIdIterable(id, inclusive), false);
+  }
+
+  @Override
+  public ImmutableSet<Node> descendantNodeSet(Set<Id> ids, boolean inclusive) {
+    return nodeWrapSet(descendantIdIterable(ids, inclusive), false);
   }
 
   // ===========================================================================
