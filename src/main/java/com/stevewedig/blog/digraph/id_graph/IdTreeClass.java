@@ -5,6 +5,7 @@ import java.util.*;
 import com.google.common.base.Optional;
 import com.google.common.collect.*;
 import com.stevewedig.blog.digraph.errors.*;
+import com.stevewedig.blog.util.CollectLib;
 
 /**
  * An implementation of IdTree.
@@ -118,10 +119,57 @@ public class IdTreeClass<Id> extends IdDagClass<Id> implements IdTree<Id> {
           maxDepth = depth;
       }
     }
-    
+
     return maxDepth;
   }
 
   private Integer maxDepth;
+
+  // ===================================
+
+  @Override
+  public Id mostDeep(Collection<Id> ids) {
+
+    CollectLib.assertNotEmpty(ids);
+
+    Id currentId = null;
+    Integer currentDepth = null;
+
+    for (Id category : ids) {
+
+      int depth = depth(category);
+
+      if (currentId == null || depth > currentDepth) {
+        currentId = category;
+        currentDepth = depth;
+      }
+    }
+
+    return currentId;
+  }
+
+  // ===================================
+
+  @Override
+  public Id leastDeep(Collection<Id> ids) {
+
+    CollectLib.assertNotEmpty(ids);
+
+    Id currentId = null;
+    Integer currentDepth = null;
+
+    for (Id category : ids) {
+
+      int depth = depth(category);
+
+      if (currentId == null || depth < currentDepth) {
+        currentId = category;
+        currentDepth = depth;
+      }
+    }
+
+    return currentId;
+
+  }
 
 }

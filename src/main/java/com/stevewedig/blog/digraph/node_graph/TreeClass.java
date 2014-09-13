@@ -1,5 +1,7 @@
 package com.stevewedig.blog.digraph.node_graph;
 
+import java.util.Collection;
+
 import com.google.common.base.Optional;
 import com.google.common.collect.*;
 import com.stevewedig.blog.digraph.id_graph.IdTree;
@@ -87,6 +89,16 @@ public class TreeClass<Id, Node> extends DagClass<Id, Node> implements Tree<Id, 
   @Override
   public int maxDepth() {
     return idTree.maxDepth();
+  }
+
+  @Override
+  public Id mostDeep(Collection<Id> ids) {
+    return idTree.mostDeep(ids);
+  }
+
+  @Override
+  public Id leastDeep(Collection<Id> ids) {
+    return idTree.leastDeep(ids);
   }
 
 }

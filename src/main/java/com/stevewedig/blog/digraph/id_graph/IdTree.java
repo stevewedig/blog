@@ -1,5 +1,7 @@
 package com.stevewedig.blog.digraph.id_graph;
 
+import java.util.Collection;
+
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 
@@ -48,5 +50,9 @@ public interface IdTree<Id> extends IdDag<Id> {
    * The maximum depth in the tree.
    */
   int maxDepth();
+
+  Id mostDeep(Collection<Id> ids);
+
+  Id leastDeep(Collection<Id> ids);
 
 }

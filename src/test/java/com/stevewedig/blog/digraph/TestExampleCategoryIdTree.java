@@ -8,9 +8,10 @@ import org.junit.Test;
 
 import com.google.common.collect.ImmutableSet;
 import com.stevewedig.blog.digraph.id_graph.*;
-import com.stevewedig.blog.util.CollectLib;
 
 public class TestExampleCategoryIdTree {
+
+  // TODO this example is in progress
 
   // ===========================================================================
   // enum
@@ -28,8 +29,7 @@ public class TestExampleCategoryIdTree {
   private static IdTree<Category> idTree = IdTreeLib.fromParentMap(Category.mammal,
       Category.animal, Category.primate, Category.mammal, Category.reptile, Category.animal);
 
-  // TODO assertion
-  // todo compare ids?
+  // TODO assertion on tree?
   static {
     if (idTree.idSize() != Category.values().length)
       throw new RuntimeException("category tree is missing items");
@@ -37,24 +37,8 @@ public class TestExampleCategoryIdTree {
 
   // ===========================================================================
 
-  // TODO deepest
   public static Category mostSpecific(Set<Category> categories) {
-
-    CollectLib.assertNotEmpty(categories);
-
-    Category specificCat = null;
-    Integer specificDepth = null;
-
-    for (Category category : categories) {
-      int depth = idTree.depth(category);
-
-      if (specificCat == null || depth > specificDepth) {
-        specificCat = category;
-        specificDepth = depth;
-      }
-    }
-
-    return specificCat;
+    return idTree.mostDeep(categories);
   }
 
   // ===========================================================================
