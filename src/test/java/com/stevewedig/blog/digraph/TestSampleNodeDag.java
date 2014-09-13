@@ -132,21 +132,21 @@ public class TestSampleNodeDag {
     // ancestors
     // =================================
 
-    assertEquals(ImmutableSet.of(), dag.ancestorNodeSet("a"));
-    assertEquals(ImmutableSet.of(a), dag.ancestorNodeSet("b"));
-    assertEquals(ImmutableSet.of(a), dag.ancestorNodeSet("c"));
-    assertEquals(ImmutableSet.of(a, b, c), dag.ancestorNodeSet("d"));
-    assertEquals(ImmutableSet.of(a, b, c, d), dag.ancestorNodeSet("e"));
+    assertEquals(ImmutableSet.of(), dag.ancestorNodeSet("a", false));
+    assertEquals(ImmutableSet.of(a), dag.ancestorNodeSet("b", false));
+    assertEquals(ImmutableSet.of(a), dag.ancestorNodeSet("c", false));
+    assertEquals(ImmutableSet.of(a, b, c), dag.ancestorNodeSet("d", false));
+    assertEquals(ImmutableSet.of(a, b, c, d), dag.ancestorNodeSet("e", false));
 
     // =================================
     // descendants
     // =================================
 
-    assertEquals(ImmutableSet.of(b, c, d, e), dag.descendantNodeSet("a"));
-    assertEquals(ImmutableSet.of(d, e), dag.descendantNodeSet("b"));
-    assertEquals(ImmutableSet.of(d, e), dag.descendantNodeSet("c"));
-    assertEquals(ImmutableSet.of(e), dag.descendantNodeSet("d"));
-    assertEquals(ImmutableSet.of(), dag.descendantNodeSet("e"));
+    assertEquals(ImmutableSet.of(b, c, d, e), dag.descendantNodeSet("a", false));
+    assertEquals(ImmutableSet.of(d, e), dag.descendantNodeSet("b", false));
+    assertEquals(ImmutableSet.of(d, e), dag.descendantNodeSet("c", false));
+    assertEquals(ImmutableSet.of(e), dag.descendantNodeSet("d", false));
+    assertEquals(ImmutableSet.of(), dag.descendantNodeSet("e", false));
 
     // =================================
     // roots (sources)

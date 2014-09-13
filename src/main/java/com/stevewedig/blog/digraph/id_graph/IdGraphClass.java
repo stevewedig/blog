@@ -170,13 +170,13 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
   // ===========================================================================
 
   @Override
-  public Iterable<Id> ancestorIdIterable(Id id) {
-    return idIterable(true, false, ImmutableList.of(id), parentIdListLambda());
+  public Iterable<Id> ancestorIdIterable(Id id, boolean inclusive) {
+    return idIterable(true, inclusive, ImmutableList.of(id), parentIdListLambda());
   }
 
   @Override
-  public ImmutableSet<Id> ancestorIdSet(Id id) {
-    return ImmutableSet.copyOf(ancestorIdIterable(id));
+  public ImmutableSet<Id> ancestorIdSet(Id id, boolean inclusive) {
+    return ImmutableSet.copyOf(ancestorIdIterable(id, inclusive));
   }
 
   @Override
@@ -189,22 +189,18 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
   // ===========================================================================
 
   @Override
-  public Iterable<Id> descendantIdIterable(Id id) {
-    return idIterable(true, false, ImmutableList.of(id), childIdListLambda());
+  public Iterable<Id> descendantIdIterable(Id id, boolean inclusive) {
+    return idIterable(true, inclusive, ImmutableList.of(id), childIdListLambda());
   }
 
   @Override
-  public ImmutableSet<Id> descendantIdSet(Id id) {
-    return ImmutableSet.copyOf(descendantIdIterable(id));
+  public ImmutableSet<Id> descendantIdSet(Id id, boolean inclusive) {
+    return ImmutableSet.copyOf(descendantIdIterable(id, inclusive));
   }
 
   @Override
   public boolean descendantOf(Id id, Id potentialAncestor, boolean inclusive) {
-
-    if (inclusive && id.equals(potentialAncestor))
-      return true;
-
-    return ancestorIdSet(id).contains(potentialAncestor);
+    return ancestorIdSet(id, inclusive).contains(potentialAncestor);
   }
 
   // ===========================================================================

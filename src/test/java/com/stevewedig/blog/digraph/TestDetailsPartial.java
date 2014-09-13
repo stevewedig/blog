@@ -79,15 +79,15 @@ public class TestDetailsPartial {
     // ancestors
     // =================================
 
-    assertEquals(parseSet(""), tree.ancestorIdSet("a"));
-    assertEquals(parseSet("a"), tree.ancestorIdSet("b"));
+    assertEquals(parseSet(""), tree.ancestorIdSet("a", false));
+    assertEquals(parseSet("a"), tree.ancestorIdSet("b", false));
 
     // =================================
     // descendants
     // =================================
 
-    assertEquals(parseSet("b"), tree.descendantIdSet("a"));
-    assertEquals(parseSet(""), tree.descendantIdSet("b"));
+    assertEquals(parseSet("b"), tree.descendantIdSet("a", false));
+    assertEquals(parseSet(""), tree.descendantIdSet("b", false));
 
     // =================================
     // roots
@@ -119,17 +119,6 @@ public class TestDetailsPartial {
     };
 
     assertEquals(parseList("b, a"), tree.idList(true, true, ImmutableList.of("b"), expandId));
-
-    // =================================
-    // node traversal (even though we don't have all the nodes
-    // =================================
-
-    Fn1<UpNode<String>, List<String>> expandNode = new Fn1<UpNode<String>, List<String>>() {
-      @Override
-      public List<String> apply(UpNode<String> node) {
-        return ImmutableList.copyOf(node.parentIds());
-      }
-    };
 
     // =========================================================================
     // dag attributes

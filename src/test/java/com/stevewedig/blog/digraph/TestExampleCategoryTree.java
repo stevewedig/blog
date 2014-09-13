@@ -11,8 +11,6 @@ import com.stevewedig.blog.digraph.id_graph.*;
 
 public class TestExampleCategoryTree {
 
-  // TODO this example is in progress
-
   // ===========================================================================
   // enum
   // ===========================================================================
@@ -27,53 +25,35 @@ public class TestExampleCategoryTree {
   // ===========================================================================
 
   // parent map means mapping from child -> parent(s)
-  private static IdTree<Category> idTree = IdTreeLib.fromParentMap(Category.mammal,
-      Category.animal, Category.primate, Category.mammal, Category.reptile, Category.animal);
+  static IdTree<Category> tree = IdTreeLib.fromParentMap(Category.mammal, Category.animal,
+      Category.primate, Category.mammal, Category.reptile, Category.animal);
 
   // this will raise an error if we add a Category without adding it to the tree
   static {
-    idTree.assertIdsMatch(Category.values());
+    tree.assertIdsMatch(Category.values());
   }
 
   // ===========================================================================
   // id tree methods
   // ===========================================================================
 
-  public static Category mostSpecific(Set<Category> categories) {
-    return idTree.mostDeep(categories);
-  }
-
-  // TODO inChildren
   public static boolean isSubcategory(Category child, Category parent) {
-    return idTree.descendantOf(child, parent, true);
+    return tree.descendantOf(child, parent, true);
   }
 
-  // TODO fill in ancestors?
-  public static Set<Category> expandParents(Set<Category> otherCategories) {
+  public static Category mostSpecific(Set<Category> categories) {
+    return tree.mostDeep(categories);
+  }
 
+  public static Set<Category> addSupercategories(Set<Category> categories) {
+
+    // return tree.ancestorIdSet(categories, true);
+    
     // otherCategories = Sets.newHashSet(otherCategories);
 
     // TODO not right but not bothering, need hierarchy and cateogry objects
-    return otherCategories;
+    return categories;
   }
-
-  // ===========================================================================
-  // node class
-  // ===========================================================================
-
-  // TODO
-
-  // ===========================================================================
-  // node tree class
-  // ===========================================================================
-
-  // TODO
-
-  // ===========================================================================
-  // node tree
-  // ===========================================================================
-
-  // TODO
 
   // ===========================================================================
   // tests
@@ -94,7 +74,7 @@ public class TestExampleCategoryTree {
   }
 
   @Test
-  public void testDeepest() {
+  public void testMostSpecific() {
 
     assertEquals(Category.animal, mostSpecific(ImmutableSet.of(Category.animal)));
 

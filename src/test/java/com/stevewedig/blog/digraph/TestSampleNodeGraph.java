@@ -159,23 +159,23 @@ public class TestSampleNodeGraph {
     // ancestors
     // =================================
 
-    assertEquals(ImmutableSet.of(b, c, d, e), graph.ancestorNodeSet("a"));
-    assertEquals(ImmutableSet.of(a, c, d, e), graph.ancestorNodeSet("b"));
-    assertEquals(ImmutableSet.of(a, b, d, e), graph.ancestorNodeSet("c"));
-    assertEquals(ImmutableSet.of(a, b, c, e), graph.ancestorNodeSet("d"));
-    assertEquals(ImmutableSet.of(a, b, c, d), graph.ancestorNodeSet("e"));
-    assertEquals(ImmutableSet.of(), graph.ancestorNodeSet("f"));
+    assertEquals(ImmutableSet.of(b, c, d, e), graph.ancestorNodeSet("a", false));
+    assertEquals(ImmutableSet.of(a, c, d, e), graph.ancestorNodeSet("b", false));
+    assertEquals(ImmutableSet.of(a, b, d, e), graph.ancestorNodeSet("c", false));
+    assertEquals(ImmutableSet.of(a, b, c, e), graph.ancestorNodeSet("d", false));
+    assertEquals(ImmutableSet.of(a, b, c, d), graph.ancestorNodeSet("e", false));
+    assertEquals(ImmutableSet.of(), graph.ancestorNodeSet("f", false));
 
     // =================================
     // descendants
     // =================================
 
-    assertEquals(ImmutableSet.of(b, c, d, e), graph.descendantNodeSet("a"));
-    assertEquals(ImmutableSet.of(a, c, d, e), graph.descendantNodeSet("b"));
-    assertEquals(ImmutableSet.of(a, b, d, e), graph.descendantNodeSet("c"));
-    assertEquals(ImmutableSet.of(a, b, c, e), graph.descendantNodeSet("d"));
-    assertEquals(ImmutableSet.of(a, b, c, d), graph.descendantNodeSet("e"));
-    assertEquals(ImmutableSet.of(), graph.descendantNodeSet("f"));
+    assertEquals(ImmutableSet.of(b, c, d, e), graph.descendantNodeSet("a", false));
+    assertEquals(ImmutableSet.of(a, c, d, e), graph.descendantNodeSet("b", false));
+    assertEquals(ImmutableSet.of(a, b, d, e), graph.descendantNodeSet("c", false));
+    assertEquals(ImmutableSet.of(a, b, c, e), graph.descendantNodeSet("d", false));
+    assertEquals(ImmutableSet.of(a, b, c, d), graph.descendantNodeSet("e", false));
+    assertEquals(ImmutableSet.of(), graph.descendantNodeSet("f", false));
 
     // =================================
     // roots (sources)

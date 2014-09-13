@@ -185,14 +185,14 @@ public class TestSampleNodeTree {
     // h -> a
 
     // ancestor set
-    assertEquals(ImmutableSet.of(), tree.ancestorNodeSet("a"));
-    assertEquals(ImmutableSet.of(a), tree.ancestorNodeSet("b"));
-    assertEquals(ImmutableSet.of(a, b), tree.ancestorNodeSet("c"));
-    assertEquals(ImmutableSet.of(a, b, c), tree.ancestorNodeSet("d"));
-    assertEquals(ImmutableSet.of(a, b), tree.ancestorNodeSet("e"));
-    assertEquals(ImmutableSet.of(a), tree.ancestorNodeSet("f"));
-    assertEquals(ImmutableSet.of(a, f), tree.ancestorNodeSet("g"));
-    assertEquals(ImmutableSet.of(a), tree.ancestorNodeSet("h"));
+    assertEquals(ImmutableSet.of(), tree.ancestorNodeSet("a", false));
+    assertEquals(ImmutableSet.of(a), tree.ancestorNodeSet("b", false));
+    assertEquals(ImmutableSet.of(a, b), tree.ancestorNodeSet("c", false));
+    assertEquals(ImmutableSet.of(a, b, c), tree.ancestorNodeSet("d", false));
+    assertEquals(ImmutableSet.of(a, b), tree.ancestorNodeSet("e", false));
+    assertEquals(ImmutableSet.of(a), tree.ancestorNodeSet("f", false));
+    assertEquals(ImmutableSet.of(a, f), tree.ancestorNodeSet("g", false));
+    assertEquals(ImmutableSet.of(a), tree.ancestorNodeSet("h", false));
 
     // ancestor list
     assertEquals(ImmutableList.of(), tree.ancestorNodeList("a"));
@@ -218,14 +218,14 @@ public class TestSampleNodeTree {
     // <- h
     @SuppressWarnings("unchecked")
     ImmutableSet<Node> aDescendants = ImmutableSet.of(b, c, d, e, f, g, h);
-    assertEquals(aDescendants, tree.descendantNodeSet("a"));
-    assertEquals(ImmutableSet.of(c, d, e), tree.descendantNodeSet("b"));
-    assertEquals(ImmutableSet.of(d), tree.descendantNodeSet("c"));
-    assertEquals(ImmutableSet.of(), tree.descendantNodeSet("d"));
-    assertEquals(ImmutableSet.of(), tree.descendantNodeSet("e"));
-    assertEquals(ImmutableSet.of(g), tree.descendantNodeSet("f"));
-    assertEquals(ImmutableSet.of(), tree.descendantNodeSet("g"));
-    assertEquals(ImmutableSet.of(), tree.descendantNodeSet("h"));
+    assertEquals(aDescendants, tree.descendantNodeSet("a", false));
+    assertEquals(ImmutableSet.of(c, d, e), tree.descendantNodeSet("b", false));
+    assertEquals(ImmutableSet.of(d), tree.descendantNodeSet("c", false));
+    assertEquals(ImmutableSet.of(), tree.descendantNodeSet("d", false));
+    assertEquals(ImmutableSet.of(), tree.descendantNodeSet("e", false));
+    assertEquals(ImmutableSet.of(g), tree.descendantNodeSet("f", false));
+    assertEquals(ImmutableSet.of(), tree.descendantNodeSet("g", false));
+    assertEquals(ImmutableSet.of(), tree.descendantNodeSet("h", false));
 
     // =================================
     // root (source)

@@ -367,7 +367,7 @@ public class TestExampleFileTree {
 
     assertEquals(ImmutableSet.of(hello, tests), tree.childNodeSet("/code/"));
 
-    assertEquals(ImmutableSet.of(hello, tests, testHello), tree.descendantNodeSet("/code/"));
+    assertEquals(ImmutableSet.of(hello, tests, testHello), tree.descendantNodeSet("/code/", false));
 
     assertEquals(ImmutableSet.of(root, code, tests), tree.directorySet());
 

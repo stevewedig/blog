@@ -152,7 +152,7 @@ public class TestExampleTwitterGraph {
       //
       // Something like PageRank would be better:
       // http://en.wikipedia.org/wiki/PageRank
-      int authority = graph.descendantIdSet(name).size();
+      int authority = graph.descendantIdSet(name, false).size();
 
       return new TwitterAccountClass(name, following, followers, authority);
     }

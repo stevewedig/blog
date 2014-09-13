@@ -138,11 +138,11 @@ public class TestSampleIdDag {
     // c -> a
     // d -> b, c
     // e -> d
-    assertEquals(ImmutableSet.of(), dag.ancestorIdSet("a"));
-    assertEquals(ImmutableSet.of("a"), dag.ancestorIdSet("b"));
-    assertEquals(ImmutableSet.of("a"), dag.ancestorIdSet("c"));
-    assertEquals(ImmutableSet.of("a", "b", "c"), dag.ancestorIdSet("d"));
-    assertEquals(ImmutableSet.of("a", "b", "c", "d"), dag.ancestorIdSet("e"));
+    assertEquals(ImmutableSet.of(), dag.ancestorIdSet("a", false));
+    assertEquals(ImmutableSet.of("a"), dag.ancestorIdSet("b", false));
+    assertEquals(ImmutableSet.of("a"), dag.ancestorIdSet("c", false));
+    assertEquals(ImmutableSet.of("a", "b", "c"), dag.ancestorIdSet("d", false));
+    assertEquals(ImmutableSet.of("a", "b", "c", "d"), dag.ancestorIdSet("e", false));
 
     // =================================
     // descendants
@@ -153,11 +153,11 @@ public class TestSampleIdDag {
     // d <- c
     // e <- d
     // <- e
-    assertEquals(ImmutableSet.of("b", "c", "d", "e"), dag.descendantIdSet("a"));
-    assertEquals(ImmutableSet.of("d", "e"), dag.descendantIdSet("b"));
-    assertEquals(ImmutableSet.of("d", "e"), dag.descendantIdSet("c"));
-    assertEquals(ImmutableSet.of("e"), dag.descendantIdSet("d"));
-    assertEquals(ImmutableSet.of(), dag.descendantIdSet("e"));
+    assertEquals(ImmutableSet.of("b", "c", "d", "e"), dag.descendantIdSet("a", false));
+    assertEquals(ImmutableSet.of("d", "e"), dag.descendantIdSet("b", false));
+    assertEquals(ImmutableSet.of("d", "e"), dag.descendantIdSet("c", false));
+    assertEquals(ImmutableSet.of("e"), dag.descendantIdSet("d", false));
+    assertEquals(ImmutableSet.of(), dag.descendantIdSet("e", false));
 
     // =================================
     // roots (sources)
