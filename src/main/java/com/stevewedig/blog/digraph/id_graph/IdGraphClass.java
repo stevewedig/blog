@@ -166,6 +166,11 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
     return ImmutableSet.copyOf(ancestorIdIterable(id));
   }
 
+  @Override
+  public boolean ancestorOf(Id id, Id potentialDescendant, boolean inclusive) {
+    return descendantOf(potentialDescendant, id, inclusive);
+  }
+
   // ===========================================================================
   // descendants
   // ===========================================================================
@@ -178,6 +183,15 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
   @Override
   public ImmutableSet<Id> descendantIdSet(Id id) {
     return ImmutableSet.copyOf(descendantIdIterable(id));
+  }
+
+  @Override
+  public boolean descendantOf(Id id, Id potentialAncestor, boolean inclusive) {
+
+    if (inclusive && id.equals(potentialAncestor))
+      return true;
+
+    return ancestorIdSet(id).contains(potentialAncestor);
   }
 
   // ===========================================================================

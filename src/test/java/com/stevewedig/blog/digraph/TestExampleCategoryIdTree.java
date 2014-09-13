@@ -45,14 +45,7 @@ public class TestExampleCategoryIdTree {
 
   // TODO inChildren
   public static boolean isSubcategory(Category child, Category parent) {
-
-    if (parent.equals(child))
-      return true;
-
-    if (idTree.ancestorIdSet(child).contains(parent))
-      return true;
-
-    return false;
+    return idTree.descendantOf(child,  parent, true);
   }
 
   // ===========================================================================

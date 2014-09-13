@@ -77,6 +77,8 @@ public interface IdGraph<Id> {
    */
   ImmutableSet<Id> ancestorIdSet(Id id);
 
+  boolean ancestorOf(Id id, Id potentialDescendant, boolean inclusive);
+
   // ===========================================================================
   // descendants
   // ===========================================================================
@@ -90,6 +92,8 @@ public interface IdGraph<Id> {
    * Getting an id's descendant id set (its children, it's childrens' children, and so on).
    */
   ImmutableSet<Id> descendantIdSet(Id id);
+
+  boolean descendantOf(Id id, Id potentialAncestor, boolean inclusive);
 
   // ===========================================================================
   // roots (sources)
@@ -119,7 +123,8 @@ public interface IdGraph<Id> {
   boolean containsCycle();
 
   /**
-   * A topologically sorted list of ids, with roots (sources) first (will be absent if the digraph is cyclic).
+   * A topologically sorted list of ids, with roots (sources) first (will be absent if the digraph
+   * is cyclic).
    */
   Optional<ImmutableList<Id>> optionalTopsortIdList();
 

@@ -45,11 +45,11 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
 
   private void validate(boolean allowPartial) {
 
-    if (!allowPartial && ! unboundIdSet().isEmpty())
+    if (!allowPartial && !unboundIdSet().isEmpty())
       throw new GraphIsMissingNodes("unbound ids = %s", unboundIdSet());
-    
+
     // =============
-    
+
     Set<Id> graphIds = idGraph.idSet();
 
     Set<Id> nodeMapIds = id__node.keySet();
@@ -217,6 +217,11 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   }
 
   @Override
+  public boolean ancestorOf(Id id, Id potentialDescendant, boolean inclusive) {
+    return idGraph.ancestorOf(id, potentialDescendant, inclusive);
+  }
+
+  @Override
   public Iterable<Node> ancestorNodeIterable(Id id) {
     return nodeWrapIterable(ancestorIdIterable(id), false);
   }
@@ -238,6 +243,11 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   @Override
   public ImmutableSet<Id> descendantIdSet(Id id) {
     return idGraph.descendantIdSet(id);
+  }
+
+  @Override
+  public boolean descendantOf(Id id, Id potentialAncestor, boolean inclusive) {
+    return idGraph.descendantOf(id, potentialAncestor, inclusive);
   }
 
   @Override
@@ -317,7 +327,7 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
       else
         optionalTopsortNodeList = Optional.absent();
     }
-    
+
     return optionalTopsortNodeList;
   }
 
