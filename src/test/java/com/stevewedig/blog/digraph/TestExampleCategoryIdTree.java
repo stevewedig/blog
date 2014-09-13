@@ -1,29 +1,28 @@
 package com.stevewedig.blog.digraph;
 
+import static org.junit.Assert.*;
+
 import java.util.Set;
 
 import org.junit.Test;
 
+import com.google.common.collect.ImmutableSet;
 import com.stevewedig.blog.digraph.id_graph.*;
-import com.stevewedig.blog.util.*;
+import com.stevewedig.blog.util.CollectLib;
 
-public class TestExampleCategoryTree {
+public class TestExampleCategoryIdTree {
 
   // ===========================================================================
-  // Category enum
+  // enum
   // ===========================================================================
 
   static enum Category {
 
-    animal,
-
-    mammal, primate,
-
-    reptile
+    animal, mammal, primate, reptile
   }
 
   // ===========================================================================
-
+  // tree
   // ===========================================================================
 
   private static IdTree<Category> idTree = IdTreeLib.fromParentMap(Category.mammal,
@@ -61,7 +60,7 @@ public class TestExampleCategoryTree {
   // ===========================================================================
 
   // TODO inChildren
-  public static boolean contains(Category parent, Category child) {
+  public static boolean isSubcategory(Category child, Category parent) {
 
     if (parent.equals(child))
       return true;
@@ -88,7 +87,27 @@ public class TestExampleCategoryTree {
   // ===========================================================================
 
   @Test
-  public void testExampleCategoryTree() {
+  public void testSubcategory() {
 
+    assertTrue(isSubcategory(Category.animal, Category.animal));
+    assertTrue(isSubcategory(Category.mammal, Category.animal));
+    assertTrue(isSubcategory(Category.primate, Category.mammal));
+    assertTrue(isSubcategory(Category.primate, Category.animal));
+
+    assertFalse(isSubcategory(Category.animal, Category.mammal));
+    assertFalse(isSubcategory(Category.mammal, Category.primate));
+    assertFalse(isSubcategory(Category.reptile, Category.mammal));
+
+  }
+
+  @Test
+  public void testDeepest() {
+
+    assertEquals(Category.animal, mostSpecific(ImmutableSet.of(Category.animal)));
+
+    assertEquals(Category.mammal, mostSpecific(ImmutableSet.of(Category.animal, Category.mammal)));
+
+    assertEquals(Category.primate, mostSpecific(ImmutableSet.of(Category.animal, Category.mammal,
+        Category.primate, Category.reptile)));
   }
 }
