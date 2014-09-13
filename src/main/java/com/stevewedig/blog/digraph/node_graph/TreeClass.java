@@ -54,13 +54,13 @@ public class TreeClass<Id, Node> extends DagClass<Id, Node> implements Tree<Id, 
   // ===========================================================================
 
   @Override
-  public ImmutableList<Id> ancestorIdList(Id id) {
-    return idTree.ancestorIdList(id);
+  public ImmutableList<Id> ancestorIdList(Id id, boolean inclusive) {
+    return idTree.ancestorIdList(id, inclusive);
   }
 
   @Override
-  public ImmutableList<Node> ancestorNodeList(Id id) {
-    return nodeWrapList(ancestorIdList(id), false);
+  public ImmutableList<Node> ancestorNodeList(Id id, boolean inclusive) {
+    return nodeWrapList(ancestorIdList(id, inclusive), false);
   }
 
   // ===========================================================================

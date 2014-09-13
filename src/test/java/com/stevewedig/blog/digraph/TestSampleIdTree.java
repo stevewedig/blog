@@ -194,14 +194,14 @@ public class TestSampleIdTree {
     assertEquals(ImmutableSet.of("a"), tree.ancestorIdSet("h", false));
 
     // ancestor list
-    assertEquals(ImmutableList.of(), tree.ancestorIdList("a"));
-    assertEquals(ImmutableList.of("a"), tree.ancestorIdList("b"));
-    assertEquals(ImmutableList.of("a", "b"), tree.ancestorIdList("c"));
-    assertEquals(ImmutableList.of("a", "b", "c"), tree.ancestorIdList("d"));
-    assertEquals(ImmutableList.of("a", "b"), tree.ancestorIdList("e"));
-    assertEquals(ImmutableList.of("a"), tree.ancestorIdList("f"));
-    assertEquals(ImmutableList.of("a", "f"), tree.ancestorIdList("g"));
-    assertEquals(ImmutableList.of("a"), tree.ancestorIdList("h"));
+    assertEquals(ImmutableList.of(), tree.ancestorIdList("a", false));
+    assertEquals(ImmutableList.of("a"), tree.ancestorIdList("b", false));
+    assertEquals(ImmutableList.of("a", "b"), tree.ancestorIdList("c", false));
+    assertEquals(ImmutableList.of("a", "b", "c"), tree.ancestorIdList("d", false));
+    assertEquals(ImmutableList.of("a", "b"), tree.ancestorIdList("e", false));
+    assertEquals(ImmutableList.of("a"), tree.ancestorIdList("f", false));
+    assertEquals(ImmutableList.of("a", "f"), tree.ancestorIdList("g", false));
+    assertEquals(ImmutableList.of("a"), tree.ancestorIdList("h", false));
 
     // depth
     assertEquals(0, tree.depth("a"));
@@ -228,7 +228,8 @@ public class TestSampleIdTree {
     // g <- f
     // <- g
     // <- h
-    assertEquals(ImmutableSet.of("b", "c", "d", "e", "f", "g", "h"), tree.descendantIdSet("a", false));
+    assertEquals(ImmutableSet.of("b", "c", "d", "e", "f", "g", "h"),
+        tree.descendantIdSet("a", false));
     assertEquals(ImmutableSet.of("c", "d", "e"), tree.descendantIdSet("b", false));
     assertEquals(ImmutableSet.of("d"), tree.descendantIdSet("c", false));
     assertEquals(ImmutableSet.of(), tree.descendantIdSet("d", false));

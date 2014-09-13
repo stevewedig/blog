@@ -163,8 +163,8 @@ public class TestDetailsPartial {
     // ancestor list
     // =================================
 
-    assertEquals(parseList(""), tree.ancestorIdList("a"));
-    assertEquals(parseList("a"), tree.ancestorIdList("b"));
+    assertEquals(parseList(""), tree.ancestorIdList("a", false));
+    assertEquals(parseList("a"), tree.ancestorIdList("b", false));
 
     // =================================
     // depth

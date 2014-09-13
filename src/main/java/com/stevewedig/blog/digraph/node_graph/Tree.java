@@ -34,6 +34,6 @@ public interface Tree<Id, Node> extends Dag<Id, Node>, PartialTree<Id, Node> {
   /**
    * Getting an id's ancestor node list, with the root node first and the id's parent node last.
    */
-  ImmutableList<Node> ancestorNodeList(Id id);
+  ImmutableList<Node> ancestorNodeList(Id id, boolean inclusive);
 
 }

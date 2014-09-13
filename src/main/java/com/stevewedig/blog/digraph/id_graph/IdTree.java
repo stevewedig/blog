@@ -35,7 +35,7 @@ public interface IdTree<Id> extends IdDag<Id> {
   /**
    * Getting an id's ancestor id list, with the root id first and the id's parent id last.
    */
-  ImmutableList<Id> ancestorIdList(Id id);
+  ImmutableList<Id> ancestorIdList(Id id, boolean inclusive);
 
   // ===========================================================================
   // depth

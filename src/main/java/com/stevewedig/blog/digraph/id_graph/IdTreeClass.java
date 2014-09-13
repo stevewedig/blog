@@ -74,12 +74,13 @@ public class IdTreeClass<Id> extends IdDagClass<Id> implements IdTree<Id> {
   // ===========================================================================
 
   @Override
-  public ImmutableList<Id> ancestorIdList(Id id) {
+  public ImmutableList<Id> ancestorIdList(Id id, boolean inclusive) {
 
     List<Id> ancestorIds = new ArrayList<>();
+    if (inclusive)
+      ancestorIds.add(id);
 
     Id currentId = id;
-
     while (true) {
 
       Optional<Id> parentId = parentId(currentId);
@@ -100,7 +101,7 @@ public class IdTreeClass<Id> extends IdDagClass<Id> implements IdTree<Id> {
 
   @Override
   public int depth(Id id) {
-    return ancestorIdList(id).size();
+    return ancestorIdList(id, false).size();
   }
 
   // ===================================

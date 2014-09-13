@@ -195,14 +195,14 @@ public class TestSampleNodeTree {
     assertEquals(ImmutableSet.of(a), tree.ancestorNodeSet("h", false));
 
     // ancestor list
-    assertEquals(ImmutableList.of(), tree.ancestorNodeList("a"));
-    assertEquals(ImmutableList.of(a), tree.ancestorNodeList("b"));
-    assertEquals(ImmutableList.of(a, b), tree.ancestorNodeList("c"));
-    assertEquals(ImmutableList.of(a, b, c), tree.ancestorNodeList("d"));
-    assertEquals(ImmutableList.of(a, b), tree.ancestorNodeList("e"));
-    assertEquals(ImmutableList.of(a), tree.ancestorNodeList("f"));
-    assertEquals(ImmutableList.of(a, f), tree.ancestorNodeList("g"));
-    assertEquals(ImmutableList.of(a), tree.ancestorNodeList("h"));
+    assertEquals(ImmutableList.of(), tree.ancestorNodeList("a", false));
+    assertEquals(ImmutableList.of(a), tree.ancestorNodeList("b", false));
+    assertEquals(ImmutableList.of(a, b), tree.ancestorNodeList("c", false));
+    assertEquals(ImmutableList.of(a, b, c), tree.ancestorNodeList("d", false));
+    assertEquals(ImmutableList.of(a, b), tree.ancestorNodeList("e", false));
+    assertEquals(ImmutableList.of(a), tree.ancestorNodeList("f", false));
+    assertEquals(ImmutableList.of(a, f), tree.ancestorNodeList("g", false));
+    assertEquals(ImmutableList.of(a), tree.ancestorNodeList("h", false));
 
     // =================================
     // descendants
