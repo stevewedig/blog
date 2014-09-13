@@ -23,6 +23,11 @@ public abstract class IdTreeLib {
     return fromParentMap(MultimapLib.keysAndValues(id__parentIds), id__parentIds);
   }
 
+  @SafeVarargs
+  public static <Id> IdTree<Id> fromParentMap(Id... entries) {
+    return fromParentMap(MultimapLib.setMultimap(entries));
+  }
+
   // ===========================================================================
   // fromChildMap
   // ===========================================================================
@@ -37,6 +42,11 @@ public abstract class IdTreeLib {
 
   public static <Id> IdTree<Id> fromChildMap(Multimap<Id, Id> id__childIds) {
     return fromChildMap(MultimapLib.keysAndValues(id__childIds), id__childIds);
+  }
+
+  @SafeVarargs
+  public static <Id> IdTree<Id> fromChildMap(Id... entries) {
+    return fromChildMap(MultimapLib.setMultimap(entries));
   }
 
 }
