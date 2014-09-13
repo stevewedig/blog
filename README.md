@@ -3,7 +3,7 @@ Libraries for Java 7+
 
 (GitHub has a rendered version of this readme: https://github.com/stevewedig/blog/)
 
-We all build up a pile of util code over time. This project is my effort to share the most reusable parts of my codebase. As I publish features I'll be describing them on my [blog](http://stevewedig.com) and sharing the code via GitHub & Maven.
+We all build up a pile of util code over time. This project is my effort to share the most reusable parts of my codebase. As I publish features I'll be describing them on my [blog](http://stevewedig.com) and sharing the code via GitHub & Maven. The code is well tested and used in production.
 
 I build on [Google Guava](https://code.google.com/p/guava-libraries/), so you can think of these libraries as an extension of Guava, which itself is an extension of Java's standard library.
 
