@@ -26,6 +26,7 @@ public class TestExampleCategoryTree {
   // id tree
   // ===========================================================================
 
+  // parent map means mapping from child -> parent(s)
   private static IdTree<Category> idTree = IdTreeLib.fromParentMap(Category.mammal,
       Category.animal, Category.primate, Category.mammal, Category.reptile, Category.animal);
 
@@ -61,7 +62,7 @@ public class TestExampleCategoryTree {
   // ===========================================================================
 
   // TODO
-  
+
   // ===========================================================================
   // node tree class
   // ===========================================================================
@@ -71,9 +72,9 @@ public class TestExampleCategoryTree {
   // ===========================================================================
   // node tree
   // ===========================================================================
-  
+
   // TODO
-  
+
   // ===========================================================================
   // tests
   // ===========================================================================
