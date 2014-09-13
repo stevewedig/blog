@@ -14,9 +14,6 @@
  */
 package com.stevewedig.blog.apache.commons.lang3;
 
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
-import java.text.Normalizer;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -814,15 +811,15 @@ public abstract class StringUtils {
   // See also Lucene's ASCIIFoldingFilter (Lucene 2.9) that replaces accented characters by their
   // unaccented equivalent (and uncommitted bug fix:
   // https://issues.apache.org/jira/browse/LUCENE-1343?focusedCommentId=12858907&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#action_12858907).
-  public static String stripAccents(final String input) {
-    if (input == null) {
-      return null;
-    }
-    final Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");//$NON-NLS-1$
-    final String decomposed = Normalizer.normalize(input, Normalizer.Form.NFD);
-    // Note that this doesn't correctly remove ligatures...
-    return pattern.matcher(decomposed).replaceAll("");//$NON-NLS-1$
-  }
+//  public static String stripAccents(final String input) {
+//    if (input == null) {
+//      return null;
+//    }
+//    final Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");//$NON-NLS-1$
+//    final String decomposed = Normalizer.normalize(input, Normalizer.Form.NFD);
+//    // Note that this doesn't correctly remove ligatures...
+//    return pattern.matcher(decomposed).replaceAll("");//$NON-NLS-1$
+//  }
 
   // Equals
   // -----------------------------------------------------------------------
@@ -3448,9 +3445,9 @@ public abstract class StringUtils {
    * @return an array of parsed Strings, {@code null} if null String input
    * @since 2.4
    */
-  public static String[] splitByCharacterType(final String str) {
-    return splitByCharacterType(str, false);
-  }
+//  public static String[] splitByCharacterType(final String str) {
+//    return splitByCharacterType(str, false);
+//  }
 
   /**
    * <p>
@@ -3476,9 +3473,9 @@ public abstract class StringUtils {
    * @return an array of parsed Strings, {@code null} if null String input
    * @since 2.4
    */
-  public static String[] splitByCharacterTypeCamelCase(final String str) {
-    return splitByCharacterType(str, true);
-  }
+//  public static String[] splitByCharacterTypeCamelCase(final String str) {
+//    return splitByCharacterType(str, true);
+//  }
 
   /**
    * <p>
@@ -3494,38 +3491,38 @@ public abstract class StringUtils {
    * @return an array of parsed Strings, {@code null} if null String input
    * @since 2.4
    */
-  private static String[] splitByCharacterType(final String str, final boolean camelCase) {
-    if (str == null) {
-      return null;
-    }
-    if (str.isEmpty()) {
-      return ArrayUtils.EMPTY_STRING_ARRAY;
-    }
-    final char[] c = str.toCharArray();
-    final List<String> list = new ArrayList<String>();
-    int tokenStart = 0;
-    int currentType = Character.getType(c[tokenStart]);
-    for (int pos = tokenStart + 1; pos < c.length; pos++) {
-      final int type = Character.getType(c[pos]);
-      if (type == currentType) {
-        continue;
-      }
-      if (camelCase && type == Character.LOWERCASE_LETTER
-          && currentType == Character.UPPERCASE_LETTER) {
-        final int newTokenStart = pos - 1;
-        if (newTokenStart != tokenStart) {
-          list.add(new String(c, tokenStart, newTokenStart - tokenStart));
-          tokenStart = newTokenStart;
-        }
-      } else {
-        list.add(new String(c, tokenStart, pos - tokenStart));
-        tokenStart = pos;
-      }
-      currentType = type;
-    }
-    list.add(new String(c, tokenStart, c.length - tokenStart));
-    return list.toArray(new String[list.size()]);
-  }
+//  private static String[] splitByCharacterType(final String str, final boolean camelCase) {
+//    if (str == null) {
+//      return null;
+//    }
+//    if (str.isEmpty()) {
+//      return ArrayUtils.EMPTY_STRING_ARRAY;
+//    }
+//    final char[] c = str.toCharArray();
+//    final List<String> list = new ArrayList<String>();
+//    int tokenStart = 0;
+//    int currentType = Character.getType(c[tokenStart]);
+//    for (int pos = tokenStart + 1; pos < c.length; pos++) {
+//      final int type = Character.getType(c[pos]);
+//      if (type == currentType) {
+//        continue;
+//      }
+//      if (camelCase && type == Character.LOWERCASE_LETTER
+//          && currentType == Character.UPPERCASE_LETTER) {
+//        final int newTokenStart = pos - 1;
+//        if (newTokenStart != tokenStart) {
+//          list.add(new String(c, tokenStart, newTokenStart - tokenStart));
+//          tokenStart = newTokenStart;
+//        }
+//      } else {
+//        list.add(new String(c, tokenStart, pos - tokenStart));
+//        tokenStart = pos;
+//      }
+//      currentType = type;
+//    }
+//    list.add(new String(c, tokenStart, c.length - tokenStart));
+//    return list.toArray(new String[list.size()]);
+//  }
 
   // Joining
   // -----------------------------------------------------------------------
@@ -4752,10 +4749,10 @@ public abstract class StringUtils {
    * @see Pattern#DOTALL
    * @since 3.2
    */
-  public static String replacePattern(final String source, final String regex,
-      final String replacement) {
-    return Pattern.compile(regex, Pattern.DOTALL).matcher(source).replaceAll(replacement);
-  }
+//  public static String replacePattern(final String source, final String regex,
+//      final String replacement) {
+//    return Pattern.compile(regex, Pattern.DOTALL).matcher(source).replaceAll(replacement);
+//  }
 
   /**
    * Removes each substring of the source String that matches the given regular expression using the
@@ -4768,9 +4765,9 @@ public abstract class StringUtils {
    * @see Pattern#DOTALL
    * @since 3.2
    */
-  public static String removePattern(final String source, final String regex) {
-    return replacePattern(source, regex, StringUtils.EMPTY);
-  }
+//  public static String removePattern(final String source, final String regex) {
+//    return replacePattern(source, regex, StringUtils.EMPTY);
+//  }
 
   /**
    * <p>
@@ -5361,10 +5358,10 @@ public abstract class StringUtils {
    * @deprecated This feature will be removed in Lang 4.0, use
    *             {@link StringUtils#removeEnd(String, String)} instead
    */
-  @Deprecated
-  public static String chomp(final String str, final String separator) {
-    return removeEnd(str, separator);
-  }
+//  @Deprecated
+//  public static String chomp(final String str, final String separator) {
+//    return removeEnd(str, separator);
+//  }
 
   // Chopping
   // -----------------------------------------------------------------------
@@ -5971,12 +5968,12 @@ public abstract class StringUtils {
    * @return the upper cased String, {@code null} if null String input
    * @since 2.5
    */
-  public static String upperCase(final String str, final Locale locale) {
-    if (str == null) {
-      return null;
-    }
-    return str.toUpperCase(locale);
-  }
+//  public static String upperCase(final String str, final Locale locale) {
+//    if (str == null) {
+//      return null;
+//    }
+//    return str.toUpperCase(locale);
+//  }
 
   /**
    * <p>
@@ -6030,12 +6027,12 @@ public abstract class StringUtils {
    * @return the lower cased String, {@code null} if null String input
    * @since 2.5
    */
-  public static String lowerCase(final String str, final Locale locale) {
-    if (str == null) {
-      return null;
-    }
-    return str.toLowerCase(locale);
-  }
+//  public static String lowerCase(final String str, final Locale locale) {
+//    if (str == null) {
+//      return null;
+//    }
+//    return str.toLowerCase(locale);
+//  }
 
   /**
    * <p>
@@ -6060,21 +6057,21 @@ public abstract class StringUtils {
    * @see #uncapitalize(String)
    * @since 2.0
    */
-  public static String capitalize(final String str) {
-    int strLen;
-    if (str == null || (strLen = str.length()) == 0) {
-      return str;
-    }
-
-    final char firstChar = str.charAt(0);
-    if (Character.isTitleCase(firstChar)) {
-      // already capitalized
-      return str;
-    }
-
-    return new StringBuilder(strLen).append(Character.toTitleCase(firstChar))
-        .append(str.substring(1)).toString();
-  }
+//  public static String capitalize(final String str) {
+//    int strLen;
+//    if (str == null || (strLen = str.length()) == 0) {
+//      return str;
+//    }
+//
+//    final char firstChar = str.charAt(0);
+//    if (Character.isTitleCase(firstChar)) {
+//      // already capitalized
+//      return str;
+//    }
+//
+//    return new StringBuilder(strLen).append(Character.toTitleCase(firstChar))
+//        .append(str.substring(1)).toString();
+//  }
 
   /**
    * <p>
@@ -6147,25 +6144,25 @@ public abstract class StringUtils {
    * @param str the String to swap case, may be null
    * @return the changed String, {@code null} if null String input
    */
-  public static String swapCase(final String str) {
-    if (StringUtils.isEmpty(str)) {
-      return str;
-    }
-
-    final char[] buffer = str.toCharArray();
-
-    for (int i = 0; i < buffer.length; i++) {
-      final char ch = buffer[i];
-      if (Character.isUpperCase(ch)) {
-        buffer[i] = Character.toLowerCase(ch);
-      } else if (Character.isTitleCase(ch)) {
-        buffer[i] = Character.toLowerCase(ch);
-      } else if (Character.isLowerCase(ch)) {
-        buffer[i] = Character.toUpperCase(ch);
-      }
-    }
-    return new String(buffer);
-  }
+//  public static String swapCase(final String str) {
+//    if (StringUtils.isEmpty(str)) {
+//      return str;
+//    }
+//
+//    final char[] buffer = str.toCharArray();
+//
+//    for (int i = 0; i < buffer.length; i++) {
+//      final char ch = buffer[i];
+//      if (Character.isUpperCase(ch)) {
+//        buffer[i] = Character.toLowerCase(ch);
+//      } else if (Character.isTitleCase(ch)) {
+//        buffer[i] = Character.toLowerCase(ch);
+//      } else if (Character.isLowerCase(ch)) {
+//        buffer[i] = Character.toUpperCase(ch);
+//      }
+//    }
+//    return new String(buffer);
+//  }
 
   // Count matches
   // -----------------------------------------------------------------------
@@ -7609,59 +7606,59 @@ public abstract class StringUtils {
    *         {@code null}
    * @since 3.4
    */
-  public static int getFuzzyDistance(final CharSequence term, final CharSequence query,
-      final Locale locale) {
-    if (term == null || query == null) {
-      throw new IllegalArgumentException("Strings must not be null");
-    } else if (locale == null) {
-      throw new IllegalArgumentException("Locale must not be null");
-    }
-
-    // fuzzy logic is case insensitive. We normalize the Strings to lower
-    // case right from the start. Turning characters to lower case
-    // via Character.toLowerCase(char) is unfortunately insufficient
-    // as it does not accept a locale.
-    final String termLowerCase = term.toString().toLowerCase(locale);
-    final String queryLowerCase = query.toString().toLowerCase(locale);
-
-    // the resulting score
-    int score = 0;
-
-    // the position in the term which will be scanned next for potential
-    // query character matches
-    int termIndex = 0;
-
-    // index of the previously matched character in the term
-    int previousMatchingCharacterIndex = Integer.MIN_VALUE;
-
-    for (int queryIndex = 0; queryIndex < queryLowerCase.length(); queryIndex++) {
-      final char queryChar = queryLowerCase.charAt(queryIndex);
-
-      boolean termCharacterMatchFound = false;
-      for (; termIndex < termLowerCase.length() && !termCharacterMatchFound; termIndex++) {
-        final char termChar = termLowerCase.charAt(termIndex);
-
-        if (queryChar == termChar) {
-          // simple character matches result in one point
-          score++;
-
-          // subsequent character matches further improve
-          // the score.
-          if (previousMatchingCharacterIndex + 1 == termIndex) {
-            score += 2;
-          }
-
-          previousMatchingCharacterIndex = termIndex;
-
-          // we can leave the nested loop. Every character in the
-          // query can match at most one character in the term.
-          termCharacterMatchFound = true;
-        }
-      }
-    }
-
-    return score;
-  }
+//  public static int getFuzzyDistance(final CharSequence term, final CharSequence query,
+//      final Locale locale) {
+//    if (term == null || query == null) {
+//      throw new IllegalArgumentException("Strings must not be null");
+//    } else if (locale == null) {
+//      throw new IllegalArgumentException("Locale must not be null");
+//    }
+//
+//    // fuzzy logic is case insensitive. We normalize the Strings to lower
+//    // case right from the start. Turning characters to lower case
+//    // via Character.toLowerCase(char) is unfortunately insufficient
+//    // as it does not accept a locale.
+//    final String termLowerCase = term.toString().toLowerCase(locale);
+//    final String queryLowerCase = query.toString().toLowerCase(locale);
+//
+//    // the resulting score
+//    int score = 0;
+//
+//    // the position in the term which will be scanned next for potential
+//    // query character matches
+//    int termIndex = 0;
+//
+//    // index of the previously matched character in the term
+//    int previousMatchingCharacterIndex = Integer.MIN_VALUE;
+//
+//    for (int queryIndex = 0; queryIndex < queryLowerCase.length(); queryIndex++) {
+//      final char queryChar = queryLowerCase.charAt(queryIndex);
+//
+//      boolean termCharacterMatchFound = false;
+//      for (; termIndex < termLowerCase.length() && !termCharacterMatchFound; termIndex++) {
+//        final char termChar = termLowerCase.charAt(termIndex);
+//
+//        if (queryChar == termChar) {
+//          // simple character matches result in one point
+//          score++;
+//
+//          // subsequent character matches further improve
+//          // the score.
+//          if (previousMatchingCharacterIndex + 1 == termIndex) {
+//            score += 2;
+//          }
+//
+//          previousMatchingCharacterIndex = termIndex;
+//
+//          // we can leave the nested loop. Every character in the
+//          // query can match at most one character in the term.
+//          termCharacterMatchFound = true;
+//        }
+//      }
+//    }
+//
+//    return score;
+//  }
 
   /**
    * Gets a set of matching characters between two strings.
@@ -8280,12 +8277,12 @@ public abstract class StringUtils {
    *             constants in your code
    * @since 3.1
    */
-  @Deprecated
-  public static String toString(final byte[] bytes, final String charsetName)
-      throws UnsupportedEncodingException {
-    return charsetName != null ? new String(bytes, charsetName) : new String(bytes,
-        Charset.defaultCharset());
-  }
+//  @Deprecated
+//  public static String toString(final byte[] bytes, final String charsetName)
+//      throws UnsupportedEncodingException {
+//    return charsetName != null ? new String(bytes, charsetName) : new String(bytes,
+//        Charset.defaultCharset());
+//  }
 
   /**
    * Converts a <code>byte[]</code> to a String using the specified character encoding.
@@ -8297,9 +8294,9 @@ public abstract class StringUtils {
    * @since 3.2
    * @since 3.3 No longer throws {@link UnsupportedEncodingException}.
    */
-  public static String toEncodedString(final byte[] bytes, final Charset charset) {
-    return new String(bytes, charset != null ? charset : Charset.defaultCharset());
-  }
+//  public static String toEncodedString(final byte[] bytes, final Charset charset) {
+//    return new String(bytes, charset != null ? charset : Charset.defaultCharset());
+//  }
 
   /**
    * <p>

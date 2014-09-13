@@ -1,6 +1,6 @@
 
-I don't want to introduce a dependency on Commons, however Guava don't provide a supserset of the functionality.
-So this directory contains a few files copied over from Apache Commons. 
+I don't want to introduce a dependency on Commons, however Guava don't provide a supserset of the functionality. 
+So this directory contains a few files copied over from Apache Commons. Modifications have been made to make it GWT compatible. 
 
 Website:
 http://commons.apache.org/proper/commons-lang/
