@@ -20,4 +20,24 @@ public abstract class SetLib {
     return items;
   }
 
+  public static <Item> void assertEquals(Set<Item> expected, Set<Item> provided) {
+
+    if (expected.equals(provided))
+      return;
+
+    Set<Item> missing = Sets.difference(expected, provided);
+
+    Set<Item> unexpected = Sets.difference(provided, expected);
+
+    String message = "Sets were not equal.";
+
+    if (!missing.isEmpty())
+      message += " Missing items: " + missing + ".";
+
+    if (!unexpected.isEmpty())
+      message += " Unexpected items: " + unexpected + ".";
+
+    throw new AssertionError(message);
+
+  }
 }

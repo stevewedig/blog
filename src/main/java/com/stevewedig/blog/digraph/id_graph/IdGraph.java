@@ -1,6 +1,6 @@
 package com.stevewedig.blog.digraph.id_graph;
 
-import java.util.List;
+import java.util.*;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.*;
@@ -24,6 +24,10 @@ public interface IdGraph<Id> {
    * The number of ids.
    */
   int idSize();
+
+  void assertIdsMatch(ImmutableSet<Id> ids);
+
+  void assertIdsMatch(Id[] ids);
 
   // ===========================================================================
   // parents

@@ -69,6 +69,19 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
     return idSet().size();
   }
 
+  // ===================================
+
+  @Override
+  public void assertIdsMatch(ImmutableSet<Id> ids) {
+    SetLib.assertEquals(idSet(), ids);
+  }
+
+  @Override
+  public void assertIdsMatch(Id[] ids) {
+    assertIdsMatch(ImmutableSet.copyOf(ids));
+  }
+
+
   // ===========================================================================
   // parents
   // ===========================================================================

@@ -84,6 +84,16 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
     return idGraph.idSize();
   }
 
+  @Override
+  public void assertIdsMatch(ImmutableSet<Id> ids) {
+    idGraph.assertIdsMatch(ids);
+  }
+
+  @Override
+  public void assertIdsMatch(Id[] ids) {
+    idGraph.assertIdsMatch(ids);
+  }
+
   // ===========================================================================
   // nodeSet
   // ===========================================================================
@@ -559,4 +569,5 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   public void clear() {
     throw new NotMutable();
   }
+
 }

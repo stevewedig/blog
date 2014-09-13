@@ -9,7 +9,7 @@ import org.junit.Test;
 import com.google.common.collect.ImmutableSet;
 import com.stevewedig.blog.digraph.id_graph.*;
 
-public class TestExampleCategoryIdTree {
+public class TestExampleCategoryTree {
 
   // TODO this example is in progress
 
@@ -29,10 +29,9 @@ public class TestExampleCategoryIdTree {
   private static IdTree<Category> idTree = IdTreeLib.fromParentMap(Category.mammal,
       Category.animal, Category.primate, Category.mammal, Category.reptile, Category.animal);
 
-  // TODO assertion on tree?
+  // this will raise an error if we add a Category without adding it to the tree
   static {
-    if (idTree.idSize() != Category.values().length)
-      throw new RuntimeException("category tree is missing items");
+    idTree.assertIdsMatch(Category.values());
   }
 
   // ===========================================================================
@@ -45,7 +44,7 @@ public class TestExampleCategoryIdTree {
 
   // TODO inChildren
   public static boolean isSubcategory(Category child, Category parent) {
-    return idTree.descendantOf(child,  parent, true);
+    return idTree.descendantOf(child, parent, true);
   }
 
   // ===========================================================================
@@ -62,6 +61,8 @@ public class TestExampleCategoryIdTree {
   // ===========================================================================
   // test
   // ===========================================================================
+
+  // TODO show the idTree vs nodeTree approaches
 
   @Test
   public void testSubcategory() {
