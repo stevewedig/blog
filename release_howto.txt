@@ -1,4 +1,8 @@
 
+================================================================================
+publishing project to maven central
+================================================================================
+
 1. read this:
 http://central.sonatype.org/pages/ossrh-guide.html
 
@@ -32,4 +36,16 @@ https://oss.sonatype.org/index.html#stagingRepositories
 
 12. wait 2 hours and it should show up in Maven Central
 http://search.maven.org/
+
+================================================================================
+publishing javadocs to github 
+================================================================================
+
+https://help.github.com/articles/user-organization-and-project-pages
+
+http://assylias.wordpress.com/2013/01/06/upload-javadoc-to-github/
+
+http://stackoverflow.com/a/15364790
+
+http://stackoverflow.com/a/3943515
 

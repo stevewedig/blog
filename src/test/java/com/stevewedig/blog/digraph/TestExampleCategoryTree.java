@@ -58,7 +58,7 @@ public class TestExampleCategoryTree {
   // ===========================================================================
 
   @Test
-  public void testSubcategory() {
+  public void testIsSubcategory() {
 
     assertTrue(isSubcategory(Category.animal, Category.animal));
     assertTrue(isSubcategory(Category.mammal, Category.animal));
@@ -68,7 +68,7 @@ public class TestExampleCategoryTree {
     assertFalse(isSubcategory(Category.animal, Category.mammal));
     assertFalse(isSubcategory(Category.mammal, Category.primate));
     assertFalse(isSubcategory(Category.reptile, Category.mammal));
-
+    
   }
 
   @Test
@@ -80,6 +80,7 @@ public class TestExampleCategoryTree {
 
     assertEquals(Category.primate, mostSpecific(ImmutableSet.of(Category.animal, Category.mammal,
         Category.primate, Category.reptile)));
+  
   }
 
   @Test
