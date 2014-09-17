@@ -79,10 +79,69 @@ public class TestCollectLib {
   // ===========================================================================
   // is even?
   // ===========================================================================
-  //
-  // @Test
-  // public void testUnionEmpty() {
-  // }
+  
+   @Test
+   public void testEvenSizeOrNot() {
+     
+     String[] oddArray = {"a"};
+     String[] evenArray = {};
+
+     Collection<String> oddCollection = ImmutableSet.of("a");
+     Collection<String> evenCollection = ImmutableSet.of();
+
+     // =================================
+     // is even (array)
+     // =================================
+
+     CollectLib.assertSizeIsEven(evenArray);
+     
+     try {
+       CollectLib.assertSizeIsEven(oddArray);
+       throw new NotThrown(AssertionError.class);
+     }
+     catch(AssertionError e) {
+     }
+
+     // =================================
+     // is even (collection)
+     // =================================
+
+     CollectLib.assertSizeIsEven(evenCollection);
+     
+     try {
+       CollectLib.assertSizeIsEven(oddCollection);
+       throw new NotThrown(AssertionError.class);
+     }
+     catch(AssertionError e) {
+     }
+     
+     // =================================
+     // not even (array)
+     // =================================
+     
+     CollectLib.assertSizeIsOdd(oddArray);
+     
+     try {
+       CollectLib.assertSizeIsOdd(evenArray);
+       throw new NotThrown(AssertionError.class);
+     }
+     catch(AssertionError e) {
+     }
+
+     // =================================
+     // not even (collection)
+     // =================================
+     
+     CollectLib.assertSizeIsOdd(oddCollection);
+     
+     try {
+       CollectLib.assertSizeIsOdd(evenCollection);
+       throw new NotThrown(AssertionError.class);
+     }
+     catch(AssertionError e) {
+     }     
+     
+   }
 
 
 }

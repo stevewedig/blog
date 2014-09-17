@@ -40,6 +40,14 @@ public abstract class CollectLib {
     return NumLib.isEven(items.size());
   }
 
+  public static <Item> boolean isSizeOdd(Item[] items) {
+    return NumLib.isOdd(items.length);
+  }
+  
+  public static <Item> boolean isSizeOdd(Collection<Item> items) {
+    return NumLib.isOdd(items.size());
+  }
+
   public static <Item> void assertSizeIsEven(Item[] items) {
     if (!isSizeEven(items))
       throw new AssertionError("array size was not even, size was " + items.length);
@@ -48,6 +56,16 @@ public abstract class CollectLib {
   public static <Item> void assertSizeIsEven(Collection<Item> items) {
     if (!isSizeEven(items))
       throw new AssertionError("collection size was not even, size was " + items.size());
+  }
+  
+  public static <Item> void assertSizeIsOdd(Item[] items) {
+    if (!isSizeOdd(items))
+      throw new AssertionError("array size was not odd, size was " + items.length);
+  }
+  
+  public static <Item> void assertSizeIsOdd(Collection<Item> items) {
+    if (!isSizeOdd(items))
+      throw new AssertionError("collection size was not odd, size was " + items.size());
   }
 
 }
