@@ -9,6 +9,12 @@ import com.google.common.collect.Sets;
  */
 public abstract class SetLib {
 
+  /**
+   * Return the union of a variable number of sets.
+   * 
+   * @param sets Variable number of sets.
+   * @return The union.
+   */
   @SafeVarargs
   public static <Item> Set<Item> union(Set<Item>... sets) {
 
@@ -20,7 +26,15 @@ public abstract class SetLib {
     return items;
   }
 
-  public static <Item> void assertEquals(Set<Item> expected, Set<Item> provided) {
+  /**
+   * Assert that two sets are equal, identifying missing and unexpected items if they are not.
+   * 
+   * @param expected The expected items.
+   * @param provided The provided items.
+   * @throws AssertionError
+   */
+  public static <Item> void assertEquals(Set<Item> expected, Set<Item> provided)
+      throws AssertionError {
 
     if (expected.equals(provided))
       return;
