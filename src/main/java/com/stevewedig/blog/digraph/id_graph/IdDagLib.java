@@ -25,7 +25,7 @@ public abstract class IdDagLib {
 
   @SafeVarargs
   public static <Id> IdDag<Id> fromParentMap(Id... entries) {
-    return fromParentMap(MultimapLib.setMultimap(entries));
+    return fromParentMap(MultimapLib.of(entries));
   }
 
   // ===========================================================================
@@ -46,7 +46,7 @@ public abstract class IdDagLib {
 
   @SafeVarargs
   public static <Id> IdDag<Id> fromChildMap(Id... entries) {
-    return fromChildMap(MultimapLib.setMultimap(entries));
+    return fromChildMap(MultimapLib.of(entries));
   }
 
 }

@@ -21,10 +21,10 @@ public class TestExampleCategoryTree {
   }
 
   // ===========================================================================
-  // id tree
+  // static category tree (an id tree)
   // ===========================================================================
 
-  // parent map means mapping from child -> parent(s)
+  // "parent map" means mapping from child -> parent(s)
   static IdTree<Category> tree = IdTreeLib.fromParentMap(Category.mammal, Category.animal,
       Category.primate, Category.mammal, Category.reptile, Category.animal, Category.lizard,
       Category.reptile);
@@ -35,17 +35,20 @@ public class TestExampleCategoryTree {
   }
 
   // ===========================================================================
-  // id tree methods
+  // static category methods
   // ===========================================================================
 
+  // similar to the "issubclass" operator
   public static boolean isSubcategory(Category child, Category parent) {
     return tree.descendantOf(child, parent, true);
   }
 
+  // non-deterministic choice when two categories are equally deep
   public static Category mostSpecific(Set<Category> categories) {
     return tree.mostDeep(categories);
   }
 
+  // subtree // TODO impl subtree method
   public static Set<Category> addSupercategories(Set<Category> categories) {
     return tree.ancestorIdSet(categories, true);
   }

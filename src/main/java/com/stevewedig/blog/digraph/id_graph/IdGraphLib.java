@@ -25,7 +25,7 @@ public abstract class IdGraphLib {
 
   @SafeVarargs
   public static <Id> IdGraph<Id> fromParentMap(Id... entries) {
-    return fromParentMap(MultimapLib.setMultimap(entries));
+    return fromParentMap(MultimapLib.of(entries));
   }
 
   // ===========================================================================
@@ -46,7 +46,7 @@ public abstract class IdGraphLib {
 
   @SafeVarargs
   public static <Id> IdGraph<Id> fromChildMap(Id... entries) {
-    return fromChildMap(MultimapLib.setMultimap(entries));
+    return fromChildMap(MultimapLib.of(entries));
   }
 
 }

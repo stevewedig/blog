@@ -122,6 +122,7 @@ public class TestExampleTwitterGraph {
 
     private IdGraph<String> graph() {
       if (!graph.isPresent())
+        // "parent map" means mapping from child -> parent(s)
         graph = Optional.of(IdGraphLib.fromParentMap(names, follower__following));
       return graph.get();
     }
