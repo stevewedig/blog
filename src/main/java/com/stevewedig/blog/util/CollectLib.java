@@ -2,9 +2,31 @@ package com.stevewedig.blog.util;
 
 import java.util.Collection;
 
-import com.stevewedig.blog.errors.Bug;
-
 public abstract class CollectLib {
+
+  // ===========================================================================
+  // is empty?
+  // ===========================================================================
+
+  public static <Item> void assertNotEmpty(Item[] items) {
+    if (items.length == 0)
+      throw new AssertionError("array was empty");
+  }
+
+  public static <Item> void assertNotEmpty(Collection<Item> items) {
+    if (items.isEmpty())
+      throw new AssertionError("collection was empty");
+  }
+
+  public static <Item> void assertIsEmpty(Item[] items) {
+    if (items.length != 0)
+      throw new AssertionError("array not empty");
+  }
+
+  public static <Item> void assertIsEmpty(Collection<Item> items) {
+    if (!items.isEmpty())
+      throw new AssertionError("collection not empty");
+  }
 
   // ===========================================================================
   // is size even?
@@ -20,26 +42,13 @@ public abstract class CollectLib {
 
   public static <Item> void assertSizeIsEven(Item[] items) {
     if (!isSizeEven(items))
-      throw new Bug("array size was not even, got %s items", items.length);
+      throw new AssertionError("array size was not even, size was " + items.length);
   }
 
   public static <Item> void assertSizeIsEven(Collection<Item> items) {
     if (!isSizeEven(items))
-      throw new Bug("collection size was not even, got %s items", items.size());
-  }
-
-  // ===========================================================================
-  // is empty?
-  // ===========================================================================
-
-  public static <Item> void assertNotEmpty(Item[] items) {
-    if (items.length == 0)
-      throw new Bug("array was empty");
-  }
-
-  public static <Item> void assertNotEmpty(Collection<Item> items) {
-    if (items.isEmpty())
-      throw new Bug("collection was empty");
+      throw new AssertionError("collection size was not even, size was " + items.size());
   }
 
 }
+
