@@ -1,7 +1,7 @@
 package com.stevewedig.blog.digraph.id_graph;
 
-import java.util.*;
 
+import java.util.*;
 import com.google.common.base.Optional;
 import com.google.common.collect.*;
 import com.stevewedig.blog.util.LambdaLib.Fn1;
@@ -123,7 +123,6 @@ public interface IdGraph<Id> {
    */
   ImmutableSet<Id> rootIdSet();
 
-
   // ===========================================================================
   // leaves (sinks)
   // ===========================================================================
@@ -158,24 +157,48 @@ public interface IdGraph<Id> {
    * Generic id traversal as an iterable.
    * 
    * @param depthFirst Whether to traverse depth first or breadth first.
-   * @param includeStarts Whether to include the start ids in the traversal.
-   * @param startIds The initial id set.
+   * @param inclusive Whether to include the start ids in the traversal.
+   * @param startId The initial id.
    * @param expand A function mapping an id to the next ids.
    * @return An id iterable corresponding to the traversal.
    */
-  Iterable<Id> idIterable(boolean depthFirst, boolean includeStarts, ImmutableList<Id> startIds,
+  Iterable<Id> idIterable(boolean depthFirst, boolean inclusive, Id startId,
+      Fn1<Id, List<Id>> expand);
+
+  /**
+   * Generic id traversal as an iterable.
+   * 
+   * @param depthFirst Whether to traverse depth first or breadth first.
+   * @param inclusive Whether to include the start ids in the traversal.
+   * @param startIds The initial id list.
+   * @param expand A function mapping an id to the next ids.
+   * @return An id iterable corresponding to the traversal.
+   */
+  Iterable<Id> idIterable(boolean depthFirst, boolean inclusive, ImmutableList<Id> startIds,
       Fn1<Id, List<Id>> expand);
 
   /**
    * Generic id traversal copied into a list.
    * 
    * @param depthFirst Whether to traverse depth first or breadth first.
-   * @param includeStarts Whether to include the start ids in the traversal.
-   * @param startIds The initial id set.
+   * @param inclusive Whether to include the start ids in the traversal.
+   * @param startIds The initial id.
    * @param expand A function mapping an id to the next ids.
    * @return An id list corresponding to the traversal.
    */
-  ImmutableList<Id> idList(boolean depthFirst, boolean includeStarts, ImmutableList<Id> startIds,
+  ImmutableList<Id> idList(boolean depthFirst, boolean inclusive, Id startId,
+      Fn1<Id, List<Id>> expand);
+
+  /**
+   * Generic id traversal copied into a list.
+   * 
+   * @param depthFirst Whether to traverse depth first or breadth first.
+   * @param inclusive Whether to include the start ids in the traversal.
+   * @param startIds The initial id list.
+   * @param expand A function mapping an id to the next ids.
+   * @return An id list corresponding to the traversal.
+   */
+  ImmutableList<Id> idList(boolean depthFirst, boolean inclusive, ImmutableList<Id> startIds,
       Fn1<Id, List<Id>> expand);
 
 }

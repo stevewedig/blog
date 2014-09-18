@@ -205,7 +205,7 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
 
   @Override
   public Iterable<Id> ancestorIdIterable(Id id, boolean inclusive) {
-    return idIterable(true, inclusive, ImmutableList.of(id), parentIdListLambda());
+    return idIterable(true, inclusive, id, parentIdListLambda());
   }
 
   @Override
@@ -244,7 +244,7 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
 
   @Override
   public Iterable<Id> descendantIdIterable(Id id, boolean inclusive) {
-    return idIterable(true, inclusive, ImmutableList.of(id), childIdListLambda());
+    return idIterable(true, inclusive, id, childIdListLambda());
   }
 
   @Override
@@ -355,19 +355,33 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
   // ===========================================================================
 
   @Override
-  public Iterable<Id> idIterable(boolean depthFirst, boolean includeStarts,
-      ImmutableList<Id> startIds, Fn1<Id, List<Id>> expand) {
+  public Iterable<Id> idIterable(boolean depthFirst, boolean inclusive, Id startId,
+      Fn1<Id, List<Id>> expand) {
 
-    // Notice that completedly delegate to TraverseLib. This is only exposed as a method on IdGraph
-    // for convenient access.
-    return TraverseLib.idIterable(depthFirst, includeStarts, startIds, expand);
+    return idIterable(depthFirst, inclusive, ImmutableList.of(startId), expand);
   }
 
   @Override
-  public ImmutableList<Id> idList(boolean depthFirst, boolean includeStarts,
+  public Iterable<Id> idIterable(boolean depthFirst, boolean inclusive, ImmutableList<Id> startIds,
+      Fn1<Id, List<Id>> expand) {
+
+    // Notice that completedly delegate to TraverseLib. This is only exposed as a method on IdGraph
+    // for convenient access.
+    return TraverseLib.idIterable(depthFirst, inclusive, startIds, expand);
+  }
+
+  @Override
+  public ImmutableList<Id> idList(boolean depthFirst, boolean inclusive, Id startId,
+      Fn1<Id, List<Id>> expand) {
+
+    return idList(depthFirst, inclusive, ImmutableList.of(startId), expand);
+  }
+
+  @Override
+  public ImmutableList<Id> idList(boolean depthFirst, boolean inclusive,
       ImmutableList<Id> startIds, Fn1<Id, List<Id>> expand) {
 
-    return ImmutableList.copyOf(idIterable(depthFirst, includeStarts, startIds, expand));
+    return ImmutableList.copyOf(idIterable(depthFirst, inclusive, startIds, expand));
   }
 
 }

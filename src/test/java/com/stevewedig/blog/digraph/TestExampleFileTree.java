@@ -245,11 +245,11 @@ public class TestExampleFileTree {
     public Iterable<FileNode> orderedDepthFirst() {
 
       boolean depthFirst = true;
-      boolean includeStarts = true;
+      boolean inclusive = true;
 
       ImmutableList<String> startIds = ImmutableList.of(rootId());
 
-      return nodeIterable(depthFirst, includeStarts, startIds, node__childList);
+      return nodeIterable(depthFirst, inclusive, startIds, node__childList);
     }
 
     private Fn1<FileNode, List<String>> node__childList = new Fn1<FileNode, List<String>>() {

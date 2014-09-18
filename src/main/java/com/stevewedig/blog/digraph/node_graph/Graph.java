@@ -102,24 +102,48 @@ public interface Graph<Id, Node> extends PartialGraph<Id, Node> {
    * Generic node traversal as an iterable.
    * 
    * @param depthFirst Whether to traverse depth first or breadth first.
-   * @param includeStarts Whether to include the start nodes in the traversal.
-   * @param startIds The initial id set.
+   * @param inclusive Whether to include the start nodes in the traversal.
+   * @param startId The initial id.
    * @param expand A function mapping a node to the next ids.
    * @return A node iterable corresponding to the traversal.
    */
-  Iterable<Node> nodeIterable(boolean depthFirst, boolean includeStarts,
-      ImmutableList<Id> startIds, Fn1<Node, List<Id>> expand);
+  Iterable<Node> nodeIterable(boolean depthFirst, boolean inclusive, Id startId,
+      Fn1<Node, List<Id>> expand);
+
+  /**
+   * Generic node traversal as an iterable.
+   * 
+   * @param depthFirst Whether to traverse depth first or breadth first.
+   * @param inclusive Whether to include the start nodes in the traversal.
+   * @param startIds The initial id list.
+   * @param expand A function mapping a node to the next ids.
+   * @return A node iterable corresponding to the traversal.
+   */
+  Iterable<Node> nodeIterable(boolean depthFirst, boolean inclusive, ImmutableList<Id> startIds,
+      Fn1<Node, List<Id>> expand);
 
   /**
    * Generic node traversal copied into a list.
    * 
    * @param depthFirst Whether to traverse depth first or breadth first.
-   * @param includeStarts Whether to include the start nodes in the traversal.
-   * @param startIds The initial id set.
+   * @param inclusive Whether to include the start nodes in the traversal.
+   * @param startIds The initial id.
    * @param expand A function mapping a node to the next ids.
    * @return A node list corresponding to the traversal.
    */
-  ImmutableList<Node> nodeList(boolean depthFirst, boolean includeStarts,
-      ImmutableList<Id> startIds, Fn1<Node, List<Id>> expand);
+  ImmutableList<Node> nodeList(boolean depthFirst, boolean inclusive, Id startId,
+      Fn1<Node, List<Id>> expand);
+
+  /**
+   * Generic node traversal copied into a list.
+   * 
+   * @param depthFirst Whether to traverse depth first or breadth first.
+   * @param inclusive Whether to include the start nodes in the traversal.
+   * @param startIds The initial id list.
+   * @param expand A function mapping a node to the next ids.
+   * @return A node list corresponding to the traversal.
+   */
+  ImmutableList<Node> nodeList(boolean depthFirst, boolean inclusive, ImmutableList<Id> startIds,
+      Fn1<Node, List<Id>> expand);
 
 }
