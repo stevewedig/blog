@@ -1,10 +1,10 @@
 package com.stevewedig.blog.digraph.node_graph;
 
-import java.util.Collection;
+import java.util.*;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.*;
-import com.stevewedig.blog.digraph.id_graph.IdTree;
+import com.stevewedig.blog.digraph.id_graph.*;
 
 /**
  * An implementation of Tree.
@@ -54,6 +54,16 @@ public class TreeClass<Id, Node> extends DagClass<Id, Node> implements Tree<Id, 
   // ===========================================================================
 
   @Override
+  public IdTree<Id> ancestorIdGraph(Id id, boolean inclusive) {
+    return idTree.ancestorIdGraph(id, inclusive);
+  }
+
+  @Override
+  public IdTree<Id> ancestorIdGraph(Set<Id> ids, boolean inclusive) {
+    return idTree.ancestorIdGraph(ids, inclusive);
+  }
+
+  @Override
   public ImmutableList<Id> ancestorIdList(Id id, boolean inclusive) {
     return idTree.ancestorIdList(id, inclusive);
   }
@@ -61,6 +71,15 @@ public class TreeClass<Id, Node> extends DagClass<Id, Node> implements Tree<Id, 
   @Override
   public ImmutableList<Node> ancestorNodeList(Id id, boolean inclusive) {
     return nodeWrapList(ancestorIdList(id, inclusive), false);
+  }
+
+  // ===========================================================================
+  // descendants
+  // ===========================================================================
+
+  @Override
+  public IdTree<Id> descendantIdTree(Id id) {
+    return idTree.descendantIdTree(id);
   }
 
   // ===========================================================================

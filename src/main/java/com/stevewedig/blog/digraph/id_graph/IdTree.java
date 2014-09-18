@@ -1,14 +1,32 @@
 package com.stevewedig.blog.digraph.id_graph;
 
-import java.util.Collection;
+import java.util.*;
 
 import com.google.common.base.Optional;
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.*;
 
 /**
  * A tree containing ids.
  */
 public interface IdTree<Id> extends IdDag<Id> {
+
+  // ===========================================================================
+  // ancestors
+  // ===========================================================================
+
+  @Override
+  IdTree<Id> ancestorIdGraph(Id id, boolean inclusive);
+
+  @Override
+  IdTree<Id> ancestorIdGraph(Set<Id> ids, boolean inclusive);
+
+  // ===========================================================================
+  // descendants
+  // ===========================================================================
+
+  // descendantIdGraph(id/ids, inclusive) won't necessarily return trees
+
+  IdTree<Id> descendantIdTree(Id id);
 
   // ===========================================================================
   // root

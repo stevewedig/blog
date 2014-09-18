@@ -1,5 +1,7 @@
 package com.stevewedig.blog.digraph.id_graph;
 
+import java.util.Set;
+
 import com.google.common.collect.*;
 import com.stevewedig.blog.digraph.errors.DagCannotHaveCycle;
 
@@ -29,6 +31,40 @@ public class IdDagClass<Id> extends IdGraphClass<Id> implements IdDag<Id> {
       throw new DagCannotHaveCycle();
   }
 
+  // ===========================================================================
+  // ancestors
+  // ===========================================================================
+
+  @Override
+  public IdDag<Id> ancestorIdGraph(Id id, boolean inclusive) {
+    return ancestorIdGraph(ImmutableSet.of(id), inclusive);
+  }
+
+  @Override
+  public IdDag<Id> ancestorIdGraph(Set<Id> ids, boolean inclusive) {
+
+    ImmutableSet<Id> ancestorIds = ancestorIdSet(ids, inclusive);
+
+    return IdDagLib.fromParentMap(ancestorIds, filterParentMap(ancestorIds));
+  }
+
+  // ===========================================================================
+  // descendants
+  // ===========================================================================
+
+  @Override
+  public IdDag<Id> descendantIdGraph(Id id, boolean inclusive) {
+    return descendantIdGraph(ImmutableSet.of(id), inclusive);
+  }
+
+  @Override
+  public IdDag<Id> descendantIdGraph(Set<Id> ids, boolean inclusive) {
+
+    ImmutableSet<Id> descendantIds = descendantIdSet(ids, inclusive);
+
+    return IdDagLib.fromParentMap(descendantIds, filterParentMap(descendantIds));
+  }
+  
   // ===========================================================================
   // toplogical sort
   // ===========================================================================

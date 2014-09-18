@@ -1,11 +1,13 @@
 package com.stevewedig.blog.digraph;
 
+import static com.stevewedig.blog.translate.FormatLib.*;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 import com.google.common.collect.*;
 import com.stevewedig.blog.digraph.id_graph.*;
+import com.stevewedig.blog.errors.NotThrown;
 
 // example graph containing cycles (a->b->c->d->a, and a->e->a)
 //
@@ -30,14 +32,17 @@ public class TestSampleIdGraph {
   // ids
   // ===========================================================================
 
-  private static ImmutableSet<String> idSet = ImmutableSet.of("a", "b", "c", "d", "e", "f");
+  private static ImmutableSet<String> idSet = parseSet("a, b, c, d, e, f");
 
   // ===========================================================================
   // graphs
   // ===========================================================================
 
   private static IdGraph<String> idGraphFromParentMap() {
+    return IdGraphLib.fromParentMap(idSet, getParentMap());
+  }
 
+  private static Multimap<String, String> getParentMap() {
     Multimap<String, String> id__parentIds = HashMultimap.create();
 
     // a -> d, e
@@ -53,12 +58,16 @@ public class TestSampleIdGraph {
     id__parentIds.put("d", "c");
     id__parentIds.put("e", "a");
 
-    return IdGraphLib.fromParentMap(idSet, id__parentIds);
+    return id__parentIds;
   }
 
   // ===================================
 
   private static IdGraph<String> idGraphFromChildMap() {
+    return IdGraphLib.fromChildMap(idSet, getChildMap());
+  }
+
+  private static Multimap<String, String> getChildMap() {
 
     Multimap<String, String> id__childIds = HashMultimap.create();
 
@@ -75,7 +84,7 @@ public class TestSampleIdGraph {
     id__childIds.put("d", "a");
     id__childIds.put("e", "a");
 
-    return IdGraphLib.fromChildMap(idSet, id__childIds);
+    return id__childIds;
   }
 
   // ===========================================================================
@@ -100,19 +109,20 @@ public class TestSampleIdGraph {
   public static void verifyIdGraph(IdGraph<String> graph) {
 
     // =================================
-    // idSet
+    // ids
     // =================================
 
     assertEquals(idSet, graph.idSet());
+
     assertEquals(idSet.size(), graph.idSize());
 
-    // =================================
-    // optIdList
-    // =================================
+    graph.assertIdsEqual(idSet);
 
-    assertTrue(graph.containsCycle());
-
-    assertFalse(graph.optionalTopsortIdList().isPresent());
+    try {
+      graph.assertIdsEqual(parseSet("xxx"));
+      throw new NotThrown(AssertionError.class);
+    } catch (AssertionError e) {
+    }
 
     // =================================
     // parents
@@ -124,12 +134,19 @@ public class TestSampleIdGraph {
     // d -> c
     // e -> a
     // f ->
-    assertEquals(ImmutableSet.of("d", "e"), graph.parentIdSet("a"));
-    assertEquals(ImmutableSet.of("a"), graph.parentIdSet("b"));
-    assertEquals(ImmutableSet.of("b"), graph.parentIdSet("c"));
-    assertEquals(ImmutableSet.of("c"), graph.parentIdSet("d"));
-    assertEquals(ImmutableSet.of("a"), graph.parentIdSet("e"));
-    assertEquals(ImmutableSet.of(), graph.parentIdSet("f"));
+
+    assertEquals(getParentMap(), graph.id__parentIds());
+
+    assertTrue(graph.parentOf("e", "a"));
+    assertFalse(graph.parentOf("f", "a"));
+
+    assertEquals(parseSet("d, e"), graph.parentIdSet("a"));
+    assertEquals(parseSet("a"), graph.parentIdSet("b"));
+    assertEquals(parseSet(""), graph.parentIdSet("f"));
+
+    assertEquals(parseMultimap("a = e, e = a, a = d"), graph.filterParentMap(parseSet("a, e, d")));
+
+    assertEquals(parseMultimap(""), graph.filterParentMap(parseSet("f")));
 
     // =================================
     // children
@@ -141,47 +158,101 @@ public class TestSampleIdGraph {
     // a <- d
     // a <- e
     // <- f
-    assertEquals(ImmutableSet.of("b", "e"), graph.childIdSet("a"));
-    assertEquals(ImmutableSet.of("c"), graph.childIdSet("b"));
-    assertEquals(ImmutableSet.of("d"), graph.childIdSet("c"));
-    assertEquals(ImmutableSet.of("a"), graph.childIdSet("d"));
-    assertEquals(ImmutableSet.of("a"), graph.childIdSet("e"));
-    assertEquals(ImmutableSet.of(), graph.childIdSet("f"));
+
+    assertEquals(getChildMap(), graph.id__childIds());
+
+    assertTrue(graph.childOf("e", "a"));
+    assertFalse(graph.childOf("f", "a"));
+
+    assertEquals(parseSet("b, e"), graph.childIdSet("a"));
+    assertEquals(parseSet("c"), graph.childIdSet("b"));
+    assertEquals(parseSet(""), graph.childIdSet("f"));
+
+    // TODO filterChildMap
 
     // =================================
     // ancestors
     // =================================
 
-    assertEquals(ImmutableSet.of("b", "c", "d", "e"), graph.ancestorIdSet("a", false));
-    assertEquals(ImmutableSet.of("a", "c", "d", "e"), graph.ancestorIdSet("b", false));
-    assertEquals(ImmutableSet.of("a", "b", "d", "e"), graph.ancestorIdSet("c", false));
-    assertEquals(ImmutableSet.of("a", "b", "c", "e"), graph.ancestorIdSet("d", false));
-    assertEquals(ImmutableSet.of("a", "b", "c", "d"), graph.ancestorIdSet("e", false));
-    assertEquals(ImmutableSet.of(), graph.ancestorIdSet("f", false));
+    assertTrue(graph.ancestorOf("a", "b", false));
+    assertTrue(graph.ancestorOf("a", "b", true));
+
+    assertFalse(graph.ancestorOf("a", "f", false));
+    assertFalse(graph.ancestorOf("a", "f", true));
+
+    assertFalse(graph.ancestorOf("a", "a", false));
+    assertTrue(graph.ancestorOf("a", "a", true));
+
+    // TODO get full data from git
+    // ancestor set, not inclusive
+    assertEquals(parseSet("b, c, d, e"), graph.ancestorIdSet("a", false));
+    assertEquals(parseSet(""), graph.ancestorIdSet("f", false));
+
+    // ancestor set, inclusive
+    assertEquals(parseSet("a, b, c, d, e"), graph.ancestorIdSet("a", true));
+    assertEquals(parseSet("f"), graph.ancestorIdSet("f", true));
+
+    assertEquals(IdGraphLib.fromParentMap(parseSet("c, d, e"), "d", "c"),
+        graph.ancestorIdGraph(parseSet("a, b"), false));
+
+    // TODO fix this
+//    assertEquals(graph, graph.ancestorIdGraph(parseSet("a, e, f"), true));
+
+    assertEquals(IdGraphLib.fromParentMap(parseSet("f")), graph.ancestorIdGraph("f", true));
 
     // =================================
     // descendants
     // =================================
 
-    assertEquals(ImmutableSet.of("b", "c", "d", "e"), graph.descendantIdSet("a", false));
-    assertEquals(ImmutableSet.of("a", "c", "d", "e"), graph.descendantIdSet("b", false));
-    assertEquals(ImmutableSet.of("a", "b", "d", "e"), graph.descendantIdSet("c", false));
-    assertEquals(ImmutableSet.of("a", "b", "c", "e"), graph.descendantIdSet("d", false));
-    assertEquals(ImmutableSet.of("a", "b", "c", "d"), graph.descendantIdSet("e", false));
-    assertEquals(ImmutableSet.of(), graph.descendantIdSet("f", false));
+    assertTrue(graph.descendantOf("a", "b", false));
+    assertTrue(graph.descendantOf("a", "b", true));
+
+    assertFalse(graph.descendantOf("a", "f", false));
+    assertFalse(graph.descendantOf("a", "f", true));
+
+    assertFalse(graph.descendantOf("a", "a", false));
+    assertTrue(graph.descendantOf("a", "a", true));
+
+    // TODO get full data from git
+    // descendant set, not inclusive
+    assertEquals(parseSet("b, c, d, e"), graph.descendantIdSet("a", false));
+    assertEquals(parseSet(""), graph.descendantIdSet("f", false));
+
+    // descendant set, inclusive
+    assertEquals(parseSet("a, b, c, d, e"), graph.descendantIdSet("a", true));
+    assertEquals(parseSet("f"), graph.descendantIdSet("f", true));
+
+    assertEquals(IdGraphLib.fromParentMap(parseSet("b, c, d, e"), "c", "b", "d", "c"),
+        graph.descendantIdGraph(parseSet("a"), false));
+
+    assertEquals(IdGraphLib.fromParentMap(parseSet("f")),
+        graph.descendantIdGraph(parseSet("f"), true));
 
     // =================================
     // roots (sources)
     // =================================
 
-    assertEquals(ImmutableSet.of("f"), graph.rootIdSet());
+    assertFalse(graph.isRootId("a"));
+    assertTrue(graph.isRootId("f"));
+
+    assertEquals(parseSet("f"), graph.rootIdSet());
 
     // =================================
     // leaves (sinks)
     // =================================
 
-    assertEquals(ImmutableSet.of("f"), graph.leafIdSet());
+    assertFalse(graph.isLeafId("a"));
+    assertTrue(graph.isLeafId("f"));
+
+    assertEquals(parseSet("f"), graph.leafIdSet());
+
+    // =================================
+    // topological sort
+    // =================================
+
+    assertTrue(graph.containsCycle());
+
+    assertFalse(graph.optionalTopsortIdList().isPresent());
 
   }
-
 }

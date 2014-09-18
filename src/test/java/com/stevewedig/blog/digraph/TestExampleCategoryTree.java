@@ -1,17 +1,13 @@
 package com.stevewedig.blog.digraph;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.Set;
 
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.SetMultimap;
-import com.stevewedig.blog.digraph.id_graph.IdTree;
-import com.stevewedig.blog.digraph.id_graph.IdTreeLib;
+import com.stevewedig.blog.digraph.id_graph.*;
 
 public class TestExampleCategoryTree {
 
@@ -35,7 +31,7 @@ public class TestExampleCategoryTree {
 
   // an AssertionError will be raised if we create a Category without adding it to the tree
   static {
-    tree.assertIdsMatch(Category.values());
+    tree.assertIdsEqual(Category.values());
   }
 
   // ===========================================================================
@@ -59,25 +55,15 @@ public class TestExampleCategoryTree {
   /**
    * Create a smaller tree containing only the categories below the provided category.
    */
-  public static IdTree<Category> subtree(Category category) {
-
-    ImmutableSet<Category> subtreeIds = tree.descendantIdSet(category, true);
-
-    SetMultimap<Category, Category> subtreeChildMap = tree.filterChildMap(subtreeIds);
-
-    return IdTreeLib.fromChildMap(subtreeIds, subtreeChildMap);
+  public static IdTree<Category> subTree(Category category) {
+    return tree.descendantIdTree(category);
   }
 
   /**
    * Create a smaller tree containing only the categories above the provided categories.
    */
-  public static IdTree<Category> supertree(Category... categories) {
-
-    ImmutableSet<Category> supertreeIds = tree.ancestorIdSet(ImmutableSet.copyOf(categories), true);
-
-    SetMultimap<Category, Category> subtreeChildMap = tree.filterChildMap(supertreeIds);
-
-    return IdTreeLib.fromChildMap(supertreeIds, subtreeChildMap);
+  public static IdTree<Category> superTree(Category... categories) {
+    return tree.ancestorIdGraph(ImmutableSet.copyOf(categories), true);
   }
 
   // ===========================================================================
