@@ -144,10 +144,6 @@ public class TestSampleIdGraph {
     assertEquals(parseSet("a"), graph.parentIdSet("b"));
     assertEquals(parseSet(""), graph.parentIdSet("f"));
 
-    assertEquals(parseMultimap("a = e, e = a, a = d"), graph.filterParentMap(parseSet("a, e, d")));
-
-    assertEquals(parseMultimap(""), graph.filterParentMap(parseSet("f")));
-
     // =================================
     // children
     // =================================
@@ -167,8 +163,6 @@ public class TestSampleIdGraph {
     assertEquals(parseSet("b, e"), graph.childIdSet("a"));
     assertEquals(parseSet("c"), graph.childIdSet("b"));
     assertEquals(parseSet(""), graph.childIdSet("f"));
-
-    // TODO filterChildMap
 
     // =================================
     // ancestors

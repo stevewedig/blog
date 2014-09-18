@@ -176,8 +176,6 @@ public class TestSampleIdTree {
     assertEquals(Optional.of("f"), tree.parentId("g"));
     assertEquals(Optional.of("a"), tree.parentId("h"));
 
-    // TODO filterParentMap
-
     // =================================
     // children
     // =================================
@@ -204,8 +202,6 @@ public class TestSampleIdTree {
     assertEquals(parseSet("g"), tree.childIdSet("f"));
     assertEquals(parseSet(""), tree.childIdSet("g"));
     assertEquals(parseSet(""), tree.childIdSet("h"));
-
-    // TODO filterChildMap
 
     // =================================
     // ancestors

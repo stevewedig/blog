@@ -143,8 +143,6 @@ public class TestSampleIdDag {
     assertEquals(parseSet("b, c"), dag.parentIdSet("d"));
     assertEquals(parseSet("d"), dag.parentIdSet("e"));
 
-    // TODO filterParentMap
-
     // =================================
     // children
     // =================================
@@ -165,8 +163,6 @@ public class TestSampleIdDag {
     assertEquals(parseSet("d"), dag.childIdSet("c"));
     assertEquals(parseSet("e"), dag.childIdSet("d"));
     assertEquals(parseSet(""), dag.childIdSet("e"));
-
-    // TODO filterChildMap
 
     // =================================
     // ancestors

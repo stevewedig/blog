@@ -55,14 +55,14 @@ public class TestExampleCategoryTree {
   /**
    * Create a smaller tree containing only the categories below the provided category.
    */
-  public static IdTree<Category> subTree(Category category) {
+  public static IdTree<Category> subtree(Category category) {
     return tree.descendantIdTree(category);
   }
 
   /**
    * Create a smaller tree containing only the categories above the provided categories.
    */
-  public static IdTree<Category> superTree(Category... categories) {
+  public static IdTree<Category> supertree(Category... categories) {
     return tree.ancestorIdGraph(ImmutableSet.copyOf(categories), true);
   }
 
