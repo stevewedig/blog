@@ -176,7 +176,7 @@ public class TestSampleIdGraph {
 
     assertTrue(graph.ancestorOf("a", "b", false));
     assertTrue(graph.ancestorOf("a", "b", true));
-    
+
     assertFalse(graph.ancestorOf("a", "f", false));
     assertFalse(graph.ancestorOf("a", "f", true));
 
@@ -189,11 +189,13 @@ public class TestSampleIdGraph {
     assertEquals(parseSet(""), graph.ancestorIdSet("f", false));
     assertEquals(parseSet("f"), graph.ancestorIdSet("f", true));
 
-    assertEquals(IdGraphLib.fromParentMap(parseSet("b, c, d, e"), "c", "b", "d", "c"),
-        graph.ancestorIdGraph(parseSet("a"), false));
+    assertEquals(IdGraphLib.fromParentMap(parseSet("c, d, e"), "d", "c"),
+        graph.ancestorIdGraph(parseSet("a, b"), false));
 
-    assertEquals(IdGraphLib.fromParentMap(parseSet("f")),
-        graph.ancestorIdGraph(parseSet("f"), true));
+    // TODO fix this
+//    assertEquals(graph, graph.ancestorIdGraph(parseSet("a, e, f"), true));
+
+    assertEquals(IdGraphLib.fromParentMap(parseSet("f")), graph.ancestorIdGraph("f", true));
 
     // =================================
     // descendants
@@ -201,13 +203,13 @@ public class TestSampleIdGraph {
 
     assertTrue(graph.descendantOf("a", "b", false));
     assertTrue(graph.descendantOf("a", "b", true));
-    
+
     assertFalse(graph.descendantOf("a", "f", false));
     assertFalse(graph.descendantOf("a", "f", true));
 
     assertFalse(graph.descendantOf("a", "a", false));
     assertTrue(graph.descendantOf("a", "a", true));
-    
+
     assertEquals(parseSet("b, c, d, e"), graph.descendantIdSet("a", false));
     assertEquals(parseSet("a, b, c, d, e"), graph.descendantIdSet("a", true));
 

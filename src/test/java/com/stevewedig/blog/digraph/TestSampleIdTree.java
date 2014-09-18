@@ -18,6 +18,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.stevewedig.blog.digraph.id_graph.IdTree;
 import com.stevewedig.blog.digraph.id_graph.IdTreeLib;
+import com.stevewedig.blog.errors.NotThrown;
 
 // example dag with varying branch factors and path depths
 //
@@ -54,6 +55,11 @@ public class TestSampleIdTree {
 
   private static IdTree<String> idTreeFromParentMap() {
 
+    return IdTreeLib.fromParentMap(idSet, getParentMap());
+  }
+
+  private static Multimap<String, String> getParentMap() {
+
     Multimap<String, String> id__parentIds = HashMultimap.create();
 
     // a ->
@@ -72,10 +78,17 @@ public class TestSampleIdTree {
     id__parentIds.put("g", "f");
     id__parentIds.put("h", "a");
 
-    return IdTreeLib.fromParentMap(idSet, id__parentIds);
+    return id__parentIds;
   }
 
+  // ===================================
+
   private static IdTree<String> idTreeFromChildMap() {
+
+    return IdTreeLib.fromChildMap(idSet, getChildMap());
+  }
+
+  private static Multimap<String, String> getChildMap() {
 
     Multimap<String, String> id__childIds = HashMultimap.create();
 
@@ -95,7 +108,7 @@ public class TestSampleIdTree {
     id__childIds.put("c", "d");
     id__childIds.put("f", "g");
 
-    return IdTreeLib.fromChildMap(idSet, id__childIds);
+    return id__childIds;
   }
 
   // ===========================================================================
@@ -121,11 +134,20 @@ public class TestSampleIdTree {
   public static void verifyIdTree(IdTree<String> tree) {
 
     // =================================
-    // idSet
+    // ids
     // =================================
 
     assertEquals(idSet, tree.idSet());
+
     assertEquals(idSet.size(), tree.idSize());
+
+    tree.assertIdsEqual(idSet);
+
+    try {
+      tree.assertIdsEqual(parseSet("xxx"));
+      throw new NotThrown(AssertionError.class);
+    } catch (AssertionError e) {
+    }
 
     // =================================
     // parents
@@ -227,8 +249,7 @@ public class TestSampleIdTree {
     // g <- f
     // <- g
     // <- h
-    assertEquals(parseSet("b, c, d, e, f, g, h"),
-        tree.descendantIdSet("a", false));
+    assertEquals(parseSet("b, c, d, e, f, g, h"), tree.descendantIdSet("a", false));
     assertEquals(parseSet("c, d, e"), tree.descendantIdSet("b", false));
     assertEquals(parseSet("d"), tree.descendantIdSet("c", false));
     assertEquals(parseSet(""), tree.descendantIdSet("d", false));
