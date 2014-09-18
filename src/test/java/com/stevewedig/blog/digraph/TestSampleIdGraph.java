@@ -174,11 +174,14 @@ public class TestSampleIdGraph {
     // ancestors
     // =================================
 
-    assertTrue(graph.ancestorOf("a", "b", true));
-    assertTrue(graph.ancestorOf("a", "a", true));
     assertTrue(graph.ancestorOf("a", "b", false));
+    assertTrue(graph.ancestorOf("a", "b", true));
+    
     assertFalse(graph.ancestorOf("a", "f", false));
+    assertFalse(graph.ancestorOf("a", "f", true));
+
     assertFalse(graph.ancestorOf("a", "a", false));
+    assertTrue(graph.ancestorOf("a", "a", true));
 
     assertEquals(parseSet("b, c, d, e"), graph.ancestorIdSet("a", false));
     assertEquals(parseSet("a, b, c, d, e"), graph.ancestorIdSet("a", true));
@@ -196,12 +199,15 @@ public class TestSampleIdGraph {
     // descendants
     // =================================
 
-    assertTrue(graph.descendantOf("a", "b", true));
-    assertTrue(graph.descendantOf("a", "a", true));
     assertTrue(graph.descendantOf("a", "b", false));
+    assertTrue(graph.descendantOf("a", "b", true));
+    
     assertFalse(graph.descendantOf("a", "f", false));
-    assertFalse(graph.descendantOf("a", "a", false));
+    assertFalse(graph.descendantOf("a", "f", true));
 
+    assertFalse(graph.descendantOf("a", "a", false));
+    assertTrue(graph.descendantOf("a", "a", true));
+    
     assertEquals(parseSet("b, c, d, e"), graph.descendantIdSet("a", false));
     assertEquals(parseSet("a, b, c, d, e"), graph.descendantIdSet("a", true));
 

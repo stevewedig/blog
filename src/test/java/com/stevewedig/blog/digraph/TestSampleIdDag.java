@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import com.google.common.collect.*;
 import com.stevewedig.blog.digraph.id_graph.*;
+import com.stevewedig.blog.errors.NotThrown;
 
 // example dag containing diamond (a, b, c, d)
 //
@@ -37,6 +38,11 @@ public class TestSampleIdDag {
 
   private static IdDag<String> idDagFromParentMap() {
 
+    return IdDagLib.fromParentMap(idSet, getParentMap());
+  }
+
+  private static Multimap<String, String> getParentMap() {
+
     Multimap<String, String> id__parentIds = HashMultimap.create();
 
     // a ->
@@ -50,10 +56,17 @@ public class TestSampleIdDag {
     id__parentIds.put("d", "c");
     id__parentIds.put("e", "d");
 
-    return IdDagLib.fromParentMap(idSet, id__parentIds);
+    return id__parentIds;
   }
 
+  // ===================================
+
   private static IdDag<String> idDagFromChildMap() {
+
+    return IdDagLib.fromChildMap(idSet, getChildMap());
+  }
+
+  private static Multimap<String, String> getChildMap() {
 
     Multimap<String, String> id__childIds = HashMultimap.create();
 
@@ -68,7 +81,7 @@ public class TestSampleIdDag {
     id__childIds.put("c", "d");
     id__childIds.put("d", "e");
 
-    return IdDagLib.fromChildMap(idSet, id__childIds);
+    return id__childIds;
   }
 
   // ===========================================================================
@@ -101,6 +114,14 @@ public class TestSampleIdDag {
 
     assertEquals(idSet.size(), dag.idSize());
 
+    dag.assertIdsEqual(idSet);
+
+    try {
+      dag.assertIdsEqual(parseSet("xxx"));
+      throw new NotThrown(AssertionError.class);
+    } catch (AssertionError e) {
+    }
+
     // =================================
     // parents
     // =================================
@@ -111,11 +132,18 @@ public class TestSampleIdDag {
     // d -> b, c
     // e -> d
 
+    assertEquals(getParentMap(), dag.id__parentIds());
+
+    assertTrue(dag.parentOf("a", "b"));
+    assertFalse(dag.parentOf("b", "a"));
+
     assertEquals(parseSet(""), dag.parentIdSet("a"));
     assertEquals(parseSet("a"), dag.parentIdSet("b"));
     assertEquals(parseSet("a"), dag.parentIdSet("c"));
     assertEquals(parseSet("b, c"), dag.parentIdSet("d"));
     assertEquals(parseSet("d"), dag.parentIdSet("e"));
+
+    // TODO filterParentMap
 
     // =================================
     // children
@@ -127,11 +155,18 @@ public class TestSampleIdDag {
     // e <- d
     // <- e
 
+    assertEquals(getChildMap(), dag.id__childIds());
+
+    assertFalse(dag.childOf("a", "b"));
+    assertTrue(dag.childOf("b", "a"));
+
     assertEquals(parseSet("b, c"), dag.childIdSet("a"));
     assertEquals(parseSet("d"), dag.childIdSet("b"));
     assertEquals(parseSet("d"), dag.childIdSet("c"));
     assertEquals(parseSet("e"), dag.childIdSet("d"));
     assertEquals(parseSet(""), dag.childIdSet("e"));
+
+    // TODO filterChildMap
 
     // =================================
     // ancestors
@@ -143,11 +178,28 @@ public class TestSampleIdDag {
     // d -> b, c
     // e -> d
 
+    assertFalse(dag.ancestorOf("e", "a", false));
+    assertFalse(dag.ancestorOf("e", "a", true));
+
+    assertTrue(dag.ancestorOf("a", "e", false));
+    assertTrue(dag.ancestorOf("a", "e", true));
+
+    assertFalse(dag.ancestorOf("a", "a", false));
+    assertTrue(dag.ancestorOf("a", "a", true));
+
     assertEquals(parseSet(""), dag.ancestorIdSet("a", false));
     assertEquals(parseSet("a"), dag.ancestorIdSet("b", false));
     assertEquals(parseSet("a"), dag.ancestorIdSet("c", false));
     assertEquals(parseSet("a, b, c"), dag.ancestorIdSet("d", false));
     assertEquals(parseSet("a, b, c, d"), dag.ancestorIdSet("e", false));
+
+    assertEquals(parseSet("a"), dag.ancestorIdSet("a", true));
+    assertEquals(parseSet("a, b"), dag.ancestorIdSet("b", true));
+    assertEquals(parseSet("a, c"), dag.ancestorIdSet("c", true));
+    assertEquals(parseSet("a, b, c, d"), dag.ancestorIdSet("d", true));
+    assertEquals(parseSet("a, b, c, d, e"), dag.ancestorIdSet("e", true));
+
+    // TODO anc graph
 
     // =================================
     // descendants
@@ -159,21 +211,44 @@ public class TestSampleIdDag {
     // e <- d
     // <- e
 
+    assertTrue(dag.descendantOf("e", "a", false));
+    assertTrue(dag.descendantOf("e", "a", true));
+
+    assertFalse(dag.descendantOf("a", "e", false));
+    assertFalse(dag.descendantOf("a", "e", true));
+
+    assertFalse(dag.descendantOf("a", "a", false));
+    assertTrue(dag.descendantOf("a", "a", true));
+
     assertEquals(parseSet("b, c, d, e"), dag.descendantIdSet("a", false));
     assertEquals(parseSet("d, e"), dag.descendantIdSet("b", false));
     assertEquals(parseSet("d, e"), dag.descendantIdSet("c", false));
     assertEquals(parseSet("e"), dag.descendantIdSet("d", false));
     assertEquals(parseSet(""), dag.descendantIdSet("e", false));
 
+    assertEquals(parseSet("a, b, c, d, e"), dag.descendantIdSet("a", true));
+    assertEquals(parseSet("b, d, e"), dag.descendantIdSet("b", true));
+    assertEquals(parseSet("c, d, e"), dag.descendantIdSet("c", true));
+    assertEquals(parseSet("d, e"), dag.descendantIdSet("d", true));
+    assertEquals(parseSet("e"), dag.descendantIdSet("e", true));
+
+    // TODO desc graph
+
     // =================================
     // roots (sources)
     // =================================
+
+    assertFalse(dag.isRootId("e"));
+    assertTrue(dag.isRootId("a"));
 
     assertEquals(parseSet("a"), dag.rootIdSet());
 
     // =================================
     // leaves (sinks)
     // =================================
+
+    assertFalse(dag.isLeafId("a"));
+    assertTrue(dag.isLeafId("e"));
 
     assertEquals(parseSet("e"), dag.leafIdSet());
 
