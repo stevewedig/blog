@@ -52,7 +52,7 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
   }
 
   // ===========================================================================
-  // idSet
+  // ids
   // ===========================================================================
 
   @Override
@@ -79,6 +79,13 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
   @Override
   public void assertIdsEqual(Id[] ids) {
     assertIdsEqual(ImmutableSet.copyOf(ids));
+  }
+
+  // ===================================
+
+  @Override
+  public IdGraph<Id> filterByIds(Set<Id> ids) {
+    return IdGraphLib.fromParentMap(ids, filterParentMap(ids));
   }
 
   // ===========================================================================
@@ -142,9 +149,9 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
   public boolean childOf(Id id, Id potentialParent) {
     return parentIdSet(id).contains(potentialParent);
   }
-  
+
   // ===================================
-  
+
   @Override
   public ImmutableSetMultimap<Id, Id> id__childIds() {
     if (id__childIds == null) {
@@ -195,7 +202,7 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
   public boolean ancestorOf(Id id, Id potentialDescendant, boolean inclusive) {
     return descendantOf(potentialDescendant, id, inclusive);
   }
-  
+
   @Override
   public Iterable<Id> ancestorIdIterable(Id id, boolean inclusive) {
     return idIterable(true, inclusive, ImmutableList.of(id), parentIdListLambda());
@@ -223,10 +230,7 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
 
   @Override
   public IdGraph<Id> ancestorIdGraph(Set<Id> ids, boolean inclusive) {
-
-    ImmutableSet<Id> ancestorIds = ancestorIdSet(ids, inclusive);
-
-    return IdGraphLib.fromParentMap(ancestorIds, filterParentMap(ancestorIds));
+    return filterByIds(ancestorIdSet(ids, inclusive));
   }
 
   // ===========================================================================
@@ -237,7 +241,7 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
   public boolean descendantOf(Id id, Id potentialAncestor, boolean inclusive) {
     return ancestorIdSet(id, inclusive).contains(potentialAncestor);
   }
-  
+
   @Override
   public Iterable<Id> descendantIdIterable(Id id, boolean inclusive) {
     return idIterable(true, inclusive, ImmutableList.of(id), childIdListLambda());
@@ -265,10 +269,7 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
 
   @Override
   public IdGraph<Id> descendantIdGraph(Set<Id> ids, boolean inclusive) {
-
-    ImmutableSet<Id> descendantIds = descendantIdSet(ids, inclusive);
-
-    return IdGraphLib.fromParentMap(descendantIds, filterParentMap(descendantIds));
+    return filterByIds(descendantIdSet(ids, inclusive));
   }
 
   // ===========================================================================
@@ -281,7 +282,7 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
   }
 
   // ===================================
-  
+
   @Override
   public ImmutableSet<Id> rootIdSet() {
     if (rootIds == null) {

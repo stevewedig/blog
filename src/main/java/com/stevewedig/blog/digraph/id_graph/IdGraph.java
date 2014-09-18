@@ -29,6 +29,8 @@ public interface IdGraph<Id> {
 
   void assertIdsEqual(Id[] ids);
 
+  IdGraph<Id> filterByIds(Set<Id> ids);
+
   // ===========================================================================
   // parents
   // ===========================================================================

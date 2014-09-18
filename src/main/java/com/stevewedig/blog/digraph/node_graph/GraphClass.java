@@ -71,7 +71,7 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   }
 
   // ===========================================================================
-  // idSet
+  // ids
   // ===========================================================================
 
   @Override
@@ -92,6 +92,11 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   @Override
   public void assertIdsEqual(Id[] ids) {
     idGraph.assertIdsEqual(ids);
+  }
+
+  @Override
+  public IdGraph<Id> filterByIds(Set<Id> ids) {
+    return idGraph.filterByIds(ids);
   }
 
   // ===========================================================================

@@ -8,7 +8,14 @@ import com.google.common.collect.ImmutableList;
  * A dag containing ids.
  */
 public interface IdDag<Id> extends IdGraph<Id> {
-  
+
+  // ===========================================================================
+  // ids
+  // ===========================================================================
+
+  @Override
+  IdDag<Id> filterByIds(Set<Id> ids);
+
   // ===========================================================================
   // ancestors
   // ===========================================================================
@@ -28,7 +35,7 @@ public interface IdDag<Id> extends IdGraph<Id> {
 
   @Override
   IdDag<Id> descendantIdGraph(Set<Id> ids, boolean inclusive);
-  
+
   // ===========================================================================
   // topological sort
   // ===========================================================================
@@ -37,7 +44,7 @@ public interface IdDag<Id> extends IdGraph<Id> {
    * A topologically sorted list of ids, with roots (sources) first.
    */
   ImmutableList<Id> topsortIdList();
-  
+
   // ===========================================================================
   // depth first
   // ===========================================================================
@@ -46,7 +53,7 @@ public interface IdDag<Id> extends IdGraph<Id> {
    * A depth first id iterable.
    */
   Iterable<Id> depthIdIterable();
-  
+
   /**
    * A depth first id list.
    */

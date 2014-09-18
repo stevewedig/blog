@@ -32,6 +32,15 @@ public class IdDagClass<Id> extends IdGraphClass<Id> implements IdDag<Id> {
   }
 
   // ===========================================================================
+  // ids
+  // ===========================================================================
+
+  @Override
+  public IdDag<Id> filterByIds(Set<Id> ids) {
+    return IdDagLib.fromParentMap(ids, filterParentMap(ids));
+  }
+
+  // ===========================================================================
   // ancestors
   // ===========================================================================
 
@@ -64,7 +73,7 @@ public class IdDagClass<Id> extends IdGraphClass<Id> implements IdDag<Id> {
 
     return IdDagLib.fromParentMap(descendantIds, filterParentMap(descendantIds));
   }
-  
+
   // ===========================================================================
   // toplogical sort
   // ===========================================================================
