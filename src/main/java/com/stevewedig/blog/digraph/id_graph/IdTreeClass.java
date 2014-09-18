@@ -49,6 +49,7 @@ public class IdTreeClass<Id> extends IdDagClass<Id> implements IdTree<Id> {
   // ids
   // ===========================================================================
 
+  // not public because an arbitrary set of ids won't necessarily create a tree
   private IdTree<Id> treeFilterByIds(Set<Id> ids) {
     return IdTreeLib.fromParentMap(ids, filterParentMap(ids));
   }
@@ -81,7 +82,7 @@ public class IdTreeClass<Id> extends IdDagClass<Id> implements IdTree<Id> {
   public IdTree<Id> ancestorIdGraph(Set<Id> ids, boolean inclusive) {
     return treeFilterByIds(ancestorIdSet(ids, inclusive));
   }
-  
+
   // ===================================
 
   @Override
