@@ -1,12 +1,18 @@
 package com.stevewedig.blog.digraph;
 
-import static com.stevewedig.blog.translate.FormatLib.*;
-import static org.junit.Assert.*;
+import static com.stevewedig.blog.translate.FormatLib.parseMultimap;
+import static com.stevewedig.blog.translate.FormatLib.parseSet;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.google.common.collect.*;
-import com.stevewedig.blog.digraph.id_graph.*;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Multimap;
+import com.stevewedig.blog.digraph.id_graph.IdGraph;
+import com.stevewedig.blog.digraph.id_graph.IdGraphLib;
 import com.stevewedig.blog.errors.NotThrown;
 
 // example graph containing cycles (a->b->c->d->a, and a->e->a)
@@ -123,6 +129,9 @@ public class TestSampleIdGraph {
       throw new NotThrown(AssertionError.class);
     } catch (AssertionError e) {
     }
+
+    assertEquals(IdGraphLib.fromParentMap(parseMultimap("a = e, e = a")),
+        graph.filterIdGraph(parseSet("a, e")));
 
     // =================================
     // parents

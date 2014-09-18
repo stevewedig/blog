@@ -1,6 +1,7 @@
 package com.stevewedig.blog.digraph;
 
 import static com.stevewedig.blog.translate.FormatLib.parseList;
+import static com.stevewedig.blog.translate.FormatLib.parseMultimap;
 import static com.stevewedig.blog.translate.FormatLib.parseSet;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -150,6 +151,9 @@ public class TestSampleIdTree {
       throw new NotThrown(AssertionError.class);
     } catch (AssertionError e) {
     }
+
+    assertEquals(IdDagLib.fromParentMap(parseMultimap("b = a, f = a")),
+        tree.filterIdGraph(parseSet("a, b, f")));
 
     // =================================
     // parents

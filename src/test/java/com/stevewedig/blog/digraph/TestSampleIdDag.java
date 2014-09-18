@@ -122,6 +122,9 @@ public class TestSampleIdDag {
     } catch (AssertionError e) {
     }
 
+    assertEquals(IdDagLib.fromParentMap(parseMultimap("b = a, c = a")),
+        dag.filterIdGraph(parseSet("a, b, c")));
+
     // =================================
     // parents
     // =================================
