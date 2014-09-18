@@ -1,5 +1,6 @@
 package com.stevewedig.blog.digraph;
 
+import static com.stevewedig.blog.translate.FormatLib.*;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -28,7 +29,7 @@ public class TestSampleIdDag {
   // ids
   // ===========================================================================
 
-  private static ImmutableSet<String> idSet = ImmutableSet.of("a", "b", "c", "d", "e");
+  private static ImmutableSet<String> idSet = parseSet("a, b, c, d, e");
 
   // ===========================================================================
   // graphs
@@ -93,10 +94,11 @@ public class TestSampleIdDag {
   public static void verifyIdDag(IdDag<String> dag) {
 
     // =================================
-    // idSet
+    // ids
     // =================================
 
     assertEquals(idSet, dag.idSet());
+
     assertEquals(idSet.size(), dag.idSize());
 
     // =================================
@@ -108,11 +110,12 @@ public class TestSampleIdDag {
     // c -> a
     // d -> b, c
     // e -> d
-    assertEquals(ImmutableSet.of(), dag.parentIdSet("a"));
-    assertEquals(ImmutableSet.of("a"), dag.parentIdSet("b"));
-    assertEquals(ImmutableSet.of("a"), dag.parentIdSet("c"));
-    assertEquals(ImmutableSet.of("b", "c"), dag.parentIdSet("d"));
-    assertEquals(ImmutableSet.of("d"), dag.parentIdSet("e"));
+
+    assertEquals(parseSet(""), dag.parentIdSet("a"));
+    assertEquals(parseSet("a"), dag.parentIdSet("b"));
+    assertEquals(parseSet("a"), dag.parentIdSet("c"));
+    assertEquals(parseSet("b, c"), dag.parentIdSet("d"));
+    assertEquals(parseSet("d"), dag.parentIdSet("e"));
 
     // =================================
     // children
@@ -123,11 +126,12 @@ public class TestSampleIdDag {
     // d <- c
     // e <- d
     // <- e
-    assertEquals(ImmutableSet.of("b", "c"), dag.childIdSet("a"));
-    assertEquals(ImmutableSet.of("d"), dag.childIdSet("b"));
-    assertEquals(ImmutableSet.of("d"), dag.childIdSet("c"));
-    assertEquals(ImmutableSet.of("e"), dag.childIdSet("d"));
-    assertEquals(ImmutableSet.of(), dag.childIdSet("e"));
+
+    assertEquals(parseSet("b, c"), dag.childIdSet("a"));
+    assertEquals(parseSet("d"), dag.childIdSet("b"));
+    assertEquals(parseSet("d"), dag.childIdSet("c"));
+    assertEquals(parseSet("e"), dag.childIdSet("d"));
+    assertEquals(parseSet(""), dag.childIdSet("e"));
 
     // =================================
     // ancestors
@@ -138,11 +142,12 @@ public class TestSampleIdDag {
     // c -> a
     // d -> b, c
     // e -> d
-    assertEquals(ImmutableSet.of(), dag.ancestorIdSet("a", false));
-    assertEquals(ImmutableSet.of("a"), dag.ancestorIdSet("b", false));
-    assertEquals(ImmutableSet.of("a"), dag.ancestorIdSet("c", false));
-    assertEquals(ImmutableSet.of("a", "b", "c"), dag.ancestorIdSet("d", false));
-    assertEquals(ImmutableSet.of("a", "b", "c", "d"), dag.ancestorIdSet("e", false));
+
+    assertEquals(parseSet(""), dag.ancestorIdSet("a", false));
+    assertEquals(parseSet("a"), dag.ancestorIdSet("b", false));
+    assertEquals(parseSet("a"), dag.ancestorIdSet("c", false));
+    assertEquals(parseSet("a, b, c"), dag.ancestorIdSet("d", false));
+    assertEquals(parseSet("a, b, c, d"), dag.ancestorIdSet("e", false));
 
     // =================================
     // descendants
@@ -153,23 +158,24 @@ public class TestSampleIdDag {
     // d <- c
     // e <- d
     // <- e
-    assertEquals(ImmutableSet.of("b", "c", "d", "e"), dag.descendantIdSet("a", false));
-    assertEquals(ImmutableSet.of("d", "e"), dag.descendantIdSet("b", false));
-    assertEquals(ImmutableSet.of("d", "e"), dag.descendantIdSet("c", false));
-    assertEquals(ImmutableSet.of("e"), dag.descendantIdSet("d", false));
-    assertEquals(ImmutableSet.of(), dag.descendantIdSet("e", false));
+
+    assertEquals(parseSet("b, c, d, e"), dag.descendantIdSet("a", false));
+    assertEquals(parseSet("d, e"), dag.descendantIdSet("b", false));
+    assertEquals(parseSet("d, e"), dag.descendantIdSet("c", false));
+    assertEquals(parseSet("e"), dag.descendantIdSet("d", false));
+    assertEquals(parseSet(""), dag.descendantIdSet("e", false));
 
     // =================================
     // roots (sources)
     // =================================
 
-    assertEquals(ImmutableSet.of("a"), dag.rootIdSet());
+    assertEquals(parseSet("a"), dag.rootIdSet());
 
     // =================================
     // leaves (sinks)
     // =================================
 
-    assertEquals(ImmutableSet.of("e"), dag.leafIdSet());
+    assertEquals(parseSet("e"), dag.leafIdSet());
 
     // =================================
     // topological sort
@@ -178,8 +184,7 @@ public class TestSampleIdDag {
     assertFalse(dag.containsCycle());
 
     ImmutableSet<ImmutableList<String>> topsortIdLists =
-        ImmutableSet.of(ImmutableList.of("a", "b", "c", "d", "e"),
-            ImmutableList.of("a", "c", "b", "d", "e"));
+        ImmutableSet.of(parseList("a, b, c, d, e"), parseList("a, c, b, d, e"));
 
     assertTrue(topsortIdLists.contains(dag.topsortIdList()));
 
@@ -191,8 +196,7 @@ public class TestSampleIdDag {
     // =================================
 
     ImmutableSet<ImmutableList<String>> depthIdLists =
-        ImmutableSet.of(ImmutableList.of("a", "b", "d", "e", "c"),
-            ImmutableList.of("a", "c", "d", "e", "b"));
+        ImmutableSet.of(parseList("a, b, d, e, c"), parseList("a, c, d, e, b"));
 
     assertTrue(depthIdLists.contains(dag.depthIdList()));
 
@@ -201,8 +205,7 @@ public class TestSampleIdDag {
     // =================================
 
     ImmutableSet<ImmutableList<String>> breadthIdLists =
-        ImmutableSet.of(ImmutableList.of("a", "b", "c", "d", "e"),
-            ImmutableList.of("a", "c", "b", "d", "e"));
+        ImmutableSet.of(parseList("a, b, c, d, e"), parseList("a, c, b, d, e"));
 
     assertTrue(breadthIdLists.contains(dag.breadthIdList()));
 
