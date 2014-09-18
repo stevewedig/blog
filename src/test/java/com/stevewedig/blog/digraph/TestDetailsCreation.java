@@ -2,16 +2,30 @@ package com.stevewedig.blog.digraph;
 
 import static com.stevewedig.blog.digraph.node.DownNodeLib.downNode;
 import static com.stevewedig.blog.digraph.node.UpNodeLib.upNode;
+import static com.stevewedig.blog.translate.FormatLib.parseSet;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Set;
 
 import org.junit.Test;
 
-import com.google.common.collect.*;
-import com.stevewedig.blog.digraph.id_graph.*;
-import com.stevewedig.blog.digraph.node_graph.*;
-import com.stevewedig.blog.digraph.node_graph_partial.*;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
+import com.stevewedig.blog.digraph.id_graph.IdDag;
+import com.stevewedig.blog.digraph.id_graph.IdDagLib;
+import com.stevewedig.blog.digraph.id_graph.IdGraph;
+import com.stevewedig.blog.digraph.id_graph.IdGraphLib;
+import com.stevewedig.blog.digraph.id_graph.IdTree;
+import com.stevewedig.blog.digraph.id_graph.IdTreeLib;
+import com.stevewedig.blog.digraph.node_graph.DagLib;
+import com.stevewedig.blog.digraph.node_graph.GraphLib;
+import com.stevewedig.blog.digraph.node_graph.TreeLib;
+import com.stevewedig.blog.digraph.node_graph_partial.PartialDagLib;
+import com.stevewedig.blog.digraph.node_graph_partial.PartialGraphLib;
+import com.stevewedig.blog.digraph.node_graph_partial.PartialTreeLib;
 
 public class TestDetailsCreation {
 
@@ -43,8 +57,12 @@ public class TestDetailsCreation {
 
     IdGraph<String> idGraph = IdGraphLib.fromParentMap(ids, childId__parentId);
     assertEquals(idGraph, IdGraphLib.fromParentMap(childId__parentId));
+    assertEquals(idGraph, IdGraphLib.fromParentMap("b", "a", "c", "a"));
+    assertEquals(idGraph, IdGraphLib.fromParentMap(parseSet("a, b, c"), "b", "a", "c", "a"));
     assertEquals(idGraph, IdGraphLib.fromChildMap(ids, parentId__childId));
     assertEquals(idGraph, IdGraphLib.fromChildMap(parentId__childId));
+    assertEquals(idGraph, IdGraphLib.fromChildMap("a", "b", "a", "c"));
+    assertEquals(idGraph, IdGraphLib.fromChildMap(parseSet("a, b, c"), "a", "b", "a", "c"));
 
     // =================================
     // id dag
@@ -52,8 +70,12 @@ public class TestDetailsCreation {
 
     IdDag<String> idDag = IdDagLib.fromParentMap(ids, childId__parentId);
     assertEquals(idDag, IdDagLib.fromParentMap(childId__parentId));
+    assertEquals(idDag, IdDagLib.fromParentMap("b", "a", "c", "a"));
+    assertEquals(idDag, IdDagLib.fromParentMap(parseSet("a, b, c"), "b", "a", "c", "a"));
     assertEquals(idDag, IdDagLib.fromChildMap(ids, parentId__childId));
     assertEquals(idDag, IdDagLib.fromChildMap(parentId__childId));
+    assertEquals(idDag, IdDagLib.fromChildMap("a", "b", "a", "c"));
+    assertEquals(idDag, IdDagLib.fromChildMap(parseSet("a, b, c"), "a", "b", "a", "c"));
 
     // =================================
     // id tree
@@ -61,8 +83,12 @@ public class TestDetailsCreation {
 
     IdTree<String> idTree = IdTreeLib.fromParentMap(ids, childId__parentId);
     assertEquals(idTree, IdTreeLib.fromParentMap(childId__parentId));
+    assertEquals(idTree, IdTreeLib.fromParentMap("b", "a", "c", "a"));
+    assertEquals(idTree, IdTreeLib.fromParentMap(parseSet("a, b, c"), "b", "a", "c", "a"));
     assertEquals(idTree, IdTreeLib.fromChildMap(ids, parentId__childId));
     assertEquals(idTree, IdTreeLib.fromChildMap(parentId__childId));
+    assertEquals(idTree, IdTreeLib.fromChildMap("a", "b", "a", "c"));
+    assertEquals(idTree, IdTreeLib.fromChildMap(parseSet("a, b, c"), "a", "b", "a", "c"));
 
     // =================================
     // node graph (up)
