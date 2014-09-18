@@ -48,6 +48,14 @@ public interface IdGraph<Id> {
    */
   Fn1<Id, List<Id>> parentIdListLambda();
 
+  /**
+   * Filtering the parent map, only keeping arcs between a subset of ids.
+   * 
+   * @param ids The subset of the graph's ids.
+   * @return A filtered parent map.
+   */
+  SetMultimap<Id, Id> filterParentMap(Set<Id> ids);
+
   // ===========================================================================
   // children
   // ===========================================================================

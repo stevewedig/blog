@@ -3,6 +3,7 @@ package com.stevewedig.blog.digraph.id_graph;
 import java.util.*;
 
 import com.google.common.base.Optional;
+import com.google.common.base.Predicate;
 import com.google.common.collect.*;
 import com.stevewedig.blog.digraph.alg.*;
 import com.stevewedig.blog.digraph.errors.GraphHadUnexpectedIds;
@@ -117,6 +118,18 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
   }
 
   private Fn1<Id, List<Id>> parentIdListLambda;
+
+  // ===================================
+
+  @Override
+  public SetMultimap<Id, Id> filterParentMap(final Set<Id> ids) {
+    return MultimapLib.filterKeysAndValues(id__parentIds(), new Predicate<Id>() {
+      @Override
+      public boolean apply(Id id) {
+        return ids.contains(id);
+      }
+    });
+  }
 
   // ===========================================================================
   // children

@@ -1,28 +1,18 @@
 package com.stevewedig.blog.util;
 
-import com.google.common.collect.*;
+import java.util.Map.Entry;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableSetMultimap;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
+import com.google.common.collect.SetMultimap;
 
 /**
  * Multimap related utilities.
  */
 public abstract class MultimapLib {
-
-  /**
-   * Collecting all of the keys and values in a multimap with keys and values of the same type.
-   * 
-   * @param key__values The multimap.
-   * @return The set of keys and values.
-   */
-  public static <Item> ImmutableSet<Item> keysAndValues(Multimap<Item, Item> key__values) {
-
-    ImmutableSet.Builder<Item> items = ImmutableSet.builder();
-
-    items.addAll(key__values.keySet());
-
-    items.addAll(key__values.values());
-
-    return items.build();
-  }
 
   /**
    * Creating a multimap with keys and values of the same type.
@@ -46,6 +36,48 @@ public abstract class MultimapLib {
     }
 
     return key__values.build();
+  }
+
+  /**
+   * Collecting all of the keys and values in a multimap with keys and values of the same type.
+   * 
+   * @param key__values The multimap.
+   * @return The set of keys and values.
+   */
+  public static <Item> ImmutableSet<Item> keysAndValues(Multimap<Item, Item> key__values) {
+
+    ImmutableSet.Builder<Item> items = ImmutableSet.builder();
+
+    items.addAll(key__values.keySet());
+
+    items.addAll(key__values.values());
+
+    return items.build();
+  }
+
+  /**
+   * Filtering the entries in a multimap containing keys and values of the same type.
+   * 
+   * @param key__values The multimap.
+   * @param keep The predicate for filtering the keys and values.
+   * @return A filtered multimap.
+   */
+  public static <Item> SetMultimap<Item, Item> filterKeysAndValues(
+      SetMultimap<Item, Item> key__values, final Predicate<Item> predicate) {
+
+    return Multimaps.filterEntries(key__values, new Predicate<Entry<Item, Item>>() {
+      @Override
+      public boolean apply(Entry<Item, Item> entry) {
+
+        if (!predicate.apply(entry.getKey()))
+          return false;
+
+        if (!predicate.apply(entry.getValue()))
+          return false;
+
+        return true;
+      }
+    });
   }
 
 }
