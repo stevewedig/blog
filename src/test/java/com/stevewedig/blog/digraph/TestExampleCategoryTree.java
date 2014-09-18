@@ -39,7 +39,7 @@ public class TestExampleCategoryTree {
   }
 
   // ===========================================================================
-  // static category releated methods
+  // static category related methods
   // ===========================================================================
 
   /**

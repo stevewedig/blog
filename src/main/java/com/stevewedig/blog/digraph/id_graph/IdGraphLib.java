@@ -28,6 +28,11 @@ public abstract class IdGraphLib {
     return fromParentMap(MultimapLib.of(entries));
   }
 
+  @SafeVarargs
+  public static <Id> IdGraph<Id> fromParentMap(Set<Id> idSet, Id... entries) {
+    return fromParentMap(idSet, MultimapLib.of(entries));
+  }
+
   // ===========================================================================
   // fromChildMap
   // ===========================================================================
@@ -47,6 +52,11 @@ public abstract class IdGraphLib {
   @SafeVarargs
   public static <Id> IdGraph<Id> fromChildMap(Id... entries) {
     return fromChildMap(MultimapLib.of(entries));
+  }
+
+  @SafeVarargs
+  public static <Id> IdGraph<Id> fromChildMap(Set<Id> idSet, Id... entries) {
+    return fromChildMap(idSet, MultimapLib.of(entries));
   }
 
 }
