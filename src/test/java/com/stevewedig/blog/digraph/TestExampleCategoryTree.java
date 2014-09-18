@@ -43,42 +43,41 @@ public class TestExampleCategoryTree {
   // ===========================================================================
 
   /**
-   * similar to the "issubclass" operator
+   * Is a category below another one, inclusively? (Similar to the "issubclass" operator.)
    */
-  public static boolean isSubcategory(Category child, Category parent) {
-    return tree.descendantOf(child, parent, true);
+  public static boolean isSubcategory(Category category, Category potentialAncestor) {
+    return tree.descendantOf(category, potentialAncestor, true);
   }
 
   /**
-   * non-deterministic choice when two categories are equally deep
+   * Find the most specific category (non-deterministic when they are equally deep).
    */
   public static Category mostSpecific(Set<Category> categories) {
     return tree.mostDeep(categories);
   }
 
   /**
-   * create a smaller tree containing the nodes below the provided category
+   * Create a smaller tree containing only the categories below the provided category.
    */
-  public static IdTree<Category> subTree(Category category) {
+  public static IdTree<Category> subtree(Category category) {
 
-    ImmutableSet<Category> idsInSubTree = tree.descendantIdSet(category, true);
+    ImmutableSet<Category> subtreeIds = tree.descendantIdSet(category, true);
 
-    SetMultimap<Category, Category> subtreeParentMap = tree.filterParentMap(idsInSubTree);
+    SetMultimap<Category, Category> subtreeChildMap = tree.filterChildMap(subtreeIds);
 
-    return IdTreeLib.fromParentMap(idsInSubTree, subtreeParentMap);
+    return IdTreeLib.fromChildMap(subtreeIds, subtreeChildMap);
   }
 
   /**
-   * create a smaller tree containing the nodes above the provided categories
+   * Create a smaller tree containing only the categories above the provided categories.
    */
-  public static IdTree<Category> superTree(Category... categories) {
+  public static IdTree<Category> supertree(Category... categories) {
 
-    ImmutableSet<Category> idsInSuperTree =
-        tree.ancestorIdSet(ImmutableSet.copyOf(categories), true);
+    ImmutableSet<Category> supertreeIds = tree.ancestorIdSet(ImmutableSet.copyOf(categories), true);
 
-    SetMultimap<Category, Category> subtreeParentMap = tree.filterParentMap(idsInSuperTree);
+    SetMultimap<Category, Category> subtreeChildMap = tree.filterChildMap(supertreeIds);
 
-    return IdTreeLib.fromParentMap(idsInSuperTree, subtreeParentMap);
+    return IdTreeLib.fromChildMap(supertreeIds, subtreeChildMap);
   }
 
   // ===========================================================================
@@ -121,38 +120,38 @@ public class TestExampleCategoryTree {
   }
 
   @Test
-  public void testSubTree() {
+  public void testSubtree() {
 
     // primate is below mammal
     assertEquals(IdTreeLib.fromChildMap(Category.mammal, Category.primate),
-        subTree(Category.mammal));
+        subtree(Category.mammal));
 
     // everything is below the root
-    assertEquals(tree, subTree(Category.animal));
+    assertEquals(tree, subtree(Category.animal));
 
     // nothing is below a leaf
     assertEquals(IdTreeLib.fromChildMap(ImmutableSet.of(Category.primate)),
-        subTree(Category.primate));
+        subtree(Category.primate));
   }
 
   @Test
-  public void testSuperTree() {
+  public void testSupertree() {
 
     // animal is above mammal
     assertEquals(IdTreeLib.fromChildMap(Category.animal, Category.mammal),
-        superTree(Category.mammal));
+        supertree(Category.mammal));
 
     // animal and mammal are above primate
     assertEquals(
         IdTreeLib.fromChildMap(Category.animal, Category.mammal, Category.mammal, Category.primate),
-        superTree(Category.primate));
+        supertree(Category.primate));
 
     // everything is above the leaves
-    assertEquals(tree, superTree(Category.primate, Category.lizard));
+    assertEquals(tree, supertree(Category.primate, Category.lizard));
 
     // nothing is above the root
     assertEquals(IdTreeLib.fromChildMap(ImmutableSet.of(Category.animal)),
-        superTree(Category.animal));
+        supertree(Category.animal));
 
   }
 

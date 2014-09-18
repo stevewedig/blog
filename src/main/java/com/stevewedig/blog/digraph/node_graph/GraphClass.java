@@ -217,6 +217,11 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
     return nodeWrapSet(childIdSet(id), false);
   }
 
+  @Override
+  public SetMultimap<Id, Id> filterChildMap(Set<Id> ids) {
+    return idGraph.filterChildMap(ids);
+  }
+
   // ===========================================================================
   // ancestors
   // ===========================================================================

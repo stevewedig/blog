@@ -178,6 +178,18 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
 
   private Fn1<Id, List<Id>> childIdListLambda;
 
+  // ===================================
+
+  @Override
+  public SetMultimap<Id, Id> filterChildMap(final Set<Id> ids) {
+    return MultimapLib.filterKeysAndValues(id__childIds(), new Predicate<Id>() {
+      @Override
+      public boolean apply(Id id) {
+        return ids.contains(id);
+      }
+    });
+  }
+
   // ===========================================================================
   // ancestors
   // ===========================================================================
