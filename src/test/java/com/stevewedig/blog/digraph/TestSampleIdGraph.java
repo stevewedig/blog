@@ -193,11 +193,14 @@ public class TestSampleIdGraph {
     assertEquals(parseSet("a, b, c, d, e"), graph.ancestorIdSet("e", true));
     assertEquals(parseSet("f"), graph.ancestorIdSet("f", true));
 
+    // ancestor graph, not inclusive
     assertEquals(IdGraphLib.fromParentMap(parseSet("c, d, e"), "d", "c"),
         graph.ancestorIdGraph(parseSet("a, b"), false));
 
+    // ancestor graph, inclusive
     assertEquals(IdGraphLib.fromParentMap(parseSet("f")), graph.ancestorIdGraph("f", true));
 
+    // ancestor graph, inclusive
     assertEquals(idGraphFromParentMap(), graph.ancestorIdGraph(parseSet("a, f"), true));
 
     // =================================
@@ -229,12 +232,15 @@ public class TestSampleIdGraph {
     assertEquals(parseSet("a, b, c, d, e"), graph.descendantIdSet("e", true));
     assertEquals(parseSet("f"), graph.descendantIdSet("f", true));
 
+    // descendant graph, not inclusive
     assertEquals(IdGraphLib.fromParentMap(parseSet("b, c, d, e"), "c", "b", "d", "c"),
         graph.descendantIdGraph(parseSet("a"), false));
 
+    // descendant graph, inclusive
     assertEquals(IdGraphLib.fromParentMap(parseSet("f")),
         graph.descendantIdGraph(parseSet("f"), true));
 
+    // descendant graph, inclusive
     assertEquals(idGraphFromParentMap(), graph.descendantIdGraph(parseSet("a, f"), true));
 
     // =================================

@@ -1,6 +1,7 @@
 package com.stevewedig.blog.digraph;
 
-import static com.stevewedig.blog.translate.FormatLib.*;
+import static com.stevewedig.blog.translate.FormatLib.parseList;
+import static com.stevewedig.blog.translate.FormatLib.parseSet;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -16,6 +17,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
+import com.stevewedig.blog.digraph.id_graph.IdDagLib;
 import com.stevewedig.blog.digraph.id_graph.IdTree;
 import com.stevewedig.blog.digraph.id_graph.IdTreeLib;
 import com.stevewedig.blog.errors.NotThrown;
@@ -256,7 +258,11 @@ public class TestSampleIdTree {
     assertEquals(parseList("a, f, g"), tree.ancestorIdList("g", true));
     assertEquals(parseList("a, h"), tree.ancestorIdList("h", true));
 
-    // TODO anc graph
+    // ancestor graph, not inclusive
+    assertEquals(IdTreeLib.fromParentMap("b", "a"), tree.ancestorIdGraph(parseSet("c"), false));
+
+    // ancestor graph, inclusive
+    assertEquals(idTreeFromParentMap(), tree.ancestorIdGraph(parseSet("d, e, g, h"), true));
 
     // depth
     assertEquals(0, tree.depth("a"));
@@ -292,9 +298,16 @@ public class TestSampleIdTree {
     assertEquals(parseSet(""), tree.descendantIdSet("g", false));
     assertEquals(parseSet(""), tree.descendantIdSet("h", false));
 
-    // TODO desc graph
+    // descendant graph, not inclusive
+    assertEquals(IdDagLib.fromParentMap(parseSet("c, d, e"), "d", "c"),
+        tree.descendantIdGraph(parseSet("b"), false));
 
-    // TODO desc tree
+    // descendant graph, inclusive
+    assertEquals(IdDagLib.fromParentMap("d", "c"), tree.descendantIdGraph(parseSet("c"), true));
+
+    // descendant tree
+    assertEquals(IdTreeLib.fromParentMap("d", "c"), tree.descendantIdTree("c"));
+    assertEquals(idTreeFromParentMap(), tree.descendantIdTree("a"));
 
     // =================================
     // root (source)

@@ -197,7 +197,12 @@ public class TestSampleIdDag {
     assertEquals(parseSet("a, b, c, d"), dag.ancestorIdSet("d", true));
     assertEquals(parseSet("a, b, c, d, e"), dag.ancestorIdSet("e", true));
 
-    // TODO anc graph
+    // ancestor graph, not inclusive
+    assertEquals(IdDagLib.fromParentMap(parseSet("a, b, c"), "b", "a", "c", "a"),
+        dag.ancestorIdGraph("d", false));
+
+    // ancestor graph, inclusive
+    assertEquals(idDagFromParentMap(), dag.ancestorIdGraph("e", true));
 
     // =================================
     // descendants
@@ -232,7 +237,12 @@ public class TestSampleIdDag {
     assertEquals(parseSet("d, e"), dag.descendantIdSet("d", true));
     assertEquals(parseSet("e"), dag.descendantIdSet("e", true));
 
-    // TODO desc graph
+    // descendant graph, not inclusive
+    assertEquals(IdDagLib.fromParentMap(parseSet("b, c, d, e"), "d", "b", "d", "c", "e", "d"),
+        dag.descendantIdGraph("a", false));
+
+    // descendant graph, inclusive
+    assertEquals(idDagFromParentMap(), dag.descendantIdGraph("a", true));
 
     // =================================
     // roots (sources)
