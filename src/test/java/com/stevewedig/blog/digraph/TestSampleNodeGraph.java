@@ -82,7 +82,7 @@ public class TestSampleNodeGraph {
     TestSampleIdGraph.verifyIdGraph(graph);
 
     // =================================
-    // nodes
+    // node map
     // =================================
 
     Node a = graph.getNode("a");
@@ -92,14 +92,21 @@ public class TestSampleNodeGraph {
     Node e = graph.getNode("e");
     Node f = graph.getNode("f");
 
+    assertEquals("a", graph.getId(a));
+
+    assertTrue(graph.containsNodeForId("a"));
+
+    // node map
     ImmutableBiMap<String, Node> id__node =
         ImmutableBiMap.<String, Node>builder().put("a", a).put("b", b).put("c", c).put("d", d)
             .put("e", e).put("f", f).build();
-
     assertEquals(id__node, graph.id__node());
 
+    // unboundIds (nodes without ids)
+    assertEquals(ImmutableSet.of(), graph.unboundIdSet());
+
     // =================================
-    // nodeSet
+    // nodes
     // =================================
 
     @SuppressWarnings("unchecked")
@@ -114,12 +121,6 @@ public class TestSampleNodeGraph {
     // =================================
 
     assertFalse(graph.optionalTopsortNodeList().isPresent());
-
-    // =================================
-    // unboundIds (nodes without ids)
-    // =================================
-
-    assertEquals(ImmutableSet.of(), graph.unboundIdSet());
 
     // =================================
     // parents
@@ -188,6 +189,12 @@ public class TestSampleNodeGraph {
     // =================================
 
     assertEquals(ImmutableSet.of(f), graph.leafNodeSet());
+
+    // =================================
+    // generic traversal
+    // =================================
+
+    // TODO
 
     // =================================
     // implementing set

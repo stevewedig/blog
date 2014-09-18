@@ -78,7 +78,7 @@ public class TestSampleNodeDag {
     TestSampleIdDag.verifyIdDag(dag);
 
     // =================================
-    // id -> nodes
+    // node map
     // =================================
 
     Node a = dag.getNode("a");
@@ -87,13 +87,20 @@ public class TestSampleNodeDag {
     Node d = dag.getNode("d");
     Node e = dag.getNode("e");
 
+    assertEquals("a", dag.getId(a));
+
+    assertTrue(dag.containsNodeForId("a"));
+
+    // node map
     ImmutableBiMap<String, Node> id__node =
         ImmutableBiMap.<String, Node>of("a", a, "b", b, "c", c, "d", d, "e", e);
-
     assertEquals(id__node, dag.id__node());
 
+    // unboundIds (ids without nodes)
+    assertEquals(ImmutableSet.of(), dag.unboundIdSet());
+
     // =================================
-    // nodeSet
+    // nodes
     // =================================
 
     ImmutableSet<Node> nodeSet = ImmutableSet.of(a, b, c, d, e);
@@ -101,12 +108,6 @@ public class TestSampleNodeDag {
     assertEquals(nodeSet, dag.nodeSet());
 
     assertEquals(nodeSet.size(), dag.nodeSize());
-
-    // =================================
-    // unboundIds (ids without nodes)
-    // =================================
-
-    assertEquals(ImmutableSet.of(), dag.unboundIdSet());
 
     // =================================
     // parents
@@ -189,6 +190,12 @@ public class TestSampleNodeDag {
         ImmutableSet.of(ImmutableList.of(a, b, c, d, e), ImmutableList.of(a, c, b, d, e));
 
     assertTrue(breadthNodeLists.contains(dag.breadthNodeList()));
+
+    // =================================
+    // generic traversal
+    // =================================
+
+    // TODO
 
     // =================================
     // implementing set

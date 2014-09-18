@@ -94,7 +94,7 @@ public class TestSampleNodeTree {
     TestSampleIdTree.verifyIdTree(tree);
 
     // =================================
-    // id -> nodes
+    // node map
     // =================================
 
     Node a = tree.getNode("a");
@@ -106,14 +106,21 @@ public class TestSampleNodeTree {
     Node g = tree.getNode("g");
     Node h = tree.getNode("h");
 
+    assertEquals("a", tree.getId(a));
+
+    assertTrue(tree.containsNodeForId("a"));
+
+    // node map
     ImmutableBiMap<String, Node> id__node =
         ImmutableBiMap.<String, Node>builder().put("a", a).put("b", b).put("c", c).put("d", d)
             .put("e", e).put("f", f).put("g", g).put("h", h).build();
-
     assertEquals(id__node, tree.id__node());
 
+    // unboundIds (ids without nodes)
+    assertEquals(ImmutableSet.of(), tree.unboundIdSet());
+
     // =================================
-    // nodeSet
+    // nodes
     // =================================
 
     @SuppressWarnings("unchecked")
@@ -122,12 +129,6 @@ public class TestSampleNodeTree {
     assertEquals(nodeSet, tree.nodeSet());
 
     assertEquals(nodeSet.size(), tree.nodeSize());
-
-    // =================================
-    // unboundIds
-    // =================================
-
-    assertEquals(ImmutableSet.of(), tree.unboundIdSet());
 
     // =================================
     // parents
@@ -267,6 +268,12 @@ public class TestSampleNodeTree {
 
     verifyBreadth(tree);
 
+    // =================================
+    // generic traversal
+    // =================================
+
+    // TODO
+    
     // =================================
     // implementing set
     // =================================
