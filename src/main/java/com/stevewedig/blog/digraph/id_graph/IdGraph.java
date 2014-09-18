@@ -12,7 +12,7 @@ import com.stevewedig.blog.util.LambdaLib.Fn1;
 public interface IdGraph<Id> {
 
   // ===========================================================================
-  // idSet
+  // ids
   // ===========================================================================
 
   /**
@@ -46,12 +46,6 @@ public interface IdGraph<Id> {
   ImmutableSet<Id> parentIdSet(Id id);
 
   /**
-   * Lambda that gets an id's parent ids.
-   */
-  Fn1<Id, List<Id>> parentIdListLambda();
-
-
-  /**
    * Filtering the parent map, only keeping arcs between a subset of ids.
    * 
    * @param ids The subset of the graph's ids.
@@ -74,11 +68,6 @@ public interface IdGraph<Id> {
    * Getting an id's child ids.
    */
   ImmutableSet<Id> childIdSet(Id id);
-
-  /**
-   * Lambda that gets an id's child ids.
-   */
-  Fn1<Id, List<Id>> childIdListLambda();
 
   // ===========================================================================
   // ancestors

@@ -108,8 +108,7 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
 
   // ===================================
 
-  @Override
-  public Fn1<Id, List<Id>> parentIdListLambda() {
+  protected Fn1<Id, List<Id>> parentIdListLambda() {
     if (parentIdListLambda == null)
       parentIdListLambda = new Fn1<Id, List<Id>>() {
         @Override
@@ -174,8 +173,7 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
 
   // ===================================
 
-  @Override
-  public Fn1<Id, List<Id>> childIdListLambda() {
+  protected Fn1<Id, List<Id>> childIdListLambda() {
     if (childIdListLambda == null)
       childIdListLambda = new Fn1<Id, List<Id>>() {
         @Override
@@ -227,7 +225,7 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
   @Override
   public IdGraph<Id> ancestorIdGraph(Set<Id> ids, boolean inclusive) {
 
-    ImmutableSet<Id> ancestorIds = ancestorIdSet(ids, true);
+    ImmutableSet<Id> ancestorIds = ancestorIdSet(ids, inclusive);
 
     return IdGraphLib.fromParentMap(ancestorIds, filterParentMap(ancestorIds));
   }
@@ -269,7 +267,7 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
   @Override
   public IdGraph<Id> descendantIdGraph(Set<Id> ids, boolean inclusive) {
 
-    ImmutableSet<Id> descendantIds = descendantIdSet(ids, true);
+    ImmutableSet<Id> descendantIds = descendantIdSet(ids, inclusive);
 
     return IdGraphLib.fromParentMap(descendantIds, filterParentMap(descendantIds));
   }

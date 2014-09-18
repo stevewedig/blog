@@ -72,7 +72,7 @@ public class IdTreeClass<Id> extends IdDagClass<Id> implements IdTree<Id> {
   @Override
   public IdTree<Id> ancestorIdGraph(Set<Id> ids, boolean inclusive) {
 
-    ImmutableSet<Id> ancestorIds = ancestorIdSet(ids, true);
+    ImmutableSet<Id> ancestorIds = ancestorIdSet(ids, inclusive);
 
     return IdTreeLib.fromParentMap(ancestorIds, filterParentMap(ancestorIds));
   }

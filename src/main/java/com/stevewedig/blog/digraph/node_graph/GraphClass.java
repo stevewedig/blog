@@ -184,11 +184,6 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   }
 
   @Override
-  public Fn1<Id, List<Id>> parentIdListLambda() {
-    return idGraph.parentIdListLambda();
-  }
-
-  @Override
   public SetMultimap<Id, Id> filterParentMap(Set<Id> ids) {
     return idGraph.filterParentMap(ids);
   }
@@ -217,11 +212,6 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   @Override
   public ImmutableSet<Id> childIdSet(Id id) {
     return idGraph.childIdSet(id);
-  }
-
-  @Override
-  public Fn1<Id, List<Id>> childIdListLambda() {
-    return idGraph.childIdListLambda();
   }
 
   // ===================================
