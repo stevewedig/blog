@@ -121,6 +121,13 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
   // ===================================
 
   @Override
+  public boolean parentOf(Id id, Id potentialChild) {
+    return childIdSet(id).contains(potentialChild);
+  }
+
+  // ===================================
+
+  @Override
   public SetMultimap<Id, Id> filterParentMap(final Set<Id> ids) {
     return MultimapLib.filterKeysAndValues(id__parentIds(), new Predicate<Id>() {
       @Override
@@ -176,6 +183,13 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
   }
 
   private Fn1<Id, List<Id>> childIdListLambda;
+
+  // ===================================
+
+  @Override
+  public boolean childOf(Id id, Id potentialParent) {
+    return parentIdSet(id).contains(potentialParent);
+  }
 
   // ===========================================================================
   // ancestors

@@ -48,6 +48,8 @@ public interface IdGraph<Id> {
    */
   Fn1<Id, List<Id>> parentIdListLambda();
 
+  boolean parentOf(Id id, Id potentialChild);
+
   /**
    * Filtering the parent map, only keeping arcs between a subset of ids.
    * 
@@ -74,6 +76,8 @@ public interface IdGraph<Id> {
    * Lambda that gets an id's child ids.
    */
   Fn1<Id, List<Id>> childIdListLambda();
+
+  boolean childOf(Id id, Id potentialParent);
 
   // ===========================================================================
   // ancestors
