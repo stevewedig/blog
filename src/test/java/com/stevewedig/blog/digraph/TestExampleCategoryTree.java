@@ -31,7 +31,7 @@ public class TestExampleCategoryTree {
 
   // an AssertionError will be raised if we create a Category without adding it to the tree
   static {
-    tree.assertIdsMatch(Category.values());
+    tree.assertIdsEqual(Category.values());
   }
 
   // ===========================================================================

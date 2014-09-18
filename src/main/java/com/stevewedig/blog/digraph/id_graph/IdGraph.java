@@ -25,13 +25,15 @@ public interface IdGraph<Id> {
    */
   int idSize();
 
-  void assertIdsMatch(ImmutableSet<Id> ids);
+  void assertIdsEqual(ImmutableSet<Id> ids);
 
-  void assertIdsMatch(Id[] ids);
+  void assertIdsEqual(Id[] ids);
 
   // ===========================================================================
   // parents
   // ===========================================================================
+
+  boolean parentOf(Id id, Id potentialChild);
 
   /**
    * The mapping from id to parent ids.
@@ -48,7 +50,6 @@ public interface IdGraph<Id> {
    */
   Fn1<Id, List<Id>> parentIdListLambda();
 
-  boolean parentOf(Id id, Id potentialChild);
 
   /**
    * Filtering the parent map, only keeping arcs between a subset of ids.
@@ -61,6 +62,8 @@ public interface IdGraph<Id> {
   // ===========================================================================
   // children
   // ===========================================================================
+
+  boolean childOf(Id id, Id potentialParent);
 
   /**
    * The mapping from id to child ids.
@@ -77,11 +80,12 @@ public interface IdGraph<Id> {
    */
   Fn1<Id, List<Id>> childIdListLambda();
 
-  boolean childOf(Id id, Id potentialParent);
 
   // ===========================================================================
   // ancestors
   // ===========================================================================
+
+  boolean ancestorOf(Id id, Id potentialDescendant, boolean inclusive);
 
   /**
    * Getting an id's ancestor id iterable (its parents, it's parents' parents, and so on).
@@ -101,12 +105,13 @@ public interface IdGraph<Id> {
 
   IdGraph<Id> ancestorIdGraph(Set<Id> ids, boolean inclusive);
 
-  boolean ancestorOf(Id id, Id potentialDescendant, boolean inclusive);
 
   // ===========================================================================
   // descendants
   // ===========================================================================
 
+  boolean descendantOf(Id id, Id potentialAncestor, boolean inclusive);
+  
   /**
    * Getting an id's descendant id iterable (its children, it's childrens' children, and so on).
    */
@@ -125,25 +130,30 @@ public interface IdGraph<Id> {
 
   IdGraph<Id> descendantIdGraph(Set<Id> ids, boolean inclusive);
 
-  boolean descendantOf(Id id, Id potentialAncestor, boolean inclusive);
 
   // ===========================================================================
   // roots (sources)
   // ===========================================================================
+
+  boolean isRootId(Id id);
 
   /**
    * The digraph's root (source) ids, so the ids without parents.
    */
   ImmutableSet<Id> rootIdSet();
 
+
   // ===========================================================================
   // leaves (sinks)
   // ===========================================================================
+
+  boolean isLeafId(Id id);
 
   /**
    * The digraph's leaf (sink) ids, so the ids without children.
    */
   ImmutableSet<Id> leafIdSet();
+
 
   // ===========================================================================
   // topological sort

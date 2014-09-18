@@ -85,13 +85,13 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   }
 
   @Override
-  public void assertIdsMatch(ImmutableSet<Id> ids) {
-    idGraph.assertIdsMatch(ids);
+  public void assertIdsEqual(ImmutableSet<Id> ids) {
+    idGraph.assertIdsEqual(ids);
   }
 
   @Override
-  public void assertIdsMatch(Id[] ids) {
-    idGraph.assertIdsMatch(ids);
+  public void assertIdsEqual(Id[] ids) {
+    idGraph.assertIdsEqual(ids);
   }
 
   // ===========================================================================
@@ -169,6 +169,11 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   // ===========================================================================
 
   @Override
+  public boolean parentOf(Id id, Id potentialChild) {
+    return idGraph.parentOf(id, potentialChild);
+  }
+  
+  @Override
   public ImmutableSetMultimap<Id, Id> id__parentIds() {
     return idGraph.id__parentIds();
   }
@@ -181,11 +186,6 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   @Override
   public Fn1<Id, List<Id>> parentIdListLambda() {
     return idGraph.parentIdListLambda();
-  }
-
-  @Override
-  public boolean parentOf(Id id, Id potentialChild) {
-    return idGraph.parentOf(id, potentialChild);
   }
 
   @Override
@@ -205,6 +205,11 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   // ===========================================================================
 
   @Override
+  public boolean childOf(Id id, Id potentialParent) {
+    return idGraph.childOf(id, potentialParent);
+  }
+  
+  @Override
   public ImmutableSetMultimap<Id, Id> id__childIds() {
     return idGraph.id__childIds();
   }
@@ -219,11 +224,6 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
     return idGraph.childIdListLambda();
   }
 
-  @Override
-  public boolean childOf(Id id, Id potentialParent) {
-    return idGraph.childOf(id, potentialParent);
-  }
-
   // ===================================
 
   @Override
@@ -235,6 +235,11 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   // ancestors
   // ===========================================================================
 
+  @Override
+  public boolean ancestorOf(Id id, Id potentialDescendant, boolean inclusive) {
+    return idGraph.ancestorOf(id, potentialDescendant, inclusive);
+  }
+  
   @Override
   public Iterable<Id> ancestorIdIterable(Id id, boolean inclusive) {
     return idGraph.ancestorIdIterable(id, inclusive);
@@ -265,11 +270,6 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
     return idGraph.ancestorIdGraph(ids, inclusive);
   }
 
-  @Override
-  public boolean ancestorOf(Id id, Id potentialDescendant, boolean inclusive) {
-    return idGraph.ancestorOf(id, potentialDescendant, inclusive);
-  }
-
   // ===================================
 
   @Override
@@ -295,6 +295,11 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   // ===========================================================================
   // descendants
   // ===========================================================================
+
+  @Override
+  public boolean descendantOf(Id id, Id potentialAncestor, boolean inclusive) {
+    return idGraph.descendantOf(id, potentialAncestor, inclusive);
+  }
 
   @Override
   public Iterable<Id> descendantIdIterable(Id id, boolean inclusive) {
@@ -326,11 +331,6 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
     return idGraph.descendantIdGraph(ids, inclusive);
   }
 
-  @Override
-  public boolean descendantOf(Id id, Id potentialAncestor, boolean inclusive) {
-    return idGraph.descendantOf(id, potentialAncestor, inclusive);
-  }
-
   // ===================================
 
   @Override
@@ -356,6 +356,13 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   // ===========================================================================
   // roots (sources)
   // ===========================================================================
+  
+  @Override
+  public boolean isRootId(Id id) {
+    return idGraph.isRootId(id);
+  }
+
+  // ===================================
 
   @Override
   public ImmutableSet<Id> rootIdSet() {
@@ -376,6 +383,13 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   // ===========================================================================
   // leaves (sinks)
   // ===========================================================================
+  
+  @Override
+  public boolean isLeafId(Id id) {
+    return idGraph.isLeafId(id);
+  }
+
+  // ===================================
 
   @Override
   public ImmutableSet<Id> leafIdSet() {
