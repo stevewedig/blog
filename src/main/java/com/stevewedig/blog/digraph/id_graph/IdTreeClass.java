@@ -46,27 +46,6 @@ public class IdTreeClass<Id> extends IdDagClass<Id> implements IdTree<Id> {
   }
 
   // ===========================================================================
-  // descendants
-  // ===========================================================================
-
-  @Override
-  public IdTree<Id> descendantIdTree(Id id) {
-
-    ImmutableSet<Id> descendantIds = descendantIdSet(id, true);
-
-    return IdTreeLib.fromParentMap(descendantIds, filterParentMap(descendantIds));
-  }
-
-  // ===========================================================================
-  // root
-  // ===========================================================================
-
-  @Override
-  public Id rootId() {
-    return Iterables.getOnlyElement(rootIdSet());
-  }
-
-  // ===========================================================================
   // parent
   // ===========================================================================
 
@@ -84,6 +63,21 @@ public class IdTreeClass<Id> extends IdDagClass<Id> implements IdTree<Id> {
   // ===========================================================================
   // ancestors
   // ===========================================================================
+
+  @Override
+  public IdTree<Id> ancestorIdGraph(Id id, boolean inclusive) {
+    return ancestorIdGraph(ImmutableSet.of(id), inclusive);
+  }
+
+  @Override
+  public IdTree<Id> ancestorIdGraph(Set<Id> ids, boolean inclusive) {
+
+    ImmutableSet<Id> ancestorIds = ancestorIdSet(ids, true);
+
+    return IdTreeLib.fromParentMap(ancestorIds, filterParentMap(ancestorIds));
+  }
+
+  // ===================================
 
   @Override
   public ImmutableList<Id> ancestorIdList(Id id, boolean inclusive) {
@@ -105,6 +99,27 @@ public class IdTreeClass<Id> extends IdDagClass<Id> implements IdTree<Id> {
     }
 
     return ImmutableList.copyOf(ancestorIds);
+  }
+
+  // ===========================================================================
+  // descendants
+  // ===========================================================================
+
+  @Override
+  public IdTree<Id> descendantIdTree(Id id) {
+
+    ImmutableSet<Id> descendantIds = descendantIdSet(id, true);
+
+    return IdTreeLib.fromParentMap(descendantIds, filterParentMap(descendantIds));
+  }
+
+  // ===========================================================================
+  // root
+  // ===========================================================================
+
+  @Override
+  public Id rootId() {
+    return Iterables.getOnlyElement(rootIdSet());
   }
 
   // ===========================================================================

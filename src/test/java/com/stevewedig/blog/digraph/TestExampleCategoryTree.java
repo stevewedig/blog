@@ -1,17 +1,13 @@
 package com.stevewedig.blog.digraph;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.Set;
 
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.SetMultimap;
-import com.stevewedig.blog.digraph.id_graph.IdTree;
-import com.stevewedig.blog.digraph.id_graph.IdTreeLib;
+import com.stevewedig.blog.digraph.id_graph.*;
 
 public class TestExampleCategoryTree {
 
@@ -60,25 +56,14 @@ public class TestExampleCategoryTree {
    * create a smaller tree containing the nodes below the provided category
    */
   public static IdTree<Category> subTree(Category category) {
-
-    ImmutableSet<Category> idsInSubTree = tree.descendantIdSet(category, true);
-
-    SetMultimap<Category, Category> subtreeParentMap = tree.filterParentMap(idsInSubTree);
-
-    return IdTreeLib.fromParentMap(idsInSubTree, subtreeParentMap);
+    return tree.descendantIdTree(category);
   }
 
   /**
    * create a smaller tree containing the nodes above the provided categories
    */
   public static IdTree<Category> superTree(Category... categories) {
-
-    ImmutableSet<Category> idsInSuperTree =
-        tree.ancestorIdSet(ImmutableSet.copyOf(categories), true);
-
-    SetMultimap<Category, Category> subtreeParentMap = tree.filterParentMap(idsInSuperTree);
-
-    return IdTreeLib.fromParentMap(idsInSuperTree, subtreeParentMap);
+    return tree.ancestorIdGraph(ImmutableSet.copyOf(categories), true);
   }
 
   // ===========================================================================
