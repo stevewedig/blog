@@ -1,7 +1,9 @@
 package com.stevewedig.blog.digraph.node_graph;
 
+import java.util.Set;
+
 import com.google.common.collect.*;
-import com.stevewedig.blog.digraph.id_graph.IdDag;
+import com.stevewedig.blog.digraph.id_graph.*;
 
 /**
  * An implementation of Dag.
@@ -30,6 +32,34 @@ public class DagClass<Id, Node> extends GraphClass<Id, Node> implements Dag<Id, 
   @Override
   public IdDag<Id> idGraph() {
     return idDag;
+  }
+
+  // ===========================================================================
+  // ancestors
+  // ===========================================================================
+
+  @Override
+  public IdDag<Id> ancestorIdGraph(Id id, boolean inclusive) {
+    return idDag.ancestorIdGraph(id, inclusive);
+  }
+
+  @Override
+  public IdDag<Id> ancestorIdGraph(Set<Id> ids, boolean inclusive) {
+    return idDag.ancestorIdGraph(ids, inclusive);
+  }
+
+  // ===========================================================================
+  // descendants
+  // ===========================================================================
+
+  @Override
+  public IdDag<Id> descendantIdGraph(Id id, boolean inclusive) {
+    return idDag.descendantIdGraph(id, inclusive);
+  }
+
+  @Override
+  public IdDag<Id> descendantIdGraph(Set<Id> ids, boolean inclusive) {
+    return idDag.descendantIdGraph(ids, inclusive);
   }
 
   // ===========================================================================

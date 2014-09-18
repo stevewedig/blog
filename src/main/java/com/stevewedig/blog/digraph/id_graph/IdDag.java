@@ -1,11 +1,33 @@
 package com.stevewedig.blog.digraph.id_graph;
 
+import java.util.Set;
+
 import com.google.common.collect.ImmutableList;
 
 /**
  * A dag containing ids.
  */
 public interface IdDag<Id> extends IdGraph<Id> {
+  
+  // ===========================================================================
+  // ancestors
+  // ===========================================================================
+
+  @Override
+  IdDag<Id> ancestorIdGraph(Id id, boolean inclusive);
+
+  @Override
+  IdDag<Id> ancestorIdGraph(Set<Id> ids, boolean inclusive);
+
+  // ===========================================================================
+  // descendants
+  // ===========================================================================
+
+  @Override
+  IdDag<Id> descendantIdGraph(Id id, boolean inclusive);
+
+  @Override
+  IdDag<Id> descendantIdGraph(Set<Id> ids, boolean inclusive);
   
   // ===========================================================================
   // topological sort

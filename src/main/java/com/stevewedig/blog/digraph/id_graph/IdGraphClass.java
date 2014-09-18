@@ -2,8 +2,7 @@ package com.stevewedig.blog.digraph.id_graph;
 
 import java.util.*;
 
-import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
+import com.google.common.base.*;
 import com.google.common.collect.*;
 import com.stevewedig.blog.digraph.alg.*;
 import com.stevewedig.blog.digraph.errors.GraphHadUnexpectedIds;
@@ -203,6 +202,19 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
   }
 
   @Override
+  public IdGraph<Id> ancestorIdGraph(Id id, boolean inclusive) {
+    return ancestorIdGraph(ImmutableSet.of(id), inclusive);
+  }
+
+  @Override
+  public IdGraph<Id> ancestorIdGraph(Set<Id> ids, boolean inclusive) {
+
+    ImmutableSet<Id> ancestorIds = ancestorIdSet(ids, true);
+
+    return IdGraphLib.fromParentMap(ancestorIds, filterParentMap(ancestorIds));
+  }
+
+  @Override
   public boolean ancestorOf(Id id, Id potentialDescendant, boolean inclusive) {
     return descendantOf(potentialDescendant, id, inclusive);
   }
@@ -229,6 +241,19 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
   @Override
   public ImmutableSet<Id> descendantIdSet(Set<Id> ids, boolean inclusive) {
     return ImmutableSet.copyOf(descendantIdIterable(ids, inclusive));
+  }
+
+  @Override
+  public IdGraph<Id> descendantIdGraph(Id id, boolean inclusive) {
+    return descendantIdGraph(ImmutableSet.of(id), inclusive);
+  }
+
+  @Override
+  public IdGraph<Id> descendantIdGraph(Set<Id> ids, boolean inclusive) {
+
+    ImmutableSet<Id> descendantIds = descendantIdSet(ids, true);
+
+    return IdGraphLib.fromParentMap(descendantIds, filterParentMap(descendantIds));
   }
 
   @Override

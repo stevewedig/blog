@@ -93,6 +93,10 @@ public interface IdGraph<Id> {
 
   ImmutableSet<Id> ancestorIdSet(Set<Id> ids, boolean inclusive);
 
+  IdGraph<Id> ancestorIdGraph(Id id, boolean inclusive);
+
+  IdGraph<Id> ancestorIdGraph(Set<Id> ids, boolean inclusive);
+
   boolean ancestorOf(Id id, Id potentialDescendant, boolean inclusive);
 
   // ===========================================================================
@@ -112,6 +116,10 @@ public interface IdGraph<Id> {
   ImmutableSet<Id> descendantIdSet(Id id, boolean inclusive);
 
   ImmutableSet<Id> descendantIdSet(Set<Id> ids, boolean inclusive);
+
+  IdGraph<Id> descendantIdGraph(Id id, boolean inclusive);
+
+  IdGraph<Id> descendantIdGraph(Set<Id> ids, boolean inclusive);
 
   boolean descendantOf(Id id, Id potentialAncestor, boolean inclusive);
 

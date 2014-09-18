@@ -46,6 +46,18 @@ public class IdTreeClass<Id> extends IdDagClass<Id> implements IdTree<Id> {
   }
 
   // ===========================================================================
+  // descendants
+  // ===========================================================================
+
+  @Override
+  public IdTree<Id> descendantIdTree(Id id) {
+
+    ImmutableSet<Id> descendantIds = descendantIdSet(id, true);
+
+    return IdTreeLib.fromParentMap(descendantIds, filterParentMap(descendantIds));
+  }
+
+  // ===========================================================================
   // root
   // ===========================================================================
 
