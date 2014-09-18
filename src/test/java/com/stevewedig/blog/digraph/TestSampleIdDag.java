@@ -187,12 +187,14 @@ public class TestSampleIdDag {
     assertFalse(dag.ancestorOf("a", "a", false));
     assertTrue(dag.ancestorOf("a", "a", true));
 
+    // ancestor set, not inclusive
     assertEquals(parseSet(""), dag.ancestorIdSet("a", false));
     assertEquals(parseSet("a"), dag.ancestorIdSet("b", false));
     assertEquals(parseSet("a"), dag.ancestorIdSet("c", false));
     assertEquals(parseSet("a, b, c"), dag.ancestorIdSet("d", false));
     assertEquals(parseSet("a, b, c, d"), dag.ancestorIdSet("e", false));
 
+    // ancestor set, inclusive
     assertEquals(parseSet("a"), dag.ancestorIdSet("a", true));
     assertEquals(parseSet("a, b"), dag.ancestorIdSet("b", true));
     assertEquals(parseSet("a, c"), dag.ancestorIdSet("c", true));
@@ -220,12 +222,14 @@ public class TestSampleIdDag {
     assertFalse(dag.descendantOf("a", "a", false));
     assertTrue(dag.descendantOf("a", "a", true));
 
+    // descendant set, not inclusive
     assertEquals(parseSet("b, c, d, e"), dag.descendantIdSet("a", false));
     assertEquals(parseSet("d, e"), dag.descendantIdSet("b", false));
     assertEquals(parseSet("d, e"), dag.descendantIdSet("c", false));
     assertEquals(parseSet("e"), dag.descendantIdSet("d", false));
     assertEquals(parseSet(""), dag.descendantIdSet("e", false));
 
+    // descendant set, inclusive
     assertEquals(parseSet("a, b, c, d, e"), dag.descendantIdSet("a", true));
     assertEquals(parseSet("b, d, e"), dag.descendantIdSet("b", true));
     assertEquals(parseSet("c, d, e"), dag.descendantIdSet("c", true));

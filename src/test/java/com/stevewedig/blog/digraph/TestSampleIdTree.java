@@ -161,6 +161,12 @@ public class TestSampleIdTree {
     // f -> a
     // g -> f
     // h -> a
+
+    assertEquals(getParentMap(), tree.id__parentIds());
+
+    assertTrue(tree.parentOf("a", "b"));
+    assertFalse(tree.parentOf("b", "a"));
+
     assertEquals(Optional.absent(), tree.parentId("a"));
     assertEquals(Optional.of("a"), tree.parentId("b"));
     assertEquals(Optional.of("b"), tree.parentId("c"));
@@ -169,6 +175,8 @@ public class TestSampleIdTree {
     assertEquals(Optional.of("a"), tree.parentId("f"));
     assertEquals(Optional.of("f"), tree.parentId("g"));
     assertEquals(Optional.of("a"), tree.parentId("h"));
+
+    // TODO filterParentMap
 
     // =================================
     // children
@@ -182,6 +190,12 @@ public class TestSampleIdTree {
     // g <- f
     // <- g
     // <- h
+
+    assertEquals(getChildMap(), tree.id__childIds());
+
+    assertFalse(tree.childOf("a", "b"));
+    assertTrue(tree.childOf("b", "a"));
+
     assertEquals(parseSet("b, f, h"), tree.childIdSet("a"));
     assertEquals(parseSet("c, e"), tree.childIdSet("b"));
     assertEquals(parseSet("d"), tree.childIdSet("c"));
@@ -190,6 +204,8 @@ public class TestSampleIdTree {
     assertEquals(parseSet("g"), tree.childIdSet("f"));
     assertEquals(parseSet(""), tree.childIdSet("g"));
     assertEquals(parseSet(""), tree.childIdSet("h"));
+
+    // TODO filterChildMap
 
     // =================================
     // ancestors
@@ -204,7 +220,7 @@ public class TestSampleIdTree {
     // g -> f
     // h -> a
 
-    // ancestor set
+    // ancestor set, not inclusive
     assertEquals(parseSet(""), tree.ancestorIdSet("a", false));
     assertEquals(parseSet("a"), tree.ancestorIdSet("b", false));
     assertEquals(parseSet("a, b"), tree.ancestorIdSet("c", false));
@@ -214,7 +230,17 @@ public class TestSampleIdTree {
     assertEquals(parseSet("a, f"), tree.ancestorIdSet("g", false));
     assertEquals(parseSet("a"), tree.ancestorIdSet("h", false));
 
-    // ancestor list
+    // ancestor set, inclusive
+    assertEquals(parseSet("a"), tree.ancestorIdSet("a", true));
+    assertEquals(parseSet("a, b"), tree.ancestorIdSet("b", true));
+    assertEquals(parseSet("a, b, c"), tree.ancestorIdSet("c", true));
+    assertEquals(parseSet("a, b, c, d"), tree.ancestorIdSet("d", true));
+    assertEquals(parseSet("a, b, e"), tree.ancestorIdSet("e", true));
+    assertEquals(parseSet("a, f"), tree.ancestorIdSet("f", true));
+    assertEquals(parseSet("a, f, g"), tree.ancestorIdSet("g", true));
+    assertEquals(parseSet("a, h"), tree.ancestorIdSet("h", true));
+
+    // ancestor list, not inclusive
     assertEquals(parseList(""), tree.ancestorIdList("a", false));
     assertEquals(parseList("a"), tree.ancestorIdList("b", false));
     assertEquals(parseList("a, b"), tree.ancestorIdList("c", false));
@@ -223,6 +249,18 @@ public class TestSampleIdTree {
     assertEquals(parseList("a"), tree.ancestorIdList("f", false));
     assertEquals(parseList("a, f"), tree.ancestorIdList("g", false));
     assertEquals(parseList("a"), tree.ancestorIdList("h", false));
+
+    // ancestor list, inclusive
+    assertEquals(parseList("a"), tree.ancestorIdList("a", true));
+    assertEquals(parseList("a, b"), tree.ancestorIdList("b", true));
+    assertEquals(parseList("a, b, c"), tree.ancestorIdList("c", true));
+    assertEquals(parseList("a, b, c, d"), tree.ancestorIdList("d", true));
+    assertEquals(parseList("a, b, e"), tree.ancestorIdList("e", true));
+    assertEquals(parseList("a, f"), tree.ancestorIdList("f", true));
+    assertEquals(parseList("a, f, g"), tree.ancestorIdList("g", true));
+    assertEquals(parseList("a, h"), tree.ancestorIdList("h", true));
+
+    // TODO anc graph
 
     // depth
     assertEquals(0, tree.depth("a"));
@@ -258,15 +296,25 @@ public class TestSampleIdTree {
     assertEquals(parseSet(""), tree.descendantIdSet("g", false));
     assertEquals(parseSet(""), tree.descendantIdSet("h", false));
 
+    // TODO desc graph
+
+    // TODO desc tree
+
     // =================================
     // root (source)
     // =================================
+
+    assertFalse(tree.isRootId("e"));
+    assertTrue(tree.isRootId("a"));
 
     assertEquals("a", tree.rootId());
 
     // =================================
     // leaves (sinks)
     // =================================
+
+    assertFalse(tree.isLeafId("a"));
+    assertTrue(tree.isLeafId("e"));
 
     assertEquals(parseSet("d, e, g, h"), tree.leafIdSet());
 
