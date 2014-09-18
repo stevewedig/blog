@@ -95,8 +95,8 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   }
 
   @Override
-  public IdGraph<Id> filterByIds(Set<Id> ids) {
-    return idGraph.filterByIds(ids);
+  public IdGraph<Id> filterIdGraph(Set<Id> ids) {
+    return idGraph.filterIdGraph(ids);
   }
 
   // ===========================================================================
@@ -132,7 +132,14 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   // ===================================
 
   @Override
-  public Node node(Id id) {
+  public Id getId(Node node) {
+    return id__node.inverse().get(node);
+  }
+
+  // ===================================
+
+  @Override
+  public Node getNode(Id id) {
 
     if (!containsNodeForId(id))
       throw new NotContained("id = %s", id);
@@ -147,7 +154,7 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
       nodeLambda = new Fn1<Id, Node>() {
         @Override
         public Node apply(Id id) {
-          return node(id);
+          return getNode(id);
         }
       };
     return nodeLambda;
@@ -155,9 +162,7 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
 
   private Fn1<Id, Node> nodeLambda;
 
-  // ===========================================================================
-  // unboundIds (ids without nodes)
-  // ===========================================================================
+  // ===================================
 
   @Override
   public ImmutableSet<Id> unboundIdSet() {
@@ -173,8 +178,8 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   // ===========================================================================
 
   @Override
-  public boolean parentOf(Id id, Id potentialChild) {
-    return idGraph.parentOf(id, potentialChild);
+  public boolean isParentOf(Id id, Id potentialChild) {
+    return idGraph.isParentOf(id, potentialChild);
   }
 
   @Override
@@ -199,8 +204,8 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   // ===========================================================================
 
   @Override
-  public boolean childOf(Id id, Id potentialParent) {
-    return idGraph.childOf(id, potentialParent);
+  public boolean isChildOf(Id id, Id potentialParent) {
+    return idGraph.isChildOf(id, potentialParent);
   }
 
   @Override
@@ -225,8 +230,8 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   // ===========================================================================
 
   @Override
-  public boolean ancestorOf(Id id, Id potentialDescendant, boolean inclusive) {
-    return idGraph.ancestorOf(id, potentialDescendant, inclusive);
+  public boolean isAncestorOf(Id id, Id potentialDescendant, boolean inclusive) {
+    return idGraph.isAncestorOf(id, potentialDescendant, inclusive);
   }
 
   @Override
@@ -286,8 +291,8 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   // ===========================================================================
 
   @Override
-  public boolean descendantOf(Id id, Id potentialAncestor, boolean inclusive) {
-    return idGraph.descendantOf(id, potentialAncestor, inclusive);
+  public boolean isDescendantOf(Id id, Id potentialAncestor, boolean inclusive) {
+    return idGraph.isDescendantOf(id, potentialAncestor, inclusive);
   }
 
   @Override
@@ -347,8 +352,8 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   // ===========================================================================
 
   @Override
-  public boolean isRootId(Id id) {
-    return idGraph.isRootId(id);
+  public boolean isRoot(Id id) {
+    return idGraph.isRoot(id);
   }
 
   // ===================================
@@ -374,8 +379,8 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   // ===========================================================================
 
   @Override
-  public boolean isLeafId(Id id) {
-    return idGraph.isLeafId(id);
+  public boolean isLeaf(Id id) {
+    return idGraph.isLeaf(id);
   }
 
   // ===================================
@@ -538,7 +543,7 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
     if (skipMissingNode && !containsNodeForId(id))
       return Optional.absent();
 
-    return Optional.of(node(id));
+    return Optional.of(getNode(id));
   }
 
   // ===================================
@@ -579,7 +584,7 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
         if (nextId == null)
           throw new NoSuchElementException();
 
-        Node node = node(nextId);
+        Node node = getNode(nextId);
 
         nextId = null;
 

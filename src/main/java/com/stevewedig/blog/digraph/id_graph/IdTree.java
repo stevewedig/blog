@@ -69,8 +69,8 @@ public interface IdTree<Id> extends IdDag<Id> {
    */
   int maxDepth();
 
-  Id mostDeep(Collection<Id> ids);
+  Id mostDeep(Set<Id> ids);
 
-  Id leastDeep(Collection<Id> ids);
+  Id leastDeep(Set<Id> ids);
 
 }

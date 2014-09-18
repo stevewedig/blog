@@ -39,8 +39,8 @@ public class DagClass<Id, Node> extends GraphClass<Id, Node> implements Dag<Id, 
   // ===========================================================================
 
   @Override
-  public IdDag<Id> filterByIds(Set<Id> ids) {
-    return idDag.filterByIds(ids);
+  public IdDag<Id> filterIdGraph(Set<Id> ids) {
+    return idDag.filterIdGraph(ids);
   }
 
   // ===========================================================================

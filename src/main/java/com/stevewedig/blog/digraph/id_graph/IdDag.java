@@ -14,7 +14,7 @@ public interface IdDag<Id> extends IdGraph<Id> {
   // ===========================================================================
 
   @Override
-  IdDag<Id> filterByIds(Set<Id> ids);
+  IdDag<Id> filterIdGraph(Set<Id> ids);
 
   // ===========================================================================
   // ancestors

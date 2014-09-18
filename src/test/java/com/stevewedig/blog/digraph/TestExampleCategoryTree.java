@@ -42,7 +42,7 @@ public class TestExampleCategoryTree {
    * Is a category below another one, inclusively? (Similar to the "issubclass" operator.)
    */
   public static boolean isSubcategory(Category category, Category potentialAncestor) {
-    return tree.descendantOf(category, potentialAncestor, true);
+    return tree.isDescendantOf(category, potentialAncestor, true);
   }
 
   /**

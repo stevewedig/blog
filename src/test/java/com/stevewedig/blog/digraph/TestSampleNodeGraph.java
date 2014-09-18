@@ -85,12 +85,12 @@ public class TestSampleNodeGraph {
     // nodes
     // =================================
 
-    Node a = graph.node("a");
-    Node b = graph.node("b");
-    Node c = graph.node("c");
-    Node d = graph.node("d");
-    Node e = graph.node("e");
-    Node f = graph.node("f");
+    Node a = graph.getNode("a");
+    Node b = graph.getNode("b");
+    Node c = graph.getNode("c");
+    Node d = graph.getNode("d");
+    Node e = graph.getNode("e");
+    Node f = graph.getNode("f");
 
     ImmutableBiMap<String, Node> id__node =
         ImmutableBiMap.<String, Node>builder().put("a", a).put("b", b).put("c", c).put("d", d)

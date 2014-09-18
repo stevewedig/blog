@@ -36,7 +36,7 @@ public class IdDagClass<Id> extends IdGraphClass<Id> implements IdDag<Id> {
   // ===========================================================================
 
   @Override
-  public IdDag<Id> filterByIds(Set<Id> ids) {
+  public IdDag<Id> filterIdGraph(Set<Id> ids) {
     return IdDagLib.fromParentMap(ids, filterParentMap(ids));
   }
 
@@ -51,7 +51,7 @@ public class IdDagClass<Id> extends IdGraphClass<Id> implements IdDag<Id> {
 
   @Override
   public IdDag<Id> ancestorIdGraph(Set<Id> ids, boolean inclusive) {
-    return filterByIds(ancestorIdSet(ids, inclusive));
+    return filterIdGraph(ancestorIdSet(ids, inclusive));
   }
 
   // ===========================================================================
@@ -65,7 +65,7 @@ public class IdDagClass<Id> extends IdGraphClass<Id> implements IdDag<Id> {
 
   @Override
   public IdDag<Id> descendantIdGraph(Set<Id> ids, boolean inclusive) {
-    return filterByIds(descendantIdSet(ids, inclusive));
+    return filterIdGraph(descendantIdSet(ids, inclusive));
   }
 
   // ===========================================================================

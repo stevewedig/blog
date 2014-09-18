@@ -93,7 +93,7 @@ public class TreeClass<Id, Node> extends DagClass<Id, Node> implements Tree<Id, 
 
   @Override
   public Node rootNode() {
-    return node(rootId());
+    return getNode(rootId());
   }
 
   // ===========================================================================
@@ -111,12 +111,12 @@ public class TreeClass<Id, Node> extends DagClass<Id, Node> implements Tree<Id, 
   }
 
   @Override
-  public Id mostDeep(Collection<Id> ids) {
+  public Id mostDeep(Set<Id> ids) {
     return idTree.mostDeep(ids);
   }
 
   @Override
-  public Id leastDeep(Collection<Id> ids) {
+  public Id leastDeep(Set<Id> ids) {
     return idTree.leastDeep(ids);
   }
 

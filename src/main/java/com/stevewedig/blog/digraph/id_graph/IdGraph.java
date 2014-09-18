@@ -29,13 +29,13 @@ public interface IdGraph<Id> {
 
   void assertIdsEqual(Id[] ids);
 
-  IdGraph<Id> filterByIds(Set<Id> ids);
+  IdGraph<Id> filterIdGraph(Set<Id> ids);
 
   // ===========================================================================
   // parents
   // ===========================================================================
 
-  boolean parentOf(Id id, Id potentialChild);
+  boolean isParentOf(Id id, Id potentialChild);
 
   /**
    * The mapping from id to parent ids.
@@ -51,7 +51,7 @@ public interface IdGraph<Id> {
   // children
   // ===========================================================================
 
-  boolean childOf(Id id, Id potentialParent);
+  boolean isChildOf(Id id, Id potentialParent);
 
   /**
    * The mapping from id to child ids.
@@ -67,7 +67,7 @@ public interface IdGraph<Id> {
   // ancestors
   // ===========================================================================
 
-  boolean ancestorOf(Id id, Id potentialDescendant, boolean inclusive);
+  boolean isAncestorOf(Id id, Id potentialDescendant, boolean inclusive);
 
   /**
    * Getting an id's ancestor id iterable (its parents, it's parents' parents, and so on).
@@ -91,7 +91,7 @@ public interface IdGraph<Id> {
   // descendants
   // ===========================================================================
 
-  boolean descendantOf(Id id, Id potentialAncestor, boolean inclusive);
+  boolean isDescendantOf(Id id, Id potentialAncestor, boolean inclusive);
 
   /**
    * Getting an id's descendant id iterable (its children, it's childrens' children, and so on).
@@ -111,12 +111,11 @@ public interface IdGraph<Id> {
 
   IdGraph<Id> descendantIdGraph(Set<Id> ids, boolean inclusive);
 
-
   // ===========================================================================
   // roots (sources)
   // ===========================================================================
 
-  boolean isRootId(Id id);
+  boolean isRoot(Id id);
 
   /**
    * The digraph's root (source) ids, so the ids without parents.
@@ -127,7 +126,7 @@ public interface IdGraph<Id> {
   // leaves (sinks)
   // ===========================================================================
 
-  boolean isLeafId(Id id);
+  boolean isLeaf(Id id);
 
   /**
    * The digraph's leaf (sink) ids, so the ids without children.

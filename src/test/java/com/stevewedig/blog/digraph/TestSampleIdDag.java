@@ -134,8 +134,8 @@ public class TestSampleIdDag {
 
     assertEquals(getParentMap(), dag.id__parentIds());
 
-    assertTrue(dag.parentOf("a", "b"));
-    assertFalse(dag.parentOf("b", "a"));
+    assertTrue(dag.isParentOf("a", "b"));
+    assertFalse(dag.isParentOf("b", "a"));
 
     assertEquals(parseSet(""), dag.parentIdSet("a"));
     assertEquals(parseSet("a"), dag.parentIdSet("b"));
@@ -155,8 +155,8 @@ public class TestSampleIdDag {
 
     assertEquals(getChildMap(), dag.id__childIds());
 
-    assertFalse(dag.childOf("a", "b"));
-    assertTrue(dag.childOf("b", "a"));
+    assertFalse(dag.isChildOf("a", "b"));
+    assertTrue(dag.isChildOf("b", "a"));
 
     assertEquals(parseSet("b, c"), dag.childIdSet("a"));
     assertEquals(parseSet("d"), dag.childIdSet("b"));
@@ -174,14 +174,14 @@ public class TestSampleIdDag {
     // d -> b, c
     // e -> d
 
-    assertFalse(dag.ancestorOf("e", "a", false));
-    assertFalse(dag.ancestorOf("e", "a", true));
+    assertFalse(dag.isAncestorOf("e", "a", false));
+    assertFalse(dag.isAncestorOf("e", "a", true));
 
-    assertTrue(dag.ancestorOf("a", "e", false));
-    assertTrue(dag.ancestorOf("a", "e", true));
+    assertTrue(dag.isAncestorOf("a", "e", false));
+    assertTrue(dag.isAncestorOf("a", "e", true));
 
-    assertFalse(dag.ancestorOf("a", "a", false));
-    assertTrue(dag.ancestorOf("a", "a", true));
+    assertFalse(dag.isAncestorOf("a", "a", false));
+    assertTrue(dag.isAncestorOf("a", "a", true));
 
     // ancestor set, not inclusive
     assertEquals(parseSet(""), dag.ancestorIdSet("a", false));
@@ -214,14 +214,14 @@ public class TestSampleIdDag {
     // e <- d
     // <- e
 
-    assertTrue(dag.descendantOf("e", "a", false));
-    assertTrue(dag.descendantOf("e", "a", true));
+    assertTrue(dag.isDescendantOf("e", "a", false));
+    assertTrue(dag.isDescendantOf("e", "a", true));
 
-    assertFalse(dag.descendantOf("a", "e", false));
-    assertFalse(dag.descendantOf("a", "e", true));
+    assertFalse(dag.isDescendantOf("a", "e", false));
+    assertFalse(dag.isDescendantOf("a", "e", true));
 
-    assertFalse(dag.descendantOf("a", "a", false));
-    assertTrue(dag.descendantOf("a", "a", true));
+    assertFalse(dag.isDescendantOf("a", "a", false));
+    assertTrue(dag.isDescendantOf("a", "a", true));
 
     // descendant set, not inclusive
     assertEquals(parseSet("b, c, d, e"), dag.descendantIdSet("a", false));
@@ -248,8 +248,8 @@ public class TestSampleIdDag {
     // roots (sources)
     // =================================
 
-    assertFalse(dag.isRootId("e"));
-    assertTrue(dag.isRootId("a"));
+    assertFalse(dag.isRoot("e"));
+    assertTrue(dag.isRoot("a"));
 
     assertEquals(parseSet("a"), dag.rootIdSet());
 
@@ -257,8 +257,8 @@ public class TestSampleIdDag {
     // leaves (sinks)
     // =================================
 
-    assertFalse(dag.isLeafId("a"));
-    assertTrue(dag.isLeafId("e"));
+    assertFalse(dag.isLeaf("a"));
+    assertTrue(dag.isLeaf("e"));
 
     assertEquals(parseSet("e"), dag.leafIdSet());
 

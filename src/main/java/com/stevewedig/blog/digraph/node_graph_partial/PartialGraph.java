@@ -26,7 +26,7 @@ public interface PartialGraph<Id, Node> extends IdGraph<Id>, Set<Node> {
   IdGraph<Id> idGraph();
 
   // ===========================================================================
-  // nodeSet
+  // nodes
   // ===========================================================================
 
   /**
@@ -54,13 +54,14 @@ public interface PartialGraph<Id, Node> extends IdGraph<Id>, Set<Node> {
   boolean containsNodeForId(Id id);
 
   /**
+   * Getting the id associated with a node.
+   */
+  Id getId(Node node);
+
+  /**
    * Getting the node associated with an id.
    */
-  Node node(Id id) throws NotContained;
-
-  // ===========================================================================
-  // unboundIds (ids without nodes)
-  // ===========================================================================
+  Node getNode(Id id) throws NotContained;
 
   /**
    * The ids in the idGraph which don't have associated nodes in id__node.
@@ -106,14 +107,14 @@ public interface PartialGraph<Id, Node> extends IdGraph<Id>, Set<Node> {
   @Deprecated
   @Override
   boolean add(Node e);
-  
+
   /**
    * Not implemented because graphs are immutable.
    */
   @Deprecated
   @Override
   boolean remove(Object o);
-  
+
   /**
    * Not implemented because graphs are immutable.
    */
@@ -127,14 +128,14 @@ public interface PartialGraph<Id, Node> extends IdGraph<Id>, Set<Node> {
   @Deprecated
   @Override
   boolean retainAll(Collection<?> c);
-  
+
   /**
    * Not implemented because graphs are immutable.
    */
   @Deprecated
   @Override
   boolean removeAll(Collection<?> c);
-  
+
   /**
    * Not implemented because graphs are immutable.
    */
@@ -143,4 +144,3 @@ public interface PartialGraph<Id, Node> extends IdGraph<Id>, Set<Node> {
   void clear();
 
 }
-

@@ -137,8 +137,8 @@ public class TestSampleIdGraph {
 
     assertEquals(getParentMap(), graph.id__parentIds());
 
-    assertTrue(graph.parentOf("e", "a"));
-    assertFalse(graph.parentOf("f", "a"));
+    assertTrue(graph.isParentOf("e", "a"));
+    assertFalse(graph.isParentOf("f", "a"));
 
     assertEquals(parseSet("d, e"), graph.parentIdSet("a"));
     assertEquals(parseSet("a"), graph.parentIdSet("b"));
@@ -157,8 +157,8 @@ public class TestSampleIdGraph {
 
     assertEquals(getChildMap(), graph.id__childIds());
 
-    assertTrue(graph.childOf("e", "a"));
-    assertFalse(graph.childOf("f", "a"));
+    assertTrue(graph.isChildOf("e", "a"));
+    assertFalse(graph.isChildOf("f", "a"));
 
     assertEquals(parseSet("b, e"), graph.childIdSet("a"));
     assertEquals(parseSet("c"), graph.childIdSet("b"));
@@ -168,14 +168,14 @@ public class TestSampleIdGraph {
     // ancestors
     // =================================
 
-    assertTrue(graph.ancestorOf("a", "b", false));
-    assertTrue(graph.ancestorOf("a", "b", true));
+    assertTrue(graph.isAncestorOf("a", "b", false));
+    assertTrue(graph.isAncestorOf("a", "b", true));
 
-    assertFalse(graph.ancestorOf("a", "f", false));
-    assertFalse(graph.ancestorOf("a", "f", true));
+    assertFalse(graph.isAncestorOf("a", "f", false));
+    assertFalse(graph.isAncestorOf("a", "f", true));
 
-    assertFalse(graph.ancestorOf("a", "a", false));
-    assertTrue(graph.ancestorOf("a", "a", true));
+    assertFalse(graph.isAncestorOf("a", "a", false));
+    assertTrue(graph.isAncestorOf("a", "a", true));
 
     // ancestor set, not inclusive
     assertEquals(parseSet("b, c, d, e"), graph.ancestorIdSet("a", false));
@@ -207,14 +207,14 @@ public class TestSampleIdGraph {
     // descendants
     // =================================
 
-    assertTrue(graph.descendantOf("a", "b", false));
-    assertTrue(graph.descendantOf("a", "b", true));
+    assertTrue(graph.isDescendantOf("a", "b", false));
+    assertTrue(graph.isDescendantOf("a", "b", true));
 
-    assertFalse(graph.descendantOf("a", "f", false));
-    assertFalse(graph.descendantOf("a", "f", true));
+    assertFalse(graph.isDescendantOf("a", "f", false));
+    assertFalse(graph.isDescendantOf("a", "f", true));
 
-    assertFalse(graph.descendantOf("a", "a", false));
-    assertTrue(graph.descendantOf("a", "a", true));
+    assertFalse(graph.isDescendantOf("a", "a", false));
+    assertTrue(graph.isDescendantOf("a", "a", true));
 
     // descendant set, not inclusive
     assertEquals(parseSet("b, c, d, e"), graph.descendantIdSet("a", false));
@@ -247,8 +247,8 @@ public class TestSampleIdGraph {
     // roots (sources)
     // =================================
 
-    assertFalse(graph.isRootId("a"));
-    assertTrue(graph.isRootId("f"));
+    assertFalse(graph.isRoot("a"));
+    assertTrue(graph.isRoot("f"));
 
     assertEquals(parseSet("f"), graph.rootIdSet());
 
@@ -256,8 +256,8 @@ public class TestSampleIdGraph {
     // leaves (sinks)
     // =================================
 
-    assertFalse(graph.isLeafId("a"));
-    assertTrue(graph.isLeafId("f"));
+    assertFalse(graph.isLeaf("a"));
+    assertTrue(graph.isLeaf("f"));
 
     assertEquals(parseSet("f"), graph.leafIdSet());
 

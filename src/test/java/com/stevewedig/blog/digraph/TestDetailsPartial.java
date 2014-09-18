@@ -54,12 +54,12 @@ public class TestDetailsPartial {
     // =================================
 
     try {
-      tree.node("a");
+      tree.getNode("a");
       throw new NotThrown(NotContained.class);
     } catch (NotContained e) {
     }
 
-    assertEquals(b, tree.node("b"));
+    assertEquals(b, tree.getNode("b"));
 
     // =================================
     // parents

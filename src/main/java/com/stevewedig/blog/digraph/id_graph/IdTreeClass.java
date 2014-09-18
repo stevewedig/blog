@@ -50,7 +50,7 @@ public class IdTreeClass<Id> extends IdDagClass<Id> implements IdTree<Id> {
   // ===========================================================================
 
   // not public because an arbitrary set of ids won't necessarily create a tree
-  private IdTree<Id> treeFilterByIds(Set<Id> ids) {
+  private IdTree<Id> filterIdTree(Set<Id> ids) {
     return IdTreeLib.fromParentMap(ids, filterParentMap(ids));
   }
 
@@ -80,7 +80,7 @@ public class IdTreeClass<Id> extends IdDagClass<Id> implements IdTree<Id> {
 
   @Override
   public IdTree<Id> ancestorIdGraph(Set<Id> ids, boolean inclusive) {
-    return treeFilterByIds(ancestorIdSet(ids, inclusive));
+    return filterIdTree(ancestorIdSet(ids, inclusive));
   }
 
   // ===================================
@@ -113,7 +113,7 @@ public class IdTreeClass<Id> extends IdDagClass<Id> implements IdTree<Id> {
 
   @Override
   public IdTree<Id> descendantIdTree(Id id) {
-    return treeFilterByIds(descendantIdSet(id, true));
+    return filterIdTree(descendantIdSet(id, true));
   }
 
   // ===========================================================================
@@ -159,7 +159,7 @@ public class IdTreeClass<Id> extends IdDagClass<Id> implements IdTree<Id> {
   // ===================================
 
   @Override
-  public Id mostDeep(Collection<Id> ids) {
+  public Id mostDeep(Set<Id> ids) {
 
     CollectLib.assertNotEmpty(ids);
 
@@ -182,7 +182,7 @@ public class IdTreeClass<Id> extends IdDagClass<Id> implements IdTree<Id> {
   // ===================================
 
   @Override
-  public Id leastDeep(Collection<Id> ids) {
+  public Id leastDeep(Set<Id> ids) {
 
     CollectLib.assertNotEmpty(ids);
 

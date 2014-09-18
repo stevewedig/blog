@@ -81,11 +81,11 @@ public class TestSampleNodeDag {
     // id -> nodes
     // =================================
 
-    Node a = dag.node("a");
-    Node b = dag.node("b");
-    Node c = dag.node("c");
-    Node d = dag.node("d");
-    Node e = dag.node("e");
+    Node a = dag.getNode("a");
+    Node b = dag.getNode("b");
+    Node c = dag.getNode("c");
+    Node d = dag.getNode("d");
+    Node e = dag.getNode("e");
 
     ImmutableBiMap<String, Node> id__node =
         ImmutableBiMap.<String, Node>of("a", a, "b", b, "c", c, "d", d, "e", e);

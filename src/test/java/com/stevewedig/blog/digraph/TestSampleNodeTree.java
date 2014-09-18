@@ -97,14 +97,14 @@ public class TestSampleNodeTree {
     // id -> nodes
     // =================================
 
-    Node a = tree.node("a");
-    Node b = tree.node("b");
-    Node c = tree.node("c");
-    Node d = tree.node("d");
-    Node e = tree.node("e");
-    Node f = tree.node("f");
-    Node g = tree.node("g");
-    Node h = tree.node("h");
+    Node a = tree.getNode("a");
+    Node b = tree.getNode("b");
+    Node c = tree.getNode("c");
+    Node d = tree.getNode("d");
+    Node e = tree.getNode("e");
+    Node f = tree.getNode("f");
+    Node g = tree.getNode("g");
+    Node h = tree.getNode("h");
 
     ImmutableBiMap<String, Node> id__node =
         ImmutableBiMap.<String, Node>builder().put("a", a).put("b", b).put("c", c).put("d", d)

@@ -166,8 +166,8 @@ public class TestSampleIdTree {
 
     assertEquals(getParentMap(), tree.id__parentIds());
 
-    assertTrue(tree.parentOf("a", "b"));
-    assertFalse(tree.parentOf("b", "a"));
+    assertTrue(tree.isParentOf("a", "b"));
+    assertFalse(tree.isParentOf("b", "a"));
 
     assertEquals(Optional.absent(), tree.parentId("a"));
     assertEquals(Optional.of("a"), tree.parentId("b"));
@@ -193,8 +193,8 @@ public class TestSampleIdTree {
 
     assertEquals(getChildMap(), tree.id__childIds());
 
-    assertFalse(tree.childOf("a", "b"));
-    assertTrue(tree.childOf("b", "a"));
+    assertFalse(tree.isChildOf("a", "b"));
+    assertTrue(tree.isChildOf("b", "a"));
 
     assertEquals(parseSet("b, f, h"), tree.childIdSet("a"));
     assertEquals(parseSet("c, e"), tree.childIdSet("b"));
@@ -313,8 +313,8 @@ public class TestSampleIdTree {
     // root (source)
     // =================================
 
-    assertFalse(tree.isRootId("e"));
-    assertTrue(tree.isRootId("a"));
+    assertFalse(tree.isRoot("e"));
+    assertTrue(tree.isRoot("a"));
 
     assertEquals("a", tree.rootId());
 
@@ -322,8 +322,8 @@ public class TestSampleIdTree {
     // leaves (sinks)
     // =================================
 
-    assertFalse(tree.isLeafId("a"));
-    assertTrue(tree.isLeafId("e"));
+    assertFalse(tree.isLeaf("a"));
+    assertTrue(tree.isLeaf("e"));
 
     assertEquals(parseSet("d, e, g, h"), tree.leafIdSet());
 
