@@ -107,7 +107,7 @@ public interface Graph<Id, Node> extends PartialGraph<Id, Node> {
    * @param expand A function mapping a node to the next ids.
    * @return A node iterable corresponding to the traversal.
    */
-  Iterable<Node> nodeIterable(boolean depthFirst, boolean inclusive, Id startId,
+  Iterable<Node> traverseNodeIterable(boolean depthFirst, boolean inclusive, Id startId,
       Fn1<Node, List<Id>> expand);
 
   /**
@@ -119,8 +119,8 @@ public interface Graph<Id, Node> extends PartialGraph<Id, Node> {
    * @param expand A function mapping a node to the next ids.
    * @return A node iterable corresponding to the traversal.
    */
-  Iterable<Node> nodeIterable(boolean depthFirst, boolean inclusive, ImmutableList<Id> startIds,
-      Fn1<Node, List<Id>> expand);
+  Iterable<Node> traverseNodeIterable(boolean depthFirst, boolean inclusive,
+      ImmutableList<Id> startIds, Fn1<Node, List<Id>> expand);
 
   /**
    * Generic node traversal copied into a list.
@@ -131,7 +131,7 @@ public interface Graph<Id, Node> extends PartialGraph<Id, Node> {
    * @param expand A function mapping a node to the next ids.
    * @return A node list corresponding to the traversal.
    */
-  ImmutableList<Node> nodeList(boolean depthFirst, boolean inclusive, Id startId,
+  ImmutableList<Node> traverseNodeList(boolean depthFirst, boolean inclusive, Id startId,
       Fn1<Node, List<Id>> expand);
 
   /**
@@ -143,7 +143,7 @@ public interface Graph<Id, Node> extends PartialGraph<Id, Node> {
    * @param expand A function mapping a node to the next ids.
    * @return A node list corresponding to the traversal.
    */
-  ImmutableList<Node> nodeList(boolean depthFirst, boolean inclusive, ImmutableList<Id> startIds,
-      Fn1<Node, List<Id>> expand);
+  ImmutableList<Node> traverseNodeList(boolean depthFirst, boolean inclusive,
+      ImmutableList<Id> startIds, Fn1<Node, List<Id>> expand);
 
 }

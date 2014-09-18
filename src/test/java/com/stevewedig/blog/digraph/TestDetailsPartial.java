@@ -118,7 +118,7 @@ public class TestDetailsPartial {
       }
     };
 
-    assertEquals(parseList("b, a"), tree.idList(true, true, ImmutableList.of("b"), expandId));
+    assertEquals(parseList("b, a"), tree.traverseIdList(true, true, ImmutableList.of("b"), expandId));
 
     // =========================================================================
     // dag attributes

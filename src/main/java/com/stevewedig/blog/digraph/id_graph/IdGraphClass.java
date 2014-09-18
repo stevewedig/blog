@@ -205,12 +205,12 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
 
   @Override
   public Iterable<Id> ancestorIdIterable(Id id, boolean inclusive) {
-    return idIterable(true, inclusive, id, parentIdListLambda());
+    return traverseIdIterable(true, inclusive, id, parentIdListLambda());
   }
 
   @Override
   public Iterable<Id> ancestorIdIterable(Set<Id> ids, boolean inclusive) {
-    return idIterable(true, inclusive, ImmutableList.copyOf(ids), parentIdListLambda());
+    return traverseIdIterable(true, inclusive, ImmutableList.copyOf(ids), parentIdListLambda());
   }
 
   @Override
@@ -244,12 +244,12 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
 
   @Override
   public Iterable<Id> descendantIdIterable(Id id, boolean inclusive) {
-    return idIterable(true, inclusive, id, childIdListLambda());
+    return traverseIdIterable(true, inclusive, id, childIdListLambda());
   }
 
   @Override
   public Iterable<Id> descendantIdIterable(Set<Id> ids, boolean inclusive) {
-    return idIterable(true, inclusive, ImmutableList.copyOf(ids), childIdListLambda());
+    return traverseIdIterable(true, inclusive, ImmutableList.copyOf(ids), childIdListLambda());
   }
 
   @Override
@@ -355,14 +355,14 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
   // ===========================================================================
 
   @Override
-  public Iterable<Id> idIterable(boolean depthFirst, boolean inclusive, Id startId,
+  public Iterable<Id> traverseIdIterable(boolean depthFirst, boolean inclusive, Id startId,
       Fn1<Id, List<Id>> expand) {
 
-    return idIterable(depthFirst, inclusive, ImmutableList.of(startId), expand);
+    return traverseIdIterable(depthFirst, inclusive, ImmutableList.of(startId), expand);
   }
 
   @Override
-  public Iterable<Id> idIterable(boolean depthFirst, boolean inclusive, ImmutableList<Id> startIds,
+  public Iterable<Id> traverseIdIterable(boolean depthFirst, boolean inclusive, ImmutableList<Id> startIds,
       Fn1<Id, List<Id>> expand) {
 
     // Notice that completedly delegate to TraverseLib. This is only exposed as a method on IdGraph
@@ -371,17 +371,17 @@ public class IdGraphClass<Id> extends ValueMixin implements IdGraph<Id> {
   }
 
   @Override
-  public ImmutableList<Id> idList(boolean depthFirst, boolean inclusive, Id startId,
+  public ImmutableList<Id> traverseIdList(boolean depthFirst, boolean inclusive, Id startId,
       Fn1<Id, List<Id>> expand) {
 
-    return idList(depthFirst, inclusive, ImmutableList.of(startId), expand);
+    return traverseIdList(depthFirst, inclusive, ImmutableList.of(startId), expand);
   }
 
   @Override
-  public ImmutableList<Id> idList(boolean depthFirst, boolean inclusive,
+  public ImmutableList<Id> traverseIdList(boolean depthFirst, boolean inclusive,
       ImmutableList<Id> startIds, Fn1<Id, List<Id>> expand) {
 
-    return ImmutableList.copyOf(idIterable(depthFirst, inclusive, startIds, expand));
+    return ImmutableList.copyOf(traverseIdIterable(depthFirst, inclusive, startIds, expand));
   }
 
 }

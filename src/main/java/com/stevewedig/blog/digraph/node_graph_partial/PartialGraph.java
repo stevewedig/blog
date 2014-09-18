@@ -1,12 +1,15 @@
 package com.stevewedig.blog.digraph.node_graph_partial;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Set;
 
 import com.google.common.base.Optional;
-import com.google.common.collect.*;
+import com.google.common.collect.ImmutableBiMap;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.stevewedig.blog.digraph.id_graph.IdGraph;
 import com.stevewedig.blog.errors.NotContained;
-import com.stevewedig.blog.util.LambdaLib.Fn1;
 
 /**
  * A partial digraph containing nodes.
@@ -54,11 +57,6 @@ public interface PartialGraph<Id, Node> extends IdGraph<Id>, Set<Node> {
    * Getting the node associated with an id.
    */
   Node node(Id id) throws NotContained;
-
-  /**
-   * A lambda that get's the node associated with an id.
-   */
-  Fn1<Id, Node> nodeLambda();
 
   // ===========================================================================
   // unboundIds (ids without nodes)

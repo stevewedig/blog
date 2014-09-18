@@ -142,8 +142,7 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
 
   // ===================================
 
-  @Override
-  public Fn1<Id, Node> nodeLambda() {
+  private Fn1<Id, Node> nodeLambda() {
     if (nodeLambda == null)
       nodeLambda = new Fn1<Id, Node>() {
         @Override
@@ -435,61 +434,61 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   // ===========================================================================
 
   @Override
-  public Iterable<Id> idIterable(boolean depthFirst, boolean inclusive, ImmutableList<Id> startIds,
-      Fn1<Id, List<Id>> expand) {
-
-    return idGraph.idIterable(depthFirst, inclusive, startIds, expand);
-  }
-
-  @Override
-  public Iterable<Id> idIterable(boolean depthFirst, boolean inclusive, Id startId,
-      Fn1<Id, List<Id>> expand) {
-
-    return idGraph.idIterable(depthFirst, inclusive, startId, expand);
-  }
-
-  @Override
-  public ImmutableList<Id> idList(boolean depthFirst, boolean inclusive,
+  public Iterable<Id> traverseIdIterable(boolean depthFirst, boolean inclusive,
       ImmutableList<Id> startIds, Fn1<Id, List<Id>> expand) {
 
-    return idGraph.idList(depthFirst, inclusive, startIds, expand);
+    return idGraph.traverseIdIterable(depthFirst, inclusive, startIds, expand);
   }
 
   @Override
-  public ImmutableList<Id> idList(boolean depthFirst, boolean inclusive, Id startId,
+  public Iterable<Id> traverseIdIterable(boolean depthFirst, boolean inclusive, Id startId,
       Fn1<Id, List<Id>> expand) {
 
-    return idGraph.idList(depthFirst, inclusive, startId, expand);
+    return idGraph.traverseIdIterable(depthFirst, inclusive, startId, expand);
+  }
+
+  @Override
+  public ImmutableList<Id> traverseIdList(boolean depthFirst, boolean inclusive,
+      ImmutableList<Id> startIds, Fn1<Id, List<Id>> expand) {
+
+    return idGraph.traverseIdList(depthFirst, inclusive, startIds, expand);
+  }
+
+  @Override
+  public ImmutableList<Id> traverseIdList(boolean depthFirst, boolean inclusive, Id startId,
+      Fn1<Id, List<Id>> expand) {
+
+    return idGraph.traverseIdList(depthFirst, inclusive, startId, expand);
   }
 
   // ===================================
 
   @Override
-  public Iterable<Node> nodeIterable(boolean depthFirst, boolean inclusive, Id startId,
+  public Iterable<Node> traverseNodeIterable(boolean depthFirst, boolean inclusive, Id startId,
       Fn1<Node, List<Id>> expand) {
 
-    return nodeIterable(depthFirst, inclusive, ImmutableList.of(startId), expand);
+    return traverseNodeIterable(depthFirst, inclusive, ImmutableList.of(startId), expand);
   }
 
   @Override
-  public Iterable<Node> nodeIterable(boolean depthFirst, boolean inclusive,
+  public Iterable<Node> traverseNodeIterable(boolean depthFirst, boolean inclusive,
       ImmutableList<Id> startIds, Fn1<Node, List<Id>> expand) {
 
     return TraverseLib.nodeIterable(depthFirst, inclusive, startIds, expand, nodeLambda());
   }
 
   @Override
-  public ImmutableList<Node> nodeList(boolean depthFirst, boolean inclusive, Id startId,
+  public ImmutableList<Node> traverseNodeList(boolean depthFirst, boolean inclusive, Id startId,
       Fn1<Node, List<Id>> expand) {
 
-    return nodeList(depthFirst, inclusive, ImmutableList.of(startId), expand);
+    return traverseNodeList(depthFirst, inclusive, ImmutableList.of(startId), expand);
   }
 
   @Override
-  public ImmutableList<Node> nodeList(boolean depthFirst, boolean inclusive,
+  public ImmutableList<Node> traverseNodeList(boolean depthFirst, boolean inclusive,
       ImmutableList<Id> startIds, Fn1<Node, List<Id>> expand) {
 
-    return ImmutableList.copyOf(nodeIterable(depthFirst, inclusive, startIds, expand));
+    return ImmutableList.copyOf(traverseNodeIterable(depthFirst, inclusive, startIds, expand));
   }
 
   // ===========================================================================

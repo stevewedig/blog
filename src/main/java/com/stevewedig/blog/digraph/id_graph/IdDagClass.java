@@ -83,7 +83,7 @@ public class IdDagClass<Id> extends IdGraphClass<Id> implements IdDag<Id> {
 
   @Override
   public Iterable<Id> depthIdIterable() {
-    return idIterable(true, true, ImmutableList.copyOf(rootIdSet()), childIdListLambda());
+    return traverseIdIterable(true, true, ImmutableList.copyOf(rootIdSet()), childIdListLambda());
   }
 
   // ===================================
@@ -103,7 +103,7 @@ public class IdDagClass<Id> extends IdGraphClass<Id> implements IdDag<Id> {
 
   @Override
   public Iterable<Id> breadthIdIterable() {
-    return idIterable(false, true, ImmutableList.copyOf(rootIdSet()), childIdListLambda());
+    return traverseIdIterable(false, true, ImmutableList.copyOf(rootIdSet()), childIdListLambda());
   }
 
   // ===================================

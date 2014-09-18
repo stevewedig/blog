@@ -162,7 +162,7 @@ public interface IdGraph<Id> {
    * @param expand A function mapping an id to the next ids.
    * @return An id iterable corresponding to the traversal.
    */
-  Iterable<Id> idIterable(boolean depthFirst, boolean inclusive, Id startId,
+  Iterable<Id> traverseIdIterable(boolean depthFirst, boolean inclusive, Id startId,
       Fn1<Id, List<Id>> expand);
 
   /**
@@ -174,8 +174,8 @@ public interface IdGraph<Id> {
    * @param expand A function mapping an id to the next ids.
    * @return An id iterable corresponding to the traversal.
    */
-  Iterable<Id> idIterable(boolean depthFirst, boolean inclusive, ImmutableList<Id> startIds,
-      Fn1<Id, List<Id>> expand);
+  Iterable<Id> traverseIdIterable(boolean depthFirst, boolean inclusive,
+      ImmutableList<Id> startIds, Fn1<Id, List<Id>> expand);
 
   /**
    * Generic id traversal copied into a list.
@@ -186,7 +186,7 @@ public interface IdGraph<Id> {
    * @param expand A function mapping an id to the next ids.
    * @return An id list corresponding to the traversal.
    */
-  ImmutableList<Id> idList(boolean depthFirst, boolean inclusive, Id startId,
+  ImmutableList<Id> traverseIdList(boolean depthFirst, boolean inclusive, Id startId,
       Fn1<Id, List<Id>> expand);
 
   /**
@@ -198,7 +198,7 @@ public interface IdGraph<Id> {
    * @param expand A function mapping an id to the next ids.
    * @return An id list corresponding to the traversal.
    */
-  ImmutableList<Id> idList(boolean depthFirst, boolean inclusive, ImmutableList<Id> startIds,
-      Fn1<Id, List<Id>> expand);
+  ImmutableList<Id> traverseIdList(boolean depthFirst, boolean inclusive,
+      ImmutableList<Id> startIds, Fn1<Id, List<Id>> expand);
 
 }

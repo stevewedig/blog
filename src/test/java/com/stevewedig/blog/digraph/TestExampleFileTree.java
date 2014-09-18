@@ -249,7 +249,7 @@ public class TestExampleFileTree {
 
       ImmutableList<String> startIds = ImmutableList.of(rootId());
 
-      return nodeIterable(depthFirst, inclusive, startIds, node__childList);
+      return traverseNodeIterable(depthFirst, inclusive, startIds, node__childList);
     }
 
     private Fn1<FileNode, List<String>> node__childList = new Fn1<FileNode, List<String>>() {
