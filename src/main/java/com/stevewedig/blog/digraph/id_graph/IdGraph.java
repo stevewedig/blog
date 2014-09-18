@@ -80,7 +80,6 @@ public interface IdGraph<Id> {
    */
   Fn1<Id, List<Id>> childIdListLambda();
 
-
   // ===========================================================================
   // ancestors
   // ===========================================================================
@@ -105,13 +104,12 @@ public interface IdGraph<Id> {
 
   IdGraph<Id> ancestorIdGraph(Set<Id> ids, boolean inclusive);
 
-
   // ===========================================================================
   // descendants
   // ===========================================================================
 
   boolean descendantOf(Id id, Id potentialAncestor, boolean inclusive);
-  
+
   /**
    * Getting an id's descendant id iterable (its children, it's childrens' children, and so on).
    */
@@ -153,7 +151,6 @@ public interface IdGraph<Id> {
    * The digraph's leaf (sink) ids, so the ids without children.
    */
   ImmutableSet<Id> leafIdSet();
-
 
   // ===========================================================================
   // topological sort
