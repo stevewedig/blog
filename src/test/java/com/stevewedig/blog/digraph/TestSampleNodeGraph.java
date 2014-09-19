@@ -117,12 +117,6 @@ public class TestSampleNodeGraph {
     assertEquals(nodeSet.size(), graph.nodeSize());
 
     // =================================
-    // optNodeList
-    // =================================
-
-    assertFalse(graph.optionalTopsortNodeList().isPresent());
-
-    // =================================
     // parents
     // =================================
 
@@ -132,6 +126,7 @@ public class TestSampleNodeGraph {
     // d -> c
     // e -> a
     // f ->
+
     assertEquals(ImmutableSet.of(d, e), graph.parentNodeSet("a"));
     assertEquals(ImmutableSet.of(a), graph.parentNodeSet("b"));
     assertEquals(ImmutableSet.of(b), graph.parentNodeSet("c"));
@@ -149,6 +144,7 @@ public class TestSampleNodeGraph {
     // a <- d
     // a <- e
     // <- f
+
     assertEquals(ImmutableSet.of(b, e), graph.childNodeSet("a"));
     assertEquals(ImmutableSet.of(c), graph.childNodeSet("b"));
     assertEquals(ImmutableSet.of(d), graph.childNodeSet("c"));
@@ -160,6 +156,14 @@ public class TestSampleNodeGraph {
     // ancestors
     // =================================
 
+    // a -> d, e
+    // b -> a
+    // c -> b
+    // d -> c
+    // e -> a
+    // f ->
+
+    // not inclusive
     assertEquals(ImmutableSet.of(b, c, d, e), graph.ancestorNodeSet("a", false));
     assertEquals(ImmutableSet.of(a, c, d, e), graph.ancestorNodeSet("b", false));
     assertEquals(ImmutableSet.of(a, b, d, e), graph.ancestorNodeSet("c", false));
@@ -167,17 +171,41 @@ public class TestSampleNodeGraph {
     assertEquals(ImmutableSet.of(a, b, c, d), graph.ancestorNodeSet("e", false));
     assertEquals(ImmutableSet.of(), graph.ancestorNodeSet("f", false));
 
+    // inclusive
+    assertEquals(ImmutableSet.of(a, b, c, d, e), graph.ancestorNodeSet("a", true));
+    assertEquals(ImmutableSet.of(a, b, c, d, e), graph.ancestorNodeSet("b", true));
+    assertEquals(ImmutableSet.of(a, b, c, d, e), graph.ancestorNodeSet("c", true));
+    assertEquals(ImmutableSet.of(a, b, c, d, e), graph.ancestorNodeSet("d", true));
+    assertEquals(ImmutableSet.of(a, b, c, d, e), graph.ancestorNodeSet("e", true));
+    assertEquals(ImmutableSet.of(f), graph.ancestorNodeSet("f", true));
+
     // =================================
     // descendants
     // =================================
 
+    // b, e <- a
+    // c <- b
+    // d <- c
+    // a <- d
+    // a <- e
+    // <- f
+
+    // not inclusive
     assertEquals(ImmutableSet.of(b, c, d, e), graph.descendantNodeSet("a", false));
     assertEquals(ImmutableSet.of(a, c, d, e), graph.descendantNodeSet("b", false));
     assertEquals(ImmutableSet.of(a, b, d, e), graph.descendantNodeSet("c", false));
     assertEquals(ImmutableSet.of(a, b, c, e), graph.descendantNodeSet("d", false));
     assertEquals(ImmutableSet.of(a, b, c, d), graph.descendantNodeSet("e", false));
     assertEquals(ImmutableSet.of(), graph.descendantNodeSet("f", false));
-
+    
+    // inclusive
+    assertEquals(ImmutableSet.of(a, b, c, d, e), graph.descendantNodeSet("a", true));
+    assertEquals(ImmutableSet.of(a, b, c, d, e), graph.descendantNodeSet("b", true));
+    assertEquals(ImmutableSet.of(a, b, c, d, e), graph.descendantNodeSet("c", true));
+    assertEquals(ImmutableSet.of(a, b, c, d, e), graph.descendantNodeSet("d", true));
+    assertEquals(ImmutableSet.of(a, b, c, d, e), graph.descendantNodeSet("e", true));
+    assertEquals(ImmutableSet.of(f), graph.descendantNodeSet("f", true));
+    
     // =================================
     // roots (sources)
     // =================================
@@ -189,6 +217,12 @@ public class TestSampleNodeGraph {
     // =================================
 
     assertEquals(ImmutableSet.of(f), graph.leafNodeSet());
+
+    // =================================
+    // topological sort
+    // =================================
+
+    assertFalse(graph.optionalTopsortNodeList().isPresent());
 
     // =================================
     // generic traversal
