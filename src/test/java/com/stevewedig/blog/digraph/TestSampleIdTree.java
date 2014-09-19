@@ -367,7 +367,7 @@ public class TestSampleIdTree {
     // generic traversal
     // =================================
 
-    // TODO
+    TestSampleIdGraph.verifyGenericTraversal(tree);
   }
 
   // ===========================================================================

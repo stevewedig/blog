@@ -100,7 +100,7 @@ public abstract class TraverseLib {
     private final boolean inclusive;
     private final Fn1<Node, List<Id>> expand;
     private final Fn1<Id, Node> lookup;
-    private final ImmutableSet<Id> starts;
+    private final ImmutableSet<Id> startSet;
 
     // =================================
     // state
@@ -128,7 +128,7 @@ public abstract class TraverseLib {
       this.expand = expand;
       this.lookup = lookup;
 
-      starts = ImmutableSet.copyOf(startIds);
+      startSet = ImmutableSet.copyOf(startIds);
 
       pushN(startIds);
     }
@@ -176,7 +176,7 @@ public abstract class TraverseLib {
 
         expand(node);
 
-        if (!inclusive && starts.contains(id))
+        if (!inclusive && startSet.contains(id))
           continue;
 
         nextNode = node;
@@ -200,13 +200,14 @@ public abstract class TraverseLib {
 
     private void pushN(List<Id> ids) {
 
-      // reversed because we want expanded.first to end up as open.first or open.last
-      for (int i = ids.size() - 1; i >= 0; i--) {
-
-        Id id = ids.get(i);
-
-        push1(id);
-      }
+      if (depthFirst)
+        // reversed because we want ids.first to end up as open.first
+        for (int i = ids.size() - 1; i >= 0; i--)
+          push1(ids.get(i));
+      else
+        // forward because we want ids.first to end up as open.last
+        for (Id id : ids)
+          push1(id);
     }
 
     // =================================

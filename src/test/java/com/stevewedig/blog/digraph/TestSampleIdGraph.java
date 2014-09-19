@@ -1,19 +1,16 @@
 package com.stevewedig.blog.digraph;
 
-import static com.stevewedig.blog.translate.FormatLib.parseMultimap;
-import static com.stevewedig.blog.translate.FormatLib.parseSet;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static com.stevewedig.blog.translate.FormatLib.*;
+import static org.junit.Assert.*;
+
+import java.util.List;
 
 import org.junit.Test;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Multimap;
-import com.stevewedig.blog.digraph.id_graph.IdGraph;
-import com.stevewedig.blog.digraph.id_graph.IdGraphLib;
+import com.google.common.collect.*;
+import com.stevewedig.blog.digraph.id_graph.*;
 import com.stevewedig.blog.errors.NotThrown;
+import com.stevewedig.blog.util.LambdaLib.Fn1;
 
 // example graph containing cycles (a->b->c->d->a, and a->e->a)
 //
@@ -282,6 +279,53 @@ public class TestSampleIdGraph {
     // generic traversal
     // =================================
 
-    // TODO
+    verifyGenericTraversal(graph);
+  }
+
+  static void verifyGenericTraversal(IdGraph<String> graph) {
+
+    Fn1<String, List<String>> expand = new Fn1<String, List<String>>() {
+      @Override
+      public List<String> apply(String id) {
+        switch (id) {
+          case "a":
+            return parseList("b, e");
+          case "b":
+            return parseList("c");
+          case "e":
+            return parseList("a");
+          default:
+            return parseList("");
+        }
+      }
+    };
+
+    // depthFirst, inclusive, 1 start
+    assertEquals(parseList("a, b, c, e"), graph.traverseIdList(true, true, "a", expand));
+
+    // depthFirst, not inclusive, 1 start
+    assertEquals(parseList("b, c, e"), graph.traverseIdList(true, false, "a", expand));;
+
+    // breadthFirst, inclusive, 1 start
+    assertEquals(parseList("a, b, e, c"), graph.traverseIdList(false, true, "a", expand));
+
+    // breadthFirst, not inclusive, 1 start
+    assertEquals(parseList("b, e, c"), graph.traverseIdList(false, false, "a", expand));
+
+    // depthFirst, inclusive, n starts
+    assertEquals(parseList("d, a, b, c, e"),
+        graph.traverseIdList(true, true, parseList("d, a"), expand));
+
+    // depthFirst, not inclusive, n starts
+    assertEquals(parseList("b, c, e"), graph.traverseIdList(true, false, parseList("d, a"), expand));
+
+    // breadthFirst, inclusive, n starts
+    assertEquals(parseList("d, a, b, e, c"),
+        graph.traverseIdList(false, true, parseList("d, a"), expand));
+
+    // breadthFirst, not inclusive, n starts
+    assertEquals(parseList("b, e, c"),
+        graph.traverseIdList(false, false, parseList("d, a"), expand));
+
   }
 }

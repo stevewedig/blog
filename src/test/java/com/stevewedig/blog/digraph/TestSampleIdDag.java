@@ -301,7 +301,7 @@ public class TestSampleIdDag {
     // generic traversal
     // =================================
 
-    // TODO
+    TestSampleIdGraph.verifyGenericTraversal(dag);
   }
 
 }

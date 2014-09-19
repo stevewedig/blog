@@ -587,10 +587,12 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   public Iterator<Node> transformIterator(Iterator<Id> idIterator) {
     return transformIterator(idIterator, false);
   }
-  
+
   @Override
   public Iterator<Node> transformIterator(final Iterator<Id> idIterator,
       final boolean skipMissingNodes) {
+
+    // Iterators.transform doesn't look like it will work because of the skipMissingNodes flag
 
     return new Iterator<Node>() {
 
