@@ -2,10 +2,12 @@ package com.stevewedig.blog.digraph;
 
 import static com.stevewedig.blog.digraph.node.DownNodeLib.downNode;
 import static com.stevewedig.blog.digraph.node.UpNodeLib.upNode;
+import static com.stevewedig.blog.translate.FormatLib.*;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.*;
 import com.stevewedig.blog.digraph.node.*;
 import com.stevewedig.blog.digraph.node_graph.*;
@@ -236,6 +238,19 @@ public class TestSampleNodeDag {
     // =================================
 
     // TODO
+
+    // =================================
+    // converting to nodes
+    // =================================
+
+    assertEquals(ImmutableSet.of(a, b), dag.convertSet(parseSet("a, b")));
+
+    assertEquals(ImmutableList.of(a, b), dag.convertList(parseList("a, b")));
+
+    assertEquals(Optional.of(a), dag.convertOptional(Optional.of("a")));
+    assertEquals(Optional.absent(), dag.convertOptional(Optional.<String>absent()));
+
+    // convertIterator & convertIterable not shown here
 
     // =================================
     // implementing set

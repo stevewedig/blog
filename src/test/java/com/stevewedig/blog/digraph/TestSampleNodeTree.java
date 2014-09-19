@@ -2,6 +2,7 @@ package com.stevewedig.blog.digraph;
 
 import static com.stevewedig.blog.digraph.node.DownNodeLib.downNode;
 import static com.stevewedig.blog.digraph.node.UpNodeLib.upNode;
+import static com.stevewedig.blog.translate.FormatLib.*;
 import static org.junit.Assert.*;
 
 import java.util.*;
@@ -307,6 +308,19 @@ public class TestSampleNodeTree {
     // =================================
 
     // TODO
+
+    // =================================
+    // converting to nodes
+    // =================================
+
+    assertEquals(ImmutableSet.of(a, b), tree.convertSet(parseSet("a, b")));
+
+    assertEquals(ImmutableList.of(a, b), tree.convertList(parseList("a, b")));
+
+    assertEquals(Optional.of(a), tree.convertOptional(Optional.of("a")));
+    assertEquals(Optional.absent(), tree.convertOptional(Optional.<String>absent()));
+
+    // convertIterator & convertIterable not shown here
 
     // =================================
     // implementing set

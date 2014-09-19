@@ -2,10 +2,12 @@ package com.stevewedig.blog.digraph;
 
 import static com.stevewedig.blog.digraph.node.DownNodeLib.downNode;
 import static com.stevewedig.blog.digraph.node.UpNodeLib.upNode;
+import static com.stevewedig.blog.translate.FormatLib.*;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.*;
 import com.stevewedig.blog.digraph.node.*;
 import com.stevewedig.blog.digraph.node_graph.*;
@@ -197,7 +199,7 @@ public class TestSampleNodeGraph {
     assertEquals(ImmutableSet.of(a, b, c, e), graph.descendantNodeSet("d", false));
     assertEquals(ImmutableSet.of(a, b, c, d), graph.descendantNodeSet("e", false));
     assertEquals(ImmutableSet.of(), graph.descendantNodeSet("f", false));
-    
+
     // inclusive
     assertEquals(ImmutableSet.of(a, b, c, d, e), graph.descendantNodeSet("a", true));
     assertEquals(ImmutableSet.of(a, b, c, d, e), graph.descendantNodeSet("b", true));
@@ -205,7 +207,7 @@ public class TestSampleNodeGraph {
     assertEquals(ImmutableSet.of(a, b, c, d, e), graph.descendantNodeSet("d", true));
     assertEquals(ImmutableSet.of(a, b, c, d, e), graph.descendantNodeSet("e", true));
     assertEquals(ImmutableSet.of(f), graph.descendantNodeSet("f", true));
-    
+
     // =================================
     // roots (sources)
     // =================================
@@ -231,6 +233,19 @@ public class TestSampleNodeGraph {
     // TODO
 
     // =================================
+    // converting to nodes
+    // =================================
+
+    assertEquals(ImmutableSet.of(a, b), graph.convertSet(parseSet("a, b")));
+
+    assertEquals(ImmutableList.of(a, b), graph.convertList(parseList("a, b")));
+
+    assertEquals(Optional.of(a), graph.convertOptional(Optional.of("a")));
+    assertEquals(Optional.absent(), graph.convertOptional(Optional.<String>absent()));
+
+    // convertIterator & convertIterable not shown here
+
+    // =================================
     // implementing set
     // =================================
 
@@ -248,5 +263,4 @@ public class TestSampleNodeGraph {
     assertEquals(graph.nodeSet(), ImmutableSet.copyOf(graph));
 
   }
-
 }

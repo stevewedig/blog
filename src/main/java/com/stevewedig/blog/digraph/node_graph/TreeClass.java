@@ -46,7 +46,7 @@ public class TreeClass<Id, Node> extends DagClass<Id, Node> implements Tree<Id, 
 
   @Override
   public Optional<Node> parentNode(Id id) {
-    return nodeWrapOptional(parentId(id), false);
+    return convertOptional(parentId(id), false);
   }
 
   // ===========================================================================
@@ -70,7 +70,7 @@ public class TreeClass<Id, Node> extends DagClass<Id, Node> implements Tree<Id, 
 
   @Override
   public ImmutableList<Node> ancestorNodeList(Id id, boolean inclusive) {
-    return nodeWrapList(ancestorIdList(id, inclusive), false);
+    return convertList(ancestorIdList(id, inclusive), false);
   }
 
   // ===========================================================================
