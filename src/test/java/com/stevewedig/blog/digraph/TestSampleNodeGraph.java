@@ -5,12 +5,15 @@ import static com.stevewedig.blog.digraph.node.UpNodeLib.upNode;
 import static com.stevewedig.blog.translate.FormatLib.*;
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.*;
 import com.stevewedig.blog.digraph.node.*;
 import com.stevewedig.blog.digraph.node_graph.*;
+import com.stevewedig.blog.util.LambdaLib.Fn1;
 
 // example graph containing cycles (a->b->c->d->a, and a->e->a)
 //
@@ -230,7 +233,7 @@ public class TestSampleNodeGraph {
     // generic traversal
     // =================================
 
-    // TODO
+    verifyGenericTraversal(graph, a, b, c, d, e);
 
     // =================================
     // transforming ids into nodes
@@ -263,4 +266,54 @@ public class TestSampleNodeGraph {
     assertEquals(graph.nodeSet(), ImmutableSet.copyOf(graph));
 
   }
+
+  static <Node> void verifyGenericTraversal(final Graph<String, Node> graph, Node a, Node b,
+      Node c, Node d, Node e) {
+
+    Fn1<Node, List<String>> expand = new Fn1<Node, List<String>>() {
+      @Override
+      public List<String> apply(Node node) {
+        switch (graph.getId(node)) {
+          case "a":
+            return parseList("b, e");
+          case "b":
+            return parseList("c");
+          case "e":
+            return parseList("a");
+          default:
+            return parseList("");
+        }
+      }
+    };
+
+    // depthFirst, inclusive, 1 start
+    assertEquals(ImmutableList.of(a, b, c, e), graph.traverseNodeList(true, true, "a", expand));
+
+    // depthFirst, not inclusive, 1 start
+    assertEquals(ImmutableList.of(b, c, e), graph.traverseNodeList(true, false, "a", expand));;
+
+    // breadthFirst, inclusive, 1 start
+    assertEquals(ImmutableList.of(a, b, e, c), graph.traverseNodeList(false, true, "a", expand));
+
+    // breadthFirst, not inclusive, 1 start
+    assertEquals(ImmutableList.of(b, e, c), graph.traverseNodeList(false, false, "a", expand));
+
+    // depthFirst, inclusive, n starts
+    assertEquals(ImmutableList.of(d, a, b, c, e),
+        graph.traverseNodeList(true, true, parseList("d, a"), expand));
+
+    // depthFirst, not inclusive, n starts
+    assertEquals(ImmutableList.of(b, c, e),
+        graph.traverseNodeList(true, false, parseList("d, a"), expand));
+
+    // breadthFirst, inclusive, n starts
+    assertEquals(ImmutableList.of(d, a, b, e, c),
+        graph.traverseNodeList(false, true, parseList("d, a"), expand));
+
+    // breadthFirst, not inclusive, n starts
+    assertEquals(ImmutableList.of(b, e, c),
+        graph.traverseNodeList(false, false, parseList("d, a"), expand));
+
+  }
+
 }

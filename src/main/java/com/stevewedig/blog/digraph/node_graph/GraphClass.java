@@ -512,8 +512,11 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
     ImmutableSet.Builder<Node> nodeSet = ImmutableSet.builder();
 
     for (Id id : ids)
-      if (skipMissingNodes && !containsNodeForId(id))
-        continue;
+      if (!containsNodeForId(id))
+        if (skipMissingNodes)
+          continue;
+        else
+          throw new NotContained("graph does not have node with id = %s", id);
       else
         nodeSet.add(id__node.get(id));
 
@@ -533,8 +536,11 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
     ImmutableList.Builder<Node> nodeList = ImmutableList.builder();
 
     for (Id id : ids)
-      if (skipMissingNodes && !containsNodeForId(id))
-        continue;
+      if (!containsNodeForId(id))
+        if (skipMissingNodes)
+          continue;
+        else
+          throw new NotContained("graph does not have node with id = %s", id);
       else
         nodeList.add(id__node.get(id));
 
@@ -556,8 +562,11 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
 
     Id id = optionalId.get();
 
-    if (skipMissingNode && !containsNodeForId(id))
-      return Optional.absent();
+    if (!containsNodeForId(id))
+      if (skipMissingNode)
+        return Optional.absent();
+      else
+        throw new NotContained("graph does not have node with id = %s", id);
 
     return Optional.of(getNode(id));
   }
@@ -632,8 +641,11 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
 
           Id id = idIterator.next();
 
-          if (skipMissingNodes && !containsNodeForId(id))
-            continue;
+          if (!containsNodeForId(id))
+            if(skipMissingNodes)
+              continue;
+            else
+              throw new NotContained("graph does not have node with id = %s", id);
 
           nextId = id;
         }

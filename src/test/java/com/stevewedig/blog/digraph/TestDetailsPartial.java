@@ -1,7 +1,7 @@
 package com.stevewedig.blog.digraph;
 
 import static com.stevewedig.blog.translate.FormatLib.*;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.*;
+import com.stevewedig.blog.digraph.id_graph.IdTreeLib;
 import com.stevewedig.blog.digraph.node.*;
 import com.stevewedig.blog.digraph.node_graph_partial.*;
 import com.stevewedig.blog.errors.*;
@@ -26,6 +27,12 @@ public class TestDetailsPartial {
     // =========================================================================
     // graph attributes
     // =========================================================================
+
+    // =================================
+    // inner idTree
+    // =================================
+
+    assertEquals(IdTreeLib.fromParentMap("b", "a"), tree.idGraph());
 
     // =================================
     // unbound ids
@@ -50,8 +57,15 @@ public class TestDetailsPartial {
     assertEquals(1, tree.nodeSize());
 
     // =================================
-    // node lookup
+    // mapping id -> node
     // =================================
+
+    assertEquals(ImmutableBiMap.of("b", b), tree.id__node());
+
+    assertTrue(tree.containsNodeForId("b"));
+    assertFalse(tree.containsNodeForId("a"));
+
+    assertEquals(b, tree.getNode("b"));
 
     try {
       tree.getNode("a");
@@ -59,7 +73,7 @@ public class TestDetailsPartial {
     } catch (NotContained e) {
     }
 
-    assertEquals(b, tree.getNode("b"));
+    assertEquals("b", tree.getId(b));
 
     // =================================
     // parents
@@ -102,13 +116,15 @@ public class TestDetailsPartial {
     assertEquals(parseSet("b"), tree.leafIdSet());
 
     // =================================
-    // optional topsort
+    // topological sort
     // =================================
 
     assertEquals(parseList("a, b"), tree.optionalTopsortIdList().get());
 
+    assertEquals(parseList("a, b"), tree.topsortIdList());
+
     // =================================
-    // id traversal
+    // generic traversal
     // =================================
 
     Fn1<String, List<String>> expandId = new Fn1<String, List<String>>() {
@@ -118,7 +134,66 @@ public class TestDetailsPartial {
       }
     };
 
-    assertEquals(parseList("b, a"), tree.traverseIdList(true, true, ImmutableList.of("b"), expandId));
+    assertEquals(parseList("b, a"),
+        tree.traverseIdList(true, true, ImmutableList.of("b"), expandId));
+
+    // =================================
+    // transform ids into nodes
+    // =================================
+
+    assertEquals(ImmutableSet.of(b), tree.transformSet(parseSet("a, b"), true));
+
+    try {
+      tree.transformSet(parseSet("a, b"), false);
+      throw new NotThrown(NotContained.class);
+    } catch (NotContained e) {
+    }
+
+    // =============
+
+    assertEquals(ImmutableList.of(b), tree.transformList(parseList("a, b"), true));
+
+    try {
+      tree.transformList(parseList("a, b"), false);
+      throw new NotThrown(NotContained.class);
+    } catch (NotContained e) {
+    }
+
+    // =============
+
+    assertEquals(Optional.of(b), tree.transformOptional(Optional.of("b"), false));
+
+    assertEquals(Optional.absent(), tree.transformOptional(Optional.<String>absent(), false));
+
+    try {
+      tree.transformOptional(Optional.of("a"), false);
+      throw new NotThrown(NotContained.class);
+    } catch (NotContained e) {
+    }
+
+    assertEquals(Optional.absent(), tree.transformOptional(Optional.of("a"), true));
+
+    // =============
+
+    assertEquals(ImmutableList.of(b),
+        ImmutableList.copyOf(tree.transformIterable(parseList("a, b"), true)));
+
+    try {
+      ImmutableList.copyOf(tree.transformIterable(parseList("a, b"), false));
+      throw new NotThrown(NotContained.class);
+    } catch (NotContained e) {
+    }
+
+    // =============
+
+    assertEquals(ImmutableList.of(b),
+        ImmutableList.copyOf(tree.transformIterator(parseList("a, b").iterator(), true)));
+
+    try {
+      ImmutableList.copyOf(tree.transformIterator(parseList("a, b").iterator(), false));
+      throw new NotThrown(NotContained.class);
+    } catch (NotContained e) {
+    }
 
     // =========================================================================
     // dag attributes
@@ -176,5 +251,4 @@ public class TestDetailsPartial {
     assertEquals(1, tree.maxDepth());
 
   }
-
 }

@@ -237,7 +237,7 @@ public class TestSampleNodeDag {
     // generic traversal
     // =================================
 
-    // TODO
+    TestSampleNodeGraph.verifyGenericTraversal(dag, a, b, c, d, e);
 
     // =================================
     // transforming ids into nodes

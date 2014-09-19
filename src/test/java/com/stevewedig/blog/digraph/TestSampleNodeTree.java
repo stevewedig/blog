@@ -307,7 +307,7 @@ public class TestSampleNodeTree {
     // generic traversal
     // =================================
 
-    // TODO
+    TestSampleNodeGraph.verifyGenericTraversal(tree, a, b, c, d, e);
 
     // =================================
     // transforming ids into nodes
