@@ -147,32 +147,32 @@ public interface Graph<Id, Node> extends PartialGraph<Id, Node> {
       ImmutableList<Id> startIds, Fn1<Node, List<Id>> expand);
 
   // ===========================================================================
-  // conversions from ids to nodes
+  // transforming ids into nodes
   // ===========================================================================
 
   /**
    * Converting ids to a node set.
    */
-  ImmutableSet<Node> convertSet(Iterable<Id> ids);
+  ImmutableSet<Node> transformSet(Iterable<Id> ids);
 
   /**
    * Converting ids to a node list.
    */
-  ImmutableList<Node> convertList(Iterable<Id> ids);
+  ImmutableList<Node> transformList(Iterable<Id> ids);
 
   /**
    * Converting optional id to an optional node.
    */
-  Optional<Node> convertOptional(Optional<Id> id);
+  Optional<Node> transformOptional(Optional<Id> id);
 
   /**
    * Converting an id iterable to a node iterable.
    */
-  Iterable<Node> convertIterable(Iterable<Id> idIterable);
+  Iterable<Node> transformIterable(Iterable<Id> idIterable);
 
   /**
    * Converting an id iterator to a node iterator.
    */
-  Iterator<Node> convertIterator(Iterator<Id> idIterator);
+  Iterator<Node> transformIterator(Iterator<Id> idIterator);
 
 }

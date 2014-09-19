@@ -168,7 +168,7 @@ public class TestExampleDependencyDag {
 
       validateDependencies(dag);
 
-      return dag.convertList(dag.topsortIdList(), true);
+      return dag.transformList(dag.topsortIdList(), true);
     }
 
     private void validateDependencies(PartialDag<String, Module> dag) {

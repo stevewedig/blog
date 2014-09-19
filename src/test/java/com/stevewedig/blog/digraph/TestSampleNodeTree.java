@@ -310,17 +310,17 @@ public class TestSampleNodeTree {
     // TODO
 
     // =================================
-    // converting to nodes
+    // transforming ids into nodes
     // =================================
 
-    assertEquals(ImmutableSet.of(a, b), tree.convertSet(parseSet("a, b")));
+    assertEquals(ImmutableSet.of(a, b), tree.transformSet(parseSet("a, b")));
 
-    assertEquals(ImmutableList.of(a, b), tree.convertList(parseList("a, b")));
+    assertEquals(ImmutableList.of(a, b), tree.transformList(parseList("a, b")));
 
-    assertEquals(Optional.of(a), tree.convertOptional(Optional.of("a")));
-    assertEquals(Optional.absent(), tree.convertOptional(Optional.<String>absent()));
+    assertEquals(Optional.of(a), tree.transformOptional(Optional.of("a")));
+    assertEquals(Optional.absent(), tree.transformOptional(Optional.<String>absent()));
 
-    // convertIterator & convertIterable not shown here
+    // transformIterator & transformIterable not shown here
 
     // =================================
     // implementing set

@@ -240,17 +240,17 @@ public class TestSampleNodeDag {
     // TODO
 
     // =================================
-    // converting to nodes
+    // transforming ids into nodes
     // =================================
 
-    assertEquals(ImmutableSet.of(a, b), dag.convertSet(parseSet("a, b")));
+    assertEquals(ImmutableSet.of(a, b), dag.transformSet(parseSet("a, b")));
 
-    assertEquals(ImmutableList.of(a, b), dag.convertList(parseList("a, b")));
+    assertEquals(ImmutableList.of(a, b), dag.transformList(parseList("a, b")));
 
-    assertEquals(Optional.of(a), dag.convertOptional(Optional.of("a")));
-    assertEquals(Optional.absent(), dag.convertOptional(Optional.<String>absent()));
+    assertEquals(Optional.of(a), dag.transformOptional(Optional.of("a")));
+    assertEquals(Optional.absent(), dag.transformOptional(Optional.<String>absent()));
 
-    // convertIterator & convertIterable not shown here
+    // transformIterator & transformIterable not shown here
 
     // =================================
     // implementing set

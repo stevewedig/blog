@@ -196,7 +196,7 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
 
   @Override
   public ImmutableSet<Node> parentNodeSet(Id id) {
-    return convertSet(parentIdSet(id), false);
+    return transformSet(parentIdSet(id), false);
   }
 
   // ===========================================================================
@@ -222,7 +222,7 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
 
   @Override
   public ImmutableSet<Node> childNodeSet(Id id) {
-    return convertSet(childIdSet(id), false);
+    return transformSet(childIdSet(id), false);
   }
 
   // ===========================================================================
@@ -268,22 +268,22 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
 
   @Override
   public Iterable<Node> ancestorNodeIterable(Id id, boolean inclusive) {
-    return convertIterable(ancestorIdIterable(id, inclusive), false);
+    return transformIterable(ancestorIdIterable(id, inclusive), false);
   }
 
   @Override
   public Iterable<Node> ancestorNodeIterable(Set<Id> ids, boolean inclusive) {
-    return convertIterable(ancestorIdIterable(ids, inclusive), false);
+    return transformIterable(ancestorIdIterable(ids, inclusive), false);
   }
 
   @Override
   public ImmutableSet<Node> ancestorNodeSet(Id id, boolean inclusive) {
-    return convertSet(ancestorIdIterable(id, inclusive), false);
+    return transformSet(ancestorIdIterable(id, inclusive), false);
   }
 
   @Override
   public ImmutableSet<Node> ancestorNodeSet(Set<Id> ids, boolean inclusive) {
-    return convertSet(ancestorIdIterable(ids, inclusive), false);
+    return transformSet(ancestorIdIterable(ids, inclusive), false);
   }
 
   // ===========================================================================
@@ -329,22 +329,22 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
 
   @Override
   public Iterable<Node> descendantNodeIterable(Id id, boolean inclusive) {
-    return convertIterable(descendantIdIterable(id, inclusive), false);
+    return transformIterable(descendantIdIterable(id, inclusive), false);
   }
 
   @Override
   public Iterable<Node> descendantNodeIterable(Set<Id> ids, boolean inclusive) {
-    return convertIterable(descendantIdIterable(ids, inclusive), false);
+    return transformIterable(descendantIdIterable(ids, inclusive), false);
   }
 
   @Override
   public ImmutableSet<Node> descendantNodeSet(Id id, boolean inclusive) {
-    return convertSet(descendantIdIterable(id, inclusive), false);
+    return transformSet(descendantIdIterable(id, inclusive), false);
   }
 
   @Override
   public ImmutableSet<Node> descendantNodeSet(Set<Id> ids, boolean inclusive) {
-    return convertSet(descendantIdIterable(ids, inclusive), false);
+    return transformSet(descendantIdIterable(ids, inclusive), false);
   }
 
   // ===========================================================================
@@ -368,7 +368,7 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   @Override
   public ImmutableSet<Node> rootNodeSet() {
     if (rootNodes == null)
-      rootNodes = convertSet(rootIdSet(), false);
+      rootNodes = transformSet(rootIdSet(), false);
     return rootNodes;
   }
 
@@ -395,7 +395,7 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   @Override
   public ImmutableSet<Node> leafNodeSet() {
     if (leafNodes == null)
-      leafNodes = convertSet(leafIdSet(), false);
+      leafNodes = transformSet(leafIdSet(), false);
     return leafNodes;
   }
 
@@ -424,7 +424,7 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
 
     if (optionalTopsortNodeList == null) {
       if (optionalTopsortIdList().isPresent())
-        optionalTopsortNodeList = Optional.of(convertList(optionalTopsortIdList().get(), false));
+        optionalTopsortNodeList = Optional.of(transformList(optionalTopsortIdList().get(), false));
       else
         optionalTopsortNodeList = Optional.absent();
     }
@@ -496,12 +496,18 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
     return ImmutableList.copyOf(traverseNodeIterable(depthFirst, inclusive, startIds, expand));
   }
 
+
   // ===========================================================================
-  // converting id collections to node collections
+  // transformations from ids to nodes
   // ===========================================================================
 
   @Override
-  public ImmutableSet<Node> convertSet(Iterable<Id> ids, boolean skipMissingNodes) {
+  public ImmutableSet<Node> transformSet(Iterable<Id> ids) {
+    return transformSet(ids, false);
+  }
+
+  @Override
+  public ImmutableSet<Node> transformSet(Iterable<Id> ids, boolean skipMissingNodes) {
 
     ImmutableSet.Builder<Node> nodeSet = ImmutableSet.builder();
 
@@ -517,7 +523,12 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   // ===================================
 
   @Override
-  public ImmutableList<Node> convertList(Iterable<Id> ids, boolean skipMissingNodes) {
+  public ImmutableList<Node> transformList(Iterable<Id> ids) {
+    return transformList(ids, false);
+  }
+
+  @Override
+  public ImmutableList<Node> transformList(Iterable<Id> ids, boolean skipMissingNodes) {
 
     ImmutableList.Builder<Node> nodeList = ImmutableList.builder();
 
@@ -533,7 +544,12 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   // ===================================
 
   @Override
-  public Optional<Node> convertOptional(Optional<Id> optionalId, boolean skipMissingNode) {
+  public Optional<Node> transformOptional(Optional<Id> id) {
+    return transformOptional(id, false);
+  }
+
+  @Override
+  public Optional<Node> transformOptional(Optional<Id> optionalId, boolean skipMissingNode) {
 
     if (!optionalId.isPresent())
       return Optional.absent();
@@ -549,13 +565,18 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   // ===================================
 
   @Override
-  public Iterable<Node> convertIterable(final Iterable<Id> idIterable,
+  public Iterable<Node> transformIterable(Iterable<Id> idIterable) {
+    return transformIterable(idIterable, false);
+  }
+
+  @Override
+  public Iterable<Node> transformIterable(final Iterable<Id> idIterable,
       final boolean skipMissingNodes) {
 
     return new Iterable<Node>() {
       @Override
       public Iterator<Node> iterator() {
-        return convertIterator(idIterable.iterator(), skipMissingNodes);
+        return transformIterator(idIterable.iterator(), skipMissingNodes);
       }
     };
   }
@@ -563,7 +584,12 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
   // ===================================
 
   @Override
-  public Iterator<Node> convertIterator(final Iterator<Id> idIterator,
+  public Iterator<Node> transformIterator(Iterator<Id> idIterator) {
+    return transformIterator(idIterator, false);
+  }
+  
+  @Override
+  public Iterator<Node> transformIterator(final Iterator<Id> idIterator,
       final boolean skipMissingNodes) {
 
     return new Iterator<Node>() {
@@ -614,35 +640,6 @@ public class GraphClass<Id, Node> extends ValueMixin implements Graph<Id, Node> 
       private Id nextId;
 
     };
-  }
-
-  // ===========================================================================
-  // conversions from ids to nodes
-  // ===========================================================================
-
-  @Override
-  public ImmutableSet<Node> convertSet(Iterable<Id> ids) {
-    return convertSet(ids, false);
-  }
-
-  @Override
-  public ImmutableList<Node> convertList(Iterable<Id> ids) {
-    return convertList(ids, false);
-  }
-
-  @Override
-  public Optional<Node> convertOptional(Optional<Id> id) {
-    return convertOptional(id, false);
-  }
-
-  @Override
-  public Iterable<Node> convertIterable(Iterable<Id> idIterable) {
-    return convertIterable(idIterable, false);
-  }
-
-  @Override
-  public Iterator<Node> convertIterator(Iterator<Id> idIterator) {
-    return convertIterator(idIterator, false);
   }
 
   // ===========================================================================

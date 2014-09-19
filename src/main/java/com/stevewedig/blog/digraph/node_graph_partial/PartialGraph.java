@@ -69,33 +69,33 @@ public interface PartialGraph<Id, Node> extends IdGraph<Id>, Set<Node> {
   ImmutableSet<Id> unboundIdSet();
 
   // ===========================================================================
-  // conversions from ids to nodes
+  // transforming ids into nodes
   // ===========================================================================
 
   /**
    * Converting ids to a node set.
    */
-  ImmutableSet<Node> convertSet(Iterable<Id> ids, boolean skipMissingNodes);
+  ImmutableSet<Node> transformSet(Iterable<Id> ids, boolean skipMissingNodes);
 
   /**
    * Converting ids to a node list.
    */
-  ImmutableList<Node> convertList(Iterable<Id> ids, boolean skipMissingNodes);
+  ImmutableList<Node> transformList(Iterable<Id> ids, boolean skipMissingNodes);
 
   /**
    * Converting optional id to an optional node.
    */
-  Optional<Node> convertOptional(Optional<Id> id, boolean skipMissingNode);
+  Optional<Node> transformOptional(Optional<Id> id, boolean skipMissingNode);
 
   /**
    * Converting an id iterable to a node iterable.
    */
-  Iterable<Node> convertIterable(Iterable<Id> idIterable, boolean skipMissingNodes);
+  Iterable<Node> transformIterable(Iterable<Id> idIterable, boolean skipMissingNodes);
 
   /**
    * Converting an id iterator to a node iterator.
    */
-  Iterator<Node> convertIterator(Iterator<Id> idIterator, boolean skipMissingNodes);
+  Iterator<Node> transformIterator(Iterator<Id> idIterator, boolean skipMissingNodes);
 
   // ===========================================================================
   // deprecating Set's mutation methods (this library's graphs are immutable)

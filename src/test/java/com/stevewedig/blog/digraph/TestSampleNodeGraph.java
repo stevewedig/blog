@@ -233,17 +233,17 @@ public class TestSampleNodeGraph {
     // TODO
 
     // =================================
-    // converting to nodes
+    // transforming ids into nodes
     // =================================
 
-    assertEquals(ImmutableSet.of(a, b), graph.convertSet(parseSet("a, b")));
+    assertEquals(ImmutableSet.of(a, b), graph.transformSet(parseSet("a, b")));
 
-    assertEquals(ImmutableList.of(a, b), graph.convertList(parseList("a, b")));
+    assertEquals(ImmutableList.of(a, b), graph.transformList(parseList("a, b")));
 
-    assertEquals(Optional.of(a), graph.convertOptional(Optional.of("a")));
-    assertEquals(Optional.absent(), graph.convertOptional(Optional.<String>absent()));
+    assertEquals(Optional.of(a), graph.transformOptional(Optional.of("a")));
+    assertEquals(Optional.absent(), graph.transformOptional(Optional.<String>absent()));
 
-    // convertIterator & convertIterable not shown here
+    // transformIterator & transformIterable not shown here
 
     // =================================
     // implementing set
