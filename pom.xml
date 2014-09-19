@@ -224,10 +224,11 @@
 
 		<!-- Guava extends the standard library -->
 		<!-- https://code.google.com/p/guava-libraries/ -->
+		<!-- MoreObjects package added in version 18.0 -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>[10.0.1,)</version>
+			<version>[18.0,)</version>
 		</dependency>
 
 		<!-- jUnit -->
