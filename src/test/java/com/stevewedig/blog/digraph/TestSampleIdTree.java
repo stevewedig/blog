@@ -278,8 +278,11 @@ public class TestSampleIdTree {
     assertEquals(2, tree.depth("g"));
     assertEquals(1, tree.depth("h"));
 
-    // maxDepth
     assertEquals(3, tree.maxDepth());
+
+    assertEquals("d", tree.mostDeep(idSet));
+    
+    assertEquals("a", tree.leastDeep(idSet));
 
     // =================================
     // descendants
