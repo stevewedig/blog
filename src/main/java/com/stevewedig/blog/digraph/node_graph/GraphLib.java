@@ -17,7 +17,7 @@ public abstract class GraphLib {
   // ===========================================================================
 
   /**
-   * Create a Graph the nested IdGraph (the arc structure) and the mapping between id and node.
+   * Create a Graph from the nested IdGraph (the arc structure) and the mapping between id and node.
    */
   public static <Id, Node> Graph<Id, Node> graph(IdGraph<Id> idGraph,
       ImmutableBiMap<Id, Node> id__node) {
