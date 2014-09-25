@@ -24,17 +24,29 @@ public interface IdGraph<Id> {
    * The number of ids.
    */
   int idSize();
-
+  
+  /**
+   * Assert that a graph contains exactly these ids.
+   */
   void assertIdsEqual(ImmutableSet<Id> ids);
 
+  /**
+   * Assert that a graph contains exactly these ids.
+   */
   void assertIdsEqual(Id[] ids);
 
+  /**
+   * Filter a graph by only keep the specified ids and arcs between these ids.
+   */
   IdGraph<Id> filterIdGraph(Set<Id> ids);
 
   // ===========================================================================
   // parents
   // ===========================================================================
 
+  /**
+   * Whether an id is a parent of another id.
+   */
   boolean isParentOf(Id id, Id potentialChild);
 
   /**
@@ -51,6 +63,9 @@ public interface IdGraph<Id> {
   // children
   // ===========================================================================
 
+  /**
+   * Whether an id is a child of another id.
+   */
   boolean isChildOf(Id id, Id potentialParent);
 
   /**
@@ -67,54 +82,88 @@ public interface IdGraph<Id> {
   // ancestors
   // ===========================================================================
 
+  /**
+   * Whether an id is a ancestor of another id.
+   */
   boolean isAncestorOf(Id id, Id potentialDescendant, boolean inclusive);
 
   /**
-   * Getting an id's ancestor id iterable (its parents, it's parents' parents, and so on).
+   * Getting an id's ancestor id iterable (its parents, parents' parents, and so on).
    */
   Iterable<Id> ancestorIdIterable(Id id, boolean inclusive);
 
+  /**
+   * Getting an id set's ancestor id iterable (their parents, parents' parents, and so on).
+   */
   Iterable<Id> ancestorIdIterable(Set<Id> ids, boolean inclusive);
 
   /**
-   * Getting an id's ancestor id set (its parents, it's parents' parents, and so on).
+   * Getting an id's ancestor id set (its parents, parents' parents, and so on).
    */
   ImmutableSet<Id> ancestorIdSet(Id id, boolean inclusive);
 
+  /**
+   * Getting an id set's ancestor id set (their parents, parents' parents, and so on).
+   */
   ImmutableSet<Id> ancestorIdSet(Set<Id> ids, boolean inclusive);
 
+  /**
+   * Getting an id's ancestor id graph (its, parents' parents, and so on).
+   */
   IdGraph<Id> ancestorIdGraph(Id id, boolean inclusive);
 
+  /**
+   * Getting an id set's ancestor id graph (their parents, parents' parents, and so on).
+   */
   IdGraph<Id> ancestorIdGraph(Set<Id> ids, boolean inclusive);
 
   // ===========================================================================
   // descendants
   // ===========================================================================
 
+  /**
+   * Whether an id is a descendant of another id.
+   */
   boolean isDescendantOf(Id id, Id potentialAncestor, boolean inclusive);
 
   /**
-   * Getting an id's descendant id iterable (its children, it's childrens' children, and so on).
+   * Getting an id's descendant id iterable (its children, childrens' children, and so on).
    */
   Iterable<Id> descendantIdIterable(Id id, boolean inclusive);
 
+  /**
+   * Getting an id set's descendant id iterable (their children, childrens' children, and so on).
+   */
   Iterable<Id> descendantIdIterable(Set<Id> ids, boolean inclusive);
 
   /**
-   * Getting an id's descendant id set (its children, it's childrens' children, and so on).
+   * Getting an id's descendant id set (its children, childrens' children, and so on).
    */
   ImmutableSet<Id> descendantIdSet(Id id, boolean inclusive);
 
+  /**
+   * Getting an id set's descendant id set (their children, childrens' children, and so on).
+   */
   ImmutableSet<Id> descendantIdSet(Set<Id> ids, boolean inclusive);
 
+
+  /**
+   * Getting an id's descendant id graph (its children, childrens' children, and so on).
+   */
   IdGraph<Id> descendantIdGraph(Id id, boolean inclusive);
 
+  /**
+   * Getting an id set's descendant id graph (their children, childrens' children, and so on).
+   */
   IdGraph<Id> descendantIdGraph(Set<Id> ids, boolean inclusive);
 
   // ===========================================================================
   // roots (sources)
   // ===========================================================================
 
+  /**
+   * Is an id a root?
+   */
   boolean isRoot(Id id);
 
   /**
@@ -126,6 +175,9 @@ public interface IdGraph<Id> {
   // leaves (sinks)
   // ===========================================================================
 
+  /**
+   * Is an id a leaf?
+   */
   boolean isLeaf(Id id);
 
   /**

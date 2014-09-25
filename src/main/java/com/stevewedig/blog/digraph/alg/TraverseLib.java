@@ -15,6 +15,15 @@ public abstract class TraverseLib {
   // iterable
   // ===========================================================================
 
+  /**
+   * Generic digraph traversal as an id iterable.
+   * 
+   * @param depthFirst Whether to traverse depth first or breadth first.
+   * @param inclusive Whether to include the start ids in the traversal.
+   * @param startId The initial id.
+   * @param expand A function mapping an id to the next ids.
+   * @return An id iterable corresponding to the traversal.
+   */
   public static <Id> Iterable<Id> idIterable(final boolean depthFirst, final boolean inclusive,
       final ImmutableList<Id> startIds, final Fn1<Id, List<Id>> expand) {
 
@@ -28,6 +37,15 @@ public abstract class TraverseLib {
     return new IterableClass<Id, Id>(depthFirst, inclusive, startIds, expand, lookup);
   }
 
+  /**
+   * Generic digraph traversal as a node iterable.
+   * 
+   * @param depthFirst Whether to traverse depth first or breadth first.
+   * @param inclusive Whether to include the start nodes in the traversal.
+   * @param startId The initial id.
+   * @param expand A function mapping a node to the next ids.
+   * @return A node iterable corresponding to the traversal.
+   */
   public static <Id, Node> Iterable<Node> nodeIterable(boolean depthFirst, boolean inclusive,
       ImmutableList<Id> startIds, Fn1<Node, List<Id>> expand, Fn1<Id, Node> lookup) {
 
@@ -67,6 +85,15 @@ public abstract class TraverseLib {
   // iterator
   // ===========================================================================
 
+  /**
+   * Generic digraph traversal as an id iterator.
+   * 
+   * @param depthFirst Whether to traverse depth first or breadth first.
+   * @param inclusive Whether to include the start ids in the traversal.
+   * @param startId The initial id.
+   * @param expand A function mapping an id to the next ids.
+   * @return An id iterable corresponding to the traversal.
+   */
   public static <Id> Iterator<Id> idIterator(boolean depthFirst, boolean inclusive,
       ImmutableList<Id> startIds, Fn1<Id, List<Id>> expand) {
 
@@ -80,6 +107,15 @@ public abstract class TraverseLib {
     return new IteratorClass<Id, Id>(depthFirst, inclusive, startIds, expand, lookup);
   }
 
+  /**
+   * Generic digraph traversal as a node iterator.
+   * 
+   * @param depthFirst Whether to traverse depth first or breadth first.
+   * @param inclusive Whether to include the start nodes in the traversal.
+   * @param startId The initial id.
+   * @param expand A function mapping a node to the next ids.
+   * @return A node iterable corresponding to the traversal.
+   */
   public static <Id, Node> Iterator<Node> nodeIterator(boolean depthFirst, boolean inclusive,
       ImmutableList<Id> startIds, Fn1<Node, List<Id>> expand, Fn1<Id, Node> lookup) {
 

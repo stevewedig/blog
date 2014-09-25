@@ -35,17 +35,23 @@ public interface Graph<Id, Node> extends PartialGraph<Id, Node> {
   // ===========================================================================
 
   /**
-   * Getting an id's ancestor node iterable (its parents, it's parents' parents, and so on).
+   * Getting an id's ancestor node iterable (its parents, parents' parents, and so on).
    */
   Iterable<Node> ancestorNodeIterable(Id id, boolean inclusive);
 
+  /**
+   * Getting an id set's ancestor node iterable (their parents, parents' parents, and so on).
+   */
   Iterable<Node> ancestorNodeIterable(Set<Id> ids, boolean inclusive);
 
   /**
-   * Getting an id's ancestor node set (its parents, it's parents' parents, and so on).
+   * Getting an id's ancestor node set (its parents, parents' parents, and so on).
    */
   ImmutableSet<Node> ancestorNodeSet(Id id, boolean inclusive);
 
+  /**
+   * Getting an id set's ancestor node set (their parents, parents' parents, and so on).
+   */
   ImmutableSet<Node> ancestorNodeSet(Set<Id> ids, boolean inclusive);
 
   // ===========================================================================
@@ -53,17 +59,23 @@ public interface Graph<Id, Node> extends PartialGraph<Id, Node> {
   // ===========================================================================
 
   /**
-   * Getting an id's descendant node iterable (its children, it's childrens' children, and so on).
+   * Getting an id's descendant node iterable (its children, childrens' children, and so on).
    */
   Iterable<Node> descendantNodeIterable(Id id, boolean inclusive);
 
+  /**
+   * Getting an id set's descendant node iterable (their children, childrens' children, and so on).
+   */
   Iterable<Node> descendantNodeIterable(Set<Id> ids, boolean inclusive);
 
   /**
-   * Getting an id's descendant node set (its children, it's childrens' children, and so on).
+   * Getting an id's descendant node set (its children, childrens' children, and so on).
    */
   ImmutableSet<Node> descendantNodeSet(Id id, boolean inclusive);
 
+  /**
+   * Getting an id set's descendant node set (their children, childrens' children, and so on).
+   */
   ImmutableSet<Node> descendantNodeSet(Set<Id> ids, boolean inclusive);
 
   // ===========================================================================

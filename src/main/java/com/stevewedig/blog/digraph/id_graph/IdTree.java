@@ -69,8 +69,14 @@ public interface IdTree<Id> extends IdDag<Id> {
    */
   int maxDepth();
 
+  /**
+   * Select the most deep id from a set, non-deterministic if there are ties.
+   */
   Id mostDeep(Set<Id> ids);
 
+  /**
+   * Select the least deep id from a set, non-deterministic if there are ties.
+   */
   Id leastDeep(Set<Id> ids);
 
 }
