@@ -12,14 +12,23 @@ public abstract class SymbolFormatLib {
   // translator (and parser/writer)
   // ===========================================================================
 
+  /**
+   * A builder for creating SymbolTranslators.
+   */
   public static SymbolTranslator.Builder translator() {
     return new SymbolTranslatorClass.TranslatorBuilder();
   }
 
+  /**
+   * A builder for creating SymbolParsers.
+   */
   public static SymbolParser.Builder parser() {
     return new SymbolTranslatorClass.ParserBuilder();
   }
 
+  /**
+   * A builder for creating SymbolWriters.
+   */
   public static SymbolWriter.Builder writer() {
     return new SymbolTranslatorClass.WriterBuilder();
   }
@@ -28,6 +37,9 @@ public abstract class SymbolFormatLib {
   // format
   // ===========================================================================
 
+  /**
+   * Creating SymbolFormat by chaining together a ConfigFormat and a SymbolTranslator.
+   */
   public static SymbolFormat format(ConfigFormat configFormat, SymbolTranslator translator) {
 
     final Format<SymbolMap> symbolFormat = FormatLib.chain(configFormat, translator);
