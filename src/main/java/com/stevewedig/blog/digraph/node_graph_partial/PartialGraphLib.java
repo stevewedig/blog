@@ -62,7 +62,7 @@ public abstract class PartialGraphLib {
   }
 
   /**
-   * Create a PartialGraph from the union of multiple UpNode sets (remember that Graph&lt;Node&gt; extends
+   * Create a PartialGraph from the union of multiple UpNode sets (remember that PartialGraph&lt;Node&gt; extends
    * Set&lt;Node&gt;).
    */
   @SafeVarargs
@@ -102,7 +102,7 @@ public abstract class PartialGraphLib {
   }
 
   /**
-   * Create a PartialGraph from the union of multiple DownNode sets (remember that Graph&lt;Node&gt;
+   * Create a PartialGraph from the union of multiple DownNode sets (remember that PartialGraph&lt;Node&gt;
    * extends Set&lt;Node&gt;).
    */
   @SafeVarargs

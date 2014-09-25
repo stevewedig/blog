@@ -62,7 +62,7 @@ public abstract class PartialTreeLib {
   }
 
   /**
-   * Create a PartialTree from the union of multiple UpNode sets (remember that Tree&lt;Node&gt; extends
+   * Create a PartialTree from the union of multiple UpNode sets (remember that PartialTree&lt;Node&gt; extends
    * Set&lt;Node&gt;).
    */
   @SafeVarargs
@@ -102,7 +102,7 @@ public abstract class PartialTreeLib {
   }
 
   /**
-   * Create a PartialTree from the union of multiple DownNode sets (remember that Tree&lt;Node&gt;
+   * Create a PartialTree from the union of multiple DownNode sets (remember that PartialTree&lt;Node&gt;
    * extends Set&lt;Node&gt;).
    */
   @SafeVarargs

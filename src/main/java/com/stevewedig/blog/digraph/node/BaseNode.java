@@ -6,5 +6,8 @@ package com.stevewedig.blog.digraph.node;
  */
 public interface BaseNode<Id> {
 
+  /**
+   * The node's id.
+   */
   Id id();
 }

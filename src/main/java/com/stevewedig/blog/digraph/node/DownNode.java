@@ -7,5 +7,8 @@ import com.google.common.collect.ImmutableSet;
  */
 public interface DownNode<Id> extends BaseNode<Id> {
 
+  /**
+   * The node's child ids.
+   */
   ImmutableSet<Id> childIds();
 }

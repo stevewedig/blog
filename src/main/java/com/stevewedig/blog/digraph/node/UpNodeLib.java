@@ -13,10 +13,16 @@ public abstract class UpNodeLib {
   // creating nodes
   // ===========================================================================
 
+  /**
+   * Create an UpNode from its id and a parent id iterable.
+   */
   public static <Id> UpNode<Id> upNode(Id id, Iterable<Id> parentIds) {
     return new UpNodeClass<Id>(id, ImmutableSet.copyOf(parentIds));
   }
 
+  /**
+   * Create an UpNode from its id and a parent id varargs array.
+   */
   @SafeVarargs
   public static <Id> UpNode<Id> upNode(Id id, Id... parentIds) {
     return upNode(id, ImmutableSet.copyOf(parentIds));
@@ -26,6 +32,9 @@ public abstract class UpNodeLib {
   // nodes -> ids
   // ===========================================================================
 
+  /**
+   * Collect all of the ids and parent ids in an UpNode iterable.
+   */
   public static <Id, Node extends UpNode<Id>> ImmutableSet<Id> nodes__ids(Iterable<Node> nodes) {
 
     ImmutableSet.Builder<Id> ids = ImmutableSet.builder();
@@ -42,6 +51,9 @@ public abstract class UpNodeLib {
   // nodes -> parentMap
   // ===========================================================================
 
+  /**
+   * Convert an UpNode iterable into a mapping from id to parent ids.
+   */
   public static <Id, Node extends UpNode<Id>> ImmutableSetMultimap<Id, Id> nodes__parentMap(
       Iterable<Node> nodes) {
 
@@ -58,6 +70,9 @@ public abstract class UpNodeLib {
   // nodes -> nodeMap
   // ===========================================================================
 
+  /**
+   * Convert an UpNode set into a mapping between id and node.
+   */
   public static <Id, Node extends UpNode<Id>> ImmutableBiMap<Id, Node> nodes__nodeMap(
       ImmutableSet<Node> nodes) {
 
@@ -78,6 +93,9 @@ public abstract class UpNodeLib {
   // nodes -> idGraph, idDag, idTree
   // ===========================================================================
 
+  /**
+   * Create an IdGraph from an UpNode iterable.
+   */
   public static <Id, Node extends UpNode<Id>> IdGraph<Id> nodes__idGraph(Iterable<Node> nodes) {
 
     ImmutableSet<Id> ids = nodes__ids(nodes);
@@ -87,6 +105,9 @@ public abstract class UpNodeLib {
     return IdGraphLib.fromParentMap(ids, id__parentIds);
   }
 
+  /**
+   * Create an IdDag from an UpNode iterable.
+   */
   public static <Id, Node extends UpNode<Id>> IdDag<Id> nodes__idDag(ImmutableSet<Node> nodes) {
 
     ImmutableSet<Id> ids = nodes__ids(nodes);
@@ -96,6 +117,9 @@ public abstract class UpNodeLib {
     return IdDagLib.fromParentMap(ids, id__parentIds);
   }
 
+  /**
+   * Create an IdTree from an UpNode iterable.
+   */
   public static <Id, Node extends UpNode<Id>> IdTree<Id> nodes__idTree(ImmutableSet<Node> nodes) {
 
     ImmutableSet<Id> ids = nodes__ids(nodes);

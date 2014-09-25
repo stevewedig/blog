@@ -62,7 +62,7 @@ public abstract class PartialDagLib {
   }
 
   /**
-   * Create a PartialDag from the union of multiple UpNode sets (remember that Dag&lt;Node&gt; extends
+   * Create a PartialDag from the union of multiple UpNode sets (remember that PartialDag&lt;Node&gt; extends
    * Set&lt;Node&gt;).
    */
   @SafeVarargs
@@ -102,7 +102,7 @@ public abstract class PartialDagLib {
   }
 
   /**
-   * Create a PartialDag from the union of multiple DownNode sets (remember that Dag&lt;Node&gt;
+   * Create a PartialDag from the union of multiple DownNode sets (remember that PartialDag&lt;Node&gt;
    * extends Set&lt;Node&gt;).
    */
   @SafeVarargs
