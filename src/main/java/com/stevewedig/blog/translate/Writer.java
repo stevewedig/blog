@@ -5,5 +5,8 @@ package com.stevewedig.blog.translate;
  */
 public interface Writer<Syntax, Model> {
 
+  /**
+   * Convert a model to the corresponding syntax.
+   */
   Syntax write(Model model);
 }

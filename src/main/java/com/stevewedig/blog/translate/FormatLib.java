@@ -16,6 +16,9 @@ public abstract class FormatLib {
   // chain
   // ===========================================================================
 
+  /**
+   * Chain together a format and a translator to create the combined format.
+   */
   public static <A, B> Format<B> chain(final Format<A> format, final Translator<A, B> translator) {
     return new Format<B>() {
 
@@ -39,6 +42,9 @@ public abstract class FormatLib {
   // str format (passthrough)
   // ===========================================================================
 
+  /**
+   * A String format which is a pass through (no-op).
+   */
   public static Format<String> strFormat = new Format<String>() {
     @Override
     public String parse(String syntax) {
@@ -55,6 +61,9 @@ public abstract class FormatLib {
   // int format
   // ===========================================================================
 
+  /**
+   * An Integer format using Integer.parseInt.
+   */
   public static Format<Integer> intFormat = new Format<Integer>() {
     @Override
     public Integer parse(String syntax) {
@@ -75,6 +84,9 @@ public abstract class FormatLib {
   // float format
   // ===========================================================================
 
+  /**
+   * A Float format using Float.parseFloat.
+   */
   public static Format<Float> floatFormat = new Format<Float>() {
     @Override
     public Float parse(String syntax) {
@@ -95,6 +107,9 @@ public abstract class FormatLib {
   // double format
   // ===========================================================================
 
+  /**
+   * A Double format using Double.parseDouble.
+   */
   public static Format<Double> doubleFormat = new Format<Double>() {
     @Override
     public Double parse(String syntax) {
@@ -115,6 +130,9 @@ public abstract class FormatLib {
   // bool format
   // ===========================================================================
 
+  /**
+   * A Boolean format using true or false.
+   */
   public static Format<Boolean> boolJsonFormat = new Format<Boolean>() {
     @Override
     public Boolean parse(String syntax) {
@@ -134,6 +152,9 @@ public abstract class FormatLib {
 
   // ===================================
 
+  /**
+   * A Boolean format using 0 or 1.
+   */
   public static Format<Boolean> boolFlagFormat = new Format<Boolean>() {
     @Override
     public Boolean parse(String syntax) {
@@ -157,6 +178,9 @@ public abstract class FormatLib {
   // set
   // ===========================================================================
 
+  /**
+   * A function for creating Set formats.
+   */
   public static <Item> Format<ImmutableSet<Item>> genSetFormat(final Format<Item> itemFormat,
       String delimiter) {
 
@@ -195,11 +219,20 @@ public abstract class FormatLib {
     };
   }
 
+  /**
+   * A String ImmutableSet format with comma delimiters.
+   */
   public static Format<ImmutableSet<String>> strCommaSetFormat = genSetFormat(strFormat, ", ");
 
+  /**
+   * An Integer ImmutableSet format with comma delimiters.
+   */
   public static Format<ImmutableSet<Integer>> intCommaSetFormat = genSetFormat(intFormat, ", ");
 
-  // more convenient that ImmutableSet.of("a", "b", ...)
+  /**
+   * A function for parsing String ImmutableSets which is more convenient than writing
+   * ImmutableSet.of("a", "b", ...).
+   */
   public static ImmutableSet<String> parseSet(String string) {
     return strCommaSetFormat.parse(string);
   }
@@ -208,6 +241,9 @@ public abstract class FormatLib {
   // list
   // ===========================================================================
 
+  /**
+   * A function for creating List formats.
+   */
   public static <Item> Format<ImmutableList<Item>> genListFormat(final Format<Item> itemFormat,
       String delimiter) {
 
@@ -246,11 +282,20 @@ public abstract class FormatLib {
     };
   }
 
+  /**
+   * A String ImmutableList format with comma delimiters.
+   */
   public static Format<ImmutableList<String>> strCommaListFormat = genListFormat(strFormat, ", ");
 
+  /**
+   * An Integer ImmutableList format with comma delimiters.
+   */
   public static Format<ImmutableList<Integer>> intCommaListFormat = genListFormat(intFormat, ", ");
 
-  // more convenient that ImmutableList.of("a", "b", ...)
+  /**
+   * A function for parsing String ImmutableLists which is more convenient than writing
+   * ImmutableList.of("a", "b", ...).
+   */
   public static ImmutableList<String> parseList(String string) {
     return strCommaListFormat.parse(string);
   }
@@ -259,6 +304,10 @@ public abstract class FormatLib {
   // multimap
   // ===========================================================================
 
+  /**
+   * An ImmutableSetMultimap format with String keys and values, with comma delimited entries, and
+   * with equal delimiting the key and value of an entry.
+   */
   public static Format<ImmutableSetMultimap<String, String>> strMultimapFormat =
       new Format<ImmutableSetMultimap<String, String>>() {
         @Override
@@ -299,6 +348,10 @@ public abstract class FormatLib {
         }
       };
 
+  /**
+   * A function for parsing ImmutableSetMultimaps with String keys and values, which is more
+   * convenient than writing ImmutableSetMultimap.of("a", "b", ...).
+   */
   public static ImmutableSetMultimap<String, String> parseMultimap(String string) {
     return FormatLib.strMultimapFormat.parse(string);
   }

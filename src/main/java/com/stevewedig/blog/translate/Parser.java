@@ -5,5 +5,8 @@ package com.stevewedig.blog.translate;
  */
 public interface Parser<Syntax, Model> {
 
+  /**
+   * Convert syntax to the corresponding model.
+   */
   Model parse(Syntax syntax) throws ParseError;
 }
