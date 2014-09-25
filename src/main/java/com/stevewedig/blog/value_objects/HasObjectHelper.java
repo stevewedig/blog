@@ -6,5 +6,8 @@ package com.stevewedig.blog.value_objects;
  */
 public interface HasObjectHelper {
 
+  /**
+   * Get an object's objectHelper(), for use in implementing toString(), equals(), and hashCode().
+   */
   ObjectHelper objectHelper();
 }

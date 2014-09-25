@@ -2,6 +2,9 @@ package com.stevewedig.blog.util;
 
 import java.util.Collection;
 
+/**
+ * Collection related utilities.
+ */
 public abstract class CollectLib {
 
   // ===========================================================================

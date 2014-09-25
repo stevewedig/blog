@@ -14,6 +14,9 @@ import com.stevewedig.blog.translate.ParseError;
  */
 public abstract class PropLib {
 
+  /**
+   * A ConfigFormat backed by Java's properties file format.
+   */
   public static ConfigFormat format = new ConfigFormat() {
 
     @Override

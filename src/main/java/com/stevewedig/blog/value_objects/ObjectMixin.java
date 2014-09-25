@@ -16,10 +16,13 @@ public abstract class ObjectMixin implements HasObjectHelper {
   // ContainerMixin < ObjectMixin
   // ImmutableContainer < ContainerMixin (set isEntity to false)
   // MutableContainer < ContainerMixin (set isEntity to true)
+  /**
+   * Should this object behave as an entity or a value?
+   */
   protected abstract boolean isEntity();
 
   /**
-   * @return An array of alternating field names and field values.
+   * An array of alternating field names and field values.
    */
   protected abstract Object[] fields();
 

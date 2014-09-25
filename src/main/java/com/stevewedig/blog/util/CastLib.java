@@ -7,6 +7,9 @@ import java.util.Map;
  */
 public abstract class CastLib {
 
+  /**
+   * Cast a value to the Value parameter, which can be inferred from an assignment.
+   */
   public static <Value> Value cast(Object value) {
 
     @SuppressWarnings("unchecked")
@@ -15,6 +18,10 @@ public abstract class CastLib {
     return casted;
   }
 
+  /**
+   * Get a value from a map, and cast it to the Value parameter, which can be inferred from an
+   * assignment.
+   */
   public static <Value> Value get(Map<?, ?> map, Object key) {
 
     Object value = map.get(key);

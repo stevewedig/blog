@@ -39,7 +39,9 @@ public abstract class StrLib {
     return builder.toString();
   }
 
-  // objectClass.getSimpleName() is not implemented in GWT, so reimplement
+  /**
+   * GWT compatible implementation of type.getSimpleName().
+   */
   public static String simpleClassName(Class<?> type) {
     String dottedPath = type.getName();
     ImmutableList<String> parts = ImmutableList.copyOf(Splitter.on('.').split(dottedPath));
@@ -53,35 +55,59 @@ public abstract class StrLib {
   // http://www.gwtproject.org/doc/latest/DevGuideCodingBasicsFormatting.html
   // ===========================================================================
 
+  /**
+   * GWT compatible implementation of Object.format that only supports "%s".
+   */
   public static String format(String template) {
     return formatN(template);
   }
 
+  /**
+   * GWT compatible implementation of Object.format that only supports "%s".
+   */
   public static String format(String template, Object a) {
     return formatN(template, a);
   }
 
+  /**
+   * GWT compatible implementation of Object.format that only supports "%s".
+   */
   public static String format(String template, Object a, Object b) {
     return formatN(template, a, b);
   }
 
+  /**
+   * GWT compatible implementation of Object.format that only supports "%s".
+   */
   public static String format(String template, Object a, Object b, Object c) {
     return formatN(template, a, b, c);
   }
 
+  /**
+   * GWT compatible implementation of Object.format that only supports "%s".
+   */
   public static String format(String template, Object a, Object b, Object c, Object d) {
     return formatN(template, a, b, c, d);
   }
 
+  /**
+   * GWT compatible implementation of Object.format that only supports "%s".
+   */
   public static String format(String template, Object a, Object b, Object c, Object d, Object e) {
     return formatN(template, a, b, c, d, e);
   }
 
+  /**
+   * GWT compatible implementation of Object.format that only supports "%s".
+   */
   public static String format(String template, Object a, Object b, Object c, Object d, Object e,
       Object f) {
     return formatN(template, a, b, c, d, e, f);
   }
 
+  /**
+   * GWT compatible implementation of Object.format that only supports "%s".
+   */
   public static String format(String template, Object a, Object b, Object c, Object d, Object e,
       Object f, Object g) {
     return formatN(template, a, b, c, d, e, f, g);
@@ -89,6 +115,10 @@ public abstract class StrLib {
 
   // ===================================
 
+  /**
+   * GWT compatible implementation of Object.format that only supports "%s", accepting a varargs
+   * array.
+   */
   public static String formatN(String template, Object... items) {
     String str = template;
     for (Object item : items)
@@ -108,35 +138,59 @@ public abstract class StrLib {
   // print() combines format() and println()
   // ===========================================================================
 
+  /**
+   * Combining System.out.println with format().
+   */
   public static void print(String template) {
     printN(template);
   }
 
+  /**
+   * Combining System.out.println with format().
+   */
   public static void print(String template, Object a) {
     printN(template, a);
   }
 
+  /**
+   * Combining System.out.println with format().
+   */
   public static void print(String template, Object a, Object b) {
     printN(template, a, b);
   }
 
+  /**
+   * Combining System.out.println with format().
+   */
   public static void print(String template, Object a, Object b, Object c) {
     printN(template, a, b, c);
   }
 
+  /**
+   * Combining System.out.println with format().
+   */
   public static void print(String template, Object a, Object b, Object c, Object d) {
     printN(template, a, b, c, d);
   }
 
+  /**
+   * Combining System.out.println with format().
+   */
   public static void print(String template, Object a, Object b, Object c, Object d, Object e) {
     printN(template, a, b, c, d, e);
   }
 
+  /**
+   * Combining System.out.println with format().
+   */
   public static void print(String template, Object a, Object b, Object c, Object d, Object e,
       Object f) {
     printN(template, a, b, c, d, e, f);
   }
 
+  /**
+   * Combining System.out.println with format().
+   */
   public static void print(String template, Object a, Object b, Object c, Object d, Object e,
       Object f, Object g) {
     printN(template, a, b, c, d, e, f, g);
@@ -144,6 +198,9 @@ public abstract class StrLib {
 
   // ===================================
 
+  /**
+   * Combining System.out.println with format(), accepting varargs array.
+   */
   public static void printN(String template, Object... items) {
     System.out.println(formatN(template, items));
   }

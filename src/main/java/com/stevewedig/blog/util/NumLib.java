@@ -1,5 +1,8 @@
 package com.stevewedig.blog.util;
 
+/**
+ * Number related utilities.
+ */
 public abstract class NumLib {
 
   // bit check could be faster:
