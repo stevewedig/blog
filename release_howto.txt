@@ -41,11 +41,16 @@ http://search.maven.org/
 publishing javadocs to github 
 ================================================================================
 
+mvn site
+close eclipse
+git fetch origin
+git checkout gh-pages
+rm -rf apidocs
+mv /tmp/apidocs .
+git checkout master
+
 https://help.github.com/articles/user-organization-and-project-pages
-
 http://assylias.wordpress.com/2013/01/06/upload-javadoc-to-github/
-
 http://stackoverflow.com/a/15364790
-
 http://stackoverflow.com/a/3943515
 
