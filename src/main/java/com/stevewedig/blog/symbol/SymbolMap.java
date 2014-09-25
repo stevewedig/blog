@@ -18,8 +18,7 @@ public interface SymbolMap extends Iterable<Entry<Symbol<?>, Object>>, HasObject
   // ===========================================================================
 
   /**
-   * 
-   * @return type safe value associated with symbol
+   * Get the value associated with a symbol.
    */
   <Value> Value get(Symbol<Value> symbol);
 
@@ -29,21 +28,31 @@ public interface SymbolMap extends Iterable<Entry<Symbol<?>, Object>>, HasObject
 
 
   /**
-   * @return The value, or the defaultValue if it is missing or null.
+   * Get the value associated with a symbol, or the defaultValue if it is missing, or the
+   * defaultValue if the value is null.
    */
   <Value> Value getDefault(Symbol<Value> symbol, Value defaultValue);
 
+  /**
+   * Get the value associated with a symbol, or the defaultValue if it is missing, or the
+   * defaultValue if its null and adaptNull = true.
+   */
   <Value> Value getDefault(Symbol<Value> symbol, Value defaultValue, boolean adaptNull);
 
   /**
-   * @return The value, or Optional.absent if it is missing or null.
+   * Get the value associated with a symbol, or Optional.absent if it is missing, or Optional.absent
+   * if the value is null.
    */
   <Value> Optional<Value> getOptional(Symbol<Value> symbol);
 
-  <Value> Optional<Value> getOptional(Symbol<Value> symbol, boolean adaptNull);
-  
   /**
-   * @return The value, or null if it is missing.
+   * Get the value associated with a symbol, or Optional.absent if it is missing, or Optional.absent
+   * if the value is null and adaptTrue = true.
+   */
+  <Value> Optional<Value> getOptional(Symbol<Value> symbol, boolean adaptNull);
+
+  /**
+   * Get the value associated with a symbol, or null if it is missing.
    */
   <Value> Value getNullable(Symbol<Value> symbol);
 
@@ -52,12 +61,12 @@ public interface SymbolMap extends Iterable<Entry<Symbol<?>, Object>>, HasObject
   // ===================================
 
   /**
-   * @return Whether the symbol is contained in the SymbolMap.
+   * Is the symbol a key in the SymbolMap?
    */
   boolean contains(Symbol<?> symbol);
 
   /**
-   * @return The symbols in the SymbolMap.
+   * The set of contained symbols.
    */
   ImmutableSet<Symbol<?>> symbols();
 
@@ -66,18 +75,18 @@ public interface SymbolMap extends Iterable<Entry<Symbol<?>, Object>>, HasObject
   // ===================================
 
   /**
-   * @return A SymbolMap.Fluid copy.
+   * Get a SymbolMap.Fluid copy.
    */
   SymbolMap.Fluid fluid();
 
   /**
-   * @return A SymbolMap.Solid copy.
+   * Get a SymbolMap.Solid copy.
    */
   SymbolMap.Solid solid();
 
   /**
    * 
-   * @return A Map copy.
+   * Get a Map copy of the state.
    */
   Map<Symbol<?>, Object> stateCopy();
 
@@ -100,9 +109,15 @@ public interface SymbolMap extends Iterable<Entry<Symbol<?>, Object>>, HasObject
    */
   interface Fluid extends SymbolMap {
 
-    // fluid interface allows us to build immutable maps via mutable ones
+    /**
+     * Set the value associated with a symbol and return the map for use in map.put(k1, v1).put(k2,
+     * v2)... chains.
+     */
     <Value> SymbolMap.Fluid put(Symbol<Value> symbol, Value value);
 
+    /**
+     * Copy the state of updates into a symbol map.
+     */
     SymbolMap.Fluid putAll(SymbolMap updates);
 
   }
