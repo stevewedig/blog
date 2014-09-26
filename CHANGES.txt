@@ -1,4 +1,5 @@
 
+v2.0.2, September 25th 2014 -- Improvements to digraph library
 v2.0.1, September 12th 2014 -- Fixing GWT compatability of apache.commons.lang3
 v2.0.0, September 11th 2014 -- Symbols are entities (backwards incompatible) and addition of blog.digraph
 v1.1.1, August 26th 2014 -- Minor changes

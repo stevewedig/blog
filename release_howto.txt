@@ -25,10 +25,9 @@ mvn release:clean
 mvn release:prepare -Darguments=-Dgpg.passphrase=<PGP_PASSPHRASE>
 mvn release:perform -Darguments=-Dgpg.passphrase=<PGP_PASSPHRASE>
 
-8. login at https://oss.sonatype.org
+8. login at https://oss.sonatype.org/index.html#stagingRepositories
 
 9. "close" the staging repository
-https://oss.sonatype.org/index.html#stagingRepositories
 
 10. check under "activity" to see whether the repository passed verification (click "refresh" until the process completes)
 
