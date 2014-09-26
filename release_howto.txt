@@ -37,19 +37,35 @@ mvn release:perform -Darguments=-Dgpg.passphrase=<PGP_PASSPHRASE>
 http://search.maven.org/
 
 ================================================================================
-publishing javadocs to github 
+after releasing..
+
+publish javadocs to github 
 ================================================================================
 
-mvn site
-close eclipse
+cp -r target/apidocs /tmp
 git fetch origin
 git checkout gh-pages
 rm -rf apidocs
 mv /tmp/apidocs .
+git add apidocs
+git commit -m 'new api docs'
+git push
 git checkout master
+
 
 https://help.github.com/articles/user-organization-and-project-pages
 http://assylias.wordpress.com/2013/01/06/upload-javadoc-to-github/
 http://stackoverflow.com/a/15364790
 http://stackoverflow.com/a/3943515
+
+================================================================================
+once the version shows up in Maven central...
+http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22blog%22
+
+update the current version in README.md 
+================================================================================
+
+- In the Maven dependency snippet
+
+- In the Maven artifact page link
 
