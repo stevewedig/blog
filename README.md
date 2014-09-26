@@ -7,7 +7,8 @@ We all build up util code over time. In this project I'm sharing the most reusab
 
 This project is compatable with Java 7+ and all code can be compiled to JavaScript by [Google Web Toolkit](http://en.wikipedia.org/wiki/Google_Web_Toolkit) 2.6+. The only runtime dependency is Guava.
 
-* **GitHub Repo**: https://github.com/stevewedig/blog
+* **Javadocs**: [http://stevewedig.github.io/blog/apidocs/](http://stevewedig.github.io/blog/apidocs/)
+* **GitHub Repo**: [https://github.com/stevewedig/blog](https://github.com/stevewedig/blog)
 * **License**: This project is in the public domain via [Unlicense](http://unlicense.org).
 
 ## Features
@@ -51,6 +52,8 @@ Use [Maven](http://en.wikipedia.org/wiki/Apache_Maven) to generate the site, inc
     # open site index: target/site/index.html
     # or
     # open javadoc index: target/site/project-reports.html
+
+Javadocs for the latest release are also available at [http://stevewedig.github.io/blog/apidocs/](http://stevewedig.github.io/blog/apidocs/)
 
 ## Project organization
 
