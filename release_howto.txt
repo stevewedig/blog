@@ -12,7 +12,7 @@ http://central.sonatype.org/pages/ossrh-guide.html
 
 4. setup pgp on your machine:
 https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
-
+	
 5. deploy snapshot (optional but trying a dry run makes sense to me)
 mvn clean deploy
 
@@ -52,7 +52,6 @@ git commit -m 'new api docs'
 git push
 git checkout master
 
-
 https://help.github.com/articles/user-organization-and-project-pages
 http://assylias.wordpress.com/2013/01/06/upload-javadoc-to-github/
 http://stackoverflow.com/a/15364790
@@ -61,11 +60,11 @@ http://stackoverflow.com/a/3943515
 ================================================================================
 once the version shows up in Maven central...
 http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22blog%22
-
-update the current version in README.md 
 ================================================================================
 
-- In the Maven dependency snippet
+update version depended on by clients
 
+update the current version in README.md 
+- In the Maven dependency snippet
 - In the Maven artifact page link
 

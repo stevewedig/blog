@@ -24,8 +24,11 @@ This project is compatable with Java 7+ and all code can be compiled to JavaScri
 
 These utilities should be fairly self explanatory...
 
-* [StrLib](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/util/StrLib.java): String manipulation utilities. (Behavior not found in Guava's [Strings](https://code.google.com/p/guava-libraries/wiki/StringsExplained) or Apache Commons [StringUtils](http://commons.apache.org/proper/commons-lang/javadocs/api-release/org/apache/commons/lang3/StringUtils.html).)
-* [LambdaLib](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/util/LambdaLib.java): Interfaces for creating anonymous lambdas (callbacks). Presumably I can get rid of this horrible syntax when I switch to Java 8.
+* [StrLib](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/util/StrLib.java) demonstrated in [TestStrLib](https://github.com/stevewedig/blog/tree/master/src/test/java/com/stevewedig/blog/util/TestStrLib.java): String manipulation utilities. (Behavior not found in Guava's [Strings](https://code.google.com/p/guava-libraries/wiki/StringsExplained) or Apache Commons [StringUtils](http://commons.apache.org/proper/commons-lang/javadocs/api-release/org/apache/commons/lang3/StringUtils.html).)
+* [LambdaLib](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/util/LambdaLib.java) demonstrated in [TestLambdaLib](https://github.com/stevewedig/blog/tree/master/src/test/java/com/stevewedig/blog/util/TestLambdaLib.java): Interfaces for creating anonymous lambdas (callbacks). Presumably I can get rid of this horrible syntax when I switch to Java 8.
+* [CollectLib](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/util/CollectLib.java) demonstrated in [TestCollectLib](https://github.com/stevewedig/blog/tree/master/src/test/java/com/stevewedig/blog/util/TestCollectLib.java)
+* [SetLib](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/util/SetLib.java) demonstrated in [TestSetLib](https://github.com/stevewedig/blog/tree/master/src/test/java/com/stevewedig/blog/util/TestSetLib.java)
+* [MultimapLib](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/util/MultimapLib.java) demonstrated in [TestMultimapLib](https://github.com/stevewedig/blog/tree/master/src/test/java/com/stevewedig/blog/util/TestMultimapLib.java)
 * [blog.errors](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/errors): A collection of common errors, and an [ErrorMixin](https://github.com/stevewedig/blog/tree/master/src/main/java/com/stevewedig/blog/errors/ErrorMixin.java) which adds string formatting constructors to RuntimeException.
 
 #### Other related blog posts
@@ -77,13 +80,13 @@ The easiest way to use this library is add it your dependency list in your Maven
         <dependency>
             <groupId>com.stevewedig</groupId>
             <artifactId>blog</artifactId>
-            <version>2.0.1</version>
+            <version>2.0.2</version>
         </dependency>
     </dependencies>
 
 #### Other build tools
 
-The [Maven Central artifact page](http://search.maven.org/#artifactdetails%7Ccom.stevewedig%7Cblog%7C2.0.1%7Cjar) has snippets for other tools like Buildr, Ivy, and SBT.
+The [Maven Central artifact page](http://search.maven.org/#artifactdetails%7Ccom.stevewedig%7Cblog%7C2.0.2%7Cjar) has snippets for other tools like Buildr, Ivy, and SBT.
 
 #### Inheriting the GWT module
 
