@@ -351,8 +351,9 @@ public class TestSampleIdTree {
         ImmutableSet.of(parseList("a, b, c, d, e, f, g, h"), parseList("a, b, c, d, e, h, f, g"),
             parseList("a, b, e, c, d, f, g, h"), parseList("a, b, e, c, d, h, f, g"),
             parseList("a, f, g, b, c, d, e, h"), parseList("a, f, g, b, e, c, d, h"),
-            parseList("a, f, g, h, b, c, d, e"), parseList("a, f, g, h, b, e, c, e"),
+            parseList("a, f, g, h, b, c, d, e"), parseList("a, f, g, h, b, e, c, d"),
             parseList("a, h, b, c, d, e, f, g"), parseList("a, h, b, e, c, d, f, g"),
+            parseList("a, h, f, g, b, e, c, d"), parseList("a, h, f, g, b, c, d, e"),
             parseList("a, h, f, a, b, c, d, e"), parseList("a, h, f, a, b, e, c, d"));
 
     assertTrue(depthIdLists.contains(tree.depthIdList()));
