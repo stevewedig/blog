@@ -1,7 +1,5 @@
 package com.stevewedig.blog.digraph.id_graph;
 
-import java.util.*;
-
 import com.google.common.base.*;
 import com.google.common.collect.*;
 import com.stevewedig.blog.digraph.alg.*;
@@ -9,6 +7,9 @@ import com.stevewedig.blog.digraph.errors.GraphHadUnexpectedIds;
 import com.stevewedig.blog.util.LambdaLib.Fn1;
 import com.stevewedig.blog.util.*;
 import com.stevewedig.blog.value_objects.ValueMixin;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * An implementation of IdGraph.

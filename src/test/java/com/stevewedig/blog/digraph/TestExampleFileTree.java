@@ -2,8 +2,6 @@ package com.stevewedig.blog.digraph;
 
 import static org.junit.Assert.*;
 
-import java.util.*;
-
 import org.junit.Test;
 
 import com.google.common.base.*;
@@ -15,6 +13,11 @@ import com.stevewedig.blog.digraph.node_graph.*;
 import com.stevewedig.blog.errors.Bug;
 import com.stevewedig.blog.util.LambdaLib.Fn1;
 import com.stevewedig.blog.value_objects.ValueMixin;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TestExampleFileTree {
 
