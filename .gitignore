@@ -13,3 +13,7 @@ target/
 .DS_Store
 /bin
 /target
+
+# intellij
+*.iml
+.idea
